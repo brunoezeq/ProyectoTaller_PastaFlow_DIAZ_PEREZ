@@ -73,6 +73,16 @@ namespace PastaFlow_DIAZ_PEREZ.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconoCajaReg {
+            get {
+                object obj = ResourceManager.GetObject("iconoCajaReg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconoCancelar {
             get {
                 object obj = ResourceManager.GetObject("iconoCancelar", resourceCulture);
@@ -83,9 +93,39 @@ namespace PastaFlow_DIAZ_PEREZ.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap iconoRaviol {
+        internal static System.Drawing.Bitmap iconoContrasenia {
             get {
-                object obj = ResourceManager.GetObject("iconoRaviol", resourceCulture);
+                object obj = ResourceManager.GetObject("iconoContrasenia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoPedido {
+            get {
+                object obj = ResourceManager.GetObject("iconoPedido", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoReserva {
+            get {
+                object obj = ResourceManager.GetObject("iconoReserva", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoUsuario {
+            get {
+                object obj = ResourceManager.GetObject("iconoUsuario", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

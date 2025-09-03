@@ -121,10 +121,22 @@
   <data name="iconoAcceder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoAcceder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="iconoCajaReg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoCajaReg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="iconoCancelar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoCancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconoRaviol" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoRaviol.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconoContrasenia" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoContrasenia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconoPedido" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoPedido.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconoReserva" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoReserva.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconoUsuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoUsuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

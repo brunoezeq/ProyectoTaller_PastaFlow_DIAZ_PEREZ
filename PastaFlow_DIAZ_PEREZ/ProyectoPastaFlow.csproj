@@ -52,10 +52,19 @@
     <Compile Include="Forms\FLogin.Designer.cs">
       <DependentUpon>FLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FMenuCajero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FMenuCajero.Designer.cs">
+      <DependentUpon>FMenuCajero.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FMenuCajero.resx">
+      <DependentUpon>FMenuCajero.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -86,22 +95,28 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\acceso.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\cancelar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\acceder.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\iconoAcceder.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconoCancelar.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\iconoRaviol.png" />
+    <None Include="Resources\iconoContrasenia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoUsuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoCajaRegistradora.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoReserva.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoPedido.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoCajaReg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

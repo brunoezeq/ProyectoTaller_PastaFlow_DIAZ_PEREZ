@@ -28,7 +28,6 @@ namespace PastaFlow_DIAZ_PEREZ
             {
                 e.Handled = true; 
             }
-
             //Solo permite ingresar 8 caracteres en el textbox
             if (char.IsDigit(e.KeyChar) && txtDNI.Text.Length >= 8)
             {
