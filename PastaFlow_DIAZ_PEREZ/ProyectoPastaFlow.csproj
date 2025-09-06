@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FCerrarCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FCerrarCaja.Designer.cs">
+      <DependentUpon>FCerrarCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,13 +65,34 @@
     <Compile Include="Forms\FMenuCajero.Designer.cs">
       <DependentUpon>FMenuCajero.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FAbrirCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FAbrirCaja.Designer.cs">
+      <DependentUpon>FAbrirCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FRegistrarVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FRegistrarVenta.Designer.cs">
+      <DependentUpon>FRegistrarVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FAbrirCaja.resx">
+      <DependentUpon>FAbrirCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FCerrarCaja.resx">
+      <DependentUpon>FCerrarCaja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FMenuCajero.resx">
       <DependentUpon>FMenuCajero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRegistrarVenta.resx">
+      <DependentUpon>FRegistrarVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
