@@ -46,9 +46,8 @@
             this.lbFechaHora.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbFechaHora.Location = new System.Drawing.Point(300, 30);
             this.lbFechaHora.Name = "lbFechaHora";
-            this.lbFechaHora.Size = new System.Drawing.Size(118, 17);
+            this.lbFechaHora.Size = new System.Drawing.Size(0, 17);
             this.lbFechaHora.TabIndex = 0;
-            this.lbFechaHora.Text = "00/00/0000 - 00:00";
             // 
             // pnlPrincipal
             // 

@@ -71,11 +71,47 @@
     <Compile Include="Forms\FAbrirCaja.Designer.cs">
       <DependentUpon>FAbrirCaja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FRegistrarEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FRegistrarEmpleado.Designer.cs">
+      <DependentUpon>FRegistrarEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FRegistrarQueja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FRegistrarQueja.Designer.cs">
+      <DependentUpon>FRegistrarQueja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FRegistrarReserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FRegistrarReserva.Designer.cs">
+      <DependentUpon>FRegistrarReserva.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FRegistrarVenta.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FRegistrarVenta.Designer.cs">
       <DependentUpon>FRegistrarVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FVerQuejas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FVerQuejas.Designer.cs">
+      <DependentUpon>FVerQuejas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FVerReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FVerReportes.Designer.cs">
+      <DependentUpon>FVerReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FGestionarInventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FGestionarInventario.Designer.cs">
+      <DependentUpon>FGestionarInventario.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,8 +127,26 @@
     <EmbeddedResource Include="Forms\FMenuCajero.resx">
       <DependentUpon>FMenuCajero.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRegistrarEmpleado.resx">
+      <DependentUpon>FRegistrarEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRegistrarQueja.resx">
+      <DependentUpon>FRegistrarQueja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FRegistrarReserva.resx">
+      <DependentUpon>FRegistrarReserva.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FRegistrarVenta.resx">
       <DependentUpon>FRegistrarVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FVerQuejas.resx">
+      <DependentUpon>FVerQuejas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FVerReportes.resx">
+      <DependentUpon>FVerReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FGestionarInventario.resx">
+      <DependentUpon>FGestionarInventario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -135,13 +189,31 @@
     <None Include="Resources\iconoUsuario.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\iconoCajaRegistradora.png" />
+    <None Include="Resources\platopastas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoInventario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoQueja.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoRegistrarUsuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoReporte.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconoReserva.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconoPedido.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoCaja.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconoCajaReg.png" />

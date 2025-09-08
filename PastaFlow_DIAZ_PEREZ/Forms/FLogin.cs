@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PastaFlow_DIAZ_PEREZ.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ
 {
@@ -17,6 +18,7 @@ namespace PastaFlow_DIAZ_PEREZ
             InitializeComponent();
         }
 
+        //Cierra la aplicación
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -33,6 +35,24 @@ namespace PastaFlow_DIAZ_PEREZ
             {
                 e.Handled = true;
             }
+        }
+
+        //Ingresa al menú
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            FMenuCajero menu = new FMenuCajero();
+            menu.Show(); 
+            this.Hide();
+
+            menu.FormClosing += frmClosing; 
+        }
+
+        //Al cerrar el menú, limpia los textbox y vuelve a mostrar el login
+        private void frmClosing(object sender, FormClosingEventArgs e)
+        {
+            txtDNI.Clear();
+            txtContrasenia.Clear();
+            this.Show(); 
         }
     }
 }
