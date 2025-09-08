@@ -113,6 +113,18 @@
     <Compile Include="Forms\FGestionarInventario.Designer.cs">
       <DependentUpon>FGestionarInventario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Caja.cs" />
+    <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Detalle_Venta.cs" />
+    <Compile Include="Models\Metodo_Pago.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Promocion.cs" />
+    <Compile Include="Models\Queja.cs" />
+    <Compile Include="Models\Reserva.cs" />
+    <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Turno.cs" />
+    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Venta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\FAbrirCaja.resx">
@@ -173,7 +185,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataAccess\" />
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
