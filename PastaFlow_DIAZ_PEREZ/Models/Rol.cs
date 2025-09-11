@@ -8,8 +8,8 @@ namespace PastaFlow_DIAZ_PEREZ.Models
 {
     public class Rol
     {
-        public int id_rol { get; set; }     
-        public string nombre_rol { get; set; }
+        public int Id_rol { get; set; }     
+        public string Nombre_rol { get; set; }
        
     }
 }

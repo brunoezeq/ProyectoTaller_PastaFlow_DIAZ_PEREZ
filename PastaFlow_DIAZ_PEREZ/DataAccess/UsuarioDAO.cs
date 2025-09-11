@@ -11,8 +11,10 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
 {
     public class UsuarioDAO
     {
+        // Obtener usuario por DNI
         public Usuario ObtenerPorDni(string dni)
         {
+            
             Usuario user = null; 
             using (var conn = DbConnection.GetConnection())
             {

@@ -22,6 +22,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FMenu_Load(object sender, EventArgs e)
         {
+            //Mostrar datos del usuario y fecha
             var user = Session.CurrentUser;
             
             if (user != null)
@@ -30,6 +31,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
             lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
 
+            //Mostrar botones según rol
             btnVerReportes.Visible = false;
             btnRegEmpleado.Visible = false;
             btnVerQuejas.Visible = false;
@@ -37,7 +39,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             btnRegQueja.Visible = false;
             btnAbrirCaja.Visible = false;
             btnCargarPedido.Visible = false;
-            btnRegReserva.Visible = false;
+            btnRegReserva.Visible = false; 
 
             if (user.Id_rol == 1) // Administrador
             {
@@ -78,6 +80,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             formHijo.Show(); 
         }
 
+        
         private void btnAbrirCaja_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new FAbrirCaja());

@@ -45,6 +45,7 @@ namespace PastaFlow_DIAZ_PEREZ
         //Ingresa al menú
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            // Validaciones básicas
             string dni = txtDNI.Text.Trim();
             string password = txtContrasenia.Text;
 
@@ -54,6 +55,7 @@ namespace PastaFlow_DIAZ_PEREZ
                 return;
             }
 
+            // Obtener usuario de la base de datos
             var dao = new UsuarioDAO();
             var user = dao.ObtenerPorDni(dni);
 
@@ -91,20 +93,9 @@ namespace PastaFlow_DIAZ_PEREZ
             this.Show(); 
         }
 
-        private void FrmLogin_Load(object sender, EventArgs e)
+        private void FLogin_Load(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlConnection conn = DbConnection.GetConnection())
-                {
-                    conn.Open();
-                    MessageBox.Show("Conexión exitosa a la base de datos.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al conectar: " + ex.Message);
-            }
+
         }
     }
 }
