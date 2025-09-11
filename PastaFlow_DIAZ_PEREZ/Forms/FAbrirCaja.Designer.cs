@@ -51,7 +51,7 @@
             // 
             // pnlPrincipal
             // 
-            this.pnlPrincipal.BackColor = System.Drawing.Color.DarkSalmon;
+            this.pnlPrincipal.BackColor = System.Drawing.Color.Khaki;
             this.pnlPrincipal.Controls.Add(this.btnAtras);
             this.pnlPrincipal.Controls.Add(this.btnAbrirCaja);
             this.pnlPrincipal.Controls.Add(this.txtMontoInicial);
@@ -69,7 +69,7 @@
             // 
             this.btnAtras.BackColor = System.Drawing.Color.LightGray;
             this.btnAtras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAtras.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtras.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAtras.Location = new System.Drawing.Point(180, 200);
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(120, 40);
@@ -82,7 +82,7 @@
             // 
             this.btnAbrirCaja.BackColor = System.Drawing.Color.LightGreen;
             this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbrirCaja.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbrirCaja.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbrirCaja.Location = new System.Drawing.Point(50, 200);
             this.btnAbrirCaja.Name = "btnAbrirCaja";
             this.btnAbrirCaja.Size = new System.Drawing.Size(120, 40);
@@ -104,20 +104,21 @@
             // lbMonto
             // 
             this.lbMonto.AutoSize = true;
-            this.lbMonto.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMonto.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMonto.Location = new System.Drawing.Point(50, 100);
             this.lbMonto.Name = "lbMonto";
-            this.lbMonto.Size = new System.Drawing.Size(179, 21);
+            this.lbMonto.Size = new System.Drawing.Size(192, 21);
             this.lbMonto.TabIndex = 2;
             this.lbMonto.Text = "Ingrese dinero en caja: ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DimGray;
             this.label2.Location = new System.Drawing.Point(100, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(190, 25);
+            this.label2.Size = new System.Drawing.Size(174, 30);
             this.label2.TabIndex = 1;
             this.label2.Text = "Apertura de Caja";
             // 

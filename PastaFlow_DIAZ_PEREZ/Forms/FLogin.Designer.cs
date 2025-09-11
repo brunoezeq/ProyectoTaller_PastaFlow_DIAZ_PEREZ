@@ -58,38 +58,41 @@
             // lbDNI
             // 
             this.lbDNI.AutoSize = true;
-            this.lbDNI.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDNI.ForeColor = System.Drawing.Color.White;
+            this.lbDNI.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDNI.ForeColor = System.Drawing.Color.Khaki;
             this.lbDNI.Location = new System.Drawing.Point(40, 177);
             this.lbDNI.Name = "lbDNI";
-            this.lbDNI.Size = new System.Drawing.Size(98, 17);
+            this.lbDNI.Size = new System.Drawing.Size(106, 17);
             this.lbDNI.TabIndex = 2;
             this.lbDNI.Text = "Nro Documento";
             // 
             // lbContraseña
             // 
             this.lbContraseña.AutoSize = true;
-            this.lbContraseña.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbContraseña.ForeColor = System.Drawing.Color.White;
+            this.lbContraseña.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbContraseña.ForeColor = System.Drawing.Color.Khaki;
             this.lbContraseña.Location = new System.Drawing.Point(40, 221);
             this.lbContraseña.Name = "lbContraseña";
-            this.lbContraseña.Size = new System.Drawing.Size(70, 17);
+            this.lbContraseña.Size = new System.Drawing.Size(77, 17);
             this.lbContraseña.TabIndex = 3;
             this.lbContraseña.Text = "Contraseña";
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.platopastas;
-            this.pictureBox1.Location = new System.Drawing.Point(53, 23);
+            this.pictureBox1.Location = new System.Drawing.Point(57, 30);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(204, 135);
+            this.pictureBox1.Size = new System.Drawing.Size(204, 127);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.FlatAppearance.BorderSize = 6;
+            this.btnCancelar.Font = new System.Drawing.Font("Yu Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancelar.Location = new System.Drawing.Point(166, 294);
@@ -103,7 +106,7 @@
             // 
             // btnIngresar
             // 
-            this.btnIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIngresar.Font = new System.Drawing.Font("Yu Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngresar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoAcceder;
             this.btnIngresar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIngresar.Location = new System.Drawing.Point(57, 294);
@@ -119,7 +122,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Maroon;
+            this.BackColor = System.Drawing.Color.Firebrick;
             this.ClientSize = new System.Drawing.Size(317, 410);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);

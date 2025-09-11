@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.pnlPrincipal = new System.Windows.Forms.Panel();
-            this.lbTitulo = new System.Windows.Forms.Label();
-            this.lbFechaHora = new System.Windows.Forms.Label();
-            this.lbMontoInicial = new System.Windows.Forms.Label();
-            this.lbMontoFinal = new System.Windows.Forms.Label();
-            this.txtMontoFinal = new System.Windows.Forms.TextBox();
-            this.btnCerrarCaja = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.lbTotalVentas = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnCerrarCaja = new System.Windows.Forms.Button();
+            this.txtMontoFinal = new System.Windows.Forms.TextBox();
+            this.lbMontoFinal = new System.Windows.Forms.Label();
+            this.lbMontoInicial = new System.Windows.Forms.Label();
+            this.lbFechaHora = new System.Windows.Forms.Label();
+            this.lbTitulo = new System.Windows.Forms.Label();
             this.pnlPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlPrincipal
             // 
-            this.pnlPrincipal.BackColor = System.Drawing.Color.DarkSalmon;
+            this.pnlPrincipal.BackColor = System.Drawing.Color.Khaki;
             this.pnlPrincipal.Controls.Add(this.lbTotalVentas);
             this.pnlPrincipal.Controls.Add(this.btnCancelar);
             this.pnlPrincipal.Controls.Add(this.btnCerrarCaja);
@@ -58,16 +58,67 @@
             this.pnlPrincipal.TabIndex = 0;
             this.pnlPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPrincipal_Paint);
             // 
-            // lbTitulo
+            // lbTotalVentas
             // 
-            this.lbTitulo.AutoSize = true;
-            this.lbTitulo.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTitulo.Location = new System.Drawing.Point(180, 20);
-            this.lbTitulo.Name = "lbTitulo";
-            this.lbTitulo.Size = new System.Drawing.Size(119, 30);
-            this.lbTitulo.TabIndex = 0;
-            this.lbTitulo.Text = "Cerrar Caja";
-            this.lbTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbTotalVentas.AutoSize = true;
+            this.lbTotalVentas.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalVentas.Location = new System.Drawing.Point(30, 160);
+            this.lbTotalVentas.Name = "lbTotalVentas";
+            this.lbTotalVentas.Size = new System.Drawing.Size(143, 21);
+            this.lbTotalVentas.TabIndex = 7;
+            this.lbTotalVentas.Text = "Total de Ventas: $";
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
+            this.btnCancelar.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Location = new System.Drawing.Point(300, 270);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(150, 40);
+            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnCerrarCaja
+            // 
+            this.btnCerrarCaja.BackColor = System.Drawing.Color.LightGreen;
+            this.btnCerrarCaja.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarCaja.Location = new System.Drawing.Point(120, 270);
+            this.btnCerrarCaja.Name = "btnCerrarCaja";
+            this.btnCerrarCaja.Size = new System.Drawing.Size(150, 40);
+            this.btnCerrarCaja.TabIndex = 5;
+            this.btnCerrarCaja.Text = "Cerrar Caja";
+            this.btnCerrarCaja.UseVisualStyleBackColor = false;
+            this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
+            // 
+            // txtMontoFinal
+            // 
+            this.txtMontoFinal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMontoFinal.Location = new System.Drawing.Point(160, 200);
+            this.txtMontoFinal.Name = "txtMontoFinal";
+            this.txtMontoFinal.Size = new System.Drawing.Size(150, 29);
+            this.txtMontoFinal.TabIndex = 4;
+            // 
+            // lbMontoFinal
+            // 
+            this.lbMontoFinal.AutoSize = true;
+            this.lbMontoFinal.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMontoFinal.Location = new System.Drawing.Point(30, 200);
+            this.lbMontoFinal.Name = "lbMontoFinal";
+            this.lbMontoFinal.Size = new System.Drawing.Size(104, 21);
+            this.lbMontoFinal.TabIndex = 3;
+            this.lbMontoFinal.Text = "Monto Final:";
+            // 
+            // lbMontoInicial
+            // 
+            this.lbMontoInicial.AutoSize = true;
+            this.lbMontoInicial.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMontoInicial.Location = new System.Drawing.Point(30, 120);
+            this.lbMontoInicial.Name = "lbMontoInicial";
+            this.lbMontoInicial.Size = new System.Drawing.Size(125, 21);
+            this.lbMontoInicial.TabIndex = 2;
+            this.lbMontoInicial.Text = "Monto Inicial: $";
             // 
             // lbFechaHora
             // 
@@ -78,67 +129,16 @@
             this.lbFechaHora.TabIndex = 1;
             this.lbFechaHora.Text = "Fecha/Hora:";
             // 
-            // lbMontoInicial
+            // lbTitulo
             // 
-            this.lbMontoInicial.AutoSize = true;
-            this.lbMontoInicial.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMontoInicial.Location = new System.Drawing.Point(30, 120);
-            this.lbMontoInicial.Name = "lbMontoInicial";
-            this.lbMontoInicial.Size = new System.Drawing.Size(116, 21);
-            this.lbMontoInicial.TabIndex = 2;
-            this.lbMontoInicial.Text = "Monto Inicial: $";
-            // 
-            // lbMontoFinal
-            // 
-            this.lbMontoFinal.AutoSize = true;
-            this.lbMontoFinal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMontoFinal.Location = new System.Drawing.Point(30, 200);
-            this.lbMontoFinal.Name = "lbMontoFinal";
-            this.lbMontoFinal.Size = new System.Drawing.Size(96, 21);
-            this.lbMontoFinal.TabIndex = 3;
-            this.lbMontoFinal.Text = "Monto Final:";
-            // 
-            // txtMontoFinal
-            // 
-            this.txtMontoFinal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMontoFinal.Location = new System.Drawing.Point(160, 200);
-            this.txtMontoFinal.Name = "txtMontoFinal";
-            this.txtMontoFinal.Size = new System.Drawing.Size(150, 29);
-            this.txtMontoFinal.TabIndex = 4;
-            // 
-            // btnCerrarCaja
-            // 
-            this.btnCerrarCaja.BackColor = System.Drawing.Color.LightGreen;
-            this.btnCerrarCaja.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarCaja.Location = new System.Drawing.Point(120, 270);
-            this.btnCerrarCaja.Name = "btnCerrarCaja";
-            this.btnCerrarCaja.Size = new System.Drawing.Size(150, 40);
-            this.btnCerrarCaja.TabIndex = 5;
-            this.btnCerrarCaja.Text = "Cerrar Caja";
-            this.btnCerrarCaja.UseVisualStyleBackColor = false;
-            this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
-            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(300, 270);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(150, 40);
-            this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // lbTotalVentas
-            // 
-            this.lbTotalVentas.AutoSize = true;
-            this.lbTotalVentas.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalVentas.Location = new System.Drawing.Point(30, 160);
-            this.lbTotalVentas.Name = "lbTotalVentas";
-            this.lbTotalVentas.Size = new System.Drawing.Size(129, 21);
-            this.lbTotalVentas.TabIndex = 7;
-            this.lbTotalVentas.Text = "Total de Ventas: $";
+            this.lbTitulo.AutoSize = true;
+            this.lbTitulo.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTitulo.Location = new System.Drawing.Point(180, 20);
+            this.lbTitulo.Name = "lbTitulo";
+            this.lbTitulo.Size = new System.Drawing.Size(118, 30);
+            this.lbTitulo.TabIndex = 0;
+            this.lbTitulo.Text = "Cerrar Caja";
+            this.lbTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FCerrarCaja
             // 

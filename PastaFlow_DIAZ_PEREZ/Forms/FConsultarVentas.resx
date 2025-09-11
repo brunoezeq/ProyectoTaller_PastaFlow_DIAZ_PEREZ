@@ -117,44 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="iconoReserva" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoReserva.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoRegistrarUsuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoRegistrarUsuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoAcceder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoAcceder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoQueja" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoQueja.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoReporte" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoReporte.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="platopastas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\platopastas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoUsuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoUsuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoCancelar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoCancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoInventario" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoInventario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoCajaReg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoCajaReg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoContrasenia" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoContrasenia.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoPedido" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoPedido.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pastaflow_transparente" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pastaflow_transparente.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

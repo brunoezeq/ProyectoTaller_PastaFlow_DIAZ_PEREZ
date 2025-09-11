@@ -29,29 +29,29 @@
         private void InitializeComponent()
         {
             this.pnlPrincipal = new System.Windows.Forms.Panel();
+            this.cbProducto = new System.Windows.Forms.ComboBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.lbTotal = new System.Windows.Forms.Label();
             this.dgvDetalleVenta = new System.Windows.Forms.DataGridView();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.txtCantidad = new System.Windows.Forms.TextBox();
-            this.lbCantidad = new System.Windows.Forms.Label();
-            this.lbProducto = new System.Windows.Forms.Label();
-            this.lbTitulo = new System.Windows.Forms.Label();
-            this.cbProducto = new System.Windows.Forms.ComboBox();
             this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.preciounitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bEliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
+            this.lbCantidad = new System.Windows.Forms.Label();
+            this.lbProducto = new System.Windows.Forms.Label();
+            this.lbTitulo = new System.Windows.Forms.Label();
             this.pnlPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleVenta)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlPrincipal
             // 
-            this.pnlPrincipal.BackColor = System.Drawing.Color.DarkSalmon;
+            this.pnlPrincipal.BackColor = System.Drawing.Color.Khaki;
             this.pnlPrincipal.Controls.Add(this.cbProducto);
             this.pnlPrincipal.Controls.Add(this.btnCancelar);
             this.pnlPrincipal.Controls.Add(this.btnConfirmar);
@@ -70,10 +70,19 @@
             this.pnlPrincipal.TabIndex = 0;
             this.pnlPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPrincipal_Paint);
             // 
+            // cbProducto
+            // 
+            this.cbProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbProducto.FormattingEnabled = true;
+            this.cbProducto.Location = new System.Drawing.Point(120, 80);
+            this.cbProducto.Name = "cbProducto";
+            this.cbProducto.Size = new System.Drawing.Size(200, 29);
+            this.cbProducto.TabIndex = 11;
+            // 
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
-            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.Location = new System.Drawing.Point(380, 400);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(120, 40);
@@ -85,7 +94,7 @@
             // btnConfirmar
             // 
             this.btnConfirmar.BackColor = System.Drawing.Color.LightGreen;
-            this.btnConfirmar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmar.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmar.Location = new System.Drawing.Point(200, 400);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(160, 40);
@@ -131,68 +140,6 @@
             this.dgvDetalleVenta.TabIndex = 6;
             this.dgvDetalleVenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalleVenta_CellContentClick);
             // 
-            // btnAgregar
-            // 
-            this.btnAgregar.BackColor = System.Drawing.Color.LightBlue;
-            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(540, 78);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(160, 35);
-            this.btnAgregar.TabIndex = 5;
-            this.btnAgregar.Text = "Agregar al carrito:";
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // txtCantidad
-            // 
-            this.txtCantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidad.Location = new System.Drawing.Point(440, 80);
-            this.txtCantidad.Multiline = true;
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(80, 30);
-            this.txtCantidad.TabIndex = 4;
-            this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
-            // 
-            // lbCantidad
-            // 
-            this.lbCantidad.AutoSize = true;
-            this.lbCantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCantidad.Location = new System.Drawing.Point(350, 80);
-            this.lbCantidad.Name = "lbCantidad";
-            this.lbCantidad.Size = new System.Drawing.Size(75, 21);
-            this.lbCantidad.TabIndex = 3;
-            this.lbCantidad.Text = "Cantidad:";
-            // 
-            // lbProducto
-            // 
-            this.lbProducto.AutoSize = true;
-            this.lbProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProducto.Location = new System.Drawing.Point(30, 80);
-            this.lbProducto.Name = "lbProducto";
-            this.lbProducto.Size = new System.Drawing.Size(76, 21);
-            this.lbProducto.TabIndex = 1;
-            this.lbProducto.Text = "Producto:";
-            // 
-            // lbTitulo
-            // 
-            this.lbTitulo.AutoSize = true;
-            this.lbTitulo.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTitulo.Location = new System.Drawing.Point(150, 20);
-            this.lbTitulo.Name = "lbTitulo";
-            this.lbTitulo.Size = new System.Drawing.Size(162, 30);
-            this.lbTitulo.TabIndex = 0;
-            this.lbTitulo.Text = "Registrar Venta";
-            // 
-            // cbProducto
-            // 
-            this.cbProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbProducto.FormattingEnabled = true;
-            this.cbProducto.Location = new System.Drawing.Point(120, 80);
-            this.cbProducto.Name = "cbProducto";
-            this.cbProducto.Size = new System.Drawing.Size(200, 29);
-            this.cbProducto.TabIndex = 11;
-            // 
             // producto
             // 
             this.producto.HeaderText = "Producto";
@@ -218,6 +165,59 @@
             this.bEliminar.HeaderText = "";
             this.bEliminar.Name = "bEliminar";
             this.bEliminar.Text = "";
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.BackColor = System.Drawing.Color.LightBlue;
+            this.btnAgregar.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Location = new System.Drawing.Point(540, 78);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(160, 35);
+            this.btnAgregar.TabIndex = 5;
+            this.btnAgregar.Text = "Agregar al carrito:";
+            this.btnAgregar.UseVisualStyleBackColor = false;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCantidad.Location = new System.Drawing.Point(440, 80);
+            this.txtCantidad.Multiline = true;
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(80, 30);
+            this.txtCantidad.TabIndex = 4;
+            this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
+            // 
+            // lbCantidad
+            // 
+            this.lbCantidad.AutoSize = true;
+            this.lbCantidad.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCantidad.Location = new System.Drawing.Point(350, 80);
+            this.lbCantidad.Name = "lbCantidad";
+            this.lbCantidad.Size = new System.Drawing.Size(81, 21);
+            this.lbCantidad.TabIndex = 3;
+            this.lbCantidad.Text = "Cantidad:";
+            // 
+            // lbProducto
+            // 
+            this.lbProducto.AutoSize = true;
+            this.lbProducto.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbProducto.Location = new System.Drawing.Point(30, 80);
+            this.lbProducto.Name = "lbProducto";
+            this.lbProducto.Size = new System.Drawing.Size(82, 21);
+            this.lbProducto.TabIndex = 1;
+            this.lbProducto.Text = "Producto:";
+            // 
+            // lbTitulo
+            // 
+            this.lbTitulo.AutoSize = true;
+            this.lbTitulo.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTitulo.Location = new System.Drawing.Point(150, 20);
+            this.lbTitulo.Name = "lbTitulo";
+            this.lbTitulo.Size = new System.Drawing.Size(159, 30);
+            this.lbTitulo.TabIndex = 0;
+            this.lbTitulo.Text = "Registrar Venta";
             // 
             // FRegistrarVenta
             // 

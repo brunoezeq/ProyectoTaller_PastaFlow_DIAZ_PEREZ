@@ -56,6 +56,12 @@
     <Compile Include="Forms\FCerrarCaja.Designer.cs">
       <DependentUpon>FCerrarCaja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FConsultarVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FConsultarVentas.Designer.cs">
+      <DependentUpon>FConsultarVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FCerrarCaja.resx">
       <DependentUpon>FCerrarCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FConsultarVentas.resx">
+      <DependentUpon>FConsultarVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
@@ -232,6 +241,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconoCajaReg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pastaflow_transparente.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
