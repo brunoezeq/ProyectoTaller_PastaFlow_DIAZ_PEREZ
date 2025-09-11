@@ -88,14 +88,14 @@
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(209, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(754, 33);
+            this.pnlTop.Size = new System.Drawing.Size(853, 33);
             this.pnlTop.TabIndex = 1;
             // 
             // lbHora
             // 
             this.lbHora.AutoSize = true;
             this.lbHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHora.Location = new System.Drawing.Point(683, 9);
+            this.lbHora.Location = new System.Drawing.Point(785, 9);
             this.lbHora.Name = "lbHora";
             this.lbHora.Size = new System.Drawing.Size(38, 15);
             this.lbHora.TabIndex = 2;
@@ -105,7 +105,7 @@
             // 
             this.lbFecha.AutoSize = true;
             this.lbFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFecha.Location = new System.Drawing.Point(604, 9);
+            this.lbFecha.Location = new System.Drawing.Point(706, 9);
             this.lbFecha.Name = "lbFecha";
             this.lbFecha.Size = new System.Drawing.Size(46, 15);
             this.lbFecha.TabIndex = 1;
@@ -129,11 +129,10 @@
             // 
             // pnlContent
             // 
-            this.pnlContent.BackColor = System.Drawing.Color.Khaki;
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(209, 33);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(754, 472);
+            this.pnlContent.Size = new System.Drawing.Size(853, 472);
             this.pnlContent.TabIndex = 2;
             // 
             // btnVerQuejas
@@ -311,7 +310,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(242)))), ((int)(((byte)(233)))));
-            this.ClientSize = new System.Drawing.Size(963, 505);
+            this.ClientSize = new System.Drawing.Size(1062, 505);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenuLateral);
