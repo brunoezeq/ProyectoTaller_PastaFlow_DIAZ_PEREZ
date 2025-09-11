@@ -8,13 +8,13 @@ namespace PastaFlow_DIAZ_PEREZ.Models
 {
     public class Usuario
     {
-        public int id_usuario { get; set; } 
-        public int dni { get; set; }
-        public string nombre { get; set; }  
-        public string apellido { get; set; }    
-        public string correo_electronico { get; set; }
-        public string contraseña { get; set; }
-        public Rol id_rol { get; set; }
-
+        public int Id_usuario { get; set; } 
+        public string Dni { get; set; }
+        public string Nombre { get; set; }  
+        public string Apellido { get; set; }    
+        public string Correo_electronico { get; set; }
+        public int Id_rol { get; set; }
+        public bool Estado { get; set; }
+        public byte[] Contrasena_hash { get; set; }
     }
 }

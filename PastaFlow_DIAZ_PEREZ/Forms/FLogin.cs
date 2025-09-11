@@ -1,13 +1,18 @@
-﻿using System;
+﻿using PastaFlow_DIAZ_PEREZ.DataAccess;
+using PastaFlow_DIAZ_PEREZ.Forms;
+using PastaFlow_DIAZ_PEREZ.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PastaFlow_DIAZ_PEREZ.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PastaFlow_DIAZ_PEREZ
 {
@@ -40,11 +45,42 @@ namespace PastaFlow_DIAZ_PEREZ
         //Ingresa al menú
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            FMenuCajero menu = new FMenuCajero();
-            menu.Show(); 
-            this.Hide();
+            string dni = txtDNI.Text.Trim();
+            string password = txtContrasenia.Text;
 
-            menu.FormClosing += frmClosing; 
+            if (string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Debe ingresar número de documento y contraseña.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var dao = new UsuarioDAO();
+            var user = dao.ObtenerPorDni(dni);
+
+            if (user == null || user.Contrasena_hash == null)
+            {
+                MessageBox.Show("Nro de documento o contraseña incorrectos.", "Error de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Hasheamos la contraseña ingresada y comparamos
+            byte[] hashedInput = SeguridadHelper.ComputeSha256Hash(password);
+
+            bool iguales = hashedInput.Length == user.Contrasena_hash.Length &&
+                           hashedInput.SequenceEqual(user.Contrasena_hash);
+
+            if (!iguales || !user.Estado)
+            {
+                MessageBox.Show("Nro de documento o contraseña incorrectos.", "Error de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Login OK: guardamos sesión y abrimos menú
+            Session.CurrentUser = user;
+            FMenuCajero menu = new FMenuCajero();
+            menu.Show();
+            this.Hide();
+            menu.FormClosing += frmClosing;
         }
 
         //Al cerrar el menú, limpia los textbox y vuelve a mostrar el login
@@ -53,6 +89,22 @@ namespace PastaFlow_DIAZ_PEREZ
             txtDNI.Clear();
             txtContrasenia.Clear();
             this.Show(); 
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlConnection conn = DbConnection.GetConnection())
+                {
+                    conn.Open();
+                    MessageBox.Show("Conexión exitosa a la base de datos.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al conectar: " + ex.Message);
+            }
         }
     }
 }

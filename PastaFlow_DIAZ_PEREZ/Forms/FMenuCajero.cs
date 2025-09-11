@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PastaFlow_DIAZ_PEREZ.Models;
+using PastaFlow_DIAZ_PEREZ.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,8 +22,40 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FMenu_Load(object sender, EventArgs e)
         {
-            lbUsuario.Text = $"Bienvenido, ";
+            var user = Session.CurrentUser;
+            
+            if (user != null)
+            {
+                lbUsuario.Text = $"Bienvenido, {user.Nombre} {user.Apellido}";
+            }
             lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+            btnVerReportes.Visible = false;
+            btnRegEmpleado.Visible = false;
+            btnVerQuejas.Visible = false;
+            btnInventario.Visible = false;
+            btnRegQueja.Visible = false;
+            btnAbrirCaja.Visible = false;
+            btnCargarPedido.Visible = false;
+            btnRegReserva.Visible = false;
+
+            if (user.Id_rol == 1) // Administrador
+            {
+                btnVerReportes.Visible = true;
+                btnRegEmpleado.Visible = true;
+                btnVerQuejas.Visible = true;
+            }
+            else if (user.Id_rol == 2) // Gerente
+            {
+                btnInventario.Visible = true;
+                btnRegQueja.Visible = true;
+            }
+            else if (user.Id_rol == 3) // Cajero
+            {
+                btnAbrirCaja.Visible = true;
+                btnCargarPedido.Visible = true;
+                btnRegReserva.Visible = true;
+            }
         }
 
         private void timerHora_Tick(object sender, EventArgs e)
