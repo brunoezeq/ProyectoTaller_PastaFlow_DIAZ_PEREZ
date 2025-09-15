@@ -21,11 +21,12 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                     StringBuilder query = new StringBuilder();
                     query.AppendLine("SELECT Id_rol, Nombre_rol FROM Rol");
                     SqlCommand cmd = new SqlCommand(query.ToString(), conn);
-                    cmd.CommandType =  CommandType.Text;
+                    cmd.CommandType = CommandType.Text;
 
                     conn.Open();
 
-                    using (SqlDataReader dr = cmd.ExecuteReader()) {
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
                         while (dr.Read())
                         {
                             roles.Add(new Rol()
@@ -36,7 +37,7 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                         }
                     }
                 }
-            catch (Exception ex)
+                catch (Exception ex)
                 {
                     throw new Exception("Error al listar roles: " + ex.Message);
                 }

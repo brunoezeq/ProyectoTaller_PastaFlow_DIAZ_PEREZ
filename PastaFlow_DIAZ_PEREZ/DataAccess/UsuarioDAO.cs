@@ -13,7 +13,7 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
     {
         public Usuario ObtenerPorDni(string dni)
         {
-            Usuario user = null; 
+            Usuario user = null;
             using (var conn = DbConnection.GetConnection())
             {
                 conn.Open();
@@ -23,11 +23,12 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
 
 
                 using (var cmd = new SqlCommand(sql, conn))
-                    {
+                {
                     cmd.Parameters.AddWithValue("@dni", dni);
-                    using (var reader = cmd.ExecuteReader())    
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read()){
+                        if (reader.Read())
+                        {
                             user = new Usuario
                             {
                                 Id_usuario = (int)reader["id_usuario"],
@@ -45,6 +46,29 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                 }
             }
             return user;
+        }
+
+        public void RegistrarUsuario(string dni, string nombre, string apellido, string correo, string telefono, int idRol, byte[] contrasena)
+        {
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("sp_RegistrarUsuario", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@dni", dni);
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@apellido", apellido);
+                    cmd.Parameters.AddWithValue("@correo", correo);
+                    cmd.Parameters.AddWithValue("@telefono", telefono);
+                    cmd.Parameters.AddWithValue("@id_rol", idRol);
+                    var p = cmd.Parameters.Add("@contrasena", SqlDbType.VarBinary, 64);
+                    p.Value = contrasena ?? (object)DBNull.Value;
+                    cmd.Parameters.AddWithValue("@estado", 1);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

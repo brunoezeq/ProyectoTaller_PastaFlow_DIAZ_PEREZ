@@ -91,20 +91,6 @@ namespace PastaFlow_DIAZ_PEREZ
             this.Show(); 
         }
 
-        private void FrmLogin_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlConnection conn = DbConnection.GetConnection())
-                {
-                    conn.Open();
-                    MessageBox.Show("Conexión exitosa a la base de datos.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al conectar: " + ex.Message);
-            }
-        }
+        
     }
 }

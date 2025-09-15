@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DbConnection.cs" />
+    <Compile Include="DataAccess\RolDAO.cs" />
     <Compile Include="DataAccess\UsuarioDAO.cs" />
     <Compile Include="Forms\FCerrarCaja.cs">
       <SubType>Form</SubType>
@@ -136,6 +137,8 @@
     <Compile Include="Models\Venta.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SeriviceRol.cs" />
+    <Compile Include="Utils\ComboOption.cs" />
     <Compile Include="Utils\SecurityHelper.cs" />
     <Compile Include="Utils\Session.cs" />
     <EmbeddedResource Include="Forms\FAbrirCaja.resx">
@@ -197,9 +200,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\iconoAcceder.png" />
   </ItemGroup>
