@@ -58,22 +58,22 @@
             // lbDNI
             // 
             this.lbDNI.AutoSize = true;
-            this.lbDNI.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDNI.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDNI.ForeColor = System.Drawing.Color.Khaki;
             this.lbDNI.Location = new System.Drawing.Point(40, 177);
             this.lbDNI.Name = "lbDNI";
-            this.lbDNI.Size = new System.Drawing.Size(106, 17);
+            this.lbDNI.Size = new System.Drawing.Size(102, 17);
             this.lbDNI.TabIndex = 2;
             this.lbDNI.Text = "Nro Documento";
             // 
             // lbContraseña
             // 
             this.lbContraseña.AutoSize = true;
-            this.lbContraseña.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbContraseña.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbContraseña.ForeColor = System.Drawing.Color.Khaki;
             this.lbContraseña.Location = new System.Drawing.Point(40, 221);
             this.lbContraseña.Name = "lbContraseña";
-            this.lbContraseña.Size = new System.Drawing.Size(77, 17);
+            this.lbContraseña.Size = new System.Drawing.Size(74, 17);
             this.lbContraseña.TabIndex = 3;
             this.lbContraseña.Text = "Contraseña";
             // 
@@ -122,7 +122,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Firebrick;
+            this.BackColor = System.Drawing.Color.DarkRed;
             this.ClientSize = new System.Drawing.Size(317, 410);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);

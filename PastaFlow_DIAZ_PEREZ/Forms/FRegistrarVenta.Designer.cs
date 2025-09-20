@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pnlPrincipal = new System.Windows.Forms.Panel();
-            this.cbProducto = new System.Windows.Forms.ComboBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtTotal = new System.Windows.Forms.TextBox();
@@ -45,14 +44,15 @@
             this.lbCantidad = new System.Windows.Forms.Label();
             this.lbProducto = new System.Windows.Forms.Label();
             this.lbTitulo = new System.Windows.Forms.Label();
+            this.textBuscarProducto = new System.Windows.Forms.TextBox();
             this.pnlPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleVenta)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlPrincipal
             // 
-            this.pnlPrincipal.BackColor = System.Drawing.Color.Khaki;
-            this.pnlPrincipal.Controls.Add(this.cbProducto);
+            this.pnlPrincipal.BackColor = System.Drawing.Color.GhostWhite;
+            this.pnlPrincipal.Controls.Add(this.textBuscarProducto);
             this.pnlPrincipal.Controls.Add(this.btnCancelar);
             this.pnlPrincipal.Controls.Add(this.btnConfirmar);
             this.pnlPrincipal.Controls.Add(this.txtTotal);
@@ -70,20 +70,11 @@
             this.pnlPrincipal.TabIndex = 0;
             this.pnlPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPrincipal_Paint);
             // 
-            // cbProducto
-            // 
-            this.cbProducto.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbProducto.FormattingEnabled = true;
-            this.cbProducto.Location = new System.Drawing.Point(120, 80);
-            this.cbProducto.Name = "cbProducto";
-            this.cbProducto.Size = new System.Drawing.Size(200, 29);
-            this.cbProducto.TabIndex = 11;
-            // 
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
             this.btnCancelar.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(380, 400);
+            this.btnCancelar.Location = new System.Drawing.Point(560, 335);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(120, 40);
             this.btnCancelar.TabIndex = 10;
@@ -95,7 +86,7 @@
             // 
             this.btnConfirmar.BackColor = System.Drawing.Color.LightGreen;
             this.btnConfirmar.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmar.Location = new System.Drawing.Point(200, 400);
+            this.btnConfirmar.Location = new System.Drawing.Point(394, 336);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(160, 40);
             this.btnConfirmar.TabIndex = 9;
@@ -106,7 +97,7 @@
             // txtTotal
             // 
             this.txtTotal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotal.Location = new System.Drawing.Point(470, 345);
+            this.txtTotal.Location = new System.Drawing.Point(99, 341);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
             this.txtTotal.Size = new System.Drawing.Size(200, 33);
@@ -117,7 +108,7 @@
             // 
             this.lbTotal.AutoSize = true;
             this.lbTotal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotal.Location = new System.Drawing.Point(400, 350);
+            this.lbTotal.Location = new System.Drawing.Point(25, 343);
             this.lbTotal.Name = "lbTotal";
             this.lbTotal.Size = new System.Drawing.Size(73, 25);
             this.lbTotal.TabIndex = 7;
@@ -181,10 +172,10 @@
             // txtCantidad
             // 
             this.txtCantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidad.Location = new System.Drawing.Point(440, 80);
+            this.txtCantidad.Location = new System.Drawing.Point(419, 93);
             this.txtCantidad.Multiline = true;
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(80, 30);
+            this.txtCantidad.Size = new System.Drawing.Size(80, 20);
             this.txtCantidad.TabIndex = 4;
             this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
@@ -193,7 +184,7 @@
             // 
             this.lbCantidad.AutoSize = true;
             this.lbCantidad.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCantidad.Location = new System.Drawing.Point(350, 80);
+            this.lbCantidad.Location = new System.Drawing.Point(332, 93);
             this.lbCantidad.Name = "lbCantidad";
             this.lbCantidad.Size = new System.Drawing.Size(81, 21);
             this.lbCantidad.TabIndex = 3;
@@ -203,7 +194,7 @@
             // 
             this.lbProducto.AutoSize = true;
             this.lbProducto.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProducto.Location = new System.Drawing.Point(30, 80);
+            this.lbProducto.Location = new System.Drawing.Point(31, 93);
             this.lbProducto.Name = "lbProducto";
             this.lbProducto.Size = new System.Drawing.Size(82, 21);
             this.lbProducto.TabIndex = 1;
@@ -213,11 +204,18 @@
             // 
             this.lbTitulo.AutoSize = true;
             this.lbTitulo.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTitulo.Location = new System.Drawing.Point(150, 20);
+            this.lbTitulo.Location = new System.Drawing.Point(314, 33);
             this.lbTitulo.Name = "lbTitulo";
-            this.lbTitulo.Size = new System.Drawing.Size(159, 30);
+            this.lbTitulo.Size = new System.Drawing.Size(172, 30);
             this.lbTitulo.TabIndex = 0;
-            this.lbTitulo.Text = "Registrar Venta";
+            this.lbTitulo.Text = "Registrar Pedido";
+            // 
+            // textBuscarProducto
+            // 
+            this.textBuscarProducto.Location = new System.Drawing.Point(119, 93);
+            this.textBuscarProducto.Name = "textBuscarProducto";
+            this.textBuscarProducto.Size = new System.Drawing.Size(190, 20);
+            this.textBuscarProducto.TabIndex = 11;
             // 
             // FRegistrarVenta
             // 
@@ -248,11 +246,11 @@
         private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.ComboBox cbProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn preciounitario;
         private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
         private System.Windows.Forms.DataGridViewButtonColumn bEliminar;
+        private System.Windows.Forms.TextBox textBuscarProducto;
     }
 }

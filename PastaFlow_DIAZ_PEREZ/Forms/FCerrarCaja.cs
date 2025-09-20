@@ -23,12 +23,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FCerrarCaja_Load(object sender, EventArgs e)
         {
-            // Fecha y hora actual
-            lbFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm");
-
-            // Mostrar datos recibidos
-            lbMontoInicial.Text = $"Monto Inicial: ${montoInicial}";
-            lbTotalVentas.Text = $"Total de Ventas: ${totalVentas}";
+            
         }
 
         private void btnCerrarCaja_Click(object sender, EventArgs e)
@@ -58,10 +53,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close(); // Sale sin hacer nada
-        }
-        private void pnlPrincipal_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

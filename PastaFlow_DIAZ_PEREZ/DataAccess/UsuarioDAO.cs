@@ -48,6 +48,7 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             return user;
         }
 
+        
         public void RegistrarUsuario(string dni, string nombre, string apellido, string correo, string telefono, int idRol, byte[] contrasena)
         {
             using (var conn = DbConnection.GetConnection())
@@ -70,5 +71,25 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                 }
             }
         }
+
+        public DataTable BuscarUsuarios(string dni = null, int? idRol = null)
+        {
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("sp_BuscarUsuarios", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@dni", (object)dni ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@id_rol", (object)idRol ?? DBNull.Value);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
     }
 }

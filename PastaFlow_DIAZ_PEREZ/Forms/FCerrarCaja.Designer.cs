@@ -28,143 +28,191 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlPrincipal = new System.Windows.Forms.Panel();
-            this.lbTotalVentas = new System.Windows.Forms.Label();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnCerrarCaja = new System.Windows.Forms.Button();
+            this.pnlAbrirCaja = new System.Windows.Forms.Panel();
             this.txtMontoFinal = new System.Windows.Forms.TextBox();
-            this.lbMontoFinal = new System.Windows.Forms.Label();
-            this.lbMontoInicial = new System.Windows.Forms.Label();
-            this.lbFechaHora = new System.Windows.Forms.Label();
-            this.lbTitulo = new System.Windows.Forms.Label();
-            this.pnlPrincipal.SuspendLayout();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnAtras = new System.Windows.Forms.Button();
+            this.btnAbrirCaja = new System.Windows.Forms.Button();
+            this.pnlAbrirCaja.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // pnlPrincipal
+            // pnlAbrirCaja
             // 
-            this.pnlPrincipal.BackColor = System.Drawing.Color.Khaki;
-            this.pnlPrincipal.Controls.Add(this.lbTotalVentas);
-            this.pnlPrincipal.Controls.Add(this.btnCancelar);
-            this.pnlPrincipal.Controls.Add(this.btnCerrarCaja);
-            this.pnlPrincipal.Controls.Add(this.txtMontoFinal);
-            this.pnlPrincipal.Controls.Add(this.lbMontoFinal);
-            this.pnlPrincipal.Controls.Add(this.lbMontoInicial);
-            this.pnlPrincipal.Controls.Add(this.lbFechaHora);
-            this.pnlPrincipal.Controls.Add(this.lbTitulo);
-            this.pnlPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlPrincipal.Location = new System.Drawing.Point(0, 0);
-            this.pnlPrincipal.Name = "pnlPrincipal";
-            this.pnlPrincipal.Size = new System.Drawing.Size(800, 450);
-            this.pnlPrincipal.TabIndex = 0;
-            this.pnlPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPrincipal_Paint);
-            // 
-            // lbTotalVentas
-            // 
-            this.lbTotalVentas.AutoSize = true;
-            this.lbTotalVentas.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalVentas.Location = new System.Drawing.Point(30, 160);
-            this.lbTotalVentas.Name = "lbTotalVentas";
-            this.lbTotalVentas.Size = new System.Drawing.Size(143, 21);
-            this.lbTotalVentas.TabIndex = 7;
-            this.lbTotalVentas.Text = "Total de Ventas: $";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.LightGray;
-            this.btnCancelar.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(300, 270);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(150, 40);
-            this.btnCancelar.TabIndex = 6;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnCerrarCaja
-            // 
-            this.btnCerrarCaja.BackColor = System.Drawing.Color.LightGreen;
-            this.btnCerrarCaja.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCerrarCaja.Location = new System.Drawing.Point(120, 270);
-            this.btnCerrarCaja.Name = "btnCerrarCaja";
-            this.btnCerrarCaja.Size = new System.Drawing.Size(150, 40);
-            this.btnCerrarCaja.TabIndex = 5;
-            this.btnCerrarCaja.Text = "Cerrar Caja";
-            this.btnCerrarCaja.UseVisualStyleBackColor = false;
-            this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
+            this.pnlAbrirCaja.BackColor = System.Drawing.Color.DarkRed;
+            this.pnlAbrirCaja.Controls.Add(this.txtMontoFinal);
+            this.pnlAbrirCaja.Controls.Add(this.textBox3);
+            this.pnlAbrirCaja.Controls.Add(this.textBox2);
+            this.pnlAbrirCaja.Controls.Add(this.textBox1);
+            this.pnlAbrirCaja.Controls.Add(this.label5);
+            this.pnlAbrirCaja.Controls.Add(this.label4);
+            this.pnlAbrirCaja.Controls.Add(this.label3);
+            this.pnlAbrirCaja.Controls.Add(this.label1);
+            this.pnlAbrirCaja.Controls.Add(this.pictureBox1);
+            this.pnlAbrirCaja.Controls.Add(this.label2);
+            this.pnlAbrirCaja.Controls.Add(this.btnAtras);
+            this.pnlAbrirCaja.Controls.Add(this.btnAbrirCaja);
+            this.pnlAbrirCaja.Location = new System.Drawing.Point(240, 18);
+            this.pnlAbrirCaja.Name = "pnlAbrirCaja";
+            this.pnlAbrirCaja.Size = new System.Drawing.Size(319, 420);
+            this.pnlAbrirCaja.TabIndex = 8;
             // 
             // txtMontoFinal
             // 
-            this.txtMontoFinal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMontoFinal.Location = new System.Drawing.Point(160, 200);
+            this.txtMontoFinal.Location = new System.Drawing.Point(151, 293);
             this.txtMontoFinal.Name = "txtMontoFinal";
-            this.txtMontoFinal.Size = new System.Drawing.Size(150, 29);
-            this.txtMontoFinal.TabIndex = 4;
+            this.txtMontoFinal.Size = new System.Drawing.Size(142, 20);
+            this.txtMontoFinal.TabIndex = 15;
             // 
-            // lbMontoFinal
+            // textBox3
             // 
-            this.lbMontoFinal.AutoSize = true;
-            this.lbMontoFinal.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMontoFinal.Location = new System.Drawing.Point(30, 200);
-            this.lbMontoFinal.Name = "lbMontoFinal";
-            this.lbMontoFinal.Size = new System.Drawing.Size(104, 21);
-            this.lbMontoFinal.TabIndex = 3;
-            this.lbMontoFinal.Text = "Monto Final:";
+            this.textBox3.Location = new System.Drawing.Point(151, 267);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(142, 20);
+            this.textBox3.TabIndex = 14;
             // 
-            // lbMontoInicial
+            // textBox2
             // 
-            this.lbMontoInicial.AutoSize = true;
-            this.lbMontoInicial.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMontoInicial.Location = new System.Drawing.Point(30, 120);
-            this.lbMontoInicial.Name = "lbMontoInicial";
-            this.lbMontoInicial.Size = new System.Drawing.Size(125, 21);
-            this.lbMontoInicial.TabIndex = 2;
-            this.lbMontoInicial.Text = "Monto Inicial: $";
+            this.textBox2.Location = new System.Drawing.Point(151, 240);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(142, 20);
+            this.textBox2.TabIndex = 13;
             // 
-            // lbFechaHora
+            // textBox1
             // 
-            this.lbFechaHora.AutoSize = true;
-            this.lbFechaHora.Location = new System.Drawing.Point(30, 80);
-            this.lbFechaHora.Name = "lbFechaHora";
-            this.lbFechaHora.Size = new System.Drawing.Size(68, 13);
-            this.lbFechaHora.TabIndex = 1;
-            this.lbFechaHora.Text = "Fecha/Hora:";
+            this.textBox1.Location = new System.Drawing.Point(151, 214);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(142, 20);
+            this.textBox1.TabIndex = 12;
             // 
-            // lbTitulo
+            // label5
             // 
-            this.lbTitulo.AutoSize = true;
-            this.lbTitulo.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTitulo.Location = new System.Drawing.Point(180, 20);
-            this.lbTitulo.Name = "lbTitulo";
-            this.lbTitulo.Size = new System.Drawing.Size(118, 30);
-            this.lbTitulo.TabIndex = 0;
-            this.lbTitulo.Text = "Cerrar Caja";
-            this.lbTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(21, 296);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 16);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Monto final :";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(21, 270);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(112, 16);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Monto esperado :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(21, 243);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 16);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Total de ventas :";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(21, 217);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 16);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Monto inicial :";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.platopastas;
+            this.pictureBox1.Location = new System.Drawing.Point(56, 53);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(204, 127);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(87, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(145, 30);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Cierre de Caja";
+            // 
+            // btnAtras
+            // 
+            this.btnAtras.BackColor = System.Drawing.Color.LightGray;
+            this.btnAtras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAtras.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtras.Location = new System.Drawing.Point(166, 368);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(120, 40);
+            this.btnAtras.TabIndex = 5;
+            this.btnAtras.Text = "Atras";
+            this.btnAtras.UseVisualStyleBackColor = false;
+            // 
+            // btnAbrirCaja
+            // 
+            this.btnAbrirCaja.BackColor = System.Drawing.Color.LightGreen;
+            this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbrirCaja.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbrirCaja.Location = new System.Drawing.Point(31, 368);
+            this.btnAbrirCaja.Name = "btnAbrirCaja";
+            this.btnAbrirCaja.Size = new System.Drawing.Size(120, 40);
+            this.btnAbrirCaja.TabIndex = 4;
+            this.btnAbrirCaja.Text = "Abrir Caja";
+            this.btnAbrirCaja.UseVisualStyleBackColor = false;
             // 
             // FCerrarCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pnlPrincipal);
+            this.Controls.Add(this.pnlAbrirCaja);
             this.Name = "FCerrarCaja";
             this.Text = "Cerrar Caja";
             this.Load += new System.EventHandler(this.FCerrarCaja_Load);
-            this.pnlPrincipal.ResumeLayout(false);
-            this.pnlPrincipal.PerformLayout();
+            this.pnlAbrirCaja.ResumeLayout(false);
+            this.pnlAbrirCaja.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlPrincipal;
-        private System.Windows.Forms.Label lbFechaHora;
-        private System.Windows.Forms.Label lbTitulo;
-        private System.Windows.Forms.Label lbMontoFinal;
-        private System.Windows.Forms.Label lbMontoInicial;
+        private System.Windows.Forms.Panel pnlAbrirCaja;
         private System.Windows.Forms.TextBox txtMontoFinal;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnCerrarCaja;
-        private System.Windows.Forms.Label lbTotalVentas;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnAtras;
+        private System.Windows.Forms.Button btnAbrirCaja;
     }
 }

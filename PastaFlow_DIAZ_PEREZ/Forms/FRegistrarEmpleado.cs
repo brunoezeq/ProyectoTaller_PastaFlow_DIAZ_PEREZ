@@ -192,5 +192,48 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 cBoxRol.SelectedValue = row.Cells["id_rol"].Value;
             }
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string dni = string.IsNullOrWhiteSpace(txtBuscarDni.Text) ? null : txtBuscarDni.Text;
+            int? rol = cBoxBuscarRol.SelectedIndex >= 0 ? (int?)cBoxBuscarRol.SelectedValue : null;
+
+            var dao = new UsuarioDAO();
+            DataTable dt = dao.BuscarUsuarios(dni, rol);
+
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show("No se encontraron usuarios con el número de documento ingresado.",
+                                "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            dgvUsuarios.DataSource = dt;
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscarDni.Clear();
+            cBoxBuscarRol.SelectedIndex = -1;
+            CargarUsuarios(); // Recargar todos los usuarios
+        }
+
+        private void txtBuscarDni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Solo permite ingresar numeros en el textbox
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
+            //Solo permite ingresar 8 caracteres en el textbox
+            if (char.IsDigit(e.KeyChar) && txtBuscarDni.Text.Length >= 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -73,6 +73,26 @@ namespace PastaFlow_DIAZ_PEREZ.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconoAtrás {
+            get {
+                object obj = ResourceManager.GetObject("iconoAtrás", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoBuscar {
+            get {
+                object obj = ResourceManager.GetObject("iconoBuscar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconoCajaReg {
             get {
                 object obj = ResourceManager.GetObject("iconoCajaReg", resourceCulture);
@@ -106,6 +126,16 @@ namespace PastaFlow_DIAZ_PEREZ.Properties {
         internal static System.Drawing.Bitmap iconoInventario {
             get {
                 object obj = ResourceManager.GetObject("iconoInventario", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoLimpiar {
+            get {
+                object obj = ResourceManager.GetObject("iconoLimpiar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

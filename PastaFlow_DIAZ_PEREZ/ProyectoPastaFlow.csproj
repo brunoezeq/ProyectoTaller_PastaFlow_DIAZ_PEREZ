@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -200,7 +201,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\iconoLimpiar.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconoAcceder.png" />
   </ItemGroup>
@@ -245,6 +248,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pastaflow_transparente.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoBuscar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconoAtrás.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

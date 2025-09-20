@@ -21,45 +21,13 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FRegistrarVenta_Load(object sender, EventArgs e)
         {
-            // Solo selección, no edición
-            cbProducto.DropDownStyle = ComboBoxStyle.DropDownList;
-            // Cargar productos en el ComboBox
-            cbProducto.Items.Add("Producto A");
-            cbProducto.Items.Add("Producto B");
-            cbProducto.Items.Add("Producto C");
-
-            // Ajustar ancho automático de columnas
-            dgvDetalleVenta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            // Solo lectura para evitar cambios directos
-            dgvDetalleVenta.ReadOnly = true;
-            dgvDetalleVenta.AllowUserToAddRows = false;
+           
         }
 
         // Evento para agregar producto a la grilla
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (cbProducto.SelectedIndex != -1 && int.TryParse(txtCantidad.Text, out int cantidad) && cantidad > 0)
-            {
-                string producto = cbProducto.SelectedItem.ToString();
-                decimal precioUnitario = 100; // Valor fijo por ahora (después se trae de BD)
-                decimal subtotal = cantidad * precioUnitario;
-
-                // Agregar fila
-                dgvDetalleVenta.Rows.Add(producto, cantidad, precioUnitario, subtotal, "Eliminar");
-
-                // Recalcular total
-                decimal total = 0;
-                foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
-                {
-                    total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
-                }
-                txtTotal.Text = total.ToString("0.00");
-            }
-            else
-            {
-                MessageBox.Show("Seleccione un producto y cantidad válida.");
-            }
+            
         }
 
 

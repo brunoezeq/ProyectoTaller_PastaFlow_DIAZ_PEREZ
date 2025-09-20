@@ -18,7 +18,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         }
         private void FAbrirCaja_Load(object sender, EventArgs e)
         {
-            lbFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm");
+            
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -48,7 +48,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lbFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy - HH:mm");
+            
         }
 
         private void btnAbrirCaja_Click(object sender, EventArgs e)

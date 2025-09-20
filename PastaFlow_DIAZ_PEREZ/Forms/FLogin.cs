@@ -90,7 +90,5 @@ namespace PastaFlow_DIAZ_PEREZ
             txtContrasenia.Clear();
             this.Show(); 
         }
-
-        
     }
 }
