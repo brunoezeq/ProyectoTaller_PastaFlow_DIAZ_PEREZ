@@ -90,12 +90,30 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnRegReserva_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new FRegistrarReserva());
+            pnlMenuLateral.Visible = false;         // Oculto el menú lateral
+
+            var frm = new FRegistrarReserva();   // Creo el formulario hijo
+
+            frm.FormClosed += (s, args) =>          // Cuando el hijo se cierra, muestro de nuevo el menú
+            {
+                pnlMenuLateral.Visible = true;
+            };
+
+            AbrirFormulario(frm);   // Lo abro dentro del panel de contenido
         }
 
         private void btnInventario_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new FGestionarInventario());
+            pnlMenuLateral.Visible = false;         // Oculto el menú lateral
+
+            var frm = new FGestionarInventario();   // Creo el formulario hijo
+
+            frm.FormClosed += (s, args) =>          // Cuando el hijo se cierra, muestro de nuevo el menú
+            {
+                pnlMenuLateral.Visible = true;
+            };
+
+            AbrirFormulario(frm);   
         }
 
         private void btnRegQueja_Click(object sender, EventArgs e)
@@ -110,7 +128,17 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnRegEmpleado_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new FRegistrarEmpleado());  
+            pnlMenuLateral.Visible = false;         // Oculto el menú lateral
+            
+            var frm = new FRegistrarEmpleado();     // Creo el formulario hijo
+
+            
+            frm.FormClosed += (s, args) =>          // Cuando el hijo se cierra, muestro de nuevo el menú
+            {
+                pnlMenuLateral.Visible = true;
+            };
+
+            AbrirFormulario(frm);
         }
 
         private void btnVerQueja_Click(object sender, EventArgs e)

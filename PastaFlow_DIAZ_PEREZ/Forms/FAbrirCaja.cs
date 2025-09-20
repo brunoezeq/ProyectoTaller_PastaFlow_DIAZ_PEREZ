@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PastaFlow_DIAZ_PEREZ.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,19 +17,17 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             InitializeComponent();
         }
+
         private void FAbrirCaja_Load(object sender, EventArgs e)
         {
-            
-        }
+            var user = Session.CurrentUser;
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void lbFechaHora_Click(object sender, EventArgs e)
-        {
-
+            if (user != null)
+            {
+                lbCajero.Text = $"{user.Nombre} {user.Apellido}";
+            }
+            lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            lbHora.Text = DateTime.Now.ToString("HH:mm");
         }
 
         private void txtMontoInicial_KeyPress(object sender, KeyPressEventArgs e)
@@ -46,22 +45,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnAbrirCaja_Click(object sender, EventArgs e)
         {
-            if (decimal.TryParse(txtMontoInicial.Text, out decimal monto) && monto > 0)
-            {
-                MessageBox.Show($"Caja abierta con ${monto}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close(); // Cierra el formulario después de abrir la caja
-            }
-            else
-            {
-                MessageBox.Show("Ingrese un monto válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+           
         }
 
         // Evento para el botón Atrás
@@ -70,9 +56,5 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             this.Close();
         }
 
-        private void FAbrirCaja_Load_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

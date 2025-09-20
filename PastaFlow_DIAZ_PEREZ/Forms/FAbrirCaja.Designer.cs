@@ -28,30 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.btnAbrirCaja = new System.Windows.Forms.Button();
             this.btnAtras = new System.Windows.Forms.Button();
             this.pnlAbrirCaja = new System.Windows.Forms.Panel();
             this.txtMontoInicial = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lbFecha = new System.Windows.Forms.Label();
+            this.lbHora = new System.Windows.Forms.Label();
+            this.lbCajero = new System.Windows.Forms.Label();
             this.pnlAbrirCaja.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label2
             // 
@@ -93,10 +85,10 @@
             // pnlAbrirCaja
             // 
             this.pnlAbrirCaja.BackColor = System.Drawing.Color.DarkRed;
+            this.pnlAbrirCaja.Controls.Add(this.lbCajero);
+            this.pnlAbrirCaja.Controls.Add(this.lbHora);
+            this.pnlAbrirCaja.Controls.Add(this.lbFecha);
             this.pnlAbrirCaja.Controls.Add(this.txtMontoInicial);
-            this.pnlAbrirCaja.Controls.Add(this.textBox3);
-            this.pnlAbrirCaja.Controls.Add(this.textBox2);
-            this.pnlAbrirCaja.Controls.Add(this.textBox1);
             this.pnlAbrirCaja.Controls.Add(this.label5);
             this.pnlAbrirCaja.Controls.Add(this.label4);
             this.pnlAbrirCaja.Controls.Add(this.label3);
@@ -112,31 +104,10 @@
             // 
             // txtMontoInicial
             // 
-            this.txtMontoInicial.Location = new System.Drawing.Point(151, 293);
+            this.txtMontoInicial.Location = new System.Drawing.Point(155, 295);
             this.txtMontoInicial.Name = "txtMontoInicial";
             this.txtMontoInicial.Size = new System.Drawing.Size(142, 20);
             this.txtMontoInicial.TabIndex = 15;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(151, 267);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(142, 20);
-            this.textBox3.TabIndex = 14;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(151, 240);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(142, 20);
-            this.textBox2.TabIndex = 13;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(151, 214);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(142, 20);
-            this.textBox1.TabIndex = 12;
             // 
             // label5
             // 
@@ -194,16 +165,49 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
+            // lbFecha
+            // 
+            this.lbFecha.AutoSize = true;
+            this.lbFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFecha.ForeColor = System.Drawing.Color.White;
+            this.lbFecha.Location = new System.Drawing.Point(156, 217);
+            this.lbFecha.Name = "lbFecha";
+            this.lbFecha.Size = new System.Drawing.Size(16, 16);
+            this.lbFecha.TabIndex = 16;
+            this.lbFecha.Text = "...";
+            // 
+            // lbHora
+            // 
+            this.lbHora.AutoSize = true;
+            this.lbHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHora.ForeColor = System.Drawing.Color.White;
+            this.lbHora.Location = new System.Drawing.Point(156, 244);
+            this.lbHora.Name = "lbHora";
+            this.lbHora.Size = new System.Drawing.Size(16, 16);
+            this.lbHora.TabIndex = 17;
+            this.lbHora.Text = "...";
+            // 
+            // lbCajero
+            // 
+            this.lbCajero.AutoSize = true;
+            this.lbCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCajero.ForeColor = System.Drawing.Color.White;
+            this.lbCajero.Location = new System.Drawing.Point(156, 270);
+            this.lbCajero.Name = "lbCajero";
+            this.lbCajero.Size = new System.Drawing.Size(16, 16);
+            this.lbCajero.TabIndex = 18;
+            this.lbCajero.Text = "...";
+            // 
             // FAbrirCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.GhostWhite;
-            this.ClientSize = new System.Drawing.Size(800, 527);
+            this.ClientSize = new System.Drawing.Size(800, 452);
             this.Controls.Add(this.pnlAbrirCaja);
             this.Name = "FAbrirCaja";
             this.Text = "Abrir Caja";
-            this.Load += new System.EventHandler(this.FAbrirCaja_Load_1);
+            this.Load += new System.EventHandler(this.FAbrirCaja_Load);
             this.pnlAbrirCaja.ResumeLayout(false);
             this.pnlAbrirCaja.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -212,7 +216,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAbrirCaja;
         private System.Windows.Forms.Button btnAtras;
@@ -222,9 +225,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMontoInicial;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbCajero;
+        private System.Windows.Forms.Label lbHora;
+        private System.Windows.Forms.Label lbFecha;
     }
 }

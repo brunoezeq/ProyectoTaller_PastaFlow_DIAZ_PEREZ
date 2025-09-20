@@ -30,45 +30,20 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             
         }
 
-
         // Evento para botón eliminar en la grilla
         private void dgvDetalleVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvDetalleVenta.Columns[e.ColumnIndex].Name == "bEliminar" && e.RowIndex >= 0)
             {
                 dgvDetalleVenta.Rows.RemoveAt(e.RowIndex);
-                CalcularTotal();
             }
         }
 
-        // 👉 Método para calcular el total
-        private void CalcularTotal()
-        {
-            decimal total = 0;
-            foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
-            {
-                if (row.Cells["Subtotal"].Value != null)
-                {
-                    total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
-                }
-            }
-            txtTotal.Text = total.ToString("N2");
-        }
-
-        // Evento Confirmar
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            if (dgvDetalleVenta.Rows.Count == 0)
-            {
-                MessageBox.Show("No hay productos en la venta.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            MessageBox.Show($"Venta registrada. Total: ${txtTotal.Text}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            
         }
 
-        // Evento Cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
