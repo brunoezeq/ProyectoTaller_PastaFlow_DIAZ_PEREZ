@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -57,12 +63,6 @@
     </Compile>
     <Compile Include="Forms\FCerrarCaja.Designer.cs">
       <DependentUpon>FCerrarCaja.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FConsultarVentas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FConsultarVentas.Designer.cs">
-      <DependentUpon>FConsultarVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FLogin.cs">
       <SubType>Form</SubType>
@@ -147,9 +147,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FCerrarCaja.resx">
       <DependentUpon>FCerrarCaja.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FConsultarVentas.resx">
-      <DependentUpon>FConsultarVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
@@ -254,6 +251,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconoAtrás.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icono.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

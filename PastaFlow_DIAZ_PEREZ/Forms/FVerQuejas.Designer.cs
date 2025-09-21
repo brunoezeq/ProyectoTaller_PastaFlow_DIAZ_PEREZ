@@ -36,7 +36,7 @@
             // dgsQuejas
             // 
             this.dgsQuejas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgsQuejas.Location = new System.Drawing.Point(41, 111);
+            this.dgsQuejas.Location = new System.Drawing.Point(51, 113);
             this.dgsQuejas.Name = "dgsQuejas";
             this.dgsQuejas.Size = new System.Drawing.Size(703, 150);
             this.dgsQuejas.TabIndex = 0;
@@ -44,11 +44,11 @@
             // lbQuejasTitulo
             // 
             this.lbQuejasTitulo.AutoSize = true;
-            this.lbQuejasTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbQuejasTitulo.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbQuejasTitulo.ForeColor = System.Drawing.Color.Black;
             this.lbQuejasTitulo.Location = new System.Drawing.Point(300, 39);
             this.lbQuejasTitulo.Name = "lbQuejasTitulo";
-            this.lbQuejasTitulo.Size = new System.Drawing.Size(194, 25);
+            this.lbQuejasTitulo.Size = new System.Drawing.Size(168, 26);
             this.lbQuejasTitulo.TabIndex = 20;
             this.lbQuejasTitulo.Text = "Quejas de Clientes";
             // 

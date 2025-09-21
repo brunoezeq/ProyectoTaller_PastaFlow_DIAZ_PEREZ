@@ -26,7 +26,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             
             if (user != null)
             {
-                lbUsuario.Text = $"Bienvenido, {user.Nombre} {user.Apellido}";
+                lbUsuario.Text = $"Bienvenido: {user.Nombre} {user.Apellido}";
             }
             lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
 

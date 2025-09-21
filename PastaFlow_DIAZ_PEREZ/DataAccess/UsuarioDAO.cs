@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data; 
+using System.Data;
 using System.Data.SqlClient;
 using PastaFlow_DIAZ_PEREZ.Models;
 
@@ -20,7 +20,6 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                 string sql = @"SELECT id_usuario, dni, nombre, apellido, id_rol, estado, contrasena_hash
                                FROM Usuario
                                WHERE dni = @dni";
-
 
                 using (var cmd = new SqlCommand(sql, conn))
                 {
@@ -48,12 +47,34 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             return user;
         }
 
-        
+        public bool ExisteDni(string dni)
+        {
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                string sql = "SELECT COUNT(*) FROM Usuario WHERE dni = @dni";
+
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@dni", dni);
+                    int count = (int)cmd.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
         public void RegistrarUsuario(string dni, string nombre, string apellido, string correo, string telefono, int idRol, byte[] contrasena)
         {
             using (var conn = DbConnection.GetConnection())
             {
                 conn.Open();
+
+                // 🔎 Verificar si el DNI ya existe
+                if (ExisteDni(dni))
+                {
+                    throw new Exception($"El DNI {dni} ya está registrado en el sistema.");
+                }
+
                 using (var cmd = new SqlCommand("sp_RegistrarUsuario", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -63,8 +84,10 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                     cmd.Parameters.AddWithValue("@correo", correo);
                     cmd.Parameters.AddWithValue("@telefono", telefono);
                     cmd.Parameters.AddWithValue("@id_rol", idRol);
+
                     var p = cmd.Parameters.Add("@contrasena", SqlDbType.VarBinary, 64);
                     p.Value = contrasena ?? (object)DBNull.Value;
+
                     cmd.Parameters.AddWithValue("@estado", 1);
 
                     cmd.ExecuteNonQuery();
@@ -72,6 +95,7 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             }
         }
 
+        // 🔎 Implementación de búsqueda con SP
         public DataTable BuscarUsuarios(string dni = null, int? idRol = null)
         {
             using (var conn = DbConnection.GetConnection())
@@ -90,6 +114,5 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                 }
             }
         }
-
     }
 }

@@ -21,7 +21,15 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FRegistrarVenta_Load(object sender, EventArgs e)
         {
-           
+            // Centra el texto de todas las celdas
+            dgvDetalleVenta.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Encabezados en negrita y centrados
+            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.Font = new Font(dgvDetalleVenta.Font, FontStyle.Bold);
+            dgvDetalleVenta.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Ajusta automáticamente la anchura de las columnas al contenido
+            dgvDetalleVenta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         // Evento para agregar producto a la grilla

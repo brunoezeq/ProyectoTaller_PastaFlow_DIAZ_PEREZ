@@ -20,23 +20,42 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         public FRegistrarEmpleado()
         {
             InitializeComponent();
+            this.Load += FRegEmpleado_Load;
         }
 
         private void FRegEmpleado_Load(object sender, EventArgs e)
         {
-            // Cargar roles en el ComboBox
+            // Cargar roles en el ComboBox principal
             List<Rol> roles = new ServiceRol().ListarRoles();
-            foreach (Rol item in roles)
-            {
-                cBoxRol.Items.Add(new ComboOption() { Valor = item.Id_rol, Texto = item.Nombre_rol });
-            }
             cBoxRol.DisplayMember = "Nombre_rol";
             cBoxRol.ValueMember = "Id_rol";
             cBoxRol.DataSource = roles;
             cBoxRol.SelectedIndex = -1;
 
+            // Cargar roles en el ComboBox de búsqueda
+            List<Rol> rolesBusqueda = new ServiceRol().ListarRoles();
+            cBoxBuscarRol.DisplayMember = "Nombre_rol";
+            cBoxBuscarRol.ValueMember = "Id_rol";
+            cBoxBuscarRol.DataSource = rolesBusqueda;
+            cBoxBuscarRol.SelectedIndex = -1;
+
+            // Asociar evento para filtrar por rol
+            cBoxBuscarRol.SelectedIndexChanged += cBoxBuscarRol_SelectedIndexChanged;
+
             // Cargar usuarios en el DataGridView
-            CargarUsuarios(); 
+            CargarUsuarios();
+        }
+
+        private void cBoxBuscarRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int? rol = cBoxBuscarRol.SelectedIndex >= 0 ? (int?)cBoxBuscarRol.SelectedValue : null;
+            var dao = new UsuarioDAO();
+            DataTable dt = dao.BuscarUsuarios(null, rol);
+            dgvUsuarios.DataSource = dt;
+
+            // Letras negras y encabezado en negrita
+            dgvUsuarios.DefaultCellStyle.ForeColor = Color.Black;
+            dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
         }
 
         private bool ValidarCamposFormulario(out string mensajeError)
@@ -93,9 +112,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             mensajeError = null;
             return true;
         }
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            //Si pasa la validación, agrega el empleado al DataGridView. Si no, muestra los errores.
             if (!ValidarCamposFormulario(out string errores))
             {
                 MessageBox.Show(errores, "Errores de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -126,7 +145,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Limpia los campos del formulario después de registrar un usuario
         private void LimpiarRegistro()
         {
             txtEmpNombre.Clear();
@@ -139,7 +157,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             cBoxRol.SelectedIndex = -1;
         }
 
-        // Carga los usuarios en el DataGridView
         private void CargarUsuarios()
         {
             using (var conn = DbConnection.GetConnection())
@@ -164,7 +181,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 da.Fill(dt);
                 dgvUsuarios.DataSource = dt;
 
-                // Ocultar la columna id_rol (solo sirve internamente)
                 if (dgvUsuarios.Columns.Contains("id_rol"))
                     dgvUsuarios.Columns["id_rol"].Visible = false;
 
@@ -175,10 +191,13 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 dgvUsuarios.Columns["telefono"].HeaderText = "Teléfono";
                 dgvUsuarios.Columns["nombre_rol"].HeaderText = "Rol";
                 dgvUsuarios.Columns["estado"].HeaderText = "Estado";
+
+                // Letras negras y encabezado en negrita
+                dgvUsuarios.DefaultCellStyle.ForeColor = Color.Black;
+                dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
             }
         }
 
-        // Al hacer click en una fila del DataGridView, carga los datos en el formulario
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -208,23 +227,25 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
 
             dgvUsuarios.DataSource = dt;
+
+            // Letras negras y encabezado en negrita
+            dgvUsuarios.DefaultCellStyle.ForeColor = Color.Black;
+            dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtBuscarDni.Clear();
             cBoxBuscarRol.SelectedIndex = -1;
-            CargarUsuarios(); // Recargar todos los usuarios
+            CargarUsuarios();
         }
 
         private void txtBuscarDni_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Solo permite ingresar numeros en el textbox
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }
-            //Solo permite ingresar 8 caracteres en el textbox
             if (char.IsDigit(e.KeyChar) && txtBuscarDni.Text.Length >= 8)
             {
                 e.Handled = true;
@@ -234,6 +255,16 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnLimpiarForm_Click(object sender, EventArgs e)
+        {
+            LimpiarRegistro();
         }
     }
 }

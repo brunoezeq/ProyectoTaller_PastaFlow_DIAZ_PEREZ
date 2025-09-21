@@ -40,7 +40,6 @@
             this.btnCargarPedido = new System.Windows.Forms.Button();
             this.btnAbrirCaja = new System.Windows.Forms.Button();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.lbHora = new System.Windows.Forms.Label();
             this.lbFecha = new System.Windows.Forms.Label();
@@ -48,8 +47,6 @@
             this.timerHora = new System.Windows.Forms.Timer(this.components);
             this.pnlContent = new System.Windows.Forms.Panel();
             this.pnlMenuLateral.SuspendLayout();
-            this.pnlHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,15 +70,16 @@
             // 
             // btnVerQuejas
             // 
-            this.btnVerQuejas.BackColor = System.Drawing.Color.Transparent;
+            this.btnVerQuejas.BackColor = System.Drawing.Color.DarkRed;
+            this.btnVerQuejas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVerQuejas.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnVerQuejas.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnVerQuejas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVerQuejas.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerQuejas.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVerQuejas.ForeColor = System.Drawing.Color.White;
             this.btnVerQuejas.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoQueja;
             this.btnVerQuejas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVerQuejas.Location = new System.Drawing.Point(0, 421);
+            this.btnVerQuejas.Location = new System.Drawing.Point(0, 348);
             this.btnVerQuejas.Name = "btnVerQuejas";
             this.btnVerQuejas.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnVerQuejas.Size = new System.Drawing.Size(209, 45);
@@ -93,15 +91,15 @@
             // 
             // btnRegEmpleado
             // 
-            this.btnRegEmpleado.BackColor = System.Drawing.Color.Transparent;
+            this.btnRegEmpleado.BackColor = System.Drawing.Color.DarkRed;
             this.btnRegEmpleado.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegEmpleado.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnRegEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegEmpleado.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegEmpleado.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegEmpleado.ForeColor = System.Drawing.Color.White;
             this.btnRegEmpleado.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoRegistrarUsuario;
             this.btnRegEmpleado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegEmpleado.Location = new System.Drawing.Point(0, 376);
+            this.btnRegEmpleado.Location = new System.Drawing.Point(0, 303);
             this.btnRegEmpleado.Name = "btnRegEmpleado";
             this.btnRegEmpleado.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnRegEmpleado.Size = new System.Drawing.Size(209, 45);
@@ -113,15 +111,15 @@
             // 
             // btnVerReportes
             // 
-            this.btnVerReportes.BackColor = System.Drawing.Color.Transparent;
+            this.btnVerReportes.BackColor = System.Drawing.Color.DarkRed;
             this.btnVerReportes.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnVerReportes.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnVerReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVerReportes.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerReportes.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVerReportes.ForeColor = System.Drawing.Color.White;
             this.btnVerReportes.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoReporte;
             this.btnVerReportes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVerReportes.Location = new System.Drawing.Point(0, 331);
+            this.btnVerReportes.Location = new System.Drawing.Point(0, 258);
             this.btnVerReportes.Name = "btnVerReportes";
             this.btnVerReportes.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnVerReportes.Size = new System.Drawing.Size(209, 45);
@@ -133,15 +131,15 @@
             // 
             // btnRegQueja
             // 
-            this.btnRegQueja.BackColor = System.Drawing.Color.Transparent;
+            this.btnRegQueja.BackColor = System.Drawing.Color.DarkRed;
             this.btnRegQueja.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegQueja.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnRegQueja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegQueja.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegQueja.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegQueja.ForeColor = System.Drawing.Color.White;
             this.btnRegQueja.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoQueja;
             this.btnRegQueja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegQueja.Location = new System.Drawing.Point(0, 286);
+            this.btnRegQueja.Location = new System.Drawing.Point(0, 213);
             this.btnRegQueja.Name = "btnRegQueja";
             this.btnRegQueja.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnRegQueja.Size = new System.Drawing.Size(209, 45);
@@ -153,15 +151,15 @@
             // 
             // btnInventario
             // 
-            this.btnInventario.BackColor = System.Drawing.Color.Transparent;
+            this.btnInventario.BackColor = System.Drawing.Color.DarkRed;
             this.btnInventario.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnInventario.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInventario.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInventario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInventario.ForeColor = System.Drawing.Color.White;
             this.btnInventario.Image = ((System.Drawing.Image)(resources.GetObject("btnInventario.Image")));
             this.btnInventario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInventario.Location = new System.Drawing.Point(0, 241);
+            this.btnInventario.Location = new System.Drawing.Point(0, 168);
             this.btnInventario.Name = "btnInventario";
             this.btnInventario.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnInventario.Size = new System.Drawing.Size(209, 45);
@@ -173,15 +171,14 @@
             // 
             // btnRegReserva
             // 
-            this.btnRegReserva.BackColor = System.Drawing.Color.Transparent;
+            this.btnRegReserva.BackColor = System.Drawing.Color.DarkRed;
             this.btnRegReserva.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegReserva.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnRegReserva.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegReserva.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegReserva.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegReserva.ForeColor = System.Drawing.Color.White;
             this.btnRegReserva.Image = ((System.Drawing.Image)(resources.GetObject("btnRegReserva.Image")));
-            this.btnRegReserva.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegReserva.Location = new System.Drawing.Point(0, 196);
+            this.btnRegReserva.Location = new System.Drawing.Point(0, 123);
             this.btnRegReserva.Name = "btnRegReserva";
             this.btnRegReserva.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnRegReserva.Size = new System.Drawing.Size(209, 45);
@@ -193,15 +190,16 @@
             // 
             // btnCargarPedido
             // 
-            this.btnCargarPedido.BackColor = System.Drawing.Color.Transparent;
+            this.btnCargarPedido.BackColor = System.Drawing.Color.DarkRed;
+            this.btnCargarPedido.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCargarPedido.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnCargarPedido.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnCargarPedido.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCargarPedido.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCargarPedido.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCargarPedido.ForeColor = System.Drawing.Color.White;
             this.btnCargarPedido.Image = ((System.Drawing.Image)(resources.GetObject("btnCargarPedido.Image")));
             this.btnCargarPedido.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCargarPedido.Location = new System.Drawing.Point(0, 151);
+            this.btnCargarPedido.Location = new System.Drawing.Point(0, 78);
             this.btnCargarPedido.Name = "btnCargarPedido";
             this.btnCargarPedido.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnCargarPedido.Size = new System.Drawing.Size(209, 45);
@@ -213,15 +211,15 @@
             // 
             // btnAbrirCaja
             // 
-            this.btnAbrirCaja.BackColor = System.Drawing.Color.Transparent;
+            this.btnAbrirCaja.BackColor = System.Drawing.Color.DarkRed;
             this.btnAbrirCaja.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnAbrirCaja.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbrirCaja.Font = new System.Drawing.Font("Yu Gothic UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbrirCaja.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbrirCaja.ForeColor = System.Drawing.Color.White;
             this.btnAbrirCaja.Image = ((System.Drawing.Image)(resources.GetObject("btnAbrirCaja.Image")));
             this.btnAbrirCaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAbrirCaja.Location = new System.Drawing.Point(0, 106);
+            this.btnAbrirCaja.Location = new System.Drawing.Point(0, 33);
             this.btnAbrirCaja.Name = "btnAbrirCaja";
             this.btnAbrirCaja.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnAbrirCaja.Size = new System.Drawing.Size(209, 45);
@@ -233,25 +231,15 @@
             // 
             // pnlHeader
             // 
-            this.pnlHeader.Controls.Add(this.pictureBox1);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(209, 106);
+            this.pnlHeader.Size = new System.Drawing.Size(209, 33);
             this.pnlHeader.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.platopastas;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(184, 80);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // pnlTop
             // 
+            this.pnlTop.BackColor = System.Drawing.Color.OliveDrab;
             this.pnlTop.Controls.Add(this.lbHora);
             this.pnlTop.Controls.Add(this.lbFecha);
             this.pnlTop.Controls.Add(this.lbUsuario);
@@ -264,32 +252,40 @@
             // lbHora
             // 
             this.lbHora.AutoSize = true;
-            this.lbHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHora.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHora.ForeColor = System.Drawing.Color.White;
+            this.lbHora.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbHora.Location = new System.Drawing.Point(785, 9);
             this.lbHora.Name = "lbHora";
-            this.lbHora.Size = new System.Drawing.Size(38, 15);
+            this.lbHora.Size = new System.Drawing.Size(37, 18);
             this.lbHora.TabIndex = 2;
             this.lbHora.Text = "Hora";
+            this.lbHora.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbFecha
             // 
             this.lbFecha.AutoSize = true;
-            this.lbFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFecha.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFecha.ForeColor = System.Drawing.Color.White;
+            this.lbFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbFecha.Location = new System.Drawing.Point(706, 9);
             this.lbFecha.Name = "lbFecha";
-            this.lbFecha.Size = new System.Drawing.Size(46, 15);
+            this.lbFecha.Size = new System.Drawing.Size(44, 18);
             this.lbFecha.TabIndex = 1;
             this.lbFecha.Text = "Fecha";
+            this.lbFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lbUsuario
             // 
             this.lbUsuario.AutoSize = true;
-            this.lbUsuario.Font = new System.Drawing.Font("Yu Gothic UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUsuario.Location = new System.Drawing.Point(6, 9);
+            this.lbUsuario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUsuario.ForeColor = System.Drawing.Color.White;
+            this.lbUsuario.Location = new System.Drawing.Point(263, 8);
             this.lbUsuario.Name = "lbUsuario";
-            this.lbUsuario.Size = new System.Drawing.Size(75, 17);
+            this.lbUsuario.Size = new System.Drawing.Size(81, 19);
             this.lbUsuario.TabIndex = 0;
             this.lbUsuario.Text = "Bienvenido";
+            this.lbUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timerHora
             // 
@@ -319,8 +315,6 @@
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.FMenu_Load);
             this.pnlMenuLateral.ResumeLayout(false);
-            this.pnlHeader.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.ResumeLayout(false);
@@ -334,7 +328,6 @@
         private System.Windows.Forms.Button btnAbrirCaja;
         private System.Windows.Forms.Button btnRegReserva;
         private System.Windows.Forms.Button btnCargarPedido;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Label lbUsuario;
         private System.Windows.Forms.Label lbHora;
