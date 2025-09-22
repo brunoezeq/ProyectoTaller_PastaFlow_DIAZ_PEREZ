@@ -40,7 +40,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAtras = new System.Windows.Forms.Button();
-            this.btnAbrirCaja = new System.Windows.Forms.Button();
+            this.btnCerrarCaja = new System.Windows.Forms.Button();
             this.pnlAbrirCaja.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +59,7 @@
             this.pnlAbrirCaja.Controls.Add(this.pictureBox1);
             this.pnlAbrirCaja.Controls.Add(this.label2);
             this.pnlAbrirCaja.Controls.Add(this.btnAtras);
-            this.pnlAbrirCaja.Controls.Add(this.btnAbrirCaja);
+            this.pnlAbrirCaja.Controls.Add(this.btnCerrarCaja);
             this.pnlAbrirCaja.Location = new System.Drawing.Point(240, 18);
             this.pnlAbrirCaja.Name = "pnlAbrirCaja";
             this.pnlAbrirCaja.Size = new System.Drawing.Size(319, 420);
@@ -142,7 +142,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.platopastas;
-            this.pictureBox1.Location = new System.Drawing.Point(56, 53);
+            this.pictureBox1.Location = new System.Drawing.Point(59, 55);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(204, 127);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -152,37 +152,37 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(87, 15);
+            this.label2.Location = new System.Drawing.Point(92, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(145, 30);
+            this.label2.Size = new System.Drawing.Size(132, 26);
             this.label2.TabIndex = 1;
             this.label2.Text = "Cierre de Caja";
             // 
             // btnAtras
             // 
-            this.btnAtras.BackColor = System.Drawing.Color.LightGray;
+            this.btnAtras.BackColor = System.Drawing.Color.RosyBrown;
             this.btnAtras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAtras.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAtras.Location = new System.Drawing.Point(166, 368);
+            this.btnAtras.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtras.Location = new System.Drawing.Point(161, 350);
             this.btnAtras.Name = "btnAtras";
-            this.btnAtras.Size = new System.Drawing.Size(120, 40);
+            this.btnAtras.Size = new System.Drawing.Size(102, 34);
             this.btnAtras.TabIndex = 5;
             this.btnAtras.Text = "Atras";
             this.btnAtras.UseVisualStyleBackColor = false;
             // 
-            // btnAbrirCaja
+            // btnCerrarCaja
             // 
-            this.btnAbrirCaja.BackColor = System.Drawing.Color.LightGreen;
-            this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbrirCaja.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAbrirCaja.Location = new System.Drawing.Point(31, 368);
-            this.btnAbrirCaja.Name = "btnAbrirCaja";
-            this.btnAbrirCaja.Size = new System.Drawing.Size(120, 40);
-            this.btnAbrirCaja.TabIndex = 4;
-            this.btnAbrirCaja.Text = "Abrir Caja";
-            this.btnAbrirCaja.UseVisualStyleBackColor = false;
+            this.btnCerrarCaja.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnCerrarCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarCaja.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCerrarCaja.Location = new System.Drawing.Point(51, 350);
+            this.btnCerrarCaja.Name = "btnCerrarCaja";
+            this.btnCerrarCaja.Size = new System.Drawing.Size(102, 34);
+            this.btnCerrarCaja.TabIndex = 4;
+            this.btnCerrarCaja.Text = "Cerrar Caja";
+            this.btnCerrarCaja.UseVisualStyleBackColor = false;
             // 
             // FCerrarCaja
             // 
@@ -213,6 +213,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAtras;
-        private System.Windows.Forms.Button btnAbrirCaja;
+        private System.Windows.Forms.Button btnCerrarCaja;
     }
 }

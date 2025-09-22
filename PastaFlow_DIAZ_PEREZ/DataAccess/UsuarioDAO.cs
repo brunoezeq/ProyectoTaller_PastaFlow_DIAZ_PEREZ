@@ -47,6 +47,7 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             return user;
         }
 
+        //Verificación de existencia de DNI
         public bool ExisteDni(string dni)
         {
             using (var conn = DbConnection.GetConnection())
@@ -63,13 +64,14 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             }
         }
 
+        //Registro de nuevo usuario con verificación de DNI único
         public void RegistrarUsuario(string dni, string nombre, string apellido, string correo, string telefono, int idRol, byte[] contrasena)
         {
             using (var conn = DbConnection.GetConnection())
             {
                 conn.Open();
 
-                // 🔎 Verificar si el DNI ya existe
+                //Verificar si el DNI ya existe
                 if (ExisteDni(dni))
                 {
                     throw new Exception($"El DNI {dni} ya está registrado en el sistema.");
@@ -95,7 +97,7 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             }
         }
 
-        // 🔎 Implementación de búsqueda con SP
+        //Búsqueda de usuarios con filtros opcionales
         public DataTable BuscarUsuarios(string dni = null, int? idRol = null)
         {
             using (var conn = DbConnection.GetConnection())

@@ -113,9 +113,49 @@ namespace PastaFlow_DIAZ_PEREZ.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconoCarrito {
+            get {
+                object obj = ResourceManager.GetObject("iconoCarrito", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoConfirmar {
+            get {
+                object obj = ResourceManager.GetObject("iconoConfirmar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconoContrasenia {
             get {
                 object obj = ResourceManager.GetObject("iconoContrasenia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoEditar {
+            get {
+                object obj = ResourceManager.GetObject("iconoEditar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoExcel {
+            get {
+                object obj = ResourceManager.GetObject("iconoExcel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +196,16 @@ namespace PastaFlow_DIAZ_PEREZ.Properties {
         internal static System.Drawing.Bitmap iconoQueja {
             get {
                 object obj = ResourceManager.GetObject("iconoQueja", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iconoRegistrar {
+            get {
+                object obj = ResourceManager.GetObject("iconoRegistrar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

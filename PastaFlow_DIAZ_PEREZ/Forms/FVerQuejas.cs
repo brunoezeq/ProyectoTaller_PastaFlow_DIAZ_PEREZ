@@ -84,5 +84,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 }
             }
         }
+
+        private void dgsQuejas_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

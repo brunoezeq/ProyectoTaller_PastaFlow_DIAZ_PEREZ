@@ -254,6 +254,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icono.ico" />
+    <None Include="Resources\iconoCarrito.png" />
+    <None Include="Resources\iconoConfirmar.png" />
+    <None Include="Resources\iconoRegistrar.png" />
+    <None Include="Resources\iconoEditar.png" />
+    <None Include="Resources\iconoExcel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

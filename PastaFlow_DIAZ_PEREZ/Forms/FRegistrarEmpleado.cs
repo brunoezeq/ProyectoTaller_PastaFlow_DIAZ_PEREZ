@@ -257,11 +257,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             this.Close();
         }
 
-        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void btnLimpiarForm_Click(object sender, EventArgs e)
         {
             LimpiarRegistro();

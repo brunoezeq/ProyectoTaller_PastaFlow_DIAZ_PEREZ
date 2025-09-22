@@ -30,27 +30,93 @@
         {
             this.dgsQuejas = new System.Windows.Forms.DataGridView();
             this.lbQuejasTitulo = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtpHasta = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpDesde = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgsQuejas)).BeginInit();
             this.SuspendLayout();
             // 
             // dgsQuejas
             // 
+            this.dgsQuejas.AllowUserToAddRows = false;
             this.dgsQuejas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgsQuejas.Location = new System.Drawing.Point(51, 113);
+            this.dgsQuejas.Location = new System.Drawing.Point(52, 127);
             this.dgsQuejas.Name = "dgsQuejas";
             this.dgsQuejas.Size = new System.Drawing.Size(703, 150);
             this.dgsQuejas.TabIndex = 0;
+            this.dgsQuejas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgsQuejas_CellContentClick_1);
             // 
             // lbQuejasTitulo
             // 
             this.lbQuejasTitulo.AutoSize = true;
-            this.lbQuejasTitulo.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbQuejasTitulo.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbQuejasTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lbQuejasTitulo.Location = new System.Drawing.Point(300, 39);
+            this.lbQuejasTitulo.Location = new System.Drawing.Point(342, 46);
             this.lbQuejasTitulo.Name = "lbQuejasTitulo";
-            this.lbQuejasTitulo.Size = new System.Drawing.Size(168, 26);
+            this.lbQuejasTitulo.Size = new System.Drawing.Size(172, 26);
             this.lbQuejasTitulo.TabIndex = 20;
             this.lbQuejasTitulo.Text = "Quejas de Clientes";
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpiar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
+            this.btnLimpiar.Location = new System.Drawing.Point(730, 95);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(25, 26);
+            this.btnLimpiar.TabIndex = 25;
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
+            this.btnBuscar.Location = new System.Drawing.Point(699, 95);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
+            this.btnBuscar.TabIndex = 24;
+            this.btnBuscar.UseVisualStyleBackColor = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(528, 99);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 18);
+            this.label4.TabIndex = 29;
+            this.label4.Text = "Hasta :";
+            // 
+            // dtpHasta
+            // 
+            this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpHasta.Location = new System.Drawing.Point(575, 98);
+            this.dtpHasta.Name = "dtpHasta";
+            this.dtpHasta.Size = new System.Drawing.Size(118, 20);
+            this.dtpHasta.TabIndex = 28;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(353, 99);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 18);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Desde :";
+            // 
+            // dtpDesde
+            // 
+            this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDesde.Location = new System.Drawing.Point(406, 98);
+            this.dtpDesde.Name = "dtpDesde";
+            this.dtpDesde.Size = new System.Drawing.Size(118, 20);
+            this.dtpDesde.TabIndex = 26;
             // 
             // FVerQuejas
             // 
@@ -58,6 +124,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.GhostWhite;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dtpHasta);
+            this.Controls.Add(this.dtpDesde);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.lbQuejasTitulo);
             this.Controls.Add(this.dgsQuejas);
             this.Name = "FVerQuejas";
@@ -72,5 +144,11 @@
 
         private System.Windows.Forms.DataGridView dgsQuejas;
         private System.Windows.Forms.Label lbQuejasTitulo;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dtpHasta;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtpDesde;
     }
 }

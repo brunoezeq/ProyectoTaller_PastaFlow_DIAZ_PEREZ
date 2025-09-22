@@ -32,15 +32,15 @@
             this.btnAbrirCaja = new System.Windows.Forms.Button();
             this.btnAtras = new System.Windows.Forms.Button();
             this.pnlAbrirCaja = new System.Windows.Forms.Panel();
+            this.lbCajero = new System.Windows.Forms.Label();
+            this.lbHora = new System.Windows.Forms.Label();
+            this.lbFecha = new System.Windows.Forms.Label();
             this.txtMontoInicial = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lbFecha = new System.Windows.Forms.Label();
-            this.lbHora = new System.Windows.Forms.Label();
-            this.lbCajero = new System.Windows.Forms.Label();
             this.pnlAbrirCaja.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -48,22 +48,22 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Yu Gothic UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(76, 14);
+            this.label2.Location = new System.Drawing.Point(83, 20);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(174, 30);
+            this.label2.Size = new System.Drawing.Size(157, 26);
             this.label2.TabIndex = 1;
             this.label2.Text = "Apertura de Caja";
             // 
             // btnAbrirCaja
             // 
-            this.btnAbrirCaja.BackColor = System.Drawing.Color.LightGreen;
+            this.btnAbrirCaja.BackColor = System.Drawing.Color.LemonChiffon;
             this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbrirCaja.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAbrirCaja.Location = new System.Drawing.Point(31, 368);
+            this.btnAbrirCaja.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbrirCaja.Location = new System.Drawing.Point(58, 347);
             this.btnAbrirCaja.Name = "btnAbrirCaja";
-            this.btnAbrirCaja.Size = new System.Drawing.Size(120, 40);
+            this.btnAbrirCaja.Size = new System.Drawing.Size(91, 34);
             this.btnAbrirCaja.TabIndex = 4;
             this.btnAbrirCaja.Text = "Abrir Caja";
             this.btnAbrirCaja.UseVisualStyleBackColor = false;
@@ -71,12 +71,12 @@
             // 
             // btnAtras
             // 
-            this.btnAtras.BackColor = System.Drawing.Color.LightGray;
+            this.btnAtras.BackColor = System.Drawing.Color.RosyBrown;
             this.btnAtras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAtras.Font = new System.Drawing.Font("Yu Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAtras.Location = new System.Drawing.Point(166, 368);
+            this.btnAtras.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAtras.Location = new System.Drawing.Point(161, 347);
             this.btnAtras.Name = "btnAtras";
-            this.btnAtras.Size = new System.Drawing.Size(120, 40);
+            this.btnAtras.Size = new System.Drawing.Size(91, 34);
             this.btnAtras.TabIndex = 5;
             this.btnAtras.Text = "Atras";
             this.btnAtras.UseVisualStyleBackColor = false;
@@ -101,6 +101,39 @@
             this.pnlAbrirCaja.Name = "pnlAbrirCaja";
             this.pnlAbrirCaja.Size = new System.Drawing.Size(319, 420);
             this.pnlAbrirCaja.TabIndex = 6;
+            // 
+            // lbCajero
+            // 
+            this.lbCajero.AutoSize = true;
+            this.lbCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCajero.ForeColor = System.Drawing.Color.White;
+            this.lbCajero.Location = new System.Drawing.Point(156, 270);
+            this.lbCajero.Name = "lbCajero";
+            this.lbCajero.Size = new System.Drawing.Size(16, 16);
+            this.lbCajero.TabIndex = 18;
+            this.lbCajero.Text = "...";
+            // 
+            // lbHora
+            // 
+            this.lbHora.AutoSize = true;
+            this.lbHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHora.ForeColor = System.Drawing.Color.White;
+            this.lbHora.Location = new System.Drawing.Point(156, 244);
+            this.lbHora.Name = "lbHora";
+            this.lbHora.Size = new System.Drawing.Size(16, 16);
+            this.lbHora.TabIndex = 17;
+            this.lbHora.Text = "...";
+            // 
+            // lbFecha
+            // 
+            this.lbFecha.AutoSize = true;
+            this.lbFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFecha.ForeColor = System.Drawing.Color.White;
+            this.lbFecha.Location = new System.Drawing.Point(156, 217);
+            this.lbFecha.Name = "lbFecha";
+            this.lbFecha.Size = new System.Drawing.Size(16, 16);
+            this.lbFecha.TabIndex = 16;
+            this.lbFecha.Text = "...";
             // 
             // txtMontoInicial
             // 
@@ -158,45 +191,12 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.platopastas;
-            this.pictureBox1.Location = new System.Drawing.Point(66, 53);
+            this.pictureBox1.Location = new System.Drawing.Point(60, 59);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(204, 127);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
-            // 
-            // lbFecha
-            // 
-            this.lbFecha.AutoSize = true;
-            this.lbFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFecha.ForeColor = System.Drawing.Color.White;
-            this.lbFecha.Location = new System.Drawing.Point(156, 217);
-            this.lbFecha.Name = "lbFecha";
-            this.lbFecha.Size = new System.Drawing.Size(16, 16);
-            this.lbFecha.TabIndex = 16;
-            this.lbFecha.Text = "...";
-            // 
-            // lbHora
-            // 
-            this.lbHora.AutoSize = true;
-            this.lbHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHora.ForeColor = System.Drawing.Color.White;
-            this.lbHora.Location = new System.Drawing.Point(156, 244);
-            this.lbHora.Name = "lbHora";
-            this.lbHora.Size = new System.Drawing.Size(16, 16);
-            this.lbHora.TabIndex = 17;
-            this.lbHora.Text = "...";
-            // 
-            // lbCajero
-            // 
-            this.lbCajero.AutoSize = true;
-            this.lbCajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCajero.ForeColor = System.Drawing.Color.White;
-            this.lbCajero.Location = new System.Drawing.Point(156, 270);
-            this.lbCajero.Name = "lbCajero";
-            this.lbCajero.Size = new System.Drawing.Size(16, 16);
-            this.lbCajero.TabIndex = 18;
-            this.lbCajero.Text = "...";
             // 
             // FAbrirCaja
             // 

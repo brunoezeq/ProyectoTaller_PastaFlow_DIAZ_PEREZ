@@ -46,8 +46,11 @@
             this.lbUsuario = new System.Windows.Forms.Label();
             this.timerHora = new System.Windows.Forms.Timer(this.components);
             this.pnlContent = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlMenuLateral.SuspendLayout();
             this.pnlTop.SuspendLayout();
+            this.pnlContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMenuLateral
@@ -239,7 +242,7 @@
             // 
             // pnlTop
             // 
-            this.pnlTop.BackColor = System.Drawing.Color.OliveDrab;
+            this.pnlTop.BackColor = System.Drawing.Color.LemonChiffon;
             this.pnlTop.Controls.Add(this.lbHora);
             this.pnlTop.Controls.Add(this.lbFecha);
             this.pnlTop.Controls.Add(this.lbUsuario);
@@ -253,7 +256,7 @@
             // 
             this.lbHora.AutoSize = true;
             this.lbHora.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHora.ForeColor = System.Drawing.Color.White;
+            this.lbHora.ForeColor = System.Drawing.Color.Black;
             this.lbHora.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbHora.Location = new System.Drawing.Point(785, 9);
             this.lbHora.Name = "lbHora";
@@ -266,7 +269,7 @@
             // 
             this.lbFecha.AutoSize = true;
             this.lbFecha.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFecha.ForeColor = System.Drawing.Color.White;
+            this.lbFecha.ForeColor = System.Drawing.Color.Black;
             this.lbFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbFecha.Location = new System.Drawing.Point(706, 9);
             this.lbFecha.Name = "lbFecha";
@@ -279,8 +282,8 @@
             // 
             this.lbUsuario.AutoSize = true;
             this.lbUsuario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUsuario.ForeColor = System.Drawing.Color.White;
-            this.lbUsuario.Location = new System.Drawing.Point(263, 8);
+            this.lbUsuario.ForeColor = System.Drawing.Color.Black;
+            this.lbUsuario.Location = new System.Drawing.Point(6, 8);
             this.lbUsuario.Name = "lbUsuario";
             this.lbUsuario.Size = new System.Drawing.Size(81, 19);
             this.lbUsuario.TabIndex = 0;
@@ -295,11 +298,24 @@
             // 
             // pnlContent
             // 
+            this.pnlContent.Controls.Add(this.pictureBox1);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(209, 33);
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Size = new System.Drawing.Size(853, 472);
             this.pnlContent.TabIndex = 2;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.platopastas;
+            this.pictureBox1.Location = new System.Drawing.Point(178, 65);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(447, 286);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // FMenuCajero
             // 
@@ -317,6 +333,8 @@
             this.pnlMenuLateral.ResumeLayout(false);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
+            this.pnlContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -339,5 +357,6 @@
         private System.Windows.Forms.Button btnInventario;
         private System.Windows.Forms.Button btnVerQuejas;
         private System.Windows.Forms.Panel pnlContent;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
