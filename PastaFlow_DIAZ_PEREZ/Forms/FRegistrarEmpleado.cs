@@ -21,6 +21,23 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             InitializeComponent();
             this.Load += FRegEmpleado_Load;
+
+            // Restricciones de entrada (teclado y pegado)
+            txtEmpNombre.KeyPress += txtSoloLetras_KeyPress;
+            txtEmpApellido.KeyPress += txtSoloLetras_KeyPress;
+            txtEmpDNI.KeyPress += txtSoloNumeros_KeyPress;
+            txtEmpTelefono.KeyPress += txtSoloNumeros_KeyPress;
+
+            txtEmpNombre.TextChanged += SoloLetras_TextChanged;
+            txtEmpApellido.TextChanged += SoloLetras_TextChanged;
+            txtEmpDNI.TextChanged += SoloNumeros_TextChanged;
+            txtEmpTelefono.TextChanged += SoloNumeros_TextChanged;
+
+            // Longitudes máximas acordes a validación
+            txtEmpNombre.MaxLength = 25;
+            txtEmpApellido.MaxLength = 25;
+            txtEmpDNI.MaxLength = 8;
+            txtEmpTelefono.MaxLength = 10;
         }
 
         private void FRegEmpleado_Load(object sender, EventArgs e)
@@ -56,6 +73,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             // Letras negras y encabezado en negrita
             dgvUsuarios.DefaultCellStyle.ForeColor = Color.Black;
             dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
+
+            // Ocultar id_rol si existe y aplicar formato de centrado/columna correo
+            if (dgvUsuarios.Columns.Contains("id_rol"))
+                dgvUsuarios.Columns["id_rol"].Visible = false;
+
+            AplicarFormatoTabla();
         }
 
         private bool ValidarCamposFormulario(out string mensajeError)
@@ -192,9 +215,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 dgvUsuarios.Columns["nombre_rol"].HeaderText = "Rol";
                 dgvUsuarios.Columns["estado"].HeaderText = "Estado";
 
-                // Letras negras y encabezado en negrita
+                // Letras negras y encabezado en negrita  de tabla
                 dgvUsuarios.DefaultCellStyle.ForeColor = Color.Black;
                 dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
+
+                // Centrado general + correo alineado a la izquierda y sin recortes de tabla
+                AplicarFormatoTabla();
             }
         }
 
@@ -231,6 +257,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             // Letras negras y encabezado en negrita
             dgvUsuarios.DefaultCellStyle.ForeColor = Color.Black;
             dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
+
+            // Ocultar id_rolsi existe y aplicar formato de centrado/columna correo
+            if (dgvUsuarios.Columns.Contains("id_rol"))
+                dgvUsuarios.Columns["id_rol"].Visible = false;
+
+            AplicarFormatoTabla();
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -260,6 +292,69 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void btnLimpiarForm_Click(object sender, EventArgs e)
         {
             LimpiarRegistro();
+        }
+
+ 
+        private void AplicarFormatoTabla()
+        {
+            var grid = dgvUsuarios;
+
+            grid.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            grid.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            grid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+
+            grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            if (grid.Columns.Contains("correo_electronico"))
+            {
+                var colMail = grid.Columns["correo_electronico"];
+                colMail.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                colMail.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                colMail.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            }
+        }
+
+        // Solo letras y espacios. 
+        private void txtSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsWhiteSpace(e.KeyChar)))
+                e.Handled = true;
+        }
+
+        // Solo dígitos. 
+        private void txtSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsControl(e.KeyChar) || char.IsDigit(e.KeyChar)))
+                e.Handled = true;
+        }
+
+        private void SoloLetras_TextChanged(object sender, EventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (tb == null) return;
+            int sel = tb.SelectionStart;
+            string filtrado = new string(tb.Text.Where(c => char.IsLetter(c) || char.IsWhiteSpace(c)).ToArray());
+            if (filtrado != tb.Text)
+            {
+                tb.Text = filtrado;
+                tb.SelectionStart = Math.Min(sel, tb.Text.Length);
+            }
+        }
+
+        //mantiene solo dígitos.
+        private void SoloNumeros_TextChanged(object sender, EventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (tb == null) return;
+            int sel = tb.SelectionStart;
+            string filtrado = new string(tb.Text.Where(char.IsDigit).ToArray());
+            if (filtrado != tb.Text)
+            {
+                tb.Text = filtrado;
+                tb.SelectionStart = Math.Min(sel, tb.Text.Length);
+            }
         }
     }
 }

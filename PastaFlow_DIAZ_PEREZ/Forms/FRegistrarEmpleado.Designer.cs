@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlRegistro = new System.Windows.Forms.Panel();
             this.btnLimpiarForm = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
@@ -51,13 +51,15 @@
             this.cBoxRol = new System.Windows.Forms.ComboBox();
             this.txtEmpNombre = new System.Windows.Forms.TextBox();
             this.lbEmpNombre = new System.Windows.Forms.Label();
-            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
             this.lbEmpTitulo = new System.Windows.Forms.Label();
             this.txtBuscarDni = new System.Windows.Forms.TextBox();
             this.cBoxBuscarRol = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.lbRol = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
             this.pnlRegistro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
@@ -89,11 +91,12 @@
             this.pnlRegistro.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlRegistro.Location = new System.Drawing.Point(0, 0);
             this.pnlRegistro.Name = "pnlRegistro";
-            this.pnlRegistro.Size = new System.Drawing.Size(230, 494);
+            this.pnlRegistro.Size = new System.Drawing.Size(240, 494);
             this.pnlRegistro.TabIndex = 0;
             // 
             // btnLimpiarForm
             // 
+            this.btnLimpiarForm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLimpiarForm.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
             this.btnLimpiarForm.Location = new System.Drawing.Point(184, 438);
             this.btnLimpiarForm.Name = "btnLimpiarForm";
@@ -105,6 +108,7 @@
             // btnVolver
             // 
             this.btnVolver.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnVolver.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVolver.ForeColor = System.Drawing.Color.DarkRed;
             this.btnVolver.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoAtrás;
@@ -130,6 +134,7 @@
             // btnEditar
             // 
             this.btnEditar.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditar.ForeColor = System.Drawing.Color.Black;
@@ -315,41 +320,21 @@
             this.lbEmpNombre.TabIndex = 0;
             this.lbEmpNombre.Text = "Nombre";
             // 
-            // dgvUsuarios
-            // 
-            this.dgvUsuarios.AllowUserToAddRows = false;
-            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvUsuarios.GridColor = System.Drawing.Color.Black;
-            this.dgvUsuarios.Location = new System.Drawing.Point(256, 117);
-            this.dgvUsuarios.Name = "dgvUsuarios";
-            this.dgvUsuarios.ReadOnly = true;
-            this.dgvUsuarios.Size = new System.Drawing.Size(718, 288);
-            this.dgvUsuarios.TabIndex = 1;
-            this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
-            // 
             // lbEmpTitulo
             // 
             this.lbEmpTitulo.AutoSize = true;
-            this.lbEmpTitulo.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpTitulo.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lbEmpTitulo.Location = new System.Drawing.Point(496, 39);
+            this.lbEmpTitulo.Location = new System.Drawing.Point(483, 26);
             this.lbEmpTitulo.Name = "lbEmpTitulo";
-            this.lbEmpTitulo.Size = new System.Drawing.Size(204, 26);
+            this.lbEmpTitulo.Size = new System.Drawing.Size(236, 29);
             this.lbEmpTitulo.TabIndex = 20;
             this.lbEmpTitulo.Text = "Gestión de Empleados";
             // 
             // txtBuscarDni
             // 
             this.txtBuscarDni.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarDni.Location = new System.Drawing.Point(743, 82);
+            this.txtBuscarDni.Location = new System.Drawing.Point(696, 117);
             this.txtBuscarDni.Name = "txtBuscarDni";
             this.txtBuscarDni.Size = new System.Drawing.Size(140, 23);
             this.txtBuscarDni.TabIndex = 21;
@@ -359,7 +344,7 @@
             // 
             this.cBoxBuscarRol.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxBuscarRol.FormattingEnabled = true;
-            this.cBoxBuscarRol.Location = new System.Drawing.Point(256, 85);
+            this.cBoxBuscarRol.Location = new System.Drawing.Point(341, 113);
             this.cBoxBuscarRol.Name = "cBoxBuscarRol";
             this.cBoxBuscarRol.Size = new System.Drawing.Size(121, 23);
             this.cBoxBuscarRol.TabIndex = 24;
@@ -370,7 +355,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(620, 84);
+            this.label3.Location = new System.Drawing.Point(565, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(125, 18);
             this.label3.TabIndex = 26;
@@ -379,10 +364,11 @@
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
             this.btnLimpiar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.btnLimpiar.Location = new System.Drawing.Point(929, 82);
+            this.btnLimpiar.Location = new System.Drawing.Point(882, 118);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(34, 23);
             this.btnLimpiar.TabIndex = 23;
@@ -392,29 +378,74 @@
             // btnBuscar
             // 
             this.btnBuscar.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.ForeColor = System.Drawing.Color.Black;
             this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
-            this.btnBuscar.Location = new System.Drawing.Point(889, 82);
+            this.btnBuscar.Location = new System.Drawing.Point(842, 118);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(34, 23);
             this.btnBuscar.TabIndex = 22;
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // lbRol
+            // 
+            this.lbRol.AutoSize = true;
+            this.lbRol.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRol.ForeColor = System.Drawing.Color.Black;
+            this.lbRol.Location = new System.Drawing.Point(303, 113);
+            this.lbRol.Name = "lbRol";
+            this.lbRol.Size = new System.Drawing.Size(32, 18);
+            this.lbRol.TabIndex = 27;
+            this.lbRol.Text = "Rol:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(302, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 19);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "Filtrar por:";
+            // 
+            // dgvUsuarios
+            // 
+            this.dgvUsuarios.AllowUserToAddRows = false;
+            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvUsuarios.GridColor = System.Drawing.Color.Black;
+            this.dgvUsuarios.Location = new System.Drawing.Point(306, 161);
+            this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.ReadOnly = true;
+            this.dgvUsuarios.Size = new System.Drawing.Size(612, 288);
+            this.dgvUsuarios.TabIndex = 29;
+            // 
             // FRegistrarEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(1001, 494);
+            this.Controls.Add(this.dgvUsuarios);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lbRol);
             this.Controls.Add(this.txtBuscarDni);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cBoxBuscarRol);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.lbEmpTitulo);
-            this.Controls.Add(this.dgvUsuarios);
             this.Controls.Add(this.pnlRegistro);
             this.ForeColor = System.Drawing.Color.Transparent;
             this.Name = "FRegistrarEmpleado";
@@ -434,7 +465,6 @@
         private System.Windows.Forms.ComboBox cBoxRol;
         private System.Windows.Forms.TextBox txtEmpNombre;
         private System.Windows.Forms.Label lbEmpNombre;
-        private System.Windows.Forms.DataGridView dgvUsuarios;
         private System.Windows.Forms.TextBox txtEmpContra;
         private System.Windows.Forms.Label lbEmpContra;
         private System.Windows.Forms.TextBox txtEmpTelefono;
@@ -459,5 +489,8 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLimpiarForm;
+        private System.Windows.Forms.Label lbRol;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dgvUsuarios;
     }
 }

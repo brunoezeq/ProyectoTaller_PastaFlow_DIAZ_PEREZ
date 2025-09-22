@@ -95,6 +95,7 @@
             // btnRegEmpleado
             // 
             this.btnRegEmpleado.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRegEmpleado.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegEmpleado.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegEmpleado.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnRegEmpleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -115,6 +116,7 @@
             // btnVerReportes
             // 
             this.btnVerReportes.BackColor = System.Drawing.Color.DarkRed;
+            this.btnVerReportes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVerReportes.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnVerReportes.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnVerReportes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -135,6 +137,7 @@
             // btnRegQueja
             // 
             this.btnRegQueja.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRegQueja.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegQueja.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegQueja.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnRegQueja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -155,6 +158,7 @@
             // btnInventario
             // 
             this.btnInventario.BackColor = System.Drawing.Color.DarkRed;
+            this.btnInventario.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnInventario.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnInventario.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnInventario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -175,6 +179,7 @@
             // btnRegReserva
             // 
             this.btnRegReserva.BackColor = System.Drawing.Color.DarkRed;
+            this.btnRegReserva.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegReserva.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnRegReserva.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
             this.btnRegReserva.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -215,6 +220,7 @@
             // btnAbrirCaja
             // 
             this.btnAbrirCaja.BackColor = System.Drawing.Color.DarkRed;
+            this.btnAbrirCaja.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAbrirCaja.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnAbrirCaja.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -247,6 +253,7 @@
             this.pnlTop.Controls.Add(this.lbFecha);
             this.pnlTop.Controls.Add(this.lbUsuario);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTop.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlTop.Location = new System.Drawing.Point(209, 0);
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(853, 33);
@@ -326,6 +333,7 @@
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenuLateral);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FMenuCajero";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
