@@ -1,0 +1,13 @@
+Usuarios y contraseñas 
+
+Adminitrador 
+dni: 11111111
+contraseña: administrador 
+
+Gerente 
+dni: 22222222
+contraseña: gerente 
+
+Cajero 
+dni: 33333333
+contraseña:cajero

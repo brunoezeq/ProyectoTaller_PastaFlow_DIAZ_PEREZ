@@ -1,15 +1,19 @@
+-- CREACIÓN DE LA BASE DE DATOS --
 CREATE DATABASE PastaFlowBD; 
 GO
 
+-- USO DE LA BASE DE DATOS --
 USE PastaFlowBD; 
 GO
 
+-- TABLA ROL --
 CREATE TABLE Rol (
     id_rol INT PRIMARY KEY IDENTITY(1,1),
     nombre_rol NVARCHAR(50) NOT NULL
 );
 GO
 
+-- TABLA USUARIO --
 CREATE TABLE Usuario (
     id_usuario INT PRIMARY KEY IDENTITY(1,1),
     dni NVARCHAR(20) UNIQUE NOT NULL,
@@ -24,6 +28,7 @@ CREATE TABLE Usuario (
 );
 GO
 
+-- TABLA TURNO --
 CREATE TABLE Turno (
     id_turno INT PRIMARY KEY IDENTITY(1,1),
     nombre_turno NVARCHAR(50) NOT NULL,
@@ -31,6 +36,7 @@ CREATE TABLE Turno (
     hora_fin TIME NOT NULL
 );
 
+-- TABLA CAJA -- 
 CREATE TABLE Caja (
     id_caja INT PRIMARY KEY IDENTITY(1,1),
     fecha_hora_apertura DATETIME NOT NULL,
@@ -45,6 +51,7 @@ CREATE TABLE Caja (
 );
 GO
 
+-- TABLA METODO DE PAGO --
 CREATE TABLE Metodo_Pago (
     id_metodo INT PRIMARY KEY IDENTITY(1,1),
     nombre NVARCHAR(50) NOT NULL,
@@ -52,12 +59,14 @@ CREATE TABLE Metodo_Pago (
 );
 GO
 
+-- TABLA CATEGORIA --
 CREATE TABLE Categoria (
     id_categoria INT PRIMARY KEY IDENTITY(1,1),
     nombre_categoria NVARCHAR(100) NOT NULL
 );
 GO
 
+-- TABLA PRODUCTO --
 CREATE TABLE Producto (
     id_producto INT PRIMARY KEY IDENTITY(1,1),
     nombre NVARCHAR(100) NOT NULL,
@@ -69,6 +78,7 @@ CREATE TABLE Producto (
     FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
 );
 
+-- TABLA VENTA --
 CREATE TABLE Venta (
     id_venta INT PRIMARY KEY IDENTITY(1,1),
     fecha_venta DATETIME NOT NULL DEFAULT GETDATE(),
@@ -81,6 +91,7 @@ CREATE TABLE Venta (
 );
 GO
 
+-- TABLA DETALLE DE VENTA --
 CREATE TABLE Detalle_Venta (
     id_detalle INT PRIMARY KEY IDENTITY(1,1),
     id_venta INT NOT NULL,
@@ -92,6 +103,7 @@ CREATE TABLE Detalle_Venta (
 );
 GO
 
+-- TABLA PROMOCION --
 CREATE TABLE Promocion (
     id_promocion INT PRIMARY KEY IDENTITY(1,1),
     id_producto INT NOT NULL,
@@ -102,6 +114,7 @@ CREATE TABLE Promocion (
 );
 GO
 
+-- TABLA RESERVA --
 CREATE TABLE Reserva (
     id_reserva INT PRIMARY KEY IDENTITY(1,1),
     nombre_cliente NVARCHAR(100) NOT NULL,
@@ -114,6 +127,7 @@ CREATE TABLE Reserva (
 );
 GO
 
+-- TABLA QUEJA --
 CREATE TABLE Queja (
     id_queja INT PRIMARY KEY IDENTITY(1,1),
     nombre_cliente NVARCHAR(100) NOT NULL,
@@ -126,14 +140,65 @@ CREATE TABLE Queja (
 );
 GO
 
-INSERT INTO Rol (nombre_rol) VALUES
-('Administrador'),
-('Gerente'),
-('Cajero');
+-- CARGA DE ROLES --
+INSERT INTO Rol (id_rol, nombre_rol) VALUES
+(1, 'Administrador'),
+(2, 'Gerente'),
+(3, 'Cajero');
+GO
 
+-- CARGA DE USUARIOS. UNO POR ROL --
 INSERT INTO Usuario (dni, nombre, apellido, correo_electronico, telefono, estado, id_rol, contrasena_hash)
 VALUES
-('12345678', 'Juan', 'Pérez', 'administrador@gmail.com', '123456789', 1, 1, HASHBYTES('SHA2_256', N'administrador')),
-('11112222', 'Martín', 'Lopez', 'gerente@gmail.com', '1234567890', 1, 2, HASHBYTES('SHA2_256', N'gerente'));
+('11111111', 'Juan', 'Pérez', 'administrador@gmail.com', '123456789', 1, 1, HASHBYTES('SHA2_256', N'administrador')),
+('22222222', 'Martín', 'Lopez', 'gerente@gmail.com', '1234567890', 1, 2, HASHBYTES('SHA2_256', N'gerente')),
+('33333333', 'Jose', 'Lopez', 'cajero@gmail.com', '1234567890', 1, 3, HASHBYTES('SHA2_256', N'cajero'));
+GO
 
-SELECT * FROM Usuario;
+-----------------------------------------------------
+--------- PROCEDIMIENTOS ALMACENADOS ----------------
+-----------------------------------------------------
+
+-- REGISTRAR USUARIO ---
+CREATE PROCEDURE sp_RegistrarUsuario
+    @dni NVARCHAR(20),
+    @nombre NVARCHAR(25),
+    @apellido NVARCHAR(25),
+    @correo NVARCHAR(100),
+    @telefono NVARCHAR(15),
+    @id_rol INT,
+    @contrasena VARBINARY(64),
+    @estado BIT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO Usuario (dni, nombre, apellido, correo_electronico, telefono, id_rol, contrasena_hash, estado)
+    VALUES (@dni, @nombre, @apellido, @correo, @telefono, @id_rol, @contrasena, @estado);
+END;
+GO
+
+-- FILTRAR POR ROLES --
+CREATE PROCEDURE sp_BuscarUsuarios
+    @dni NVARCHAR(20) = NULL,
+    @id_rol INT = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT u.nombre, 
+           u.apellido, 
+           u.dni, 
+           u.correo_electronico, 
+           u.telefono, 
+           r.nombre_rol,  
+           u.id_rol,       
+           CASE 
+               WHEN u.estado = 1 THEN 'Activo' 
+               ELSE 'Inactivo' 
+           END AS estado
+    FROM Usuario u
+    INNER JOIN Rol r ON u.id_rol = r.id_rol
+    WHERE (@dni IS NULL OR u.dni = @dni)
+      AND (@id_rol IS NULL OR u.id_rol = @id_rol);
+END;
