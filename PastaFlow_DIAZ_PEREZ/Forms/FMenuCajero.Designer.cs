@@ -248,7 +248,7 @@
             // 
             // pnlTop
             // 
-            this.pnlTop.BackColor = System.Drawing.Color.Khaki;
+            this.pnlTop.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.pnlTop.Controls.Add(this.lbHora);
             this.pnlTop.Controls.Add(this.lbFecha);
             this.pnlTop.Controls.Add(this.lbUsuario);
@@ -263,7 +263,7 @@
             // 
             this.lbHora.AutoSize = true;
             this.lbHora.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHora.ForeColor = System.Drawing.Color.Black;
+            this.lbHora.ForeColor = System.Drawing.Color.Khaki;
             this.lbHora.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbHora.Location = new System.Drawing.Point(785, 9);
             this.lbHora.Name = "lbHora";
@@ -276,23 +276,23 @@
             // 
             this.lbFecha.AutoSize = true;
             this.lbFecha.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFecha.ForeColor = System.Drawing.Color.Black;
+            this.lbFecha.ForeColor = System.Drawing.Color.Khaki;
             this.lbFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbFecha.Location = new System.Drawing.Point(706, 9);
             this.lbFecha.Name = "lbFecha";
             this.lbFecha.Size = new System.Drawing.Size(44, 18);
-            this.lbFecha.TabIndex = 1;
+            this.lbFecha.TabIndex = 2;
             this.lbFecha.Text = "Fecha";
-            this.lbFecha.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbFecha.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lbUsuario
             // 
             this.lbUsuario.AutoSize = true;
-            this.lbUsuario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUsuario.ForeColor = System.Drawing.Color.Black;
+            this.lbUsuario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUsuario.ForeColor = System.Drawing.Color.Khaki;
             this.lbUsuario.Location = new System.Drawing.Point(6, 8);
             this.lbUsuario.Name = "lbUsuario";
-            this.lbUsuario.Size = new System.Drawing.Size(81, 19);
+            this.lbUsuario.Size = new System.Drawing.Size(86, 19);
             this.lbUsuario.TabIndex = 0;
             this.lbUsuario.Text = "Bienvenido";
             this.lbUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -305,6 +305,7 @@
             // 
             // pnlContent
             // 
+            this.pnlContent.BackColor = System.Drawing.Color.Khaki;
             this.pnlContent.Controls.Add(this.pictureBox1);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(209, 33);
@@ -316,10 +317,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.platopastas;
-            this.pictureBox1.Location = new System.Drawing.Point(178, 65);
+            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.imagencentral;
+            this.pictureBox1.Location = new System.Drawing.Point(188, 60);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(447, 286);
+            this.pictureBox1.Size = new System.Drawing.Size(466, 300);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;

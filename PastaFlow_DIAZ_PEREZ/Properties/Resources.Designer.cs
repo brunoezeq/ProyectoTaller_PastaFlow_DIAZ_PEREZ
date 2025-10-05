@@ -253,6 +253,16 @@ namespace PastaFlow_DIAZ_PEREZ.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap imagencentral {
+            get {
+                object obj = ResourceManager.GetObject("imagencentral", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pastaflow_transparente {
             get {
                 object obj = ResourceManager.GetObject("pastaflow_transparente", resourceCulture);
