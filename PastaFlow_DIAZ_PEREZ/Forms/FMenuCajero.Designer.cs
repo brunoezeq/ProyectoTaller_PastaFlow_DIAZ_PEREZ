@@ -248,7 +248,7 @@
             // 
             // pnlTop
             // 
-            this.pnlTop.BackColor = System.Drawing.Color.LemonChiffon;
+            this.pnlTop.BackColor = System.Drawing.Color.Khaki;
             this.pnlTop.Controls.Add(this.lbHora);
             this.pnlTop.Controls.Add(this.lbFecha);
             this.pnlTop.Controls.Add(this.lbUsuario);
