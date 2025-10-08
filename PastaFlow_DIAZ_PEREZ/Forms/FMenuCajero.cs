@@ -2,26 +2,25 @@
 using PastaFlow_DIAZ_PEREZ.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
     public partial class FMenuCajero : Form
     {
-        // Solo para resaltar el botón activo del menú
         private Button _activeButton;
 
         public FMenuCajero()
         {
             InitializeComponent();
             this.Load += FMenu_Load;
+
+            // Reposicionar encabezado cuando cambie el tamaño
+            this.pnlTop.Resize += (s, e) => AjustarHeader();
         }
 
         private void FMenu_Load(object sender, EventArgs e)
@@ -31,8 +30,17 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             if (user != null)
             {
                 lbUsuario.Text = $"Bienvenido: {user.Nombre} {user.Apellido}";
+                lbRol.Text = $"Rol: {ObtenerNombreRol(user.Id_rol)}";
             }
+            else
+            {
+                lbRol.Text = "Rol: -";
+            }
+
             lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+
+            // Scroll si fuese necesario
+            pnlMenuLateral.AutoScroll = true;
 
             // Mostrar todos los botones, pero deshabilitar por rol (anulados visibles)
             foreach (var btn in GetBotonesMenu())
@@ -63,13 +71,36 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 }
             }
 
-            // Mantener solo el diseño visual del menú (colores, hover, activo, bordes redondeados)
             AplicarEstiloMenu();
+            InsertarEspaciadoresMenu(10); // separa botones arriba/abajo
+            AjustarHeader();              // evita superposición usuario/fecha/hora
+
+            // Centrar y ajustar la imagen "pasaflow"
+            pictureBox1.Dock = DockStyle.Fill;                 // ocupa todo el panel de contenido
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;    // mantiene proporción y centra
+            pictureBox1.BackColor = pnlContent.BackColor;      // fondo consistente
         }
 
         private void timerHora_Tick(object sender, EventArgs e)
         {
             lbHora.Text = DateTime.Now.ToString("HH:mm:ss");
+            AjustarHeader();
+        }
+
+        private void AjustarHeader()
+        {
+            if (pnlTop == null || lbHora == null || lbFecha == null || lbUsuario == null) return;
+
+            int paddingRight = 12;
+            // Ubicar hora y fecha a la derecha
+            lbHora.Left = pnlTop.Width - lbHora.Width - paddingRight;
+            lbFecha.Left = lbHora.Left - lbFecha.Width - 16;
+
+            // Reservar espacio para el usuario hasta antes de la fecha
+            lbUsuario.AutoSize = false;
+            int maxRight = Math.Max(0, lbFecha.Left - 16);
+            lbUsuario.Width = Math.Max(120, maxRight - lbUsuario.Left);
+            lbUsuario.AutoEllipsis = true;
         }
 
         private void AbrirFormulario(Form formHijo)
@@ -97,7 +128,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void btnRegReserva_Click(object sender, EventArgs e)
         {
             MarcarBotonActivo(sender as Button);
-            // Comportamiento original de tu formulario (ocultar menú lateral)
             pnlMenuLateral.Visible = false;
             var frm = new FRegistrarReserva();
             frm.FormClosed += (s, args) => { pnlMenuLateral.Visible = true; };
@@ -107,7 +137,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void btnInventario_Click(object sender, EventArgs e)
         {
             MarcarBotonActivo(sender as Button);
-            // Comportamiento original de tu formulario (ocultar menú lateral)
             pnlMenuLateral.Visible = false;
             var frm = new FGestionarInventario();
             frm.FormClosed += (s, args) => { pnlMenuLateral.Visible = true; };
@@ -129,7 +158,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void btnRegEmpleado_Click(object sender, EventArgs e)
         {
             MarcarBotonActivo(sender as Button);
-            // Comportamiento original de tu formulario (ocultar menú lateral)
             pnlMenuLateral.Visible = false;
             var frm = new FRegistrarEmpleado();
             frm.FormClosed += (s, args) => { pnlMenuLateral.Visible = true; };
@@ -142,20 +170,18 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             AbrirFormulario(new FVerQuejas());
         }
 
-        // ---------- Solo diseño del menú lateral ----------
-
         private IEnumerable<Button> GetBotonesMenu()
         {
             return new Button[]
             {
-                btnVerReportes,
+                btnVerQuejas,
                 btnRegEmpleado,
-                btnInventario,
+                btnVerReportes,
                 btnRegQueja,
-                btnAbrirCaja,
-                btnCargarPedido,
+                btnInventario,
                 btnRegReserva,
-                btnVerQuejas
+                btnCargarPedido,
+                btnAbrirCaja
             };
         }
 
@@ -165,19 +191,16 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             {
                 if (btn == null) continue;
 
-                // Tamaño y disposición
                 btn.Height = Math.Max(btn.Height, 48);
                 btn.ImageAlign = ContentAlignment.MiddleLeft;
                 btn.TextAlign = ContentAlignment.MiddleCenter;
                 btn.TextImageRelation = TextImageRelation.ImageBeforeText;
                 TrySetFont(btn, "Segoe UI", 10.5f, FontStyle.Regular);
 
-                // Estilo base (vino/beige)
                 btn.UseVisualStyleBackColor = false;
                 btn.FlatStyle = FlatStyle.Flat;
                 btn.FlatAppearance.BorderSize = 0;
 
-                // Estado visual según disponibilidad por rol
                 if (btn.Enabled)
                 {
                     btn.BackColor = Palette.Vino;
@@ -186,21 +209,42 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 }
                 else
                 {
-                    btn.BackColor = Darken(Palette.Vino, 0.35f); // Vino más oscuro para "anulado"
+                    btn.BackColor = Darken(Palette.Vino, 0.35f);
                     btn.ForeColor = Color.FromArgb(200, Palette.Beige);
                     btn.Cursor = Cursors.No;
                 }
 
-                // Hover
                 btn.MouseEnter -= Btn_MouseEnter;
                 btn.MouseEnter += Btn_MouseEnter;
                 btn.MouseLeave -= Btn_MouseLeave;
                 btn.MouseLeave += Btn_MouseLeave;
 
-                // Bordes redondeados por control
                 btn.Resize -= (s, e) => RedondearControl(btn, 8);
                 btn.Resize += (s, e) => RedondearControl(btn, 8);
                 RedondearControl(btn, 8);
+            }
+        }
+
+        // Inserta paneles "espaciadores" entre botones dockeados arriba
+        private void InsertarEspaciadoresMenu(int alto)
+        {
+            if (pnlMenuLateral == null) return;
+
+            var existentes = pnlMenuLateral.Controls.Cast<Control>().Where(c => (string)c.Tag == "spacer").ToList();
+            foreach (var s in existentes) pnlMenuLateral.Controls.Remove(s);
+
+            foreach (var btn in GetBotonesMenu().Reverse())
+            {
+                var spacer = new Panel
+                {
+                    Height = alto,
+                    Dock = DockStyle.Top,
+                    BackColor = Color.Transparent,
+                    Tag = "spacer"
+                };
+                pnlMenuLateral.Controls.Add(spacer);
+                spacer.BringToFront();
+                btn.BringToFront();
             }
         }
 
@@ -224,7 +268,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             if (btn == null || !btn.Enabled) return;
 
-            // Quitar activo anterior
             if (_activeButton != null && _activeButton.Visible)
             {
                 _activeButton.BackColor = Palette.Vino;
@@ -232,7 +275,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 TrySetFont(_activeButton, _activeButton.Font.FontFamily.Name, _activeButton.Font.Size, FontStyle.Regular);
             }
 
-            // Nuevo activo
             _activeButton = btn;
             if (_activeButton.Visible)
             {
@@ -264,12 +306,22 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             try { c.Font = new Font(family, size, style); } catch { }
         }
 
-        // Paleta mínima para el menú
         private static class Palette
         {
             public static readonly Color Vino = ColorTranslator.FromHtml("#7B1E1E");
             public static readonly Color Beige = ColorTranslator.FromHtml("#F4E1A1");
             public static readonly Color Dorado = ColorTranslator.FromHtml("#D4B65F");
+        }
+
+        private string ObtenerNombreRol(int idRol)
+        {
+            switch (idRol)
+            {
+                case 1: return "Administrador";
+                case 2: return "Gerente";
+                case 3: return "Cajero";
+                default: return "Desconocido";
+            }
         }
 
         private Color Lighten(Color color, float amount)

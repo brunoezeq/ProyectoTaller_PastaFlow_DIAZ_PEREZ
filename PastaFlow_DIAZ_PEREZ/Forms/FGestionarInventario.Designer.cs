@@ -44,17 +44,17 @@
             this.txtProdNombre = new System.Windows.Forms.TextBox();
             this.lbProdNombre = new System.Windows.Forms.Label();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.lbProdTitulo = new System.Windows.Forms.Label();
-            this.txtBuscarProducto = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.nombreProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbProdTitulo = new System.Windows.Forms.Label();
+            this.txtBuscarProducto = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.pnlRegistro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -249,6 +249,48 @@
             this.dgvProductos.Size = new System.Drawing.Size(608, 162);
             this.dgvProductos.TabIndex = 2;
             // 
+            // nombreProd
+            // 
+            this.nombreProd.HeaderText = "Producto";
+            this.nombreProd.Name = "nombreProd";
+            this.nombreProd.ReadOnly = true;
+            this.nombreProd.Width = 150;
+            // 
+            // DescProd
+            // 
+            this.DescProd.HeaderText = "Descripción";
+            this.DescProd.Name = "DescProd";
+            this.DescProd.ReadOnly = true;
+            this.DescProd.Width = 150;
+            // 
+            // Precio
+            // 
+            this.Precio.HeaderText = "Precio";
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            this.Precio.Width = 60;
+            // 
+            // Stock
+            // 
+            this.Stock.HeaderText = "Stock";
+            this.Stock.Name = "Stock";
+            this.Stock.ReadOnly = true;
+            this.Stock.Width = 60;
+            // 
+            // Categoria
+            // 
+            this.Categoria.HeaderText = "Categoría";
+            this.Categoria.Name = "Categoria";
+            this.Categoria.ReadOnly = true;
+            this.Categoria.Width = 80;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "Estado";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Width = 60;
+            // 
             // lbProdTitulo
             // 
             this.lbProdTitulo.AutoSize = true;
@@ -301,53 +343,11 @@
             this.btnBuscar.TabIndex = 25;
             this.btnBuscar.UseVisualStyleBackColor = false;
             // 
-            // nombreProd
-            // 
-            this.nombreProd.HeaderText = "Producto";
-            this.nombreProd.Name = "nombreProd";
-            this.nombreProd.ReadOnly = true;
-            this.nombreProd.Width = 150;
-            // 
-            // DescProd
-            // 
-            this.DescProd.HeaderText = "Descripción";
-            this.DescProd.Name = "DescProd";
-            this.DescProd.ReadOnly = true;
-            this.DescProd.Width = 150;
-            // 
-            // Precio
-            // 
-            this.Precio.HeaderText = "Precio";
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            this.Precio.Width = 60;
-            // 
-            // Stock
-            // 
-            this.Stock.HeaderText = "Stock";
-            this.Stock.Name = "Stock";
-            this.Stock.ReadOnly = true;
-            this.Stock.Width = 60;
-            // 
-            // Categoria
-            // 
-            this.Categoria.HeaderText = "Categoría";
-            this.Categoria.Name = "Categoria";
-            this.Categoria.ReadOnly = true;
-            this.Categoria.Width = 80;
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            this.Estado.Width = 60;
-            // 
             // FGestionarInventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.GhostWhite;
+            this.BackColor = System.Drawing.Color.Khaki;
             this.ClientSize = new System.Drawing.Size(861, 485);
             this.Controls.Add(this.txtBuscarProducto);
             this.Controls.Add(this.label2);
