@@ -10,6 +10,6 @@ namespace PastaFlow_DIAZ_PEREZ.Models
     {
         public int id_categoria { get; set; }
         public string nombre_categoria { get; set; }
-
+        public bool estado { get; set; }  // true = activa, false = inactiva
     }
 }

@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FGestionarInventario));
             this.pnlRegistro = new System.Windows.Forms.Panel();
+            this.btnLimpiarForm = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.cBoxProdCat = new System.Windows.Forms.ComboBox();
             this.txtProdStock = new System.Windows.Forms.TextBox();
@@ -43,6 +45,13 @@
             this.lbProdDescripcion = new System.Windows.Forms.Label();
             this.txtProdNombre = new System.Windows.Forms.TextBox();
             this.lbProdNombre = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.txtBuscarProducto = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.lbProdTitulo = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.nombreProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,18 +59,16 @@
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbProdTitulo = new System.Windows.Forms.Label();
-            this.txtBuscarProducto = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.pnlRegistro.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlRegistro
             // 
             this.pnlRegistro.BackColor = System.Drawing.Color.DarkRed;
+            this.pnlRegistro.Controls.Add(this.btnLimpiarForm);
             this.pnlRegistro.Controls.Add(this.btnVolver);
             this.pnlRegistro.Controls.Add(this.cBoxProdCat);
             this.pnlRegistro.Controls.Add(this.txtProdStock);
@@ -76,162 +83,161 @@
             this.pnlRegistro.Controls.Add(this.lbProdDescripcion);
             this.pnlRegistro.Controls.Add(this.txtProdNombre);
             this.pnlRegistro.Controls.Add(this.lbProdNombre);
-            this.pnlRegistro.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlRegistro.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.pnlRegistro, "pnlRegistro");
             this.pnlRegistro.Name = "pnlRegistro";
-            this.pnlRegistro.Size = new System.Drawing.Size(218, 485);
-            this.pnlRegistro.TabIndex = 1;
+            // 
+            // btnLimpiarForm
+            // 
+            this.btnLimpiarForm.BackColor = System.Drawing.Color.RosyBrown;
+            resources.ApplyResources(this.btnLimpiarForm, "btnLimpiarForm");
+            this.btnLimpiarForm.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
+            this.btnLimpiarForm.Name = "btnLimpiarForm";
+            this.btnLimpiarForm.UseVisualStyleBackColor = false;
+            this.btnLimpiarForm.Click += new System.EventHandler(this.btnLimpiarForm_Click);
             // 
             // btnVolver
             // 
             this.btnVolver.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnVolver.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnVolver, "btnVolver");
             this.btnVolver.ForeColor = System.Drawing.Color.DarkRed;
             this.btnVolver.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoAtrás;
-            this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVolver.Location = new System.Drawing.Point(8, 8);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(33, 25);
-            this.btnVolver.TabIndex = 30;
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // cBoxProdCat
             // 
             this.cBoxProdCat.FormattingEnabled = true;
-            this.cBoxProdCat.Location = new System.Drawing.Point(14, 303);
+            resources.ApplyResources(this.cBoxProdCat, "cBoxProdCat");
             this.cBoxProdCat.Name = "cBoxProdCat";
-            this.cBoxProdCat.Size = new System.Drawing.Size(184, 22);
-            this.cBoxProdCat.TabIndex = 24;
             // 
             // txtProdStock
             // 
-            this.txtProdStock.Location = new System.Drawing.Point(12, 256);
+            resources.ApplyResources(this.txtProdStock, "txtProdStock");
             this.txtProdStock.Name = "txtProdStock";
-            this.txtProdStock.Size = new System.Drawing.Size(187, 22);
-            this.txtProdStock.TabIndex = 23;
             this.txtProdStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StockProd_KeyPress);
             // 
             // txtProdPrecio
             // 
-            this.txtProdPrecio.Location = new System.Drawing.Point(11, 209);
+            resources.ApplyResources(this.txtProdPrecio, "txtProdPrecio");
             this.txtProdPrecio.Name = "txtProdPrecio";
-            this.txtProdPrecio.Size = new System.Drawing.Size(187, 22);
-            this.txtProdPrecio.TabIndex = 22;
             this.txtProdPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PrecioProd_KeyPress);
             // 
             // txtProdDesc
             // 
-            this.txtProdDesc.Location = new System.Drawing.Point(11, 162);
+            resources.ApplyResources(this.txtProdDesc, "txtProdDesc");
             this.txtProdDesc.Name = "txtProdDesc";
-            this.txtProdDesc.Size = new System.Drawing.Size(187, 22);
-            this.txtProdDesc.TabIndex = 21;
             this.txtProdDesc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DescProd_KeyPress);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.label1, "label1");
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(27, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 23);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Registrar Producto";
             // 
             // btnEditar
             // 
             this.btnEditar.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.btnEditar, "btnEditar");
             this.btnEditar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoEditar;
-            this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditar.Location = new System.Drawing.Point(113, 347);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(75, 25);
-            this.btnEditar.TabIndex = 17;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnRegistrar
             // 
             this.btnRegistrar.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.btnRegistrar, "btnRegistrar");
             this.btnRegistrar.ForeColor = System.Drawing.Color.Black;
             this.btnRegistrar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoRegistrar;
-            this.btnRegistrar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRegistrar.Location = new System.Drawing.Point(23, 347);
             this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(80, 25);
-            this.btnRegistrar.TabIndex = 16;
-            this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRegistrar.UseVisualStyleBackColor = false;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // lbProdCategoria
             // 
-            this.lbProdCategoria.AutoSize = true;
-            this.lbProdCategoria.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lbProdCategoria, "lbProdCategoria");
             this.lbProdCategoria.ForeColor = System.Drawing.Color.White;
-            this.lbProdCategoria.Location = new System.Drawing.Point(11, 284);
             this.lbProdCategoria.Name = "lbProdCategoria";
-            this.lbProdCategoria.Size = new System.Drawing.Size(59, 15);
-            this.lbProdCategoria.TabIndex = 15;
-            this.lbProdCategoria.Text = "Categoría";
             // 
             // lbProdStock
             // 
-            this.lbProdStock.AutoSize = true;
-            this.lbProdStock.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lbProdStock, "lbProdStock");
             this.lbProdStock.ForeColor = System.Drawing.Color.White;
-            this.lbProdStock.Location = new System.Drawing.Point(11, 238);
             this.lbProdStock.Name = "lbProdStock";
-            this.lbProdStock.Size = new System.Drawing.Size(36, 15);
-            this.lbProdStock.TabIndex = 9;
-            this.lbProdStock.Text = "Stock";
             // 
             // lbProdPrecio
             // 
-            this.lbProdPrecio.AutoSize = true;
-            this.lbProdPrecio.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lbProdPrecio, "lbProdPrecio");
             this.lbProdPrecio.ForeColor = System.Drawing.Color.White;
-            this.lbProdPrecio.Location = new System.Drawing.Point(11, 192);
             this.lbProdPrecio.Name = "lbProdPrecio";
-            this.lbProdPrecio.Size = new System.Drawing.Size(41, 15);
-            this.lbProdPrecio.TabIndex = 7;
-            this.lbProdPrecio.Text = "Precio";
             // 
             // lbProdDescripcion
             // 
-            this.lbProdDescripcion.AutoSize = true;
-            this.lbProdDescripcion.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lbProdDescripcion, "lbProdDescripcion");
             this.lbProdDescripcion.ForeColor = System.Drawing.Color.White;
-            this.lbProdDescripcion.Location = new System.Drawing.Point(11, 143);
             this.lbProdDescripcion.Name = "lbProdDescripcion";
-            this.lbProdDescripcion.Size = new System.Drawing.Size(69, 15);
-            this.lbProdDescripcion.TabIndex = 3;
-            this.lbProdDescripcion.Text = "Descripción";
             // 
             // txtProdNombre
             // 
-            this.txtProdNombre.Location = new System.Drawing.Point(12, 115);
+            resources.ApplyResources(this.txtProdNombre, "txtProdNombre");
             this.txtProdNombre.Name = "txtProdNombre";
-            this.txtProdNombre.Size = new System.Drawing.Size(186, 22);
-            this.txtProdNombre.TabIndex = 1;
             this.txtProdNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NombreProd_KeyPress);
             // 
             // lbProdNombre
             // 
-            this.lbProdNombre.AutoSize = true;
-            this.lbProdNombre.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lbProdNombre, "lbProdNombre");
             this.lbProdNombre.ForeColor = System.Drawing.Color.White;
-            this.lbProdNombre.Location = new System.Drawing.Point(11, 98);
             this.lbProdNombre.Name = "lbProdNombre";
-            this.lbProdNombre.Size = new System.Drawing.Size(53, 15);
-            this.lbProdNombre.TabIndex = 0;
-            this.lbProdNombre.Text = "Nombre";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.txtBuscarProducto);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.btnLimpiar);
+            this.panel2.Controls.Add(this.btnBuscar);
+            this.panel2.Controls.Add(this.lbProdTitulo);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // txtBuscarProducto
+            // 
+            resources.ApplyResources(this.txtBuscarProducto, "txtBuscarProducto");
+            this.txtBuscarProducto.Name = "txtBuscarProducto";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.BackColor = System.Drawing.Color.RosyBrown;
+            resources.ApplyResources(this.btnLimpiar, "btnLimpiar");
+            this.btnLimpiar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = false;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackColor = System.Drawing.Color.LemonChiffon;
+            resources.ApplyResources(this.btnBuscar, "btnBuscar");
+            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
+            this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.UseVisualStyleBackColor = false;
+            // 
+            // lbProdTitulo
+            // 
+            resources.ApplyResources(this.lbProdTitulo, "lbProdTitulo");
+            this.lbProdTitulo.ForeColor = System.Drawing.Color.Black;
+            this.lbProdTitulo.Name = "lbProdTitulo";
+            // 
+            // panel1
+            // 
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.dgvProductos);
+            this.panel1.Name = "panel1";
             // 
             // dgvProductos
             // 
@@ -243,124 +249,60 @@
             this.Stock,
             this.Categoria,
             this.Estado});
-            this.dgvProductos.Location = new System.Drawing.Point(241, 128);
+            resources.ApplyResources(this.dgvProductos, "dgvProductos");
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.Size = new System.Drawing.Size(608, 162);
-            this.dgvProductos.TabIndex = 2;
             // 
             // nombreProd
             // 
-            this.nombreProd.HeaderText = "Producto";
+            resources.ApplyResources(this.nombreProd, "nombreProd");
             this.nombreProd.Name = "nombreProd";
             this.nombreProd.ReadOnly = true;
-            this.nombreProd.Width = 150;
             // 
             // DescProd
             // 
-            this.DescProd.HeaderText = "Descripción";
+            resources.ApplyResources(this.DescProd, "DescProd");
             this.DescProd.Name = "DescProd";
             this.DescProd.ReadOnly = true;
-            this.DescProd.Width = 150;
             // 
             // Precio
             // 
-            this.Precio.HeaderText = "Precio";
+            resources.ApplyResources(this.Precio, "Precio");
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
-            this.Precio.Width = 60;
             // 
             // Stock
             // 
-            this.Stock.HeaderText = "Stock";
+            resources.ApplyResources(this.Stock, "Stock");
             this.Stock.Name = "Stock";
             this.Stock.ReadOnly = true;
-            this.Stock.Width = 60;
             // 
             // Categoria
             // 
-            this.Categoria.HeaderText = "Categoría";
+            resources.ApplyResources(this.Categoria, "Categoria");
             this.Categoria.Name = "Categoria";
             this.Categoria.ReadOnly = true;
-            this.Categoria.Width = 80;
             // 
             // Estado
             // 
-            this.Estado.HeaderText = "Estado";
+            resources.ApplyResources(this.Estado, "Estado");
             this.Estado.Name = "Estado";
             this.Estado.ReadOnly = true;
-            this.Estado.Width = 60;
-            // 
-            // lbProdTitulo
-            // 
-            this.lbProdTitulo.AutoSize = true;
-            this.lbProdTitulo.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProdTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lbProdTitulo.Location = new System.Drawing.Point(406, 37);
-            this.lbProdTitulo.Name = "lbProdTitulo";
-            this.lbProdTitulo.Size = new System.Drawing.Size(199, 26);
-            this.lbProdTitulo.TabIndex = 19;
-            this.lbProdTitulo.Text = "Gestión de Inventario";
-            // 
-            // txtBuscarProducto
-            // 
-            this.txtBuscarProducto.Location = new System.Drawing.Point(639, 96);
-            this.txtBuscarProducto.Multiline = true;
-            this.txtBuscarProducto.Name = "txtBuscarProducto";
-            this.txtBuscarProducto.Size = new System.Drawing.Size(144, 24);
-            this.txtBuscarProducto.TabIndex = 24;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(504, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(138, 18);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Ingrese el producto : ";
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLimpiar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.btnLimpiar.Location = new System.Drawing.Point(820, 96);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(27, 25);
-            this.btnLimpiar.TabIndex = 26;
-            this.btnLimpiar.UseVisualStyleBackColor = false;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.ForeColor = System.Drawing.Color.Black;
-            this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
-            this.btnBuscar.Location = new System.Drawing.Point(789, 96);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
-            this.btnBuscar.TabIndex = 25;
-            this.btnBuscar.UseVisualStyleBackColor = false;
             // 
             // FGestionarInventario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Khaki;
-            this.ClientSize = new System.Drawing.Size(861, 485);
-            this.Controls.Add(this.txtBuscarProducto);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.lbProdTitulo);
-            this.Controls.Add(this.dgvProductos);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlRegistro);
-            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "FGestionarInventario";
-            this.Text = "Inventario";
             this.pnlRegistro.ResumeLayout(false);
             this.pnlRegistro.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -379,17 +321,20 @@
         private System.Windows.Forms.Label lbProdDescripcion;
         private System.Windows.Forms.TextBox txtProdNombre;
         private System.Windows.Forms.Label lbProdNombre;
-        private System.Windows.Forms.DataGridView dgvProductos;
-        private System.Windows.Forms.Label lbProdTitulo;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.TextBox txtBuscarProducto;
         private System.Windows.Forms.TextBox txtProdDesc;
         private System.Windows.Forms.ComboBox cBoxProdCat;
         private System.Windows.Forms.TextBox txtProdStock;
         private System.Windows.Forms.TextBox txtProdPrecio;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnLimpiarForm;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox txtBuscarProducto;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Label lbProdTitulo;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreProd;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescProd;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio;

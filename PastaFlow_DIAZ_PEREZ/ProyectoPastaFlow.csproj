@@ -55,7 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\CategoriaDao.cs" />
     <Compile Include="DataAccess\DbConnection.cs" />
+    <Compile Include="DataAccess\ProductoDao.cs" />
     <Compile Include="DataAccess\RolDAO.cs" />
     <Compile Include="DataAccess\UsuarioDAO.cs" />
     <Compile Include="Forms\FCerrarCaja.cs">
@@ -147,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FCerrarCaja.resx">
       <DependentUpon>FCerrarCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FGestionarInventario.es-419.resx">
+      <DependentUpon>FGestionarInventario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
