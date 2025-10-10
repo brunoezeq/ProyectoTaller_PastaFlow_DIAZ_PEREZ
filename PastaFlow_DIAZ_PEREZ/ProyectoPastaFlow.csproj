@@ -259,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icono.ico" />
+    <None Include="Resources\gif.gif" />
     <None Include="Resources\imagencentral.png" />
     <None Include="Resources\iconoCarrito.png" />
     <None Include="Resources\iconoConfirmar.png" />

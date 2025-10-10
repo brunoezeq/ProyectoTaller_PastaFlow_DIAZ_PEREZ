@@ -30,6 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FMenuCajero));
+            this.pnlTop = new System.Windows.Forms.Panel();
+            this.lbHora = new System.Windows.Forms.Label();
+            this.lbFecha = new System.Windows.Forms.Label();
+            this.lbUsuario = new System.Windows.Forms.Label();
+            this.timerHora = new System.Windows.Forms.Timer(this.components);
+            this.pnlContent = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlHeader = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbRol = new System.Windows.Forms.Label();
             this.pnlMenuLateral = new System.Windows.Forms.Panel();
             this.btnVerQuejas = new System.Windows.Forms.Button();
             this.btnRegEmpleado = new System.Windows.Forms.Button();
@@ -39,22 +49,124 @@
             this.btnRegReserva = new System.Windows.Forms.Button();
             this.btnCargarPedido = new System.Windows.Forms.Button();
             this.btnAbrirCaja = new System.Windows.Forms.Button();
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbRol = new System.Windows.Forms.Label();
-            this.pnlTop = new System.Windows.Forms.Panel();
-            this.lbHora = new System.Windows.Forms.Label();
-            this.lbFecha = new System.Windows.Forms.Label();
-            this.lbUsuario = new System.Windows.Forms.Label();
-            this.timerHora = new System.Windows.Forms.Timer(this.components);
-            this.pnlContent = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pnlMenuLateral.SuspendLayout();
-            this.pnlHeader.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.pnlContent.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.pnlHeader.SuspendLayout();
+            this.pnlMenuLateral.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pnlTop
+            // 
+            this.pnlTop.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.pnlTop.Controls.Add(this.lbHora);
+            this.pnlTop.Controls.Add(this.lbFecha);
+            this.pnlTop.Controls.Add(this.lbUsuario);
+            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTop.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pnlTop.Location = new System.Drawing.Point(209, 0);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(853, 40);
+            this.pnlTop.TabIndex = 1;
+            // 
+            // lbHora
+            // 
+            this.lbHora.AutoSize = true;
+            this.lbHora.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHora.ForeColor = System.Drawing.Color.Khaki;
+            this.lbHora.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbHora.Location = new System.Drawing.Point(785, 9);
+            this.lbHora.Name = "lbHora";
+            this.lbHora.Size = new System.Drawing.Size(37, 18);
+            this.lbHora.TabIndex = 2;
+            this.lbHora.Text = "Hora";
+            this.lbHora.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbFecha
+            // 
+            this.lbFecha.AutoSize = true;
+            this.lbFecha.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFecha.ForeColor = System.Drawing.Color.Khaki;
+            this.lbFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lbFecha.Location = new System.Drawing.Point(706, 9);
+            this.lbFecha.Name = "lbFecha";
+            this.lbFecha.Size = new System.Drawing.Size(44, 18);
+            this.lbFecha.TabIndex = 2;
+            this.lbFecha.Text = "Fecha";
+            this.lbFecha.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lbUsuario
+            // 
+            this.lbUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbUsuario.AutoSize = true;
+            this.lbUsuario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUsuario.ForeColor = System.Drawing.Color.Khaki;
+            this.lbUsuario.Location = new System.Drawing.Point(6, 8);
+            this.lbUsuario.Name = "lbUsuario";
+            this.lbUsuario.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lbUsuario.Size = new System.Drawing.Size(86, 19);
+            this.lbUsuario.TabIndex = 0;
+            this.lbUsuario.Text = "Bienvenido";
+            this.lbUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timerHora
+            // 
+            this.timerHora.Enabled = true;
+            this.timerHora.Interval = 1000;
+            this.timerHora.Tick += new System.EventHandler(this.timerHora_Tick);
+            // 
+            // pnlContent
+            // 
+            this.pnlContent.BackColor = System.Drawing.Color.Khaki;
+            this.pnlContent.Controls.Add(this.panel1);
+            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContent.Location = new System.Drawing.Point(0, 0);
+            this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Size = new System.Drawing.Size(1062, 505);
+            this.pnlContent.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1062, 505);
+            this.panel1.TabIndex = 11;
+            // 
+            // pnlHeader
+            // 
+            this.pnlHeader.Controls.Add(this.label1);
+            this.pnlHeader.Controls.Add(this.lbRol);
+            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlHeader.Location = new System.Drawing.Point(10, 12);
+            this.pnlHeader.Name = "pnlHeader";
+            this.pnlHeader.Size = new System.Drawing.Size(189, 33);
+            this.pnlHeader.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(765, 155);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
+            // 
+            // lbRol
+            // 
+            this.lbRol.AutoSize = true;
+            this.lbRol.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRol.ForeColor = System.Drawing.Color.Khaki;
+            this.lbRol.Location = new System.Drawing.Point(12, 9);
+            this.lbRol.Name = "lbRol";
+            this.lbRol.Size = new System.Drawing.Size(0, 19);
+            this.lbRol.TabIndex = 1;
             // 
             // pnlMenuLateral
             // 
@@ -242,112 +354,24 @@
             this.btnAbrirCaja.UseVisualStyleBackColor = false;
             this.btnAbrirCaja.Click += new System.EventHandler(this.btnAbrirCaja_Click);
             // 
-            // pnlHeader
+            // panel2
             // 
-            this.pnlHeader.Controls.Add(this.label1);
-            this.pnlHeader.Controls.Add(this.lbRol);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(10, 12);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(189, 33);
-            this.pnlHeader.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(765, 155);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            // 
-            // lbRol
-            // 
-            this.lbRol.AutoSize = true;
-            this.lbRol.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRol.ForeColor = System.Drawing.Color.Khaki;
-            this.lbRol.Location = new System.Drawing.Point(12, 9);
-            this.lbRol.Name = "lbRol";
-            this.lbRol.Size = new System.Drawing.Size(0, 19);
-            this.lbRol.TabIndex = 1;
-            // 
-            // pnlTop
-            // 
-            this.pnlTop.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.pnlTop.Controls.Add(this.lbHora);
-            this.pnlTop.Controls.Add(this.lbFecha);
-            this.pnlTop.Controls.Add(this.lbUsuario);
-            this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlTop.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlTop.Location = new System.Drawing.Point(209, 0);
-            this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(853, 33);
-            this.pnlTop.TabIndex = 1;
-            // 
-            // lbHora
-            // 
-            this.lbHora.AutoSize = true;
-            this.lbHora.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHora.ForeColor = System.Drawing.Color.Khaki;
-            this.lbHora.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lbHora.Location = new System.Drawing.Point(785, 9);
-            this.lbHora.Name = "lbHora";
-            this.lbHora.Size = new System.Drawing.Size(37, 18);
-            this.lbHora.TabIndex = 2;
-            this.lbHora.Text = "Hora";
-            this.lbHora.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbFecha
-            // 
-            this.lbFecha.AutoSize = true;
-            this.lbFecha.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFecha.ForeColor = System.Drawing.Color.Khaki;
-            this.lbFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lbFecha.Location = new System.Drawing.Point(706, 9);
-            this.lbFecha.Name = "lbFecha";
-            this.lbFecha.Size = new System.Drawing.Size(44, 18);
-            this.lbFecha.TabIndex = 2;
-            this.lbFecha.Text = "Fecha";
-            this.lbFecha.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lbUsuario
-            // 
-            this.lbUsuario.AutoSize = true;
-            this.lbUsuario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUsuario.ForeColor = System.Drawing.Color.Khaki;
-            this.lbUsuario.Location = new System.Drawing.Point(6, 8);
-            this.lbUsuario.Name = "lbUsuario";
-            this.lbUsuario.Size = new System.Drawing.Size(86, 19);
-            this.lbUsuario.TabIndex = 0;
-            this.lbUsuario.Text = "Bienvenido";
-            this.lbUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // timerHora
-            // 
-            this.timerHora.Enabled = true;
-            this.timerHora.Interval = 1000;
-            this.timerHora.Tick += new System.EventHandler(this.timerHora_Tick);
-            // 
-            // pnlContent
-            // 
-            this.pnlContent.BackColor = System.Drawing.Color.Khaki;
-            this.pnlContent.Controls.Add(this.pictureBox1);
-            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(209, 33);
-            this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(853, 472);
-            this.pnlContent.TabIndex = 2;
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Location = new System.Drawing.Point(251, 77);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(559, 425);
+            this.panel2.TabIndex = 0;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.imagencentral;
-            this.pictureBox1.Location = new System.Drawing.Point(188, 60);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.gif;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(466, 300);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.Size = new System.Drawing.Size(559, 425);
+            this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
             // 
             // FMenuCajero
@@ -356,45 +380,49 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(242)))), ((int)(((byte)(233)))));
             this.ClientSize = new System.Drawing.Size(1062, 505);
-            this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenuLateral);
+            this.Controls.Add(this.pnlContent);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FMenuCajero";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FMenu_Load);
-            this.pnlMenuLateral.ResumeLayout(false);
-            this.pnlHeader.ResumeLayout(false);
-            this.pnlHeader.PerformLayout();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlContent.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.pnlHeader.ResumeLayout(false);
+            this.pnlHeader.PerformLayout();
+            this.pnlMenuLateral.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlMenuLateral;
-        private System.Windows.Forms.Panel pnlHeader;
-        private System.Windows.Forms.Button btnAbrirCaja;
-        private System.Windows.Forms.Button btnRegReserva;
-        private System.Windows.Forms.Button btnCargarPedido;
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Label lbUsuario;
         private System.Windows.Forms.Label lbHora;
         private System.Windows.Forms.Label lbFecha;
         private System.Windows.Forms.Timer timerHora;
-        private System.Windows.Forms.Button btnRegEmpleado;
-        private System.Windows.Forms.Button btnVerReportes;
-        private System.Windows.Forms.Button btnRegQueja;
-        private System.Windows.Forms.Button btnInventario;
-        private System.Windows.Forms.Button btnVerQuejas;
         private System.Windows.Forms.Panel pnlContent;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel pnlHeader;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbRol;
+        private System.Windows.Forms.Button btnAbrirCaja;
+        private System.Windows.Forms.Button btnCargarPedido;
+        private System.Windows.Forms.Button btnRegReserva;
+        private System.Windows.Forms.Button btnInventario;
+        private System.Windows.Forms.Button btnRegQueja;
+        private System.Windows.Forms.Button btnVerReportes;
+        private System.Windows.Forms.Button btnRegEmpleado;
+        private System.Windows.Forms.Button btnVerQuejas;
+        private System.Windows.Forms.Panel pnlMenuLateral;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

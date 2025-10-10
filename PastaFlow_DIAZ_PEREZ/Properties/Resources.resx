@@ -127,9 +127,6 @@
   <data name="iconoAcceder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoAcceder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconoUsuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoUsuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="platopastas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\platopastas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -157,23 +154,29 @@
   <data name="pastaflow_transparente" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pastaflow_transparente.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconoExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoExcel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="imagencentral" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagencentral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconoCancelar" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoCancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iconoReserva" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoReserva.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconoUsuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoUsuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iconoCajaReg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoCajaReg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconoCarrito" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconoCarrito.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconoExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoExcel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iconoAtrás" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoAtrás.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconoCancelar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoCancelar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconoCarrito" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoCarrito.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="iconoReserva" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconoReserva.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iconoInventario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoInventario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,7 +184,7 @@
   <data name="iconoRegistrarUsuario" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconoRegistrarUsuario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="imagencentral" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagencentral.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="gif" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gif.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
