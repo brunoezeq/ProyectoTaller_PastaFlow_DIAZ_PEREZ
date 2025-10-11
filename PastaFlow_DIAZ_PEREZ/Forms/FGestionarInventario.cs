@@ -28,6 +28,14 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private readonly ProductoDao _productoDao = new ProductoDao();
         private readonly CategoriaDao _categoriaDao = new CategoriaDao();
 
+        // Campo para alternar el orden
+        private bool _ordenNombreAsc = true;
+        private bool _ordenDescAsc = true;
+        private bool _ordenPrecioAsc = false; // primero mayor->menor
+        private bool _ordenStockAsc = true;
+        private bool _ordenCategoriaAsc = true;
+        private bool _ordenEstadoAsc = true;
+
         public FGestionarInventario()
         {
             InitializeComponent();
@@ -41,6 +49,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
             dgvProductos.CellFormatting += dgvProductos_CellFormatting;
             dgvProductos.CellContentClick += dgvProductos_CellContentClick;
+            dgvProductos.ColumnHeaderMouseClick += dgvProductos_ColumnHeaderMouseClick; // ordenar al hacer click en encabezado
 
             // Búsqueda en tiempo real
             if (txtBuscarProducto != null)
@@ -52,6 +61,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         // -------------------------------
         private void FGestionarInventario_Load(object sender, EventArgs e)
         {
+            // Desconectar el evento para evitar selección automática
+            dgvProductos.SelectionChanged -= dgvProductos_SelectionChanged;
+
             ConfigurarGrillaVisual();
             ConfigurarGrillaDatos();
 
@@ -63,9 +75,13 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             LimpiarFormulario();
             dgvProductos.ClearSelection();
+            dgvProductos.CurrentCell = null;
 
             // Foco en el primer campo
             this.ActiveControl = txtProdNombre;
+
+            // Reconectar el evento después de la carga
+            dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
         }
 
         // -------------------------------
@@ -115,12 +131,35 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         // -------------------------------
         private void ConfigurarGrillaDatos()
         {
-            if (nombreProd != null) nombreProd.DataPropertyName = "nombre";
-            if (DescProd != null) DescProd.DataPropertyName = "descripcion";
-            if (Precio != null) Precio.DataPropertyName = "precio";
-            if (Stock != null) Stock.DataPropertyName = "stock";
+            if (nombreProd != null)
+            {
+                nombreProd.DataPropertyName = "nombre";
+                nombreProd.SortMode = DataGridViewColumnSortMode.Programmatic;
+            }
+            if (DescProd != null)
+            {
+                DescProd.DataPropertyName = "descripcion";
+                DescProd.SortMode = DataGridViewColumnSortMode.Programmatic;
+            }
+            if (Precio != null)
+            {
+                Precio.DataPropertyName = "precio";
+                Precio.SortMode = DataGridViewColumnSortMode.Programmatic;
+            }
+            if (Stock != null)
+            {
+                Stock.DataPropertyName = "stock";
+                Stock.SortMode = DataGridViewColumnSortMode.Programmatic;
+            }
+            if (Categoria != null)
+            {
+                Categoria.SortMode = DataGridViewColumnSortMode.Programmatic;
+            }
+            if (Estado != null)
+            {
+                Estado.SortMode = DataGridViewColumnSortMode.Programmatic;
+            }
 
-            // Agrego la columna de botón si no existe
             if (dgvProductos.Columns["Accion"] == null)
             {
                 var colAccion = new DataGridViewButtonColumn();
@@ -473,5 +512,121 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         private void MostrarInfo(string msg) =>
             MessageBox.Show(msg, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        private void dgvProductos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var visible = _bsProductos.DataSource as IEnumerable<Producto> ?? _productos;
+
+            IEnumerable<Producto> ordenada = visible;
+            SortOrder glyph;
+
+            if (e.ColumnIndex == nombreProd.Index)
+            {
+                bool asc = _ordenNombreAsc;
+                ordenada = asc
+                    ? visible.OrderBy(p => p.nombre ?? string.Empty, StringComparer.CurrentCultureIgnoreCase)
+                    : visible.OrderByDescending(p => p.nombre ?? string.Empty, StringComparer.CurrentCultureIgnoreCase);
+                _ordenNombreAsc = !asc;
+                glyph = asc ? SortOrder.Ascending : SortOrder.Descending;
+                nombreProd.HeaderCell.SortGlyphDirection = glyph;
+                DescProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Precio.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Stock.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Categoria.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Estado.HeaderCell.SortGlyphDirection = SortOrder.None;
+            }
+            else if (e.ColumnIndex == DescProd.Index)
+            {
+                bool asc = _ordenDescAsc;
+                ordenada = asc
+                    ? visible.OrderBy(p => p.descripcion ?? string.Empty, StringComparer.CurrentCultureIgnoreCase)
+                    : visible.OrderByDescending(p => p.descripcion ?? string.Empty, StringComparer.CurrentCultureIgnoreCase);
+                _ordenDescAsc = !asc;
+                glyph = asc ? SortOrder.Ascending : SortOrder.Descending;
+                nombreProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                DescProd.HeaderCell.SortGlyphDirection = glyph;
+                Precio.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Stock.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Categoria.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Estado.HeaderCell.SortGlyphDirection = SortOrder.None;
+            }
+            else if (e.ColumnIndex == Precio.Index)
+            {
+                bool asc = _ordenPrecioAsc; // false inicialmente => primer click Desc
+                ordenada = asc
+                    ? visible.OrderBy(p => p.precio)
+                    : visible.OrderByDescending(p => p.precio);
+                _ordenPrecioAsc = !asc;
+                glyph = asc ? SortOrder.Ascending : SortOrder.Descending;
+                nombreProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                DescProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Precio.HeaderCell.SortGlyphDirection = glyph;
+                Stock.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Categoria.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Estado.HeaderCell.SortGlyphDirection = SortOrder.None;
+            }
+            else if (e.ColumnIndex == Stock.Index)
+            {
+                bool asc = _ordenStockAsc;
+                ordenada = asc
+                    ? visible.OrderBy(p => p.stock)
+                    : visible.OrderByDescending(p => p.stock);
+                _ordenStockAsc = !asc;
+                glyph = asc ? SortOrder.Ascending : SortOrder.Descending;
+                nombreProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                DescProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Precio.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Stock.HeaderCell.SortGlyphDirection = glyph;
+                Categoria.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Estado.HeaderCell.SortGlyphDirection = SortOrder.None;
+            }
+            else if (e.ColumnIndex == Categoria.Index)
+            {
+                bool asc = _ordenCategoriaAsc;
+                ordenada = asc
+                    ? visible.OrderBy(p => p.id_categoria?.nombre_categoria ?? string.Empty, StringComparer.CurrentCultureIgnoreCase)
+                    : visible.OrderByDescending(p => p.id_categoria?.nombre_categoria ?? string.Empty, StringComparer.CurrentCultureIgnoreCase);
+                _ordenCategoriaAsc = !asc;
+                glyph = asc ? SortOrder.Ascending : SortOrder.Descending;
+                nombreProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                DescProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Precio.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Stock.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Categoria.HeaderCell.SortGlyphDirection = glyph;
+                Estado.HeaderCell.SortGlyphDirection = SortOrder.None;
+            }
+            else if (e.ColumnIndex == Estado.Index)
+            {
+                bool asc = _ordenEstadoAsc;
+                ordenada = asc
+                    ? visible.OrderBy(p => p.estado)               // Inactivo->Activo
+                    : visible.OrderByDescending(p => p.estado);     // Activo->Inactivo
+                _ordenEstadoAsc = !asc;
+                glyph = asc ? SortOrder.Ascending : SortOrder.Descending;
+                nombreProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                DescProd.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Precio.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Stock.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Categoria.HeaderCell.SortGlyphDirection = SortOrder.None;
+                Estado.HeaderCell.SortGlyphDirection = glyph;
+            }
+            else
+            {
+                return;
+            }
+
+            dgvProductos.SelectionChanged -= dgvProductos_SelectionChanged;
+            try
+            {
+                _bsProductos.DataSource = new BindingList<Producto>(ordenada.ToList());
+                _bsProductos.ResetBindings(false);
+                dgvProductos.ClearSelection();
+                dgvProductos.CurrentCell = null;
+            }
+            finally
+            {
+                dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
+            }
+        }
     }
 }
