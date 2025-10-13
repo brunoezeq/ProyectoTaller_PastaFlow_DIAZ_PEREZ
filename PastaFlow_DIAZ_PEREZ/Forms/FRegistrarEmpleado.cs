@@ -81,11 +81,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             AplicarFormatoTabla();
         }
 
-        private bool ValidarCamposFormulario(out string mensajeError)
+        private bool ValidarCamposFormulario(out string mensajeError, bool esEdicion = false)
         {
             var errores = new List<string>();
 
-            // Nombre / Apellido: solo letras y máx 25
+            // Nombre / Apellido
             if (string.IsNullOrWhiteSpace(txtEmpNombre.Text))
                 errores.Add("Nombre vacío.");
             else if (!System.Text.RegularExpressions.Regex.IsMatch(txtEmpNombre.Text, @"^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$") || txtEmpNombre.Text.Length > 25)
@@ -96,7 +96,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             else if (!System.Text.RegularExpressions.Regex.IsMatch(txtEmpApellido.Text, @"^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$") || txtEmpApellido.Text.Length > 25)
                 errores.Add("Apellido inválido (solo letras, max 25).");
 
-            // DNI: 8 dígitos
+            // DNI
             if (string.IsNullOrWhiteSpace(txtEmpDNI.Text))
                 errores.Add("DNI vacío.");
             else if (!System.Text.RegularExpressions.Regex.IsMatch(txtEmpDNI.Text, @"^\d{8}$"))
@@ -108,19 +108,23 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             else if (!System.Text.RegularExpressions.Regex.IsMatch(txtEmpCorreo.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
                 errores.Add("Formato de correo inválido.");
 
-            // Teléfono: 10 dígitos
+            // Teléfono
             if (string.IsNullOrWhiteSpace(txtEmpTelefono.Text))
                 errores.Add("Teléfono vacío.");
             else if (!System.Text.RegularExpressions.Regex.IsMatch(txtEmpTelefono.Text, @"^\d{10}$"))
                 errores.Add("Teléfono inválido (10 dígitos).");
 
-            // Contraseñas
-            if (string.IsNullOrEmpty(txtEmpContra.Text))
-                errores.Add("Contraseña vacía.");
-            else if (txtEmpContra.Text.Length > 20)
-                errores.Add("Contraseña supera 20 caracteres.");
-            if (txtEmpContra.Text != txtEmpRContra.Text)
-                errores.Add("Las contraseñas no coinciden.");
+            // ✅ Contraseñas (solo si NO es edición o si el usuario las llenó)
+            if (!esEdicion || !string.IsNullOrEmpty(txtEmpContra.Text))
+            {
+                if (string.IsNullOrEmpty(txtEmpContra.Text))
+                    errores.Add("Contraseña vacía.");
+                else if (txtEmpContra.Text.Length > 20)
+                    errores.Add("Contraseña supera 20 caracteres.");
+
+                if (txtEmpContra.Text != txtEmpRContra.Text)
+                    errores.Add("Las contraseñas no coinciden.");
+            }
 
             // Rol
             if (cBoxRol.SelectedItem == null)
@@ -135,6 +139,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             mensajeError = null;
             return true;
         }
+
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -168,6 +173,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Limpiar campos del formulario
         private void LimpiarRegistro()
         {
             txtEmpNombre.Clear();
@@ -180,6 +186,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             cBoxRol.SelectedIndex = -1;
         }
 
+        // Cargar usuarios en el DataGridView
         private void CargarUsuarios()
         {
             using (var conn = DbConnection.GetConnection())
@@ -204,9 +211,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 da.Fill(dt);
                 dgvUsuarios.DataSource = dt;
 
+                // Ocultar columna interna
                 if (dgvUsuarios.Columns.Contains("id_rol"))
                     dgvUsuarios.Columns["id_rol"].Visible = false;
 
+                // Encabezados legibles
                 dgvUsuarios.Columns["nombre"].HeaderText = "Nombre";
                 dgvUsuarios.Columns["apellido"].HeaderText = "Apellido";
                 dgvUsuarios.Columns["dni"].HeaderText = "DNI";
@@ -215,15 +224,52 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 dgvUsuarios.Columns["nombre_rol"].HeaderText = "Rol";
                 dgvUsuarios.Columns["estado"].HeaderText = "Estado";
 
-                // Letras negras y encabezado en negrita  de tabla
+                // Letras negras, negrita y formato de tabla
                 dgvUsuarios.DefaultCellStyle.ForeColor = Color.Black;
                 dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
-
-                // Centrado general + correo alineado a la izquierda y sin recortes de tabla
                 AplicarFormatoTabla();
+
+                // Si la columna de botones no existe, la creamos
+                if (!dgvUsuarios.Columns.Contains("Accion"))
+                {
+                    DataGridViewButtonColumn btnAccion = new DataGridViewButtonColumn();
+                    btnAccion.Name = "Accion";
+                    btnAccion.HeaderText = "Acción";
+                    btnAccion.UseColumnTextForButtonValue = false; // <<--- importante
+                    dgvUsuarios.Columns.Add(btnAccion);
+                }
+
+                // Asignamos el texto del botón según el estado
+                foreach (DataGridViewRow row in dgvUsuarios.Rows)
+                {
+                    string estado = row.Cells["estado"].Value?.ToString();
+                    row.Cells["Accion"].Value = (estado == "Activo") ? "Eliminar" : "Activar";
+                }
             }
+
+            // Ajustes visuales
+            AjustarDataGridView(dgvUsuarios);
         }
 
+        private void AjustarDataGridView(DataGridView dgv)
+        {
+            // Ajusta columnas al contenido
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            // Evita las barras de desplazamiento
+            dgv.ScrollBars = ScrollBars.None;
+
+            // Permite que el texto se vea correctamente centrado
+            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Fuente y colores legibles
+            dgv.DefaultCellStyle.ForeColor = Color.Black;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font(dgv.Font, FontStyle.Bold);
+        }
+
+        // Al hacer click en una fila, cargar datos en el formulario
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -235,9 +281,13 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 txtEmpCorreo.Text = row.Cells["correo_electronico"].Value.ToString();
                 txtEmpTelefono.Text = row.Cells["telefono"].Value.ToString();
                 cBoxRol.SelectedValue = row.Cells["id_rol"].Value;
+
+                // No permite editar DNI
+                txtEmpDNI.ReadOnly = true;
             }
         }
 
+        // Buscar usuarios por DNI y/o rol
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             string dni = string.IsNullOrWhiteSpace(txtBuscarDni.Text) ? null : txtBuscarDni.Text;
@@ -265,6 +315,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             AplicarFormatoTabla();
         }
 
+        // Limpiar filtros de búsqueda
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtBuscarDni.Clear();
@@ -354,6 +405,95 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             {
                 tb.Text = filtrado;
                 tb.SelectionStart = Math.Min(sel, tb.Text.Length);
+            }
+        }
+
+        // Editar usuario seleccionado
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            // validación en modo edición
+            if (!ValidarCamposFormulario(out string errores, esEdicion: true))
+            {
+                MessageBox.Show(errores, "Errores de validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Confirmación
+            var res = MessageBox.Show("¿Está seguro que desea guardar los cambios del usuario?",
+                                      "Confirmar edición", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res != DialogResult.Yes) return;
+
+            string nombre = txtEmpNombre.Text.Trim();
+            string apellido = txtEmpApellido.Text.Trim();
+            string dni = txtEmpDNI.Text.Trim();
+            string correo = txtEmpCorreo.Text.Trim();
+            string telefono = txtEmpTelefono.Text.Trim();
+            int rol = Convert.ToInt32(cBoxRol.SelectedValue);
+
+            string contrasena = txtEmpContra.Text.Trim();
+            byte[] hash = null;
+            if (!string.IsNullOrEmpty(contrasena))
+                hash = SeguridadHelper.ComputeSha256Hash(contrasena);
+
+            var dao = new UsuarioDAO();
+            try
+            {
+                dao.ActualizarUsuario(dni, nombre, apellido, correo, telefono, rol, hash);
+                MessageBox.Show("Usuario actualizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CargarUsuarios();
+                LimpiarRegistro();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar el usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Cambiar estado (activar/eliminar) usuario desde el DataGridView
+        private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvUsuarios.Columns[e.ColumnIndex].Name == "Accion")
+            {
+                string dni = dgvUsuarios.Rows[e.RowIndex].Cells["dni"].Value.ToString();
+                string estado = dgvUsuarios.Rows[e.RowIndex].Cells["estado"].Value.ToString();
+
+                string accion = (estado == "Activo") ? "eliminar" : "activar";
+
+                DialogResult dr = MessageBox.Show(
+                    $"¿Desea {accion} este usuario?",
+                    "Confirmar acción",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (dr == DialogResult.Yes)
+                {
+                    try
+                    {
+                        var dao = new UsuarioDAO();
+                        dao.CambiarEstadoUsuario(dni);
+
+                        // Cambiar estado y texto del botón directamente
+                        if (estado == "Activo")
+                        {
+                            dgvUsuarios.Rows[e.RowIndex].Cells["estado"].Value = "Inactivo";
+                            dgvUsuarios.Rows[e.RowIndex].Cells["Accion"].Value = "Activar";
+                        }
+                        else
+                        {
+                            dgvUsuarios.Rows[e.RowIndex].Cells["estado"].Value = "Activo";
+                            dgvUsuarios.Rows[e.RowIndex].Cells["Accion"].Value = "Eliminar";
+                        }
+
+                        MessageBox.Show("Estado del usuario actualizado correctamente.",
+                                        "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al actualizar estado: " + ex.Message,
+                                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
     }

@@ -1,0 +1,7 @@
+Taller de Programación II - Primera Entrega
+
+Proyecto PastaFlow: https://github.com/brunoezeq/ProyectoTaller_PastaFlow_DIAZ_PEREZ
+Grupo: 15 
+Integrantes: 
+	- Díaz, Cristian
+	- Pérez, Bruno 

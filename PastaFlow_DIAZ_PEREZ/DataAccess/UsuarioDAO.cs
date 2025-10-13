@@ -116,5 +116,53 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                 }
             }
         }
+
+        // Edición de usuario existente
+        public void ActualizarUsuario(string dni, string nombre, string apellido, string correo, string telefono, int idRol, byte[] contrasena)
+        {
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("sp_ActualizarUsuario", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@dni", dni);
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@apellido", apellido);
+                    cmd.Parameters.AddWithValue("@correo", correo);
+                    cmd.Parameters.AddWithValue("@telefono", telefono);
+                    cmd.Parameters.AddWithValue("@id_rol", idRol);
+
+                    var p = cmd.Parameters.Add("@contrasena", SqlDbType.VarBinary, 64);
+                    p.Value = (object)contrasena ?? DBNull.Value;
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+        // Cambio de estado (activo/inactivo) de usuario
+        public void CambiarEstadoUsuario(string dni)
+        {
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("sp_CambiarEstadoUsuario", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@dni", dni);
+
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        throw new Exception($"Error al cambiar estado del usuario: {ex.Message}");
+                    }
+                }
+            }
+        }
     }
 }
