@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgsQuejas = new System.Windows.Forms.DataGridView();
+            this.dgvQuejas = new System.Windows.Forms.DataGridView();
             this.lbQuejasTitulo = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpHasta = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.dtpDesde = new System.Windows.Forms.DateTimePicker();
-            ((System.ComponentModel.ISupportInitialize)(this.dgsQuejas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQuejas)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgsQuejas
+            // dgvQuejas
             // 
-            this.dgsQuejas.AllowUserToAddRows = false;
-            this.dgsQuejas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgsQuejas.Location = new System.Drawing.Point(52, 127);
-            this.dgsQuejas.Name = "dgsQuejas";
-            this.dgsQuejas.Size = new System.Drawing.Size(703, 150);
-            this.dgsQuejas.TabIndex = 0;
-            this.dgsQuejas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgsQuejas_CellContentClick_1);
+            this.dgvQuejas.AllowUserToAddRows = false;
+            this.dgvQuejas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvQuejas.Location = new System.Drawing.Point(52, 127);
+            this.dgvQuejas.Name = "dgvQuejas";
+            this.dgvQuejas.Size = new System.Drawing.Size(703, 150);
+            this.dgvQuejas.TabIndex = 0;
+            this.dgvQuejas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuejas_CellContentClick);
             // 
             // lbQuejasTitulo
             // 
@@ -70,17 +70,19 @@
             this.btnLimpiar.Size = new System.Drawing.Size(25, 26);
             this.btnLimpiar.TabIndex = 25;
             this.btnLimpiar.UseVisualStyleBackColor = false;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiarQuejas_Click);
             // 
-            // btnBuscar
+            // btnFiltrar
             // 
-            this.btnBuscar.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
-            this.btnBuscar.Location = new System.Drawing.Point(699, 95);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(25, 25);
-            this.btnBuscar.TabIndex = 24;
-            this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnFiltrar.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFiltrar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
+            this.btnFiltrar.Location = new System.Drawing.Point(699, 95);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(25, 25);
+            this.btnFiltrar.TabIndex = 24;
+            this.btnFiltrar.UseVisualStyleBackColor = false;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrarQueja_Click);
             // 
             // label4
             // 
@@ -129,12 +131,13 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.btnFiltrar);
             this.Controls.Add(this.lbQuejasTitulo);
-            this.Controls.Add(this.dgsQuejas);
+            this.Controls.Add(this.dgvQuejas);
             this.Name = "FVerQuejas";
             this.Text = "Quejas";
-            ((System.ComponentModel.ISupportInitialize)(this.dgsQuejas)).EndInit();
+            this.Load += new System.EventHandler(this.FVerQuejas_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQuejas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,10 +145,10 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgsQuejas;
+        private System.Windows.Forms.DataGridView dgvQuejas;
         private System.Windows.Forms.Label lbQuejasTitulo;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker dtpHasta;
         private System.Windows.Forms.Label label3;

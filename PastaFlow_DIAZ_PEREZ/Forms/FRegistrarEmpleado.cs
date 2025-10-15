@@ -271,10 +271,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 AplicarFormatoTabla();
 
                 // Reemplaza el foreach del final de CargarUsuarios()
-foreach (DataGridViewRow row in dgvUsuarios.Rows)
-{
-    AplicarAccionEnFila(row); // asigna botón o lo oculta si es el propio admin
-}
+                foreach (DataGridViewRow row in dgvUsuarios.Rows)
+                {
+                    AplicarAccionEnFila(row); // asigna botón o lo oculta si es el propio admin
+                }
             }
             AjustarDataGridView(dgvUsuarios);
         }

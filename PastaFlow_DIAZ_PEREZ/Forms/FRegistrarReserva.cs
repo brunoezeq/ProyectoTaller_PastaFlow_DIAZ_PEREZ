@@ -148,5 +148,75 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dtpFechaHora.Value = DateTime.Now;
             cBoxEstado.SelectedIndex = 0;
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            DateTime fechaInicio = dtpInicio.Value.Date;
+            DateTime fechaFin = dtpFin.Value.Date.AddDays(1).AddSeconds(-1); // Hasta fin del día
+
+            try
+            {
+                var dao = new ReservaDAO();
+                DataTable dt = dao.BuscarReservasPorFechas(fechaInicio, fechaFin);
+
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("No se encontraron reservas en el rango seleccionado.",
+                        "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    dgvReservas.DataSource = null;
+                }
+                else
+                {
+                    dgvReservas.DataSource = dt;
+                    FormatearGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar reservas: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnLimpiarReserva_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Restablecer los DateTimePicker a sus valores por defecto
+                dtpInicio.Value = DateTime.Today.AddDays(-7); // Ejemplo: últimos 7 días
+                dtpFin.Value = DateTime.Today;
+
+                // Limpiar el DataGridView
+                dgvReservas.DataSource = null;
+
+                // (Opcional) Volver a cargar todas las reservas sin filtro
+                CargarReservas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al limpiar el filtro: " + ex.Message,
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void FormatearGrilla()
+        {
+            // Ocultar columnas internas si las hay
+            if (dgvReservas.Columns.Contains("id_reserva"))
+                dgvReservas.Columns["id_reserva"].Visible = false;
+
+            // Ajustes visuales
+            dgvReservas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvReservas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvReservas.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgvReservas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            // Alinear fecha y cajero
+            if (dgvReservas.Columns.Contains("Fecha y Hora"))
+                dgvReservas.Columns["Fecha y Hora"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            if (dgvReservas.Columns.Contains("Cajero"))
+                dgvReservas.Columns["Cajero"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        }
+
     }
 }

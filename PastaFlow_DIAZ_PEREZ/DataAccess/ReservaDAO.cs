@@ -49,5 +49,26 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                 }
             }
         }
+
+        // Buscar reservas por fechas
+        public DataTable BuscarReservasPorFechas(DateTime fechaInicio, DateTime fechaFin)
+        {
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("sp_BuscarReservasPorFechas", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@fecha_inicio", fechaInicio);
+                    cmd.Parameters.AddWithValue("@fecha_fin", fechaFin);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    return dt;
+                }
+            }
+        }
     }
 }

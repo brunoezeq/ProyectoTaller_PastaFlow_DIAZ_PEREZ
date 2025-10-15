@@ -57,7 +57,7 @@
             // 
             // pnlTop
             // 
-            this.pnlTop.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.pnlTop.BackColor = System.Drawing.Color.Khaki;
             this.pnlTop.Controls.Add(this.lbHora);
             this.pnlTop.Controls.Add(this.lbFecha);
             this.pnlTop.Controls.Add(this.lbUsuario);
@@ -72,9 +72,9 @@
             // 
             this.lbHora.AutoSize = true;
             this.lbHora.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHora.ForeColor = System.Drawing.Color.Khaki;
+            this.lbHora.ForeColor = System.Drawing.Color.Black;
             this.lbHora.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lbHora.Location = new System.Drawing.Point(785, 9);
+            this.lbHora.Location = new System.Drawing.Point(785, 13);
             this.lbHora.Name = "lbHora";
             this.lbHora.Size = new System.Drawing.Size(37, 18);
             this.lbHora.TabIndex = 2;
@@ -85,9 +85,9 @@
             // 
             this.lbFecha.AutoSize = true;
             this.lbFecha.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFecha.ForeColor = System.Drawing.Color.Khaki;
+            this.lbFecha.ForeColor = System.Drawing.Color.Black;
             this.lbFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lbFecha.Location = new System.Drawing.Point(706, 9);
+            this.lbFecha.Location = new System.Drawing.Point(706, 12);
             this.lbFecha.Name = "lbFecha";
             this.lbFecha.Size = new System.Drawing.Size(44, 18);
             this.lbFecha.TabIndex = 2;
@@ -100,8 +100,8 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lbUsuario.AutoSize = true;
             this.lbUsuario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUsuario.ForeColor = System.Drawing.Color.Khaki;
-            this.lbUsuario.Location = new System.Drawing.Point(6, 8);
+            this.lbUsuario.ForeColor = System.Drawing.Color.Black;
+            this.lbUsuario.Location = new System.Drawing.Point(6, 11);
             this.lbUsuario.Name = "lbUsuario";
             this.lbUsuario.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lbUsuario.Size = new System.Drawing.Size(86, 19);
@@ -127,6 +127,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Wheat;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
