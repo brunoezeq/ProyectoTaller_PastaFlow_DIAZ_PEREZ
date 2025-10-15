@@ -49,15 +49,10 @@
             this.btnRegReserva = new System.Windows.Forms.Button();
             this.btnCargarPedido = new System.Windows.Forms.Button();
             this.btnAbrirCaja = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlTop.SuspendLayout();
             this.pnlContent.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.pnlHeader.SuspendLayout();
             this.pnlMenuLateral.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTop
@@ -68,9 +63,9 @@
             this.pnlTop.Controls.Add(this.lbUsuario);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pnlTop.Location = new System.Drawing.Point(209, 0);
+            this.pnlTop.Location = new System.Drawing.Point(271, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(853, 40);
+            this.pnlTop.Size = new System.Drawing.Size(791, 40);
             this.pnlTop.TabIndex = 1;
             // 
             // lbHora
@@ -132,7 +127,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -146,7 +140,7 @@
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(10, 12);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(189, 33);
+            this.pnlHeader.Size = new System.Drawing.Size(251, 33);
             this.pnlHeader.TabIndex = 0;
             // 
             // label1
@@ -184,7 +178,7 @@
             this.pnlMenuLateral.Location = new System.Drawing.Point(0, 0);
             this.pnlMenuLateral.Name = "pnlMenuLateral";
             this.pnlMenuLateral.Padding = new System.Windows.Forms.Padding(10, 12, 10, 12);
-            this.pnlMenuLateral.Size = new System.Drawing.Size(209, 505);
+            this.pnlMenuLateral.Size = new System.Drawing.Size(271, 505);
             this.pnlMenuLateral.TabIndex = 0;
             // 
             // btnVerQuejas
@@ -201,7 +195,7 @@
             this.btnVerQuejas.Location = new System.Drawing.Point(10, 360);
             this.btnVerQuejas.Name = "btnVerQuejas";
             this.btnVerQuejas.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnVerQuejas.Size = new System.Drawing.Size(189, 45);
+            this.btnVerQuejas.Size = new System.Drawing.Size(251, 45);
             this.btnVerQuejas.TabIndex = 8;
             this.btnVerQuejas.Text = "   Ver Quejas";
             this.btnVerQuejas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -222,7 +216,7 @@
             this.btnRegEmpleado.Location = new System.Drawing.Point(10, 315);
             this.btnRegEmpleado.Name = "btnRegEmpleado";
             this.btnRegEmpleado.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnRegEmpleado.Size = new System.Drawing.Size(189, 45);
+            this.btnRegEmpleado.Size = new System.Drawing.Size(251, 45);
             this.btnRegEmpleado.TabIndex = 7;
             this.btnRegEmpleado.Text = "   Registrar Empleado";
             this.btnRegEmpleado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -243,7 +237,7 @@
             this.btnVerReportes.Location = new System.Drawing.Point(10, 270);
             this.btnVerReportes.Name = "btnVerReportes";
             this.btnVerReportes.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnVerReportes.Size = new System.Drawing.Size(189, 45);
+            this.btnVerReportes.Size = new System.Drawing.Size(251, 45);
             this.btnVerReportes.TabIndex = 6;
             this.btnVerReportes.Text = "   Ver Reportes";
             this.btnVerReportes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -264,7 +258,7 @@
             this.btnRegQueja.Location = new System.Drawing.Point(10, 225);
             this.btnRegQueja.Name = "btnRegQueja";
             this.btnRegQueja.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnRegQueja.Size = new System.Drawing.Size(189, 45);
+            this.btnRegQueja.Size = new System.Drawing.Size(251, 45);
             this.btnRegQueja.TabIndex = 5;
             this.btnRegQueja.Text = "   Registrar Queja";
             this.btnRegQueja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -285,7 +279,7 @@
             this.btnInventario.Location = new System.Drawing.Point(10, 180);
             this.btnInventario.Name = "btnInventario";
             this.btnInventario.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnInventario.Size = new System.Drawing.Size(189, 45);
+            this.btnInventario.Size = new System.Drawing.Size(251, 45);
             this.btnInventario.TabIndex = 4;
             this.btnInventario.Text = "   Gestionar Inventario";
             this.btnInventario.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -305,7 +299,7 @@
             this.btnRegReserva.Location = new System.Drawing.Point(10, 135);
             this.btnRegReserva.Name = "btnRegReserva";
             this.btnRegReserva.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnRegReserva.Size = new System.Drawing.Size(189, 45);
+            this.btnRegReserva.Size = new System.Drawing.Size(251, 45);
             this.btnRegReserva.TabIndex = 3;
             this.btnRegReserva.Text = "   Registrar Reserva";
             this.btnRegReserva.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -326,7 +320,7 @@
             this.btnCargarPedido.Location = new System.Drawing.Point(10, 90);
             this.btnCargarPedido.Name = "btnCargarPedido";
             this.btnCargarPedido.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnCargarPedido.Size = new System.Drawing.Size(189, 45);
+            this.btnCargarPedido.Size = new System.Drawing.Size(251, 45);
             this.btnCargarPedido.TabIndex = 2;
             this.btnCargarPedido.Text = "   Cargar Pedido";
             this.btnCargarPedido.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -347,32 +341,12 @@
             this.btnAbrirCaja.Location = new System.Drawing.Point(10, 45);
             this.btnAbrirCaja.Name = "btnAbrirCaja";
             this.btnAbrirCaja.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnAbrirCaja.Size = new System.Drawing.Size(189, 45);
+            this.btnAbrirCaja.Size = new System.Drawing.Size(251, 45);
             this.btnAbrirCaja.TabIndex = 1;
             this.btnAbrirCaja.Text = "   Abrir Caja";
             this.btnAbrirCaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAbrirCaja.UseVisualStyleBackColor = false;
             this.btnAbrirCaja.Click += new System.EventHandler(this.btnAbrirCaja_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Location = new System.Drawing.Point(251, 77);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(559, 425);
-            this.panel2.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.gif;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(559, 425);
-            this.pictureBox1.TabIndex = 11;
-            this.pictureBox1.TabStop = false;
             // 
             // FMenuCajero
             // 
@@ -392,12 +366,9 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlContent.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlMenuLateral.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -422,7 +393,5 @@
         private System.Windows.Forms.Button btnVerQuejas;
         private System.Windows.Forms.Panel pnlMenuLateral;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panel2;
     }
 }

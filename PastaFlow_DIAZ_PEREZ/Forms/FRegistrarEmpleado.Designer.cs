@@ -28,13 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlRegistro = new System.Windows.Forms.Panel();
-            this.btnLimpiarForm = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnEditar = new System.Windows.Forms.Button();
-            this.btnRegistrar = new System.Windows.Forms.Button();
             this.lbEmpRol = new System.Windows.Forms.Label();
             this.txtEmpRContra = new System.Windows.Forms.TextBox();
             this.lbEmpRContra = new System.Windows.Forms.Label();
@@ -51,27 +48,44 @@
             this.cBoxRol = new System.Windows.Forms.ComboBox();
             this.txtEmpNombre = new System.Windows.Forms.TextBox();
             this.lbEmpNombre = new System.Windows.Forms.Label();
-            this.lbEmpTitulo = new System.Windows.Forms.Label();
-            this.txtBuscarDni = new System.Windows.Forms.TextBox();
-            this.cBoxBuscarRol = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.lbRol = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CorreoElectronico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Accion = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnRegistrar = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnLimpiarForm = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lbRol = new System.Windows.Forms.Label();
+            this.txtBuscarDni = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cBoxBuscarRol = new System.Windows.Forms.ComboBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.lbEmpTitulo = new System.Windows.Forms.Label();
             this.pnlRegistro.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlRegistro
             // 
             this.pnlRegistro.BackColor = System.Drawing.Color.DarkRed;
-            this.pnlRegistro.Controls.Add(this.btnLimpiarForm);
+            this.pnlRegistro.Controls.Add(this.flowLayoutPanel1);
             this.pnlRegistro.Controls.Add(this.btnVolver);
             this.pnlRegistro.Controls.Add(this.label1);
-            this.pnlRegistro.Controls.Add(this.btnEditar);
-            this.pnlRegistro.Controls.Add(this.btnRegistrar);
             this.pnlRegistro.Controls.Add(this.lbEmpRol);
             this.pnlRegistro.Controls.Add(this.txtEmpRContra);
             this.pnlRegistro.Controls.Add(this.lbEmpRContra);
@@ -91,19 +105,8 @@
             this.pnlRegistro.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlRegistro.Location = new System.Drawing.Point(0, 0);
             this.pnlRegistro.Name = "pnlRegistro";
-            this.pnlRegistro.Size = new System.Drawing.Size(240, 494);
+            this.pnlRegistro.Size = new System.Drawing.Size(314, 690);
             this.pnlRegistro.TabIndex = 0;
-            // 
-            // btnLimpiarForm
-            // 
-            this.btnLimpiarForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLimpiarForm.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.btnLimpiarForm.Location = new System.Drawing.Point(184, 438);
-            this.btnLimpiarForm.Name = "btnLimpiarForm";
-            this.btnLimpiarForm.Size = new System.Drawing.Size(31, 24);
-            this.btnLimpiarForm.TabIndex = 24;
-            this.btnLimpiarForm.UseVisualStyleBackColor = true;
-            this.btnLimpiarForm.Click += new System.EventHandler(this.btnLimpiarForm_Click);
             // 
             // btnVolver
             // 
@@ -113,9 +116,9 @@
             this.btnVolver.ForeColor = System.Drawing.Color.DarkRed;
             this.btnVolver.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoAtrás;
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVolver.Location = new System.Drawing.Point(3, 7);
+            this.btnVolver.Location = new System.Drawing.Point(23, 83);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(32, 23);
+            this.btnVolver.Size = new System.Drawing.Size(32, 29);
             this.btnVolver.TabIndex = 19;
             this.btnVolver.UseVisualStyleBackColor = false;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
@@ -123,244 +126,168 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(31, 42);
+            this.label1.Location = new System.Drawing.Point(61, 83);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(165, 23);
+            this.label1.Size = new System.Drawing.Size(209, 29);
             this.label1.TabIndex = 18;
             this.label1.Text = "Registrar Empleado";
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.BackColor = System.Drawing.Color.RosyBrown;
-            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.ForeColor = System.Drawing.Color.Black;
-            this.btnEditar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoEditar;
-            this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditar.Location = new System.Drawing.Point(98, 438);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(80, 24);
-            this.btnEditar.TabIndex = 17;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditar.UseVisualStyleBackColor = false;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // btnRegistrar
-            // 
-            this.btnRegistrar.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrar.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrar.ForeColor = System.Drawing.Color.Black;
-            this.btnRegistrar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoRegistrar;
-            this.btnRegistrar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRegistrar.Location = new System.Drawing.Point(12, 438);
-            this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(80, 24);
-            this.btnRegistrar.TabIndex = 16;
-            this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegistrar.UseVisualStyleBackColor = false;
-            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // lbEmpRol
             // 
             this.lbEmpRol.AutoSize = true;
-            this.lbEmpRol.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpRol.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpRol.ForeColor = System.Drawing.Color.White;
-            this.lbEmpRol.Location = new System.Drawing.Point(11, 383);
+            this.lbEmpRol.Location = new System.Drawing.Point(43, 536);
             this.lbEmpRol.Name = "lbEmpRol";
-            this.lbEmpRol.Size = new System.Drawing.Size(24, 15);
+            this.lbEmpRol.Size = new System.Drawing.Size(31, 19);
             this.lbEmpRol.TabIndex = 15;
             this.lbEmpRol.Text = "Rol";
             // 
             // txtEmpRContra
             // 
-            this.txtEmpRContra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpRContra.Location = new System.Drawing.Point(12, 357);
+            this.txtEmpRContra.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpRContra.Location = new System.Drawing.Point(44, 501);
             this.txtEmpRContra.Name = "txtEmpRContra";
             this.txtEmpRContra.PasswordChar = '•';
-            this.txtEmpRContra.Size = new System.Drawing.Size(201, 23);
+            this.txtEmpRContra.Size = new System.Drawing.Size(201, 27);
             this.txtEmpRContra.TabIndex = 14;
             // 
             // lbEmpRContra
             // 
             this.lbEmpRContra.AutoSize = true;
-            this.lbEmpRContra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpRContra.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpRContra.ForeColor = System.Drawing.Color.White;
-            this.lbEmpRContra.Location = new System.Drawing.Point(11, 339);
+            this.lbEmpRContra.Location = new System.Drawing.Point(43, 479);
             this.lbEmpRContra.Name = "lbEmpRContra";
-            this.lbEmpRContra.Size = new System.Drawing.Size(113, 15);
+            this.lbEmpRContra.Size = new System.Drawing.Size(139, 19);
             this.lbEmpRContra.TabIndex = 13;
             this.lbEmpRContra.Text = "Repetir Contraseña";
             // 
             // txtEmpContra
             // 
-            this.txtEmpContra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpContra.Location = new System.Drawing.Point(12, 310);
+            this.txtEmpContra.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpContra.Location = new System.Drawing.Point(44, 440);
             this.txtEmpContra.Name = "txtEmpContra";
             this.txtEmpContra.PasswordChar = '•';
-            this.txtEmpContra.Size = new System.Drawing.Size(201, 23);
+            this.txtEmpContra.Size = new System.Drawing.Size(201, 27);
             this.txtEmpContra.TabIndex = 12;
             // 
             // lbEmpContra
             // 
             this.lbEmpContra.AutoSize = true;
-            this.lbEmpContra.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpContra.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpContra.ForeColor = System.Drawing.Color.White;
-            this.lbEmpContra.Location = new System.Drawing.Point(11, 293);
+            this.lbEmpContra.Location = new System.Drawing.Point(43, 418);
             this.lbEmpContra.Name = "lbEmpContra";
-            this.lbEmpContra.Size = new System.Drawing.Size(69, 15);
+            this.lbEmpContra.Size = new System.Drawing.Size(86, 19);
             this.lbEmpContra.TabIndex = 11;
             this.lbEmpContra.Text = "Contraseña";
             // 
             // txtEmpTelefono
             // 
-            this.txtEmpTelefono.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpTelefono.Location = new System.Drawing.Point(12, 263);
+            this.txtEmpTelefono.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpTelefono.Location = new System.Drawing.Point(44, 381);
             this.txtEmpTelefono.Name = "txtEmpTelefono";
-            this.txtEmpTelefono.Size = new System.Drawing.Size(201, 23);
+            this.txtEmpTelefono.Size = new System.Drawing.Size(201, 27);
             this.txtEmpTelefono.TabIndex = 10;
             // 
             // lbEmpTelefono
             // 
             this.lbEmpTelefono.AutoSize = true;
-            this.lbEmpTelefono.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpTelefono.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpTelefono.ForeColor = System.Drawing.Color.White;
-            this.lbEmpTelefono.Location = new System.Drawing.Point(11, 247);
+            this.lbEmpTelefono.Location = new System.Drawing.Point(43, 359);
             this.lbEmpTelefono.Name = "lbEmpTelefono";
-            this.lbEmpTelefono.Size = new System.Drawing.Size(54, 15);
+            this.lbEmpTelefono.Size = new System.Drawing.Size(68, 19);
             this.lbEmpTelefono.TabIndex = 9;
             this.lbEmpTelefono.Text = "Teléfono";
             // 
             // txtEmpCorreo
             // 
-            this.txtEmpCorreo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpCorreo.Location = new System.Drawing.Point(12, 220);
+            this.txtEmpCorreo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpCorreo.Location = new System.Drawing.Point(44, 323);
             this.txtEmpCorreo.Name = "txtEmpCorreo";
-            this.txtEmpCorreo.Size = new System.Drawing.Size(201, 23);
+            this.txtEmpCorreo.Size = new System.Drawing.Size(201, 27);
             this.txtEmpCorreo.TabIndex = 8;
             // 
             // lbEmpCorreo
             // 
             this.lbEmpCorreo.AutoSize = true;
-            this.lbEmpCorreo.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpCorreo.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpCorreo.ForeColor = System.Drawing.Color.White;
-            this.lbEmpCorreo.Location = new System.Drawing.Point(11, 204);
+            this.lbEmpCorreo.Location = new System.Drawing.Point(43, 301);
             this.lbEmpCorreo.Name = "lbEmpCorreo";
-            this.lbEmpCorreo.Size = new System.Drawing.Size(108, 15);
+            this.lbEmpCorreo.Size = new System.Drawing.Size(136, 19);
             this.lbEmpCorreo.TabIndex = 7;
             this.lbEmpCorreo.Text = "Correo Electrónico";
             // 
             // txtEmpDNI
             // 
-            this.txtEmpDNI.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpDNI.Location = new System.Drawing.Point(12, 178);
+            this.txtEmpDNI.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpDNI.Location = new System.Drawing.Point(44, 266);
             this.txtEmpDNI.Name = "txtEmpDNI";
-            this.txtEmpDNI.Size = new System.Drawing.Size(201, 23);
+            this.txtEmpDNI.Size = new System.Drawing.Size(201, 27);
             this.txtEmpDNI.TabIndex = 6;
             // 
             // lbEmpDNI
             // 
             this.lbEmpDNI.AutoSize = true;
-            this.lbEmpDNI.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpDNI.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpDNI.ForeColor = System.Drawing.Color.White;
-            this.lbEmpDNI.Location = new System.Drawing.Point(11, 161);
+            this.lbEmpDNI.Location = new System.Drawing.Point(43, 244);
             this.lbEmpDNI.Name = "lbEmpDNI";
-            this.lbEmpDNI.Size = new System.Drawing.Size(95, 15);
+            this.lbEmpDNI.Size = new System.Drawing.Size(119, 19);
             this.lbEmpDNI.TabIndex = 5;
             this.lbEmpDNI.Text = "Nro Documento";
             // 
             // txtEmpApellido
             // 
-            this.txtEmpApellido.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpApellido.Location = new System.Drawing.Point(12, 134);
+            this.txtEmpApellido.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpApellido.Location = new System.Drawing.Point(44, 210);
             this.txtEmpApellido.Name = "txtEmpApellido";
-            this.txtEmpApellido.Size = new System.Drawing.Size(201, 23);
+            this.txtEmpApellido.Size = new System.Drawing.Size(201, 27);
             this.txtEmpApellido.TabIndex = 4;
             // 
             // lbEmpApellido
             // 
             this.lbEmpApellido.AutoSize = true;
-            this.lbEmpApellido.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpApellido.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpApellido.ForeColor = System.Drawing.Color.White;
-            this.lbEmpApellido.Location = new System.Drawing.Point(11, 117);
+            this.lbEmpApellido.Location = new System.Drawing.Point(43, 188);
             this.lbEmpApellido.Name = "lbEmpApellido";
-            this.lbEmpApellido.Size = new System.Drawing.Size(52, 15);
+            this.lbEmpApellido.Size = new System.Drawing.Size(66, 19);
             this.lbEmpApellido.TabIndex = 3;
             this.lbEmpApellido.Text = "Apellido";
             // 
             // cBoxRol
             // 
-            this.cBoxRol.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBoxRol.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxRol.FormattingEnabled = true;
-            this.cBoxRol.Location = new System.Drawing.Point(12, 399);
+            this.cBoxRol.Location = new System.Drawing.Point(44, 558);
             this.cBoxRol.Name = "cBoxRol";
-            this.cBoxRol.Size = new System.Drawing.Size(201, 23);
+            this.cBoxRol.Size = new System.Drawing.Size(201, 27);
             this.cBoxRol.TabIndex = 2;
             // 
             // txtEmpNombre
             // 
-            this.txtEmpNombre.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmpNombre.Location = new System.Drawing.Point(12, 92);
+            this.txtEmpNombre.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpNombre.Location = new System.Drawing.Point(44, 149);
             this.txtEmpNombre.Name = "txtEmpNombre";
-            this.txtEmpNombre.Size = new System.Drawing.Size(201, 23);
+            this.txtEmpNombre.Size = new System.Drawing.Size(201, 27);
             this.txtEmpNombre.TabIndex = 1;
             // 
             // lbEmpNombre
             // 
             this.lbEmpNombre.AutoSize = true;
-            this.lbEmpNombre.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpNombre.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpNombre.ForeColor = System.Drawing.Color.White;
-            this.lbEmpNombre.Location = new System.Drawing.Point(11, 75);
+            this.lbEmpNombre.Location = new System.Drawing.Point(43, 127);
             this.lbEmpNombre.Name = "lbEmpNombre";
-            this.lbEmpNombre.Size = new System.Drawing.Size(53, 15);
+            this.lbEmpNombre.Size = new System.Drawing.Size(65, 19);
             this.lbEmpNombre.TabIndex = 0;
             this.lbEmpNombre.Text = "Nombre";
-            // 
-            // lbEmpTitulo
-            // 
-            this.lbEmpTitulo.AutoSize = true;
-            this.lbEmpTitulo.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEmpTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lbEmpTitulo.Location = new System.Drawing.Point(483, 26);
-            this.lbEmpTitulo.Name = "lbEmpTitulo";
-            this.lbEmpTitulo.Size = new System.Drawing.Size(236, 29);
-            this.lbEmpTitulo.TabIndex = 20;
-            this.lbEmpTitulo.Text = "Gestión de Empleados";
-            // 
-            // txtBuscarDni
-            // 
-            this.txtBuscarDni.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarDni.Location = new System.Drawing.Point(696, 117);
-            this.txtBuscarDni.Name = "txtBuscarDni";
-            this.txtBuscarDni.Size = new System.Drawing.Size(140, 23);
-            this.txtBuscarDni.TabIndex = 21;
-            this.txtBuscarDni.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscarDni_KeyPress);
-            // 
-            // cBoxBuscarRol
-            // 
-            this.cBoxBuscarRol.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBoxBuscarRol.FormattingEnabled = true;
-            this.cBoxBuscarRol.Location = new System.Drawing.Point(341, 113);
-            this.cBoxBuscarRol.Name = "cBoxBuscarRol";
-            this.cBoxBuscarRol.Size = new System.Drawing.Size(121, 23);
-            this.cBoxBuscarRol.TabIndex = 24;
-            this.cBoxBuscarRol.SelectedIndexChanged += new System.EventHandler(this.cBoxBuscarRol_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(565, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 18);
-            this.label3.TabIndex = 26;
-            this.label3.Text = "Nº de documento :";
             // 
             // btnLimpiar
             // 
@@ -369,12 +296,239 @@
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.ForeColor = System.Drawing.Color.Black;
             this.btnLimpiar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.btnLimpiar.Location = new System.Drawing.Point(882, 118);
+            this.btnLimpiar.Location = new System.Drawing.Point(878, 110);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(34, 23);
             this.btnLimpiar.TabIndex = 23;
             this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Khaki;
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(314, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(722, 690);
+            this.panel1.TabIndex = 24;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.dgvUsuarios);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(722, 690);
+            this.panel2.TabIndex = 37;
+            // 
+            // dgvUsuarios
+            // 
+            this.dgvUsuarios.AllowUserToAddRows = false;
+            this.dgvUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Nombre,
+            this.Apellido,
+            this.Dni,
+            this.CorreoElectronico,
+            this.Telefono,
+            this.Rol,
+            this.Estado,
+            this.Accion});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvUsuarios.GridColor = System.Drawing.Color.Black;
+            this.dgvUsuarios.Location = new System.Drawing.Point(0, 210);
+            this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.ReadOnly = true;
+            this.dgvUsuarios.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvUsuarios.Size = new System.Drawing.Size(722, 480);
+            this.dgvUsuarios.TabIndex = 39;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "NOMBRE";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
+            this.Nombre.Width = 79;
+            // 
+            // Apellido
+            // 
+            this.Apellido.HeaderText = "APELLIDO";
+            this.Apellido.Name = "Apellido";
+            this.Apellido.ReadOnly = true;
+            this.Apellido.Width = 84;
+            // 
+            // Dni
+            // 
+            this.Dni.HeaderText = "DNI";
+            this.Dni.Name = "Dni";
+            this.Dni.ReadOnly = true;
+            this.Dni.Width = 51;
+            // 
+            // CorreoElectronico
+            // 
+            this.CorreoElectronico.HeaderText = "CORREO ELECTRONICO";
+            this.CorreoElectronico.Name = "CorreoElectronico";
+            this.CorreoElectronico.ReadOnly = true;
+            this.CorreoElectronico.Width = 143;
+            // 
+            // Telefono
+            // 
+            this.Telefono.HeaderText = "TELEFONO";
+            this.Telefono.Name = "Telefono";
+            this.Telefono.ReadOnly = true;
+            this.Telefono.Width = 89;
+            // 
+            // Rol
+            // 
+            this.Rol.HeaderText = "ROL";
+            this.Rol.Name = "Rol";
+            this.Rol.ReadOnly = true;
+            this.Rol.Width = 54;
+            // 
+            // Estado
+            // 
+            this.Estado.HeaderText = "ESTADO";
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            this.Estado.Width = 76;
+            // 
+            // Accion
+            // 
+            this.Accion.HeaderText = "ACCION";
+            this.Accion.Name = "Accion";
+            this.Accion.ReadOnly = true;
+            this.Accion.Width = 53;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnRegistrar);
+            this.flowLayoutPanel1.Controls.Add(this.btnEditar);
+            this.flowLayoutPanel1.Controls.Add(this.btnLimpiarForm);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(23, 604);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(258, 57);
+            this.flowLayoutPanel1.TabIndex = 26;
+            // 
+            // btnRegistrar
+            // 
+            this.btnRegistrar.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnRegistrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrar.ForeColor = System.Drawing.Color.Black;
+            this.btnRegistrar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoRegistrar;
+            this.btnRegistrar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRegistrar.Location = new System.Drawing.Point(3, 3);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(96, 42);
+            this.btnRegistrar.TabIndex = 16;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRegistrar.UseVisualStyleBackColor = false;
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnEditar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.Color.Black;
+            this.btnEditar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoEditar;
+            this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEditar.Location = new System.Drawing.Point(105, 3);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(90, 42);
+            this.btnEditar.TabIndex = 17;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditar.UseVisualStyleBackColor = false;
+            // 
+            // btnLimpiarForm
+            // 
+            this.btnLimpiarForm.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLimpiarForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiarForm.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
+            this.btnLimpiarForm.Location = new System.Drawing.Point(201, 3);
+            this.btnLimpiarForm.Name = "btnLimpiarForm";
+            this.btnLimpiarForm.Size = new System.Drawing.Size(45, 42);
+            this.btnLimpiarForm.TabIndex = 24;
+            this.btnLimpiarForm.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label4);
+            this.panel3.Controls.Add(this.lbRol);
+            this.panel3.Controls.Add(this.txtBuscarDni);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.cBoxBuscarRol);
+            this.panel3.Controls.Add(this.btnBuscar);
+            this.panel3.Controls.Add(this.lbEmpTitulo);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(722, 190);
+            this.panel3.TabIndex = 40;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(194, 115);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 19);
+            this.label4.TabIndex = 43;
+            this.label4.Text = "Filtrar por:";
+            // 
+            // lbRol
+            // 
+            this.lbRol.AutoSize = true;
+            this.lbRol.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRol.ForeColor = System.Drawing.Color.Black;
+            this.lbRol.Location = new System.Drawing.Point(254, 154);
+            this.lbRol.Name = "lbRol";
+            this.lbRol.Size = new System.Drawing.Size(35, 19);
+            this.lbRol.TabIndex = 42;
+            this.lbRol.Text = "Rol:";
+            // 
+            // txtBuscarDni
+            // 
+            this.txtBuscarDni.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBuscarDni.Location = new System.Drawing.Point(564, 149);
+            this.txtBuscarDni.Name = "txtBuscarDni";
+            this.txtBuscarDni.Size = new System.Drawing.Size(77, 27);
+            this.txtBuscarDni.TabIndex = 38;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(419, 155);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(139, 19);
+            this.label3.TabIndex = 41;
+            this.label3.Text = "Nº de documento :";
+            // 
+            // cBoxBuscarRol
+            // 
+            this.cBoxBuscarRol.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBoxBuscarRol.FormattingEnabled = true;
+            this.cBoxBuscarRol.Location = new System.Drawing.Point(295, 149);
+            this.cBoxBuscarRol.Name = "cBoxBuscarRol";
+            this.cBoxBuscarRol.Size = new System.Drawing.Size(79, 27);
+            this.cBoxBuscarRol.TabIndex = 40;
             // 
             // btnBuscar
             // 
@@ -383,55 +537,22 @@
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.ForeColor = System.Drawing.Color.Black;
             this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
-            this.btnBuscar.Location = new System.Drawing.Point(842, 118);
+            this.btnBuscar.Location = new System.Drawing.Point(647, 149);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(34, 23);
-            this.btnBuscar.TabIndex = 22;
+            this.btnBuscar.Size = new System.Drawing.Size(52, 25);
+            this.btnBuscar.TabIndex = 39;
             this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // lbRol
+            // lbEmpTitulo
             // 
-            this.lbRol.AutoSize = true;
-            this.lbRol.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRol.ForeColor = System.Drawing.Color.Black;
-            this.lbRol.Location = new System.Drawing.Point(303, 113);
-            this.lbRol.Name = "lbRol";
-            this.lbRol.Size = new System.Drawing.Size(32, 18);
-            this.lbRol.TabIndex = 27;
-            this.lbRol.Text = "Rol:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(302, 75);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 19);
-            this.label4.TabIndex = 28;
-            this.label4.Text = "Filtrar por:";
-            // 
-            // dgvUsuarios
-            // 
-            this.dgvUsuarios.AllowUserToAddRows = false;
-            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvUsuarios.GridColor = System.Drawing.Color.Black;
-            this.dgvUsuarios.Location = new System.Drawing.Point(306, 161);
-            this.dgvUsuarios.Name = "dgvUsuarios";
-            this.dgvUsuarios.ReadOnly = true;
-            this.dgvUsuarios.Size = new System.Drawing.Size(612, 288);
-            this.dgvUsuarios.TabIndex = 29;
-            this.dgvUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellClick);
-            this.dgvUsuarios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellContentClick);
+            this.lbEmpTitulo.AutoSize = true;
+            this.lbEmpTitulo.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpTitulo.ForeColor = System.Drawing.Color.Black;
+            this.lbEmpTitulo.Location = new System.Drawing.Point(337, 56);
+            this.lbEmpTitulo.Name = "lbEmpTitulo";
+            this.lbEmpTitulo.Size = new System.Drawing.Size(236, 29);
+            this.lbEmpTitulo.TabIndex = 37;
+            this.lbEmpTitulo.Text = "Gestión de Empleados";
             // 
             // FRegistrarEmpleado
             // 
@@ -439,16 +560,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(1001, 494);
-            this.Controls.Add(this.dgvUsuarios);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lbRol);
-            this.Controls.Add(this.txtBuscarDni);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.cBoxBuscarRol);
+            this.ClientSize = new System.Drawing.Size(1036, 690);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnLimpiar);
-            this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.lbEmpTitulo);
             this.Controls.Add(this.pnlRegistro);
             this.ForeColor = System.Drawing.Color.Transparent;
             this.Name = "FRegistrarEmpleado";
@@ -456,9 +570,13 @@
             this.Load += new System.EventHandler(this.FRegEmpleado_Load);
             this.pnlRegistro.ResumeLayout(false);
             this.pnlRegistro.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -481,19 +599,31 @@
         private System.Windows.Forms.Label lbEmpRol;
         private System.Windows.Forms.TextBox txtEmpRContra;
         private System.Windows.Forms.Label lbEmpRContra;
-        private System.Windows.Forms.Button btnEditar;
-        private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbEmpTitulo;
-        private System.Windows.Forms.TextBox txtBuscarDni;
-        private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.ComboBox cBoxBuscarRol;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnLimpiarForm;
-        private System.Windows.Forms.Label lbRol;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvUsuarios;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Dni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CorreoElectronico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
+        private System.Windows.Forms.DataGridViewButtonColumn Accion;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnLimpiarForm;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbRol;
+        private System.Windows.Forms.TextBox txtBuscarDni;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cBoxBuscarRol;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Label lbEmpTitulo;
     }
 }

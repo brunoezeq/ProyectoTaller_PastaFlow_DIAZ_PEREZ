@@ -12,15 +12,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 {
     public partial class FGestionarInventario : Form
     {
-        // -------------------------------
         // Límites de texto para los campos
-        // -------------------------------
         private const int MAX_NOMBRE = 25;
         private const int MAX_DESCRIPCION = 100;
 
-        // -------------------------------
+        
         // Listas y conexión con la base
-        // -------------------------------
         private readonly BindingList<Producto> _productos = new BindingList<Producto>();
         private readonly BindingList<Categoria> _categorias = new BindingList<Categoria>();
         private readonly BindingSource _bsProductos = new BindingSource();
@@ -56,9 +53,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 txtBuscarProducto.TextChanged += txtBuscarProducto_TextChanged;
         }
 
-        // -------------------------------
+   
         // Cuando se abre el formulario
-        // -------------------------------
         private void FGestionarInventario_Load(object sender, EventArgs e)
         {
             // Desconectar el evento para evitar selección automática
@@ -84,9 +80,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
         }
 
-        // -------------------------------
         // Diseño visual del DataGridView
-        // -------------------------------
+     
         private void ConfigurarGrillaVisual()
         {
             dgvProductos.AutoGenerateColumns = false;
@@ -126,9 +121,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dgvProductos.ColumnHeadersHeight = 42;
         }
 
-        // -------------------------------
         // Columnas de la tabla
-        // -------------------------------
         private void ConfigurarGrillaDatos()
         {
             if (nombreProd != null)
@@ -171,9 +164,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // -------------------------------
         // Cargo las categorías al ComboBox
-        // -------------------------------
         private void CargarCategorias()
         {
             _categorias.Clear();
@@ -194,9 +185,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             cBoxProdCat.SelectedIndex = _categorias.Count > 0 ? 0 : -1;
         }
 
-        // -------------------------------
         // Cargar productos
-        // -------------------------------
         private void CargarProductos(bool incluirInactivos)
         {
             _productos.Clear();
@@ -214,9 +203,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             AplicarFiltro();
         }
 
-        // -------------------------------
         // Registrar un nuevo producto
-        // -------------------------------
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             decimal precio;
@@ -254,9 +241,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // -------------------------------
         // Editar un producto existente
-        // -------------------------------
         private void btnEditar_Click(object sender, EventArgs e)
         {
             var prodSel = dgvProductos.CurrentRow?.DataBoundItem as Producto;
@@ -296,9 +281,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // -------------------------------
         // Baja o restaurar producto
-        // -------------------------------
+
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || dgvProductos.Columns[e.ColumnIndex].Name != "Accion") return;
@@ -340,9 +324,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // -------------------------------
+        
         // Muestra los datos al seleccionar
-        // -------------------------------
+      
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
             var p = dgvProductos.CurrentRow?.DataBoundItem as Producto;
@@ -364,9 +348,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // -------------------------------
+
         // Formato visual del DataGridView
-        // -------------------------------
+
         private void dgvProductos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -399,9 +383,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // -------------------------------
+
         // Filtrar productos por nombre o categoría
-        // -------------------------------
+
         private void txtBuscarProducto_TextChanged(object sender, EventArgs e) => AplicarFiltro();
 
         private void AplicarFiltro()
@@ -423,9 +407,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             _bsProductos.ResetBindings(false);
         }
 
-        // -------------------------------
         // Limpia el formulario
-        // -------------------------------
+    
         private void LimpiarFormulario()
         {
             txtProdNombre.Clear();
@@ -456,15 +439,14 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
             }
         }
-
-        // -------------------------------
-        // Botón volver
-        // -------------------------------
+       
+        // Boton volver
+     
         private void btnVolver_Click(object sender, EventArgs e) => this.Close();
 
-        // -------------------------------
+        
         // Validaciones básicas
-        // -------------------------------
+    
         private bool ValidarProducto(out decimal precio, out int stock)
         {
             precio = 0m;
@@ -503,9 +485,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             return true;
         }
 
-        // -------------------------------
         // Mensajes
-        // -------------------------------
+        
         private void MostrarWarn(string msg) =>
             MessageBox.Show(msg, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         private void MostrarError(string msg) =>
@@ -552,7 +533,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
             else if (e.ColumnIndex == Precio.Index)
             {
-                bool asc = _ordenPrecioAsc; // false inicialmente => primer click Desc
+                bool asc = _ordenPrecioAsc;
                 ordenada = asc
                     ? visible.OrderBy(p => p.precio)
                     : visible.OrderByDescending(p => p.precio);

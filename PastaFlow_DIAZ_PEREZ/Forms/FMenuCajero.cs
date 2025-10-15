@@ -13,10 +13,13 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
     public partial class FMenuCajero : Form
     {
         private Button _activeButton;
+        private PictureBox pictureBox1;
 
         public FMenuCajero()
         {
             InitializeComponent();
+            pictureBox1 = new PictureBox();
+            pnlContent.Controls.Add(pictureBox1);
             this.Load += FMenu_Load;
 
             // Reposicionar encabezado cuando cambie el tamaño
