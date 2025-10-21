@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlRegistro = new System.Windows.Forms.Panel();
-            this.btnRegistrar = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
             this.btnLimpiarForm = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbEmpRol = new System.Windows.Forms.Label();
@@ -55,6 +55,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lbRol = new System.Windows.Forms.Label();
             this.txtBuscarDni = new System.Windows.Forms.TextBox();
@@ -71,7 +72,6 @@
             this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Accion = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.button1 = new System.Windows.Forms.Button();
             this.pnlRegistro.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -109,23 +109,17 @@
             this.pnlRegistro.Size = new System.Drawing.Size(314, 690);
             this.pnlRegistro.TabIndex = 0;
             // 
-            // btnRegistrar
+            // btnLimpiarForm
             // 
-            this.btnRegistrar.BackColor = System.Drawing.Color.LemonChiffon;
-            this.btnRegistrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrar.ForeColor = System.Drawing.Color.Black;
-            this.btnRegistrar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoRegistrar;
-            this.btnRegistrar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRegistrar.Location = new System.Drawing.Point(37, 613);
-            this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(96, 30);
-            this.btnRegistrar.TabIndex = 16;
-            this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegistrar.UseVisualStyleBackColor = false;
-            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
+            this.btnLimpiarForm.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLimpiarForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiarForm.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
+            this.btnLimpiarForm.Location = new System.Drawing.Point(241, 613);
+            this.btnLimpiarForm.Name = "btnLimpiarForm";
+            this.btnLimpiarForm.Size = new System.Drawing.Size(33, 30);
+            this.btnLimpiarForm.TabIndex = 24;
+            this.btnLimpiarForm.UseVisualStyleBackColor = true;
+            this.btnLimpiarForm.Click += new System.EventHandler(this.btnLimpiarForm_Click);
             // 
             // btnEditar
             // 
@@ -145,17 +139,23 @@
             this.btnEditar.UseVisualStyleBackColor = false;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
-            // btnLimpiarForm
+            // btnRegistrar
             // 
-            this.btnLimpiarForm.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLimpiarForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpiarForm.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.btnLimpiarForm.Location = new System.Drawing.Point(241, 613);
-            this.btnLimpiarForm.Name = "btnLimpiarForm";
-            this.btnLimpiarForm.Size = new System.Drawing.Size(33, 30);
-            this.btnLimpiarForm.TabIndex = 24;
-            this.btnLimpiarForm.UseVisualStyleBackColor = true;
-            this.btnLimpiarForm.Click += new System.EventHandler(this.btnLimpiarForm_Click);
+            this.btnRegistrar.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnRegistrar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegistrar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRegistrar.ForeColor = System.Drawing.Color.Black;
+            this.btnRegistrar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoRegistrar;
+            this.btnRegistrar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRegistrar.Location = new System.Drawing.Point(37, 613);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(96, 30);
+            this.btnRegistrar.TabIndex = 16;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRegistrar.UseVisualStyleBackColor = false;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // btnVolver
             // 
@@ -364,7 +364,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Wheat;
+            this.panel2.BackColor = System.Drawing.Color.Khaki;
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.dgvUsuarios);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -375,7 +375,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Wheat;
+            this.panel3.BackColor = System.Drawing.Color.Khaki;
             this.panel3.Controls.Add(this.button1);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.lbRol);
@@ -390,12 +390,27 @@
             this.panel3.Size = new System.Drawing.Size(722, 190);
             this.panel3.TabIndex = 40;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.RosyBrown;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
+            this.button1.Location = new System.Drawing.Point(720, 156);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 28);
+            this.button1.TabIndex = 44;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(44, 127);
+            this.label4.Location = new System.Drawing.Point(90, 124);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 19);
             this.label4.TabIndex = 43;
@@ -406,7 +421,7 @@
             this.lbRol.AutoSize = true;
             this.lbRol.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRol.ForeColor = System.Drawing.Color.Black;
-            this.lbRol.Location = new System.Drawing.Point(44, 165);
+            this.lbRol.Location = new System.Drawing.Point(90, 162);
             this.lbRol.Name = "lbRol";
             this.lbRol.Size = new System.Drawing.Size(35, 19);
             this.lbRol.TabIndex = 42;
@@ -415,7 +430,7 @@
             // txtBuscarDni
             // 
             this.txtBuscarDni.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscarDni.Location = new System.Drawing.Point(484, 160);
+            this.txtBuscarDni.Location = new System.Drawing.Point(530, 157);
             this.txtBuscarDni.Name = "txtBuscarDni";
             this.txtBuscarDni.Size = new System.Drawing.Size(144, 26);
             this.txtBuscarDni.TabIndex = 38;
@@ -426,7 +441,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(339, 163);
+            this.label3.Location = new System.Drawing.Point(385, 160);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(139, 19);
             this.label3.TabIndex = 41;
@@ -436,7 +451,7 @@
             // 
             this.cBoxBuscarRol.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cBoxBuscarRol.FormattingEnabled = true;
-            this.cBoxBuscarRol.Location = new System.Drawing.Point(85, 160);
+            this.cBoxBuscarRol.Location = new System.Drawing.Point(131, 157);
             this.cBoxBuscarRol.Name = "cBoxBuscarRol";
             this.cBoxBuscarRol.Size = new System.Drawing.Size(139, 26);
             this.cBoxBuscarRol.TabIndex = 40;
@@ -448,7 +463,7 @@
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.ForeColor = System.Drawing.Color.Black;
             this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
-            this.btnBuscar.Location = new System.Drawing.Point(634, 159);
+            this.btnBuscar.Location = new System.Drawing.Point(680, 156);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(34, 28);
             this.btnBuscar.TabIndex = 39;
@@ -458,13 +473,14 @@
             // lbEmpTitulo
             // 
             this.lbEmpTitulo.AutoSize = true;
-            this.lbEmpTitulo.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEmpTitulo.ForeColor = System.Drawing.Color.Black;
-            this.lbEmpTitulo.Location = new System.Drawing.Point(337, 67);
+            this.lbEmpTitulo.BackColor = System.Drawing.Color.DarkRed;
+            this.lbEmpTitulo.Font = new System.Drawing.Font("Calibri", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEmpTitulo.ForeColor = System.Drawing.Color.Snow;
+            this.lbEmpTitulo.Location = new System.Drawing.Point(363, 78);
             this.lbEmpTitulo.Name = "lbEmpTitulo";
-            this.lbEmpTitulo.Size = new System.Drawing.Size(236, 29);
+            this.lbEmpTitulo.Size = new System.Drawing.Size(263, 29);
             this.lbEmpTitulo.TabIndex = 37;
-            this.lbEmpTitulo.Text = "Gestión de Empleados";
+            this.lbEmpTitulo.Text = "GESTION DE EMPLEADOS";
             // 
             // dgvUsuarios
             // 
@@ -480,14 +496,14 @@
             this.Rol,
             this.Estado,
             this.Accion});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsuarios.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvUsuarios.GridColor = System.Drawing.Color.Black;
             this.dgvUsuarios.Location = new System.Drawing.Point(0, 210);
@@ -552,21 +568,6 @@
             this.Accion.Name = "Accion";
             this.Accion.ReadOnly = true;
             this.Accion.Width = 53;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.RosyBrown;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.button1.Location = new System.Drawing.Point(674, 159);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 28);
-            this.button1.TabIndex = 44;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // FRegistrarEmpleado
             // 

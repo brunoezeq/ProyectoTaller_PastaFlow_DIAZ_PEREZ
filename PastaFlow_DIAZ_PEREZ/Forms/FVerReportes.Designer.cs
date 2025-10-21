@@ -44,7 +44,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(529, 109);
+            this.label4.Location = new System.Drawing.Point(820, 135);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 18);
             this.label4.TabIndex = 36;
@@ -53,7 +53,7 @@
             // dtpHasta
             // 
             this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHasta.Location = new System.Drawing.Point(577, 108);
+            this.dtpHasta.Location = new System.Drawing.Point(868, 134);
             this.dtpHasta.Name = "dtpHasta";
             this.dtpHasta.Size = new System.Drawing.Size(118, 20);
             this.dtpHasta.TabIndex = 35;
@@ -62,7 +62,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(356, 109);
+            this.label3.Location = new System.Drawing.Point(647, 135);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(54, 18);
             this.label3.TabIndex = 34;
@@ -71,7 +71,7 @@
             // dtpDesde
             // 
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDesde.Location = new System.Drawing.Point(408, 108);
+            this.dtpDesde.Location = new System.Drawing.Point(699, 134);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(118, 20);
             this.dtpDesde.TabIndex = 33;
@@ -79,7 +79,7 @@
             // dgsQuejas
             // 
             this.dgsQuejas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgsQuejas.Location = new System.Drawing.Point(53, 138);
+            this.dgsQuejas.Location = new System.Drawing.Point(263, 178);
             this.dgsQuejas.Name = "dgsQuejas";
             this.dgsQuejas.Size = new System.Drawing.Size(703, 150);
             this.dgsQuejas.TabIndex = 30;
@@ -91,7 +91,7 @@
             this.btnGenerarExcel.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerarExcel.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoExcel;
             this.btnGenerarExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGenerarExcel.Location = new System.Drawing.Point(53, 106);
+            this.btnGenerarExcel.Location = new System.Drawing.Point(344, 132);
             this.btnGenerarExcel.Name = "btnGenerarExcel";
             this.btnGenerarExcel.Size = new System.Drawing.Size(111, 23);
             this.btnGenerarExcel.TabIndex = 37;
@@ -102,19 +102,21 @@
             // lbTitulo
             // 
             this.lbTitulo.AutoSize = true;
-            this.lbTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTitulo.Location = new System.Drawing.Point(314, 49);
+            this.lbTitulo.BackColor = System.Drawing.Color.DarkRed;
+            this.lbTitulo.Font = new System.Drawing.Font("Calibri", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTitulo.ForeColor = System.Drawing.Color.Snow;
+            this.lbTitulo.Location = new System.Drawing.Point(512, 63);
             this.lbTitulo.Name = "lbTitulo";
-            this.lbTitulo.Size = new System.Drawing.Size(170, 20);
+            this.lbTitulo.Size = new System.Drawing.Size(232, 29);
             this.lbTitulo.TabIndex = 38;
-            this.lbTitulo.Text = "Reportes de Ventas";
+            this.lbTitulo.Text = "REPORTES DE VENTAS";
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.BackColor = System.Drawing.Color.RosyBrown;
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.btnLimpiar.Location = new System.Drawing.Point(731, 106);
+            this.btnLimpiar.Location = new System.Drawing.Point(1022, 132);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(25, 25);
             this.btnLimpiar.TabIndex = 32;
@@ -125,7 +127,7 @@
             this.btnBuscar.BackColor = System.Drawing.Color.LemonChiffon;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
-            this.btnBuscar.Location = new System.Drawing.Point(701, 106);
+            this.btnBuscar.Location = new System.Drawing.Point(992, 132);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(25, 25);
             this.btnBuscar.TabIndex = 31;
@@ -135,6 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Khaki;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dtpHasta);
             this.Controls.Add(this.dtpDesde);

@@ -55,12 +55,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\CajaDao.cs" />
     <Compile Include="DataAccess\CategoriaDao.cs" />
     <Compile Include="DataAccess\DbConnection.cs" />
     <Compile Include="DataAccess\ProductoDao.cs" />
     <Compile Include="DataAccess\QuejaDAO.cs" />
     <Compile Include="DataAccess\ReservaDAO.cs" />
     <Compile Include="DataAccess\RolDAO.cs" />
+    <Compile Include="DataAccess\TurnoDAO.cs" />
     <Compile Include="DataAccess\UsuarioDAO.cs" />
     <Compile Include="Forms\FCerrarCaja.cs">
       <SubType>Form</SubType>

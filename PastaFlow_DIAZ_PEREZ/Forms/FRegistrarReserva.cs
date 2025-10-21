@@ -27,6 +27,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             cBoxEstado.Items.AddRange(new string[] { "Pendiente", "Confirmada", "Cancelada" });
             cBoxEstado.SelectedIndex = 0;
 
+            // Aplicar estilo visual consistente con Gestionar Inventario
+            ConfigurarGrillaVisualReservas();
+
             CargarReservas();
         }
 
@@ -136,7 +139,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             var dao = new ReservaDAO();
             dgvReservas.DataSource = dao.ListarReservas();
-            AjustarDataGridView(dgvReservas);
+
+            // Aplicar estilo visual completo y luego ajustes por columna
+            ConfigurarGrillaVisualReservas();
+            FormatearGrillaReservas();
         }
 
         // Limpiar campos del formulario
@@ -168,7 +174,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 else
                 {
                     dgvReservas.DataSource = dt;
-                    FormatearGrilla();
+                    FormatearGrillaReservas();
                 }
             }
             catch (Exception ex)
@@ -218,5 +224,80 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 dgvReservas.Columns["Cajero"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
 
+        // Nuevo: configuración visual igual a FGestionarInventario
+        private void ConfigurarGrillaVisualReservas()
+        {
+            var g = dgvReservas;
+
+            g.AutoGenerateColumns = true;
+            g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            g.RowTemplate.Height = 38;
+
+            g.AllowUserToAddRows = false;
+            g.AllowUserToDeleteRows = false;
+            g.AllowUserToResizeColumns = false;
+            g.AllowUserToResizeRows = false;
+            g.MultiSelect = false;
+            g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            g.RowHeadersVisible = false;
+
+            g.BorderStyle = BorderStyle.None;
+            g.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            g.GridColor = Color.FromArgb(230, 200, 190);
+            g.BackgroundColor = Color.White;
+            g.Cursor = Cursors.Hand;
+
+            g.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
+            g.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            g.DefaultCellStyle.BackColor = Color.White;
+            g.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 40);
+            g.DefaultCellStyle.SelectionBackColor = Color.FromArgb(170, 40, 40);
+            g.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            g.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 243, 230);
+
+            g.EnableHeadersVisualStyles = false;
+            g.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            g.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            g.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(128, 0, 0);
+            g.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            g.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
+            g.ColumnHeadersHeight = 42;
+
+            // Asegurar scroll vertical (mejor para tablas largas)
+            g.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            g.ScrollBars = ScrollBars.Vertical;
+        }
+
+        private void FormatearGrillaReservas()
+        {
+            // Ocultar columnas internas si las hay
+            if (dgvReservas.Columns.Contains("id_reserva"))
+                dgvReservas.Columns["id_reserva"].Visible = false;
+
+            // Alinear campos específicos si existen
+            if (dgvReservas.Columns.Contains("Fecha y Hora"))
+                dgvReservas.Columns["Fecha y Hora"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            if (dgvReservas.Columns.Contains("Cajero"))
+                dgvReservas.Columns["Cajero"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+
+            // Aplicar formato general
+            dgvReservas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvReservas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvReservas.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+
+            // Si quieres un botón de acción (ej. cancelar reserva), puedes agregarlo así:
+            if (!dgvReservas.Columns.Contains("Accion"))
+            {
+                var col = new DataGridViewButtonColumn
+                {
+                    Name = "Accion",
+                    HeaderText = "Acción",
+                    UseColumnTextForButtonValue = false,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                };
+                dgvReservas.Columns.Add(col);
+            }
+        }
     }
 }

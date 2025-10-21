@@ -43,7 +43,7 @@
             // 
             this.txtDNI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDNI.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDNI.Location = new System.Drawing.Point(43, 197);
+            this.txtDNI.Location = new System.Drawing.Point(42, 213);
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(236, 26);
             this.txtDNI.TabIndex = 0;
@@ -53,7 +53,7 @@
             // 
             this.txtContrasenia.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtContrasenia.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtContrasenia.Location = new System.Drawing.Point(43, 254);
+            this.txtContrasenia.Location = new System.Drawing.Point(45, 270);
             this.txtContrasenia.Name = "txtContrasenia";
             this.txtContrasenia.PasswordChar = '•';
             this.txtContrasenia.Size = new System.Drawing.Size(236, 26);
@@ -62,22 +62,22 @@
             // lbDNI
             // 
             this.lbDNI.AutoSize = true;
-            this.lbDNI.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbDNI.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDNI.ForeColor = System.Drawing.Color.Khaki;
-            this.lbDNI.Location = new System.Drawing.Point(40, 177);
+            this.lbDNI.Location = new System.Drawing.Point(44, 195);
             this.lbDNI.Name = "lbDNI";
-            this.lbDNI.Size = new System.Drawing.Size(105, 19);
+            this.lbDNI.Size = new System.Drawing.Size(107, 19);
             this.lbDNI.TabIndex = 2;
             this.lbDNI.Text = "Nº Documento";
             // 
             // lbContraseña
             // 
             this.lbContraseña.AutoSize = true;
-            this.lbContraseña.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbContraseña.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbContraseña.ForeColor = System.Drawing.Color.Khaki;
-            this.lbContraseña.Location = new System.Drawing.Point(40, 232);
+            this.lbContraseña.Location = new System.Drawing.Point(44, 250);
             this.lbContraseña.Name = "lbContraseña";
-            this.lbContraseña.Size = new System.Drawing.Size(81, 19);
+            this.lbContraseña.Size = new System.Drawing.Size(83, 19);
             this.lbContraseña.TabIndex = 3;
             this.lbContraseña.Text = "Contraseña";
             // 
@@ -85,24 +85,24 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Khaki;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.platopastas;
-            this.pictureBox1.Location = new System.Drawing.Point(57, 30);
+            this.pictureBox1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.imagencentral;
+            this.pictureBox1.Location = new System.Drawing.Point(45, 19);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(204, 127);
+            this.pictureBox1.Size = new System.Drawing.Size(229, 149);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnCancelar.BackColor = System.Drawing.Color.DarkSalmon;
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(166, 314);
+            this.btnCancelar.Location = new System.Drawing.Point(168, 330);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(91, 34);
             this.btnCancelar.TabIndex = 5;
@@ -113,7 +113,7 @@
             // 
             // btnIngresar
             // 
-            this.btnIngresar.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnIngresar.BackColor = System.Drawing.Color.Khaki;
             this.btnIngresar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnIngresar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnIngresar.FlatAppearance.BorderSize = 0;
@@ -121,7 +121,7 @@
             this.btnIngresar.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIngresar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoAcceder;
             this.btnIngresar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIngresar.Location = new System.Drawing.Point(58, 314);
+            this.btnIngresar.Location = new System.Drawing.Point(58, 330);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(91, 34);
             this.btnIngresar.TabIndex = 4;
@@ -146,6 +146,7 @@
             this.Controls.Add(this.txtDNI);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FLogin";
+            this.Padding = new System.Windows.Forms.Padding(2);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

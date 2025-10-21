@@ -108,7 +108,8 @@
             // lblTitulo
             // 
             resources.ApplyResources(this.lblTitulo, "lblTitulo");
-            this.lblTitulo.ForeColor = System.Drawing.Color.Black;
+            this.lblTitulo.BackColor = System.Drawing.Color.DarkRed;
+            this.lblTitulo.ForeColor = System.Drawing.Color.Snow;
             this.lblTitulo.Name = "lblTitulo";
             // 
             // txtBuscarProducto

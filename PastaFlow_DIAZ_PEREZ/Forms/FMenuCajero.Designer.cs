@@ -57,7 +57,7 @@
             // 
             // pnlTop
             // 
-            this.pnlTop.BackColor = System.Drawing.Color.Khaki;
+            this.pnlTop.BackColor = System.Drawing.Color.DarkRed;
             this.pnlTop.Controls.Add(this.lbHora);
             this.pnlTop.Controls.Add(this.lbFecha);
             this.pnlTop.Controls.Add(this.lbUsuario);
@@ -65,14 +65,14 @@
             this.pnlTop.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlTop.Location = new System.Drawing.Point(271, 0);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(791, 40);
+            this.pnlTop.Size = new System.Drawing.Size(803, 40);
             this.pnlTop.TabIndex = 1;
             // 
             // lbHora
             // 
             this.lbHora.AutoSize = true;
             this.lbHora.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHora.ForeColor = System.Drawing.Color.Black;
+            this.lbHora.ForeColor = System.Drawing.Color.Khaki;
             this.lbHora.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbHora.Location = new System.Drawing.Point(785, 13);
             this.lbHora.Name = "lbHora";
@@ -85,7 +85,7 @@
             // 
             this.lbFecha.AutoSize = true;
             this.lbFecha.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbFecha.ForeColor = System.Drawing.Color.Black;
+            this.lbFecha.ForeColor = System.Drawing.Color.Khaki;
             this.lbFecha.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbFecha.Location = new System.Drawing.Point(706, 12);
             this.lbFecha.Name = "lbFecha";
@@ -96,18 +96,17 @@
             // 
             // lbUsuario
             // 
-            this.lbUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbUsuario.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lbUsuario.AutoSize = true;
             this.lbUsuario.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUsuario.ForeColor = System.Drawing.Color.Black;
-            this.lbUsuario.Location = new System.Drawing.Point(6, 11);
+            this.lbUsuario.ForeColor = System.Drawing.Color.Khaki;
+            this.lbUsuario.Location = new System.Drawing.Point(26, 11);
             this.lbUsuario.Name = "lbUsuario";
             this.lbUsuario.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lbUsuario.Size = new System.Drawing.Size(86, 19);
+            this.lbUsuario.Size = new System.Drawing.Size(69, 19);
             this.lbUsuario.TabIndex = 0;
-            this.lbUsuario.Text = "Bienvenido";
-            this.lbUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbUsuario.Text = "Usuario: ";
+            this.lbUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // timerHora
             // 
@@ -122,16 +121,16 @@
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 0);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1062, 505);
+            this.pnlContent.Size = new System.Drawing.Size(1074, 505);
             this.pnlContent.TabIndex = 2;
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Wheat;
+            this.panel1.BackColor = System.Drawing.Color.Khaki;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1062, 505);
+            this.panel1.Size = new System.Drawing.Size(1074, 505);
             this.panel1.TabIndex = 11;
             // 
             // pnlHeader
@@ -354,7 +353,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(242)))), ((int)(((byte)(233)))));
-            this.ClientSize = new System.Drawing.Size(1062, 505);
+            this.ClientSize = new System.Drawing.Size(1074, 505);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenuLateral);
             this.Controls.Add(this.pnlContent);
