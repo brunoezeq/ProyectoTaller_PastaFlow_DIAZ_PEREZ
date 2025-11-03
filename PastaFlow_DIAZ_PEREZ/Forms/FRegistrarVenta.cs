@@ -1,15 +1,20 @@
-﻿using System;
+﻿using PastaFlow_DIAZ_PEREZ.DataAccess;
+using PastaFlow_DIAZ_PEREZ.Models;
+using PastaFlow_DIAZ_PEREZ.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PastaFlow_DIAZ_PEREZ.DataAccess;
-using PastaFlow_DIAZ_PEREZ.Models;
+using System.IO;              
+using System.Diagnostics;   
+
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
@@ -28,6 +33,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             InitializeComponent();
             this.Load += new System.EventHandler(this.FRegistrarVenta_Load);
+
         }
 
         private void FRegistrarVenta_Load(object sender, EventArgs e)
@@ -96,6 +102,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             btnAgregar.Click += btnAgregar_Click;
             // Inicial cantidad
             txtCantidad.Text = "1";
+
+            CargarMetodosPago();
+            cBoxMetodoPago.SelectedIndexChanged += cBoxMetodoPago_SelectedIndexChanged;
+
         }
 
         // Mostrar/actualizar sugerencias en la lista debajo del TextBox
@@ -312,13 +322,166 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            // Implementar lógica de guardado de venta
-            MessageBox.Show("Funcionalidad de confirmación no implementada en este cambio.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (dgvDetalleVenta.Rows.Count == 0)
+            {
+                MessageBox.Show("Debe agregar al menos un producto.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cBoxMetodoPago.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un método de pago.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Obtener el método de pago seleccionado
+            var metodo = (Metodo_Pago)cBoxMetodoPago.SelectedItem;
+
+            // Calcular totales
+            decimal totalBase = 0m;
+            foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
+            {
+                if (row.IsNewRow) continue;
+                string s = Convert.ToString(row.Cells["subtotal"].Value);
+                if (decimal.TryParse(s, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal v))
+                    totalBase += v;
+            }
+
+            decimal totalFinal = Math.Round(totalBase + (totalBase * metodo.Recargo / 100m), 2);
+
+            string numeroFactura = $"F-{DateTime.Now:yyyyMMddHHmmss}";
+            int idCaja = Session.CurrentCaja != null ? Session.CurrentCaja.Id_caja : 1; // usar caja actual
+            var dao = new VentaDao();
+
+            try
+            {
+                // Registrar venta
+                int idVenta = dao.RegistrarVenta(idCaja, metodo.Id_metodo, totalBase, metodo.Recargo, totalFinal, numeroFactura);
+
+                // Registrar detalles
+                foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    string nombreProd = row.Cells["producto"].Value.ToString();
+                    var prod = _productosList.FirstOrDefault(p => p.nombre == nombreProd);
+                    int cantidad = Convert.ToInt32(row.Cells["cantidad"].Value);
+
+                    dao.InsertarDetalleVenta(idVenta, prod.id_producto, cantidad, prod.precio);
+                }
+
+                //Crear DataTable con los productos para el PDF
+                DataTable dtProductos = new DataTable();
+                dtProductos.Columns.Add("Producto", typeof(string));
+                dtProductos.Columns.Add("Cantidad", typeof(int));
+                dtProductos.Columns.Add("Subtotal", typeof(decimal));
+
+                foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    string producto = row.Cells["producto"].Value.ToString();
+                    int cantidad = Convert.ToInt32(row.Cells["cantidad"].Value);
+                    decimal subtotal = 0;
+                    decimal.TryParse(row.Cells["subtotal"].Value.ToString(), NumberStyles.Currency, CultureInfo.CurrentCulture, out subtotal);
+
+                    dtProductos.Rows.Add(producto, cantidad, subtotal);
+                }
+
+                //Generar la factura PDF
+                string logoPath = Path.Combine(Application.StartupPath, "Resources", "logo.png"); // Ajusta ruta si es necesario
+                string rutaSalida = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"Factura_{numeroFactura}.pdf");
+
+                PdfHelper.GenerarFacturaVenta(
+                    nombreLocal: "Pasta Flow",
+                    logoPath: logoPath,
+                    numeroFactura: numeroFactura,
+                    fecha: DateTime.Now,
+                    cajero: $"{Session.CurrentUser.Nombre} {Session.CurrentUser.Apellido}",
+                    productos: dtProductos,
+                    totalVenta: totalFinal,
+                    rutaSalida: rutaSalida
+                );
+
+                //Abrir automáticamente el PDF generado
+                if (File.Exists(rutaSalida))
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = rutaSalida,
+                        UseShellExecute = true
+                    });
+                }
+
+                MessageBox.Show($"Venta registrada correctamente.\nFactura: {numeroFactura}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Limpiar grilla y total
+                dgvDetalleVenta.Rows.Clear();
+                txtTotal.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar venta: " + ex.Message);
+            }
         }
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void CargarMetodosPago()
+        {
+            var metodos = new List<Metodo_Pago>();
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("SELECT id_metodo, nombre, recargo FROM Metodo_Pago", conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        metodos.Add(new Metodo_Pago
+                        {
+                            Id_metodo = (int)reader["id_metodo"],
+                            Nombre = reader["nombre"].ToString(),
+                            Recargo = reader.GetDecimal(reader.GetOrdinal("recargo"))
+                        });
+                    }
+                }
+            }
+
+            cBoxMetodoPago.DataSource = metodos;
+            cBoxMetodoPago.DisplayMember = "Nombre";
+            cBoxMetodoPago.ValueMember = "Id_metodo";
+            cBoxMetodoPago.SelectedIndex = -1;
+        }
+
+        private void cBoxMetodoPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateTotalConRecargo();
+        }
+
+        private void UpdateTotalConRecargo()
+        {
+            if (cBoxMetodoPago.SelectedItem is Metodo_Pago metodo)
+            {
+                // Tomar el total base (sin recargo)
+                decimal totalBase = 0m;
+                foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
+                {
+                    if (row.IsNewRow) continue;
+                    var s = Convert.ToString(row.Cells["subtotal"].Value);
+                    if (decimal.TryParse(s, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal v))
+                        totalBase += v;
+                }
+
+                // Calcular total con recargo
+                decimal recargo = metodo.Recargo / 100;
+                decimal totalFinal = totalBase + (totalBase * recargo);
+
+                // Mostrar el total formateado
+                txtTotal.Text = totalFinal.ToString("C", CultureInfo.CurrentCulture);
+            }
         }
 
         // Validar que txtCantidad acepte solo números
@@ -476,5 +639,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
             return maxWidth;
         }
+
+        
+
     }
 }

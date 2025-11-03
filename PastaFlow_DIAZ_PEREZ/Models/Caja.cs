@@ -8,13 +8,13 @@ namespace PastaFlow_DIAZ_PEREZ.Models
 {
     public class Caja
     {
-        public int Id { get; set; } 
-        public DateTime fecha_hora_apertura { get; set; }
-        public decimal monto_inicio { get; set; }
-        public DateTime fecha_hora_cierre { get; set; }
-        public decimal monto_cierre { get; set; }
-        public decimal monto_esperado { get; set; }
-        public Usuario id_usuario { get; set; }
-        public Turno id_turno { get; set; }
+        public int Id_caja { get; set; } 
+        public DateTime Fecha_hora_apertura { get; set; }
+        public decimal Monto_inicio { get; set; }
+        public DateTime Fecha_hora_cierre { get; set; }
+        public decimal Monto_cierre { get; set; }
+        public decimal Monto_esperado { get; set; }
+        public int Id_usuario { get; set; }
+        public int Id_turno { get; set; }
     }
 }

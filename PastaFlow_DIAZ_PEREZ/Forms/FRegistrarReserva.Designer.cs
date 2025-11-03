@@ -303,6 +303,7 @@
             this.btnBuscar.Size = new System.Drawing.Size(26, 25);
             this.btnBuscar.TabIndex = 34;
             this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // button1
             // 
@@ -315,6 +316,7 @@
             this.button1.Size = new System.Drawing.Size(26, 25);
             this.button1.TabIndex = 35;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.btnLimpiarReserva_Click);
             // 
             // panel2
             // 

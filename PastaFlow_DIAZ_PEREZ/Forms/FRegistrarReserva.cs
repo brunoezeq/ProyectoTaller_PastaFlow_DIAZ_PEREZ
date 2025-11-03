@@ -4,11 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
@@ -107,6 +110,32 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 int id = dao.RegistrarReserva(nombre, apellido, fechaHora, cantidad, estado, idUsuario);
 
                 MessageBox.Show($"Reserva registrada correctamente.");
+
+                // 🔹 Generar ticket PDF
+                string ruta = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                    $"Ticket_Reserva_{id}.pdf");
+
+                string nombreLocal = "PastaFlow Restaurante";
+                string logo = Path.Combine(Application.StartupPath, "Recursos", "logo");
+                string cajero = Session.CurrentUser.Nombre + " " + Session.CurrentUser.Apellido;
+
+                PdfHelper.GenerarTicketReserva(
+                    nombreLocal,
+                    logo,
+                    nombre,
+                    apellido,
+                    fechaHora,
+                    cantidad,
+                    estado,
+                    cajero,
+                    ruta
+                );
+
+                MessageBox.Show($"Ticket generado en: {ruta}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Process.Start(new ProcessStartInfo(ruta) { UseShellExecute = true });
+
                 CargarReservas();
             }
             catch (Exception ex)
@@ -202,26 +231,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 MessageBox.Show("Error al limpiar el filtro: " + ex.Message,
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-
-        private void FormatearGrilla()
-        {
-            // Ocultar columnas internas si las hay
-            if (dgvReservas.Columns.Contains("id_reserva"))
-                dgvReservas.Columns["id_reserva"].Visible = false;
-
-            // Ajustes visuales
-            dgvReservas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvReservas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvReservas.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
-            dgvReservas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
-            // Alinear fecha y cajero
-            if (dgvReservas.Columns.Contains("Fecha y Hora"))
-                dgvReservas.Columns["Fecha y Hora"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            if (dgvReservas.Columns.Contains("Cajero"))
-                dgvReservas.Columns["Cajero"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
         }
 
         // Nuevo: configuración visual igual a FGestionarInventario

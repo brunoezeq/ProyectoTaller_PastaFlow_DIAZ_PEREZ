@@ -8,8 +8,8 @@ namespace PastaFlow_DIAZ_PEREZ.Models
 {
     public class Metodo_Pago
     {
-        public int id_metodo { get; set; }
-        public string nombre { get; set; }
-        public decimal recargo { get; set; }
+        public int Id_metodo { get; set; }
+        public string Nombre { get; set; }
+        public decimal Recargo { get; set; }
     }
 }

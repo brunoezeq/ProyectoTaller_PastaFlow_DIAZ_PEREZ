@@ -10,5 +10,6 @@ namespace PastaFlow_DIAZ_PEREZ.Utils
     public static class Session
     {
         public static Usuario CurrentUser { get; set; }
+        public static Caja CurrentCaja { get; set; }
     }
 }

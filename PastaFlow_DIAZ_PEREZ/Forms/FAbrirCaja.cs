@@ -63,69 +63,68 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             // Intentar parsear con cultura actual e invariante (acepta ',' o '.')
             decimal monto;
-            var parsed = decimal.TryParse(texto, System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.CurrentCulture, out monto)
-                      || decimal.TryParse(texto, System.Globalization.NumberStyles.Number, System.Globalization.CultureInfo.InvariantCulture, out monto);
+            var parsed = decimal.TryParse(texto, System.Globalization.NumberStyles.Number,
+                          System.Globalization.CultureInfo.CurrentCulture, out monto)
+                      || decimal.TryParse(texto, System.Globalization.NumberStyles.Number,
+                          System.Globalization.CultureInfo.InvariantCulture, out monto);
 
             if (!parsed)
             {
-                MessageBox.Show("Monto inicial inválido. Use sólo números y un separador decimal.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Monto inicial inválido. Use sólo números y un separador decimal.",
+                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtMontoInicial.Focus();
                 return;
             }
 
             if (monto < 0m)
             {
-                MessageBox.Show("El monto inicial no puede ser negativo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El monto inicial no puede ser negativo.",
+                    "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtMontoInicial.Focus();
                 return;
             }
 
             // Confirmar apertura
-            var dr = MessageBox.Show($"Abrir caja con monto inicial {monto:C}?", "Confirmar apertura", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var dr = MessageBox.Show($"Abrir caja con monto inicial {monto:C}?",
+                "Confirmar apertura", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr != DialogResult.Yes) return;
 
-            // Persistir con el DAO
             try
             {
+                // declaramos el DAO y llamamos al método
                 var dao = new CajaDAO();
+                var nuevaCaja = dao.AbrirCaja(Session.CurrentUser.Id_usuario, monto, DateTime.Now);
 
-                // opcional: comprobar si ya hay una caja abierta
-                int abiertaId;
-                if (dao.EstaCajaAbierta(out abiertaId))
+                if (nuevaCaja != null)
                 {
-                    MessageBox.Show("Ya existe una caja abierta. Cierre la caja anterior antes de abrir una nueva.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                    // Guardar la caja actual en la sesión
+                    Session.CurrentCaja = nuevaCaja;
 
-                int id = dao.AbrirCaja(Session.CurrentUser.Id_usuario, monto, DateTime.Now);
-                if (id > 0)
-                {
-                    // Guardar valores en propiedades públicas para que el llamador los use
                     MontoApertura = monto;
                     FechaApertura = DateTime.Now;
 
-                    // Actualizar visualmente
                     lbFecha.Text = FechaApertura.ToString("dd/MM/yyyy");
                     lbHora.Text = FechaApertura.ToString("HH:mm");
 
-                    // Desactivar controles para evitar duplicados
                     btnAbrirCaja.Enabled = false;
                     txtMontoInicial.Enabled = false;
 
-                    MessageBox.Show("Caja abierta correctamente.", "Apertura", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Caja abierta correctamente (ID: {nuevaCaja.Id_caja}).",
+                        "Apertura", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Devolver OK al llamador (por ejemplo si llamó ShowDialog)
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo guardar la apertura de caja. Revise la configuración.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se pudo guardar la apertura de caja.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al abrir la caja: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al abrir la caja: {ex.Message}",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -134,6 +133,5 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             this.Close();
         }
-
     }
 }

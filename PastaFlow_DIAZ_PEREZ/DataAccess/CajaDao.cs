@@ -1,9 +1,11 @@
+using PastaFlow_DIAZ_PEREZ.Models;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Collections.Generic;
+
 
 namespace PastaFlow_DIAZ_PEREZ.DataAccess
 {
@@ -72,7 +74,7 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             throw new InvalidOperationException("No se encontró ningún registro en la tabla 'Turno'. Cree un turno en la base de datos o modifique la lógica para proporcionar un id_turno válido.");
         }
 
-        public int AbrirCaja(int usuarioId, decimal montoInicial, DateTime fechaApertura)
+        public Caja AbrirCaja(int usuarioId, decimal montoInicial, DateTime fechaApertura)
         {
             const string sql = @"
                 INSERT INTO Caja (id_turno, id_usuario, fecha_hora_apertura, monto_inicial, monto_esperado)
@@ -85,7 +87,7 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             {
                 cn.Open();
 
-                // Obtener id_turno válido desde la tabla Turno (lanzará excepción si no existe ninguno)
+                // Obtener id_turno válido desde la tabla Turno
                 int idTurno = GetCurrentTurnoId(cn);
 
                 cmd.CommandText = sql;
@@ -96,8 +98,22 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
 
                 var scalar = cmd.ExecuteScalar();
                 if (scalar != null && scalar != DBNull.Value)
-                    return Convert.ToInt32(scalar);
-                return -1;
+                {
+                    int idCaja = Convert.ToInt32(scalar);
+
+                    // Devolver objeto Caja con los datos insertados
+                    return new Caja
+                    {
+                        Id_caja = idCaja,
+                        Id_turno = idTurno,
+                        Id_usuario = usuarioId,
+                        Fecha_hora_apertura = fechaApertura,
+                        Monto_inicio = montoInicial,
+                        Monto_esperado = 0
+                    };
+                }
+
+                return null;
             }
         }
 
@@ -119,22 +135,41 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             }
         }
 
-        public bool CerrarCaja(int cajaId, decimal montoCierre, DateTime fechaCierre)
+        public decimal ObtenerTotalVentasEfectivo(int idCaja)
         {
-            const string sql = @"
-                UPDATE Caja
-                SET monto_cierre = @montoCierre, fecha_hora_cierre = @fechaCierre
-                WHERE id_caja = @cajaId
-            ";
             using (var cn = new SqlConnection(_connString))
-            using (var cmd = new SqlCommand(sql, cn))
             {
-                cmd.Parameters.AddWithValue("@montoCierre", montoCierre);
-                cmd.Parameters.AddWithValue("@fechaCierre", fechaCierre);
-                cmd.Parameters.AddWithValue("@cajaId", cajaId);
                 cn.Open();
-                return cmd.ExecuteNonQuery() > 0;
+                const string sql = @"
+            SELECT ISNULL(SUM(v.total_venta), 0)
+            FROM Venta v
+            INNER JOIN Metodo_Pago m ON v.id_metodo = m.id_metodo
+            WHERE v.id_caja = @idCaja AND m.nombre = 'Efectivo';";
+
+                using (var cmd = new SqlCommand(sql, cn))
+                {
+                    cmd.Parameters.AddWithValue("@idCaja", idCaja);
+                    var result = cmd.ExecuteScalar();
+                    return result != DBNull.Value ? Convert.ToDecimal(result) : 0;
+                }
             }
         }
+
+        public void CerrarCaja(int idCaja, decimal montoFinal)
+        {
+            using (var cn = new SqlConnection(_connString))
+            using (var cmd = new SqlCommand("sp_CerrarCaja", cn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_caja", idCaja);
+                cmd.Parameters.AddWithValue("@monto_cierre", montoFinal);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
+
+
     }
 }

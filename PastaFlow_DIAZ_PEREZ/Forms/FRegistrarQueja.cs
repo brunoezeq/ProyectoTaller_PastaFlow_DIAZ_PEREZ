@@ -61,7 +61,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void LimpiarFormulario()
         {
             txtNombreCliente.Clear();
-           
+            textApellidoCliente.Clear(); 
             txtMotivo.Clear();
             txtDescripcion.Clear();
         }

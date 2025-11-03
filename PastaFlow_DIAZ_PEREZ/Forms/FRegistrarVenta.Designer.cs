@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlPrincipal = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cBoxMetodoPago = new System.Windows.Forms.ComboBox();
             this.textBuscarProducto = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
@@ -52,6 +54,8 @@
             // pnlPrincipal
             // 
             this.pnlPrincipal.BackColor = System.Drawing.Color.Khaki;
+            this.pnlPrincipal.Controls.Add(this.label1);
+            this.pnlPrincipal.Controls.Add(this.cBoxMetodoPago);
             this.pnlPrincipal.Controls.Add(this.textBuscarProducto);
             this.pnlPrincipal.Controls.Add(this.btnCancelar);
             this.pnlPrincipal.Controls.Add(this.btnConfirmar);
@@ -70,6 +74,24 @@
             this.pnlPrincipal.Size = new System.Drawing.Size(1068, 450);
             this.pnlPrincipal.TabIndex = 0;
             this.pnlPrincipal.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlPrincipal_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(299, 363);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(127, 19);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Método de Pago:";
+            // 
+            // cBoxMetodoPago
+            // 
+            this.cBoxMetodoPago.FormattingEnabled = true;
+            this.cBoxMetodoPago.Location = new System.Drawing.Point(427, 364);
+            this.cBoxMetodoPago.Name = "cBoxMetodoPago";
+            this.cBoxMetodoPago.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMetodoPago.TabIndex = 12;
             // 
             // textBuscarProducto
             // 
@@ -115,21 +137,21 @@
             // txtTotal
             // 
             this.txtTotal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotal.Location = new System.Drawing.Point(359, 363);
+            this.txtTotal.Location = new System.Drawing.Point(611, 364);
             this.txtTotal.Multiline = true;
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.ReadOnly = true;
-            this.txtTotal.Size = new System.Drawing.Size(128, 29);
+            this.txtTotal.Size = new System.Drawing.Size(128, 28);
             this.txtTotal.TabIndex = 8;
             this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbTotal
             // 
             this.lbTotal.AutoSize = true;
-            this.lbTotal.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotal.Location = new System.Drawing.Point(305, 366);
+            this.lbTotal.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotal.Location = new System.Drawing.Point(558, 368);
             this.lbTotal.Name = "lbTotal";
-            this.lbTotal.Size = new System.Drawing.Size(53, 23);
+            this.lbTotal.Size = new System.Drawing.Size(47, 19);
             this.lbTotal.TabIndex = 7;
             this.lbTotal.Text = "Total:";
             // 
@@ -195,10 +217,10 @@
             // txtCantidad
             // 
             this.txtCantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCantidad.Location = new System.Drawing.Point(652, 126);
+            this.txtCantidad.Location = new System.Drawing.Point(652, 125);
             this.txtCantidad.Multiline = true;
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(80, 20);
+            this.txtCantidad.Size = new System.Drawing.Size(80, 21);
             this.txtCantidad.TabIndex = 4;
             this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantidad_KeyPress);
@@ -271,5 +293,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
         private System.Windows.Forms.DataGridViewButtonColumn bEliminar;
         private System.Windows.Forms.TextBox textBuscarProducto;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cBoxMetodoPago;
     }
 }

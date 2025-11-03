@@ -14,6 +14,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
     {
         private Button _activeButton;
         private PictureBox pictureBox1;
+        private bool cajaAbierta = false;
 
         public FMenuCajero()
         {
@@ -119,7 +120,23 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void btnAbrirCaja_Click(object sender, EventArgs e)
         {
             MarcarBotonActivo(sender as Button);
-            AbrirFormulario(new FAbrirCaja());
+
+            if (!cajaAbierta)
+            {
+                // Abrir caja
+                AbrirFormulario(new FAbrirCaja());
+                btnAbrirCaja.Text = "Cerrar Caja";
+                cajaAbierta = true;
+            }
+            else
+            {   
+                decimal montoInicial = 0m;
+                decimal totalEfectivo = 0m; 
+
+                AbrirFormulario(new FCerrarCaja(montoInicial, totalEfectivo));
+                btnAbrirCaja.Text = "Abrir Caja";
+                cajaAbierta = false;
+            }
         }
 
         private void btnPedido_Click(object sender, EventArgs e)

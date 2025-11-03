@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.pnlAbrirCaja = new System.Windows.Forms.Panel();
-            this.txtMontoFinal = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtMontoActual = new System.Windows.Forms.TextBox();
+            this.txtMontoEsperado = new System.Windows.Forms.TextBox();
+            this.txtTotalEfectivo = new System.Windows.Forms.TextBox();
+            this.txtMontoInicial = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,10 +48,10 @@
             // pnlAbrirCaja
             // 
             this.pnlAbrirCaja.BackColor = System.Drawing.Color.DarkRed;
-            this.pnlAbrirCaja.Controls.Add(this.txtMontoFinal);
-            this.pnlAbrirCaja.Controls.Add(this.textBox3);
-            this.pnlAbrirCaja.Controls.Add(this.textBox2);
-            this.pnlAbrirCaja.Controls.Add(this.textBox1);
+            this.pnlAbrirCaja.Controls.Add(this.txtMontoActual);
+            this.pnlAbrirCaja.Controls.Add(this.txtMontoEsperado);
+            this.pnlAbrirCaja.Controls.Add(this.txtTotalEfectivo);
+            this.pnlAbrirCaja.Controls.Add(this.txtMontoInicial);
             this.pnlAbrirCaja.Controls.Add(this.label5);
             this.pnlAbrirCaja.Controls.Add(this.label4);
             this.pnlAbrirCaja.Controls.Add(this.label3);
@@ -65,33 +65,33 @@
             this.pnlAbrirCaja.Size = new System.Drawing.Size(319, 420);
             this.pnlAbrirCaja.TabIndex = 8;
             // 
-            // txtMontoFinal
+            // txtMontoActual
             // 
-            this.txtMontoFinal.Location = new System.Drawing.Point(151, 293);
-            this.txtMontoFinal.Name = "txtMontoFinal";
-            this.txtMontoFinal.Size = new System.Drawing.Size(142, 20);
-            this.txtMontoFinal.TabIndex = 15;
+            this.txtMontoActual.Location = new System.Drawing.Point(151, 293);
+            this.txtMontoActual.Name = "txtMontoActual";
+            this.txtMontoActual.Size = new System.Drawing.Size(142, 20);
+            this.txtMontoActual.TabIndex = 15;
             // 
-            // textBox3
+            // txtMontoEsperado
             // 
-            this.textBox3.Location = new System.Drawing.Point(151, 267);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(142, 20);
-            this.textBox3.TabIndex = 14;
+            this.txtMontoEsperado.Location = new System.Drawing.Point(151, 267);
+            this.txtMontoEsperado.Name = "txtMontoEsperado";
+            this.txtMontoEsperado.Size = new System.Drawing.Size(142, 20);
+            this.txtMontoEsperado.TabIndex = 14;
             // 
-            // textBox2
+            // txtTotalEfectivo
             // 
-            this.textBox2.Location = new System.Drawing.Point(151, 240);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(142, 20);
-            this.textBox2.TabIndex = 13;
+            this.txtTotalEfectivo.Location = new System.Drawing.Point(151, 240);
+            this.txtTotalEfectivo.Name = "txtTotalEfectivo";
+            this.txtTotalEfectivo.Size = new System.Drawing.Size(142, 20);
+            this.txtTotalEfectivo.TabIndex = 13;
             // 
-            // textBox1
+            // txtMontoInicial
             // 
-            this.textBox1.Location = new System.Drawing.Point(151, 214);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(142, 20);
-            this.textBox1.TabIndex = 12;
+            this.txtMontoInicial.Location = new System.Drawing.Point(151, 214);
+            this.txtMontoInicial.Name = "txtMontoInicial";
+            this.txtMontoInicial.Size = new System.Drawing.Size(142, 20);
+            this.txtMontoInicial.TabIndex = 12;
             // 
             // label5
             // 
@@ -100,9 +100,9 @@
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(21, 296);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 16);
+            this.label5.Size = new System.Drawing.Size(89, 16);
             this.label5.TabIndex = 11;
-            this.label5.Text = "Monto final :";
+            this.label5.Text = "Monto actual :";
             // 
             // label4
             // 
@@ -169,8 +169,9 @@
             this.btnAtras.Name = "btnAtras";
             this.btnAtras.Size = new System.Drawing.Size(102, 34);
             this.btnAtras.TabIndex = 5;
-            this.btnAtras.Text = "Atras";
+            this.btnAtras.Text = "Cancelar";
             this.btnAtras.UseVisualStyleBackColor = false;
+            this.btnAtras.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnCerrarCaja
             // 
@@ -183,6 +184,7 @@
             this.btnCerrarCaja.TabIndex = 4;
             this.btnCerrarCaja.Text = "Cerrar Caja";
             this.btnCerrarCaja.UseVisualStyleBackColor = false;
+            this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
             // 
             // FCerrarCaja
             // 
@@ -202,10 +204,10 @@
 
         #endregion
         private System.Windows.Forms.Panel pnlAbrirCaja;
-        private System.Windows.Forms.TextBox txtMontoFinal;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtMontoActual;
+        private System.Windows.Forms.TextBox txtMontoEsperado;
+        private System.Windows.Forms.TextBox txtTotalEfectivo;
+        private System.Windows.Forms.TextBox txtMontoInicial;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
