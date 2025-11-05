@@ -97,7 +97,7 @@
             this.pnlAbrirCaja.Controls.Add(this.label2);
             this.pnlAbrirCaja.Controls.Add(this.btnAtras);
             this.pnlAbrirCaja.Controls.Add(this.btnAbrirCaja);
-            this.pnlAbrirCaja.Location = new System.Drawing.Point(231, 12);
+            this.pnlAbrirCaja.Location = new System.Drawing.Point(469, 20);
             this.pnlAbrirCaja.Name = "pnlAbrirCaja";
             this.pnlAbrirCaja.Size = new System.Drawing.Size(319, 420);
             this.pnlAbrirCaja.TabIndex = 6;

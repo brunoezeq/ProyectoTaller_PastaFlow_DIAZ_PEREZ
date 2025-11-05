@@ -21,6 +21,20 @@ namespace PastaFlow_DIAZ_PEREZ
         public FLogin()
         {
             InitializeComponent();
+
+            // Hace que Enter dispare el botón de entrar
+            this.AcceptButton = btnIngresar;
+
+            // Fallback por si algún control consume Enter
+            this.KeyPreview = true;
+            this.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    btnIngresar.PerformClick();
+                    e.Handled = true;
+                }
+            };
         }
 
         //Cierra la aplicación

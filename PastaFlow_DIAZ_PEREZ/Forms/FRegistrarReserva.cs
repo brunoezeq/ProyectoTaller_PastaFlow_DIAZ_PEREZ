@@ -111,25 +111,39 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
                 MessageBox.Show($"Reserva registrada correctamente.");
 
-                // 🔹 Generar ticket PDF
+                // Generar ticket PDF
                 string ruta = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                     $"Ticket_Reserva_{id}.pdf");
 
                 string nombreLocal = "PastaFlow Restaurante";
-                string logo = Path.Combine(Application.StartupPath, "Recursos", "logo");
+
+                // Asegurar que el logo apunte a un archivo existente con extensión
+                string logo = Path.Combine(Application.StartupPath, "Recursos", "logo.png");
+                if (!File.Exists(logo))
+                {
+                    var logoJpg = Path.Combine(Application.StartupPath, "Recursos", "logo.jpg");
+                    logo = File.Exists(logoJpg) ? logoJpg : null; // si no existe, no se intenta cargar
+                }
+
                 string cajero = Session.CurrentUser.Nombre + " " + Session.CurrentUser.Apellido;
 
-                PdfHelper.GenerarTicketReserva(
+                // Crear una tabla vacía para cumplir con la firma de PdfHelper.GenerarFacturaVenta
+                var productos = new DataTable();
+                productos.Columns.Add("Producto");
+                productos.Columns.Add("Cantidad");
+                productos.Columns.Add("Subtotal", typeof(decimal));
+
+                PdfHelper.GenerarFacturaVenta(
                     nombreLocal,
                     logo,
-                    nombre,
-                    apellido,
+                    $"Reserva_{id}", // número de factura como identificador de reserva
                     fechaHora,
-                    cantidad,
-                    estado,
                     cajero,
+                    productos, // tabla vacía para evitar null reference
+                    0m,        // totalVenta, no aplica para reserva
                     ruta
+                    // imagenExtraPath: null
                 );
 
                 MessageBox.Show($"Ticket generado en: {ruta}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -218,7 +218,7 @@
             this.btnRegEmpleado.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.btnRegEmpleado.Size = new System.Drawing.Size(251, 45);
             this.btnRegEmpleado.TabIndex = 7;
-            this.btnRegEmpleado.Text = "   Registrar Empleado";
+            this.btnRegEmpleado.Text = "   Gestionar Empleado";
             this.btnRegEmpleado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRegEmpleado.UseVisualStyleBackColor = false;
             this.btnRegEmpleado.Click += new System.EventHandler(this.btnRegEmpleado_Click);

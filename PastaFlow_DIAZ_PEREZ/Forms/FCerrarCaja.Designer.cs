@@ -60,7 +60,7 @@
             this.pnlAbrirCaja.Controls.Add(this.label2);
             this.pnlAbrirCaja.Controls.Add(this.btnAtras);
             this.pnlAbrirCaja.Controls.Add(this.btnCerrarCaja);
-            this.pnlAbrirCaja.Location = new System.Drawing.Point(240, 18);
+            this.pnlAbrirCaja.Location = new System.Drawing.Point(575, 182);
             this.pnlAbrirCaja.Name = "pnlAbrirCaja";
             this.pnlAbrirCaja.Size = new System.Drawing.Size(319, 420);
             this.pnlAbrirCaja.TabIndex = 8;
@@ -190,7 +190,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.Khaki;
+            this.ClientSize = new System.Drawing.Size(1012, 680);
             this.Controls.Add(this.pnlAbrirCaja);
             this.Name = "FCerrarCaja";
             this.Text = "Cerrar Caja";
