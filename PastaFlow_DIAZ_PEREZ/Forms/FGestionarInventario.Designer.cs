@@ -39,13 +39,9 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.pnlTabla = new System.Windows.Forms.Panel();
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
-            this.nombreProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.flowLayoutPanelBotones = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnAtras = new System.Windows.Forms.Button();
+            this.btnAdelante = new System.Windows.Forms.Button();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.panelLateral = new System.Windows.Forms.Panel();
             this.lbProdCategoria = new System.Windows.Forms.Label();
@@ -64,14 +60,22 @@
             this.txtProdNombre = new System.Windows.Forms.TextBox();
             this.txtProdDesc = new System.Windows.Forms.TextBox();
             this.lbProdDescripcion = new System.Windows.Forms.Label();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.pnlPrincipal.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelContenido.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlTabla.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
+            this.flowLayoutPanelBotones.SuspendLayout();
             this.panelLateral.SuspendLayout();
             this.flowBotones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlPrincipal
@@ -125,6 +129,7 @@
             // btnBuscar
             // 
             this.btnBuscar.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btnBuscar, "btnBuscar");
             this.btnBuscar.ForeColor = System.Drawing.Color.Black;
             this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
@@ -133,7 +138,8 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnLimpiar.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btnLimpiar, "btnLimpiar");
             this.btnLimpiar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
             this.btnLimpiar.Name = "btnLimpiar";
@@ -141,61 +147,31 @@
             // 
             // pnlTabla
             // 
+            this.pnlTabla.Controls.Add(this.flowLayoutPanelBotones);
             this.pnlTabla.Controls.Add(this.dgvProductos);
             resources.ApplyResources(this.pnlTabla, "pnlTabla");
             this.pnlTabla.Name = "pnlTabla";
             // 
-            // dgvProductos
+            // flowLayoutPanelBotones
             // 
-            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nombreProd,
-            this.DescProd,
-            this.Precio,
-            this.Stock,
-            this.Categoria,
-            this.Estado});
-            resources.ApplyResources(this.dgvProductos, "dgvProductos");
-            this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.ReadOnly = true;
+            this.flowLayoutPanelBotones.Controls.Add(this.btnAtras);
+            this.flowLayoutPanelBotones.Controls.Add(this.btnAdelante);
+            resources.ApplyResources(this.flowLayoutPanelBotones, "flowLayoutPanelBotones");
+            this.flowLayoutPanelBotones.Name = "flowLayoutPanelBotones";
             // 
-            // nombreProd
+            // btnAtras
             // 
-            resources.ApplyResources(this.nombreProd, "nombreProd");
-            this.nombreProd.Name = "nombreProd";
-            this.nombreProd.ReadOnly = true;
+            resources.ApplyResources(this.btnAtras, "btnAtras");
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.UseVisualStyleBackColor = true;
+            this.btnAtras.Click += new System.EventHandler(this.btnAnterior_Click);
             // 
-            // DescProd
+            // btnAdelante
             // 
-            resources.ApplyResources(this.DescProd, "DescProd");
-            this.DescProd.Name = "DescProd";
-            this.DescProd.ReadOnly = true;
-            // 
-            // Precio
-            // 
-            resources.ApplyResources(this.Precio, "Precio");
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            // 
-            // Stock
-            // 
-            resources.ApplyResources(this.Stock, "Stock");
-            this.Stock.Name = "Stock";
-            this.Stock.ReadOnly = true;
-            // 
-            // Categoria
-            // 
-            resources.ApplyResources(this.Categoria, "Categoria");
-            this.Categoria.Name = "Categoria";
-            this.Categoria.ReadOnly = true;
-            // 
-            // Estado
-            // 
-            resources.ApplyResources(this.Estado, "Estado");
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
+            resources.ApplyResources(this.btnAdelante, "btnAdelante");
+            this.btnAdelante.Name = "btnAdelante";
+            this.btnAdelante.UseVisualStyleBackColor = true;
+            this.btnAdelante.Click += new System.EventHandler(this.btnSiguiente_Click);
             // 
             // panelHeader
             // 
@@ -243,7 +219,7 @@
             // 
             // btnRegistrar
             // 
-            this.btnRegistrar.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnRegistrar.BackColor = System.Drawing.Color.Khaki;
             resources.ApplyResources(this.btnRegistrar, "btnRegistrar");
             this.btnRegistrar.ForeColor = System.Drawing.Color.Black;
             this.btnRegistrar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoRegistrar;
@@ -262,7 +238,7 @@
             // 
             // btnLimpiarForm
             // 
-            this.btnLimpiarForm.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnLimpiarForm.BackColor = System.Drawing.Color.DarkSeaGreen;
             resources.ApplyResources(this.btnLimpiarForm, "btnLimpiarForm");
             this.btnLimpiarForm.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
             this.btnLimpiarForm.Name = "btnLimpiarForm";
@@ -283,6 +259,7 @@
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
+            this.label1.BackColor = System.Drawing.Color.DarkRed;
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Name = "label1";
             // 
@@ -316,6 +293,7 @@
             // txtProdNombre
             // 
             resources.ApplyResources(this.txtProdNombre, "txtProdNombre");
+            this.txtProdNombre.BackColor = System.Drawing.Color.White;
             this.txtProdNombre.Name = "txtProdNombre";
             // 
             // txtProdDesc
@@ -328,6 +306,61 @@
             resources.ApplyResources(this.lbProdDescripcion, "lbProdDescripcion");
             this.lbProdDescripcion.ForeColor = System.Drawing.Color.White;
             this.lbProdDescripcion.Name = "lbProdDescripcion";
+            // 
+            // Estado
+            // 
+            resources.ApplyResources(this.Estado, "Estado");
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
+            // 
+            // Categoria
+            // 
+            resources.ApplyResources(this.Categoria, "Categoria");
+            this.Categoria.Name = "Categoria";
+            this.Categoria.ReadOnly = true;
+            // 
+            // Stock
+            // 
+            resources.ApplyResources(this.Stock, "Stock");
+            this.Stock.Name = "Stock";
+            this.Stock.ReadOnly = true;
+            // 
+            // Precio
+            // 
+            resources.ApplyResources(this.Precio, "Precio");
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            // 
+            // DescProd
+            // 
+            resources.ApplyResources(this.DescProd, "DescProd");
+            this.DescProd.Name = "DescProd";
+            this.DescProd.ReadOnly = true;
+            // 
+            // nombreProd
+            // 
+            resources.ApplyResources(this.nombreProd, "nombreProd");
+            this.nombreProd.Name = "nombreProd";
+            this.nombreProd.ReadOnly = true;
+            // 
+            // dgvProductos
+            // 
+            this.dgvProductos.AllowUserToResizeRows = false;
+            resources.ApplyResources(this.dgvProductos, "dgvProductos");
+            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProductos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvProductos.BackgroundColor = System.Drawing.Color.White;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nombreProd,
+            this.DescProd,
+            this.Precio,
+            this.Stock,
+            this.Categoria,
+            this.Estado});
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.ReadOnly = true;
+            this.dgvProductos.RowHeadersVisible = false;
             // 
             // FGestionarInventario
             // 
@@ -346,10 +379,11 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnlTabla.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
+            this.flowLayoutPanelBotones.ResumeLayout(false);
             this.panelLateral.ResumeLayout(false);
             this.panelLateral.PerformLayout();
             this.flowBotones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -384,6 +418,9 @@
         private System.Windows.Forms.TextBox txtProdNombre;
         private System.Windows.Forms.TextBox txtProdDesc;
         private System.Windows.Forms.Label lbProdDescripcion;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelBotones;
+        private System.Windows.Forms.Button btnAtras;
+        private System.Windows.Forms.Button btnAdelante;
         private System.Windows.Forms.DataGridView dgvProductos;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombreProd;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescProd;
