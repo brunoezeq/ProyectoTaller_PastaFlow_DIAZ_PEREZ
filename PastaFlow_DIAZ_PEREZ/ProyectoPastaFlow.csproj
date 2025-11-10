@@ -67,6 +67,7 @@
     <Compile Include="DataAccess\MetodoPagoDAO.cs" />
     <Compile Include="DataAccess\ProductoDao.cs" />
     <Compile Include="DataAccess\QuejaDAO.cs" />
+    <Compile Include="DataAccess\ReporteDAO.cs" />
     <Compile Include="DataAccess\ReservaDAO.cs" />
     <Compile Include="DataAccess\RolDAO.cs" />
     <Compile Include="DataAccess\TurnoDAO.cs" />
@@ -77,6 +78,12 @@
     </Compile>
     <Compile Include="Forms\FCerrarCaja.Designer.cs">
       <DependentUpon>FCerrarCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FGraficos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FGraficos.Designer.cs">
+      <DependentUpon>FGraficos.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FLogin.cs">
       <SubType>Form</SubType>
@@ -95,6 +102,12 @@
     </Compile>
     <Compile Include="Forms\FAbrirCaja.Designer.cs">
       <DependentUpon>FAbrirCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FBackup.Designer.cs">
+      <DependentUpon>FBackup.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FRegistrarEmpleado.cs">
       <SubType>Form</SubType>
@@ -169,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FGestionarInventario.es-419.resx">
       <DependentUpon>FGestionarInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FGraficos.resx">
+      <DependentUpon>FGraficos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
@@ -277,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icono.ico" />
+    <None Include="Resources\iconoBackup.png" />
     <None Include="Resources\gif.gif" />
     <None Include="Resources\imagencentral.png" />
     <None Include="Resources\iconoCarrito.png" />

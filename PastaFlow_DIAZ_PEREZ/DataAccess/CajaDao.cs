@@ -168,7 +168,32 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             }
         }
 
+        public Dictionary<string, decimal> ObtenerTotalesPorMetodo(int idCaja)
+        {
+            var totales = new Dictionary<string, decimal>();
+            string sql = @"
+        SELECT mp.nombre AS Metodo, SUM(v.total_venta) AS Total
+        FROM Venta v
+        INNER JOIN Metodo_Pago mp ON v.id_metodo = mp.id_metodo
+        WHERE v.id_caja = @idCaja
+        GROUP BY mp.nombre;";
 
+            using (var cn = new SqlConnection(_connString))
+            using (var cmd = new SqlCommand(sql, cn))
+            {
+                cmd.Parameters.AddWithValue("@idCaja", idCaja);
+                cn.Open();
+
+                using (var rdr = cmd.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        totales[rdr["Metodo"].ToString()] = rdr["Total"] != DBNull.Value ? Convert.ToDecimal(rdr["Total"]) : 0m;
+                    }
+                }
+            }
+            return totales;
+        }
 
 
     }

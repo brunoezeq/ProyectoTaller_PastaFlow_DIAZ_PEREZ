@@ -93,6 +93,16 @@ namespace PastaFlow_DIAZ_PEREZ.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconoBackup {
+            get {
+                object obj = ResourceManager.GetObject("iconoBackup", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconoBuscar {
             get {
                 object obj = ResourceManager.GetObject("iconoBuscar", resourceCulture);

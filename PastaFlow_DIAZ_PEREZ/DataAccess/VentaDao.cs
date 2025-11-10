@@ -63,6 +63,8 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             }
         }
 
+        // Método para obtener el reporte de ventas por empleado/metodo de pago/producto en un rango de fechas
+        
 
 
     }

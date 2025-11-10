@@ -27,6 +27,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FCerrarCaja_Load(object sender, EventArgs e)
         {
+            var dao = new CajaDAO();
             if (Session.CurrentCaja == null)
             {
                 MessageBox.Show("No hay ninguna caja abierta actualmente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -36,15 +37,27 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             int idCaja = Session.CurrentCaja.Id_caja;
 
+            var totalesPorMetodo = dao.ObtenerTotalesPorMetodo(Session.CurrentCaja.Id_caja);
+            decimal totalTransferencia = totalesPorMetodo.ContainsKey("Transferencia") ? totalesPorMetodo["Transferencia"] : 0m;
+            decimal totalDebito = totalesPorMetodo.ContainsKey("Débito") ? totalesPorMetodo["Débito"] : 0m;
+            decimal totalCredito = totalesPorMetodo.ContainsKey("Crédito") ? totalesPorMetodo["Crédito"] : 0m;
+
+            // Mostrar totales por método de pago
+            txtTransferencia.Text = totalTransferencia.ToString("C");
+            txtDebito.Text = totalDebito.ToString("C");
+            txtCredito.Text = totalCredito.ToString("C");
+
+            // Calcular montos
             montoInicial = Session.CurrentCaja.Monto_inicio;
             totalEfectivo = cajaDao.ObtenerTotalVentasEfectivo(idCaja);
             montoEsperado = montoInicial + totalEfectivo;
 
+            // Mostrar montos al cierre
             txtMontoInicial.Text = montoInicial.ToString("C");
             txtTotalEfectivo.Text = totalEfectivo.ToString("C");
             txtMontoEsperado.Text = montoEsperado.ToString("C");
 
-            txtMontoActual.Focus();
+            txtMontoActual.Focus();   
         }
 
         private void btnCerrarCaja_Click(object sender, EventArgs e)

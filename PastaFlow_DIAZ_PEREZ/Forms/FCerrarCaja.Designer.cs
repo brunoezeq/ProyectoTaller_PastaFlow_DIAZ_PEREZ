@@ -41,8 +41,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnAtras = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txtDebito = new System.Windows.Forms.TextBox();
+            this.txtCredito = new System.Windows.Forms.TextBox();
+            this.txtTransferencia = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.pnlAbrirCaja.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlAbrirCaja
@@ -186,12 +196,105 @@
             this.btnCerrarCaja.UseVisualStyleBackColor = false;
             this.btnCerrarCaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.DarkRed;
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.txtDebito);
+            this.panel1.Controls.Add(this.txtCredito);
+            this.panel1.Controls.Add(this.txtTransferencia);
+            this.panel1.Controls.Add(this.label7);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Location = new System.Drawing.Point(917, 182);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(319, 420);
+            this.panel1.TabIndex = 16;
+            // 
+            // txtDebito
+            // 
+            this.txtDebito.Location = new System.Drawing.Point(66, 227);
+            this.txtDebito.Name = "txtDebito";
+            this.txtDebito.Size = new System.Drawing.Size(193, 20);
+            this.txtDebito.TabIndex = 14;
+            // 
+            // txtCredito
+            // 
+            this.txtCredito.Location = new System.Drawing.Point(66, 169);
+            this.txtCredito.Name = "txtCredito";
+            this.txtCredito.Size = new System.Drawing.Size(193, 20);
+            this.txtCredito.TabIndex = 13;
+            // 
+            // txtTransferencia
+            // 
+            this.txtTransferencia.Location = new System.Drawing.Point(66, 111);
+            this.txtTransferencia.Name = "txtTransferencia";
+            this.txtTransferencia.Size = new System.Drawing.Size(193, 20);
+            this.txtTransferencia.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(90, 204);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(148, 16);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Total en Tarjeta Débito ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(90, 146);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(151, 16);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Total en Tarjeta Crédito ";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(90, 88);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(145, 16);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Total en Transferencia ";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(89, 18);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(154, 26);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Total Recaudado";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(103, 355);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(124, 18);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "¡Hasta Mañana!";
+            // 
             // FCerrarCaja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Khaki;
-            this.ClientSize = new System.Drawing.Size(1012, 680);
+            this.ClientSize = new System.Drawing.Size(1255, 680);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlAbrirCaja);
             this.Name = "FCerrarCaja";
             this.Text = "Cerrar Caja";
@@ -199,6 +302,8 @@
             this.pnlAbrirCaja.ResumeLayout(false);
             this.pnlAbrirCaja.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -217,5 +322,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAtras;
         private System.Windows.Forms.Button btnCerrarCaja;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox txtDebito;
+        private System.Windows.Forms.TextBox txtCredito;
+        private System.Windows.Forms.TextBox txtTransferencia;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label6;
     }
 }

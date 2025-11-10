@@ -61,6 +61,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     btnVerReportes.Enabled = true;
                     btnRegEmpleado.Enabled = true;
                     btnVerQuejas.Enabled = true;
+                    btnVerGraficos.Enabled = true; 
+                    btnBackup.Enabled = true;
                 }
                 else if (user.Id_rol == 2) // Gerente
                 {
@@ -190,6 +192,18 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             AbrirFormulario(new FVerQuejas());
         }
 
+        private void btnVerGraficos_Click(object sender, EventArgs e)
+        {
+            MarcarBotonActivo(sender as Button);
+            AbrirFormulario(new FGraficos());
+        }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            MarcarBotonActivo(sender as Button);
+            AbrirFormulario(new FBackup());
+        }
+
         private IEnumerable<Button> GetBotonesMenu()
         {
             return new Button[]
@@ -201,7 +215,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 btnInventario,
                 btnRegReserva,
                 btnCargarPedido,
-                btnAbrirCaja
+                btnAbrirCaja,
+                btnVerGraficos
             };
         }
 
@@ -361,5 +376,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             int b = (int)(color.B * (1f - amount));
             return Color.FromArgb(color.A, Math.Max(0, r), Math.Max(0, g), Math.Max(0, b));
         }
+
+        
     }
 }
