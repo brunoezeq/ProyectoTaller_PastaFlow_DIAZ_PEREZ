@@ -42,26 +42,26 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(373, 170);
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(568, 251);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(205, 15);
+            this.label1.Size = new System.Drawing.Size(218, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "Seleccione la ruta del archivo: ";
             // 
             // lblUltimoBackup
             // 
             this.lblUltimoBackup.AutoSize = true;
-            this.lblUltimoBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUltimoBackup.Location = new System.Drawing.Point(373, 121);
+            this.lblUltimoBackup.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUltimoBackup.Location = new System.Drawing.Point(568, 174);
             this.lblUltimoBackup.Name = "lblUltimoBackup";
-            this.lblUltimoBackup.Size = new System.Drawing.Size(100, 15);
+            this.lblUltimoBackup.Size = new System.Drawing.Size(108, 19);
             this.lblUltimoBackup.TabIndex = 3;
             this.lblUltimoBackup.Text = "Último Backup";
             // 
             // txtRuta
             // 
-            this.txtRuta.Location = new System.Drawing.Point(376, 190);
+            this.txtRuta.Location = new System.Drawing.Point(572, 273);
             this.txtRuta.Multiline = true;
             this.txtRuta.Name = "txtRuta";
             this.txtRuta.Size = new System.Drawing.Size(240, 23);
@@ -70,11 +70,13 @@
             // btnSeleccionarRuta
             // 
             this.btnSeleccionarRuta.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnSeleccionarRuta.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSeleccionarRuta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleccionarRuta.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSeleccionarRuta.ForeColor = System.Drawing.Color.Black;
-            this.btnSeleccionarRuta.Location = new System.Drawing.Point(622, 190);
+            this.btnSeleccionarRuta.Location = new System.Drawing.Point(818, 264);
             this.btnSeleccionarRuta.Name = "btnSeleccionarRuta";
-            this.btnSeleccionarRuta.Size = new System.Drawing.Size(102, 23);
+            this.btnSeleccionarRuta.Size = new System.Drawing.Size(121, 32);
             this.btnSeleccionarRuta.TabIndex = 5;
             this.btnSeleccionarRuta.Text = "Seleccionar Ruta";
             this.btnSeleccionarRuta.UseVisualStyleBackColor = false;
@@ -82,13 +84,16 @@
             // 
             // btnGenerarBackup
             // 
+            this.btnGenerarBackup.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnGenerarBackup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGenerarBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGenerarBackup.Location = new System.Drawing.Point(690, 387);
+            this.btnGenerarBackup.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerarBackup.Location = new System.Drawing.Point(881, 480);
             this.btnGenerarBackup.Name = "btnGenerarBackup";
-            this.btnGenerarBackup.Size = new System.Drawing.Size(111, 23);
+            this.btnGenerarBackup.Size = new System.Drawing.Size(111, 51);
             this.btnGenerarBackup.TabIndex = 6;
             this.btnGenerarBackup.Text = "Generar Backup";
-            this.btnGenerarBackup.UseVisualStyleBackColor = true;
+            this.btnGenerarBackup.UseVisualStyleBackColor = false;
             this.btnGenerarBackup.Click += new System.EventHandler(this.btnGenerarBackup_Click);
             // 
             // lbTitulo
@@ -97,7 +102,7 @@
             this.lbTitulo.BackColor = System.Drawing.Color.DarkRed;
             this.lbTitulo.Font = new System.Drawing.Font("Calibri", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitulo.ForeColor = System.Drawing.Color.Snow;
-            this.lbTitulo.Location = new System.Drawing.Point(575, 53);
+            this.lbTitulo.Location = new System.Drawing.Point(713, 87);
             this.lbTitulo.Name = "lbTitulo";
             this.lbTitulo.Size = new System.Drawing.Size(288, 33);
             this.lbTitulo.TabIndex = 41;
@@ -105,19 +110,22 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Yellow;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(807, 387);
+            this.button1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(998, 480);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 23);
+            this.button1.Size = new System.Drawing.Size(111, 51);
             this.button1.TabIndex = 42;
             this.button1.Text = "Restaurar Backup";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.btnRestaurarBackup_Click);
             // 
             // dgvHistorial
             // 
             this.dgvHistorial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvHistorial.Location = new System.Drawing.Point(376, 219);
+            this.dgvHistorial.Location = new System.Drawing.Point(572, 311);
             this.dgvHistorial.Name = "dgvHistorial";
             this.dgvHistorial.Size = new System.Drawing.Size(542, 150);
             this.dgvHistorial.TabIndex = 43;
@@ -128,7 +136,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Khaki;
-            this.ClientSize = new System.Drawing.Size(940, 450);
+            this.ClientSize = new System.Drawing.Size(1222, 575);
             this.Controls.Add(this.dgvHistorial);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lbTitulo);

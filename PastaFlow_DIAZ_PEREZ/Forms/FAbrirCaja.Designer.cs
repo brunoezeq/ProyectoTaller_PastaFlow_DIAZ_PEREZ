@@ -59,6 +59,7 @@
             // btnAbrirCaja
             // 
             this.btnAbrirCaja.BackColor = System.Drawing.Color.LemonChiffon;
+            this.btnAbrirCaja.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAbrirCaja.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbrirCaja.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbrirCaja.Location = new System.Drawing.Point(58, 347);
@@ -72,6 +73,7 @@
             // btnAtras
             // 
             this.btnAtras.BackColor = System.Drawing.Color.RosyBrown;
+            this.btnAtras.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAtras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAtras.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAtras.Location = new System.Drawing.Point(161, 347);
@@ -97,7 +99,7 @@
             this.pnlAbrirCaja.Controls.Add(this.label2);
             this.pnlAbrirCaja.Controls.Add(this.btnAtras);
             this.pnlAbrirCaja.Controls.Add(this.btnAbrirCaja);
-            this.pnlAbrirCaja.Location = new System.Drawing.Point(469, 20);
+            this.pnlAbrirCaja.Location = new System.Drawing.Point(666, 205);
             this.pnlAbrirCaja.Name = "pnlAbrirCaja";
             this.pnlAbrirCaja.Size = new System.Drawing.Size(319, 420);
             this.pnlAbrirCaja.TabIndex = 6;
@@ -203,7 +205,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Khaki;
-            this.ClientSize = new System.Drawing.Size(800, 452);
+            this.ClientSize = new System.Drawing.Size(1147, 743);
             this.Controls.Add(this.pnlAbrirCaja);
             this.Name = "FAbrirCaja";
             this.Text = "Abrir Caja";

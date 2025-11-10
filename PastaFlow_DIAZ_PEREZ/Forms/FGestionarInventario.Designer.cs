@@ -42,6 +42,13 @@
             this.flowLayoutPanelBotones = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAtras = new System.Windows.Forms.Button();
             this.btnAdelante = new System.Windows.Forms.Button();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
+            this.nombreProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.panelLateral = new System.Windows.Forms.Panel();
             this.lbProdCategoria = new System.Windows.Forms.Label();
@@ -60,22 +67,15 @@
             this.txtProdNombre = new System.Windows.Forms.TextBox();
             this.txtProdDesc = new System.Windows.Forms.TextBox();
             this.lbProdDescripcion = new System.Windows.Forms.Label();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DescProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreProd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.pnlPrincipal.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelContenido.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnlTabla.SuspendLayout();
             this.flowLayoutPanelBotones.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.panelLateral.SuspendLayout();
             this.flowBotones.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlPrincipal
@@ -172,6 +172,61 @@
             this.btnAdelante.Name = "btnAdelante";
             this.btnAdelante.UseVisualStyleBackColor = true;
             this.btnAdelante.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
+            // dgvProductos
+            // 
+            this.dgvProductos.AllowUserToResizeRows = false;
+            resources.ApplyResources(this.dgvProductos, "dgvProductos");
+            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProductos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvProductos.BackgroundColor = System.Drawing.Color.White;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nombreProd,
+            this.DescProd,
+            this.Precio,
+            this.Stock,
+            this.Categoria,
+            this.Estado});
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.ReadOnly = true;
+            this.dgvProductos.RowHeadersVisible = false;
+            // 
+            // nombreProd
+            // 
+            resources.ApplyResources(this.nombreProd, "nombreProd");
+            this.nombreProd.Name = "nombreProd";
+            this.nombreProd.ReadOnly = true;
+            // 
+            // DescProd
+            // 
+            resources.ApplyResources(this.DescProd, "DescProd");
+            this.DescProd.Name = "DescProd";
+            this.DescProd.ReadOnly = true;
+            // 
+            // Precio
+            // 
+            resources.ApplyResources(this.Precio, "Precio");
+            this.Precio.Name = "Precio";
+            this.Precio.ReadOnly = true;
+            // 
+            // Stock
+            // 
+            resources.ApplyResources(this.Stock, "Stock");
+            this.Stock.Name = "Stock";
+            this.Stock.ReadOnly = true;
+            // 
+            // Categoria
+            // 
+            resources.ApplyResources(this.Categoria, "Categoria");
+            this.Categoria.Name = "Categoria";
+            this.Categoria.ReadOnly = true;
+            // 
+            // Estado
+            // 
+            resources.ApplyResources(this.Estado, "Estado");
+            this.Estado.Name = "Estado";
+            this.Estado.ReadOnly = true;
             // 
             // panelHeader
             // 
@@ -307,61 +362,6 @@
             this.lbProdDescripcion.ForeColor = System.Drawing.Color.White;
             this.lbProdDescripcion.Name = "lbProdDescripcion";
             // 
-            // Estado
-            // 
-            resources.ApplyResources(this.Estado, "Estado");
-            this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
-            // 
-            // Categoria
-            // 
-            resources.ApplyResources(this.Categoria, "Categoria");
-            this.Categoria.Name = "Categoria";
-            this.Categoria.ReadOnly = true;
-            // 
-            // Stock
-            // 
-            resources.ApplyResources(this.Stock, "Stock");
-            this.Stock.Name = "Stock";
-            this.Stock.ReadOnly = true;
-            // 
-            // Precio
-            // 
-            resources.ApplyResources(this.Precio, "Precio");
-            this.Precio.Name = "Precio";
-            this.Precio.ReadOnly = true;
-            // 
-            // DescProd
-            // 
-            resources.ApplyResources(this.DescProd, "DescProd");
-            this.DescProd.Name = "DescProd";
-            this.DescProd.ReadOnly = true;
-            // 
-            // nombreProd
-            // 
-            resources.ApplyResources(this.nombreProd, "nombreProd");
-            this.nombreProd.Name = "nombreProd";
-            this.nombreProd.ReadOnly = true;
-            // 
-            // dgvProductos
-            // 
-            this.dgvProductos.AllowUserToResizeRows = false;
-            resources.ApplyResources(this.dgvProductos, "dgvProductos");
-            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvProductos.BackgroundColor = System.Drawing.Color.White;
-            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nombreProd,
-            this.DescProd,
-            this.Precio,
-            this.Stock,
-            this.Categoria,
-            this.Estado});
-            this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.RowHeadersVisible = false;
-            // 
             // FGestionarInventario
             // 
             resources.ApplyResources(this, "$this");
@@ -380,10 +380,10 @@
             this.panel1.PerformLayout();
             this.pnlTabla.ResumeLayout(false);
             this.flowLayoutPanelBotones.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.panelLateral.ResumeLayout(false);
             this.panelLateral.PerformLayout();
             this.flowBotones.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
 
         }

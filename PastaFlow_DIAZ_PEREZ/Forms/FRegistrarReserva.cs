@@ -22,6 +22,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             InitializeComponent();
         }
 
+        // Campo privado para recordar el nombre real de la columna ID (puede variar según SP)
+        private string _idReservaColumnName = "id_reserva";
+
         private void FReservas_Load(object sender, EventArgs e)
         {
             dtpFechaHora.Format = DateTimePickerFormat.Custom;
@@ -30,8 +33,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             cBoxEstado.Items.AddRange(new string[] { "Pendiente", "Confirmada", "Cancelada" });
             cBoxEstado.SelectedIndex = 0;
 
-            // Aplicar estilo visual consistente con Gestionar Inventario
+            // Estilo + datos
             ConfigurarGrillaVisualReservas();
+
+            // Cablear click del botón de acción
+            dgvReservas.CellContentClick -= dgvReservas_CellContentClick;
+            dgvReservas.CellContentClick += dgvReservas_CellContentClick;
 
             CargarReservas();
         }
@@ -148,10 +155,44 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             var dao = new ReservaDAO();
             dgvReservas.DataSource = dao.ListarReservas();
 
+            // Detectar dinámicamente el nombre de la columna ID de la reserva
+            DetectarColumnaIdReserva();
+
             // Aplicar estilo visual completo y luego ajustes por columna
             ConfigurarGrillaVisualReservas();
             FormatearGrillaReservas();
         }
+
+        private void DetectarColumnaIdReserva()
+        {
+            _idReservaColumnName = null;
+            foreach (DataGridViewColumn c in dgvReservas.Columns)
+            {
+                var nombre = c.Name;
+                var header = c.HeaderText;
+                var prop = c.DataPropertyName;
+
+                bool esId =
+                    Igual(nombre, "id_reserva") ||
+                    Igual(prop, "id_reserva") ||
+                    (Contiene(header, "id") && Contiene(header, "reserva")) ||
+                    (Contiene(nombre, "id") && Contiene(nombre, "reserva")) ||
+                    Igual(nombre, "IdReserva") || Igual(prop, "IdReserva") ||
+                    Igual(nombre, "ID_RESERVA");
+
+                if (esId)
+                {
+                    _idReservaColumnName = c.Name; // usamos Name para acceder a la celda
+                    break;
+                }
+            }
+        }
+
+        private bool Igual(string a, string b) =>
+            string.Equals(a?.Trim(), b?.Trim(), StringComparison.OrdinalIgnoreCase);
+
+        private bool Contiene(string a, string b) =>
+            !string.IsNullOrWhiteSpace(a) && a.IndexOf(b, StringComparison.OrdinalIgnoreCase) >= 0;
 
         // Limpiar campos del formulario
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -259,32 +300,87 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FormatearGrillaReservas()
         {
-            // Ocultar columnas internas si las hay
-            if (dgvReservas.Columns.Contains("id_reserva"))
-                dgvReservas.Columns["id_reserva"].Visible = false;
+            if (_idReservaColumnName != null && dgvReservas.Columns.Contains(_idReservaColumnName))
+                dgvReservas.Columns[_idReservaColumnName].Visible = false;
 
-            // Alinear campos específicos si existen
             if (dgvReservas.Columns.Contains("Fecha y Hora"))
                 dgvReservas.Columns["Fecha y Hora"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             if (dgvReservas.Columns.Contains("Cajero"))
                 dgvReservas.Columns["Cajero"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
-            // Aplicar formato general
             dgvReservas.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvReservas.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvReservas.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
 
-            // Si quieres un botón de acción (ej. cancelar reserva), puedes agregarlo así:
             if (!dgvReservas.Columns.Contains("Accion"))
             {
                 var col = new DataGridViewButtonColumn
                 {
                     Name = "Accion",
                     HeaderText = "Acción",
-                    UseColumnTextForButtonValue = false,
-                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    Text = "Eliminar",
+                    UseColumnTextForButtonValue = true,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+                    FlatStyle = FlatStyle.Standard
                 };
                 dgvReservas.Columns.Add(col);
+            }
+            else
+            {
+                var c = dgvReservas.Columns["Accion"] as DataGridViewButtonColumn;
+                c.Text = "Eliminar";
+                c.UseColumnTextForButtonValue = true;
+                c.FlatStyle = FlatStyle.Standard;
+            }
+        }
+        private void dgvReservas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var col = dgvReservas.Columns[e.ColumnIndex];
+            if (col == null || col.Name != "Accion") return;
+
+            if (string.IsNullOrEmpty(_idReservaColumnName) || !dgvReservas.Columns.Contains(_idReservaColumnName))
+            {
+                MessageBox.Show("No se encontró la columna de identificador de reserva en el resultado. Ajuste el SP para incluir 'id_reserva'.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var row = dgvReservas.Rows[e.RowIndex];
+            var val = row.Cells[_idReservaColumnName]?.Value?.ToString();
+
+            if (!int.TryParse(val, out int idReserva))
+            {
+                MessageBox.Show("No se pudo obtener el identificador de la reserva.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var confirmar = MessageBox.Show("¿Desea eliminar la reserva seleccionada?",
+                "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmar != DialogResult.Yes) return;
+
+            try
+            {
+                var dao = new ReservaDAO();
+                bool ok = dao.EliminarReserva(idReserva);
+                if (ok)
+                {
+                    CargarReservas();
+                    MessageBox.Show("Reserva eliminada correctamente.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo eliminar la reserva.", "Atención",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar reserva: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

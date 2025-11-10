@@ -133,7 +133,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTitulo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>322, 12</value>
+    <value>322, 29</value>
   </data>
   <data name="lblTitulo.Size" type="System.Drawing.Size, System.Drawing">
     <value>254, 33</value>
@@ -349,7 +349,7 @@
     <value>1</value>
   </data>
   <data name="flowLayoutPanelBotones.Location" type="System.Drawing.Point, System.Drawing">
-    <value>292, 386</value>
+    <value>308, 386</value>
   </data>
   <data name="flowLayoutPanelBotones.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 44</value>
@@ -553,7 +553,7 @@
     <value>Calibri, 12pt, style=Bold</value>
   </data>
   <data name="cBoxProdCat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 420</value>
+    <value>46, 420</value>
   </data>
   <data name="cBoxProdCat.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 27</value>
@@ -1074,28 +1074,10 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Inventario</value>
   </data>
-  <data name="&gt;&gt;Estado.Name" xml:space="preserve">
-    <value>Estado</value>
+  <data name="&gt;&gt;nombreProd.Name" xml:space="preserve">
+    <value>nombreProd</value>
   </data>
-  <data name="&gt;&gt;Estado.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Categoria.Name" xml:space="preserve">
-    <value>Categoria</value>
-  </data>
-  <data name="&gt;&gt;Categoria.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Stock.Name" xml:space="preserve">
-    <value>Stock</value>
-  </data>
-  <data name="&gt;&gt;Stock.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Precio.Name" xml:space="preserve">
-    <value>Precio</value>
-  </data>
-  <data name="&gt;&gt;Precio.Type" xml:space="preserve">
+  <data name="&gt;&gt;nombreProd.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DescProd.Name" xml:space="preserve">
@@ -1104,10 +1086,28 @@
   <data name="&gt;&gt;DescProd.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;nombreProd.Name" xml:space="preserve">
-    <value>nombreProd</value>
+  <data name="&gt;&gt;Precio.Name" xml:space="preserve">
+    <value>Precio</value>
   </data>
-  <data name="&gt;&gt;nombreProd.Type" xml:space="preserve">
+  <data name="&gt;&gt;Precio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Stock.Name" xml:space="preserve">
+    <value>Stock</value>
+  </data>
+  <data name="&gt;&gt;Stock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Categoria.Name" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="&gt;&gt;Categoria.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Estado.Name" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="&gt;&gt;Estado.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

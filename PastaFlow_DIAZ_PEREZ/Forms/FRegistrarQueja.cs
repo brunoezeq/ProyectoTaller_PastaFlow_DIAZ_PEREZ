@@ -14,6 +14,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 {
     public partial class FRegistrarQueja : Form
     {
+        private const string PlaceholderNombre = "Nombre";
+        private const string PlaceholderApellido = "Apellido";
+
         public FRegistrarQueja()
         {
             InitializeComponent();
@@ -21,12 +24,14 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnRegistrarQueja_Click(object sender, EventArgs e)
         {
-            // Validar campos obligatorios
+            // Validar campos obligatorios evitando placeholders (comparación robusta)
             if (string.IsNullOrWhiteSpace(txtNombreCliente.Text) ||
+                string.Equals(txtNombreCliente.Text.Trim(), PlaceholderNombre, StringComparison.OrdinalIgnoreCase) ||
                 string.IsNullOrWhiteSpace(txtApellidoCliente.Text) ||
+                string.Equals(txtApellidoCliente.Text.Trim(), PlaceholderApellido, StringComparison.OrdinalIgnoreCase) ||
                 string.IsNullOrWhiteSpace(txtMotivo.Text))
             {
-                MessageBox.Show("Por favor complete todos los campos obligatorios.",
+                MessageBox.Show("Por favor ingrese nombre y apellido reales y el motivo.",
                                 "Campos requeridos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -35,11 +40,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             string apellido = txtApellidoCliente.Text.Trim();
             string motivo = txtMotivo.Text.Trim();
             string descripcion = txtDescripcion.Text.Trim();
-
-            // 🔹 Obtener el usuario logueado
-            // Si ya guardás el usuario en sesión (por ejemplo en una variable global o singleton)
             int idUsuario = Session.CurrentUser.Id_usuario;
-            // Si no tenés una sesión aún, podrías usar un valor de prueba (por ejemplo, 1)
 
             try
             {
@@ -61,7 +62,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void LimpiarFormulario()
         {
             txtNombreCliente.Clear();
-            textApellidoCliente.Clear(); 
+            txtApellidoCliente.Clear(); 
             txtMotivo.Clear();
             txtDescripcion.Clear();
         }

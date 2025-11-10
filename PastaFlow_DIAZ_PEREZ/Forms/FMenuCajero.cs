@@ -24,17 +24,17 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             pictureBox1 = new PictureBox();
             pnlContent.Controls.Add(pictureBox1);
             this.Load += FMenu_Load;
-
-            // Reposicionar encabezado cuando cambie el tamaño
             this.pnlTop.Resize += (s, e) => AjustarHeader();
+
+            // Asegura que el botón esté cableado
+            btnAbrirCaja.Click -= btnAbrirCaja_Click;
+            btnAbrirCaja.Click += btnAbrirCaja_Click;
         }
 
         private void FMenu_Load(object sender, EventArgs e)
         {
             var user = Session.CurrentUser;
-            var dao = new CajaDAO();
 
-            // Mostrar datos básicos (defensivo)
             if (user != null)
             {
                 lbUsuario.Text = $"Bienvenido: {user.Nombre} {user.Apellido}";
@@ -49,7 +49,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             pnlMenuLateral.AutoScroll = true;
 
-            // Inicial: todos visibles, deshabilitados (depende de rol luego)
             foreach (var btn in GetBotonesMenu())
             {
                 if (btn == null) continue;
@@ -57,10 +56,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 btn.Enabled = false;
             }
 
-            // Habilitar botones por rol
             if (user != null)
             {
-                if (user.Id_rol == 1) // Admin
+                if (user.Id_rol == 1)
                 {
                     btnVerReportes.Enabled = true;
                     btnRegEmpleado.Enabled = true;
@@ -68,55 +66,29 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     btnVerGraficos.Enabled = true;
                     btnBackup.Enabled = true;
                 }
-                else if (user.Id_rol == 2) // Gerente
+                else if (user.Id_rol == 2)
                 {
                     btnInventario.Enabled = true;
                     btnRegQueja.Enabled = true;
                 }
-                else if (user.Id_rol == 3) // Cajero
+                else if (user.Id_rol == 3)
                 {
                     btnAbrirCaja.Enabled = true;
-                    btnCargarPedido.Enabled = true;
-                    btnRegReserva.Enabled = true;
+                    // Las demás se habilitan sólo si la caja está abierta
                 }
             }
 
-            // Aplicar estilo antes de hacer la comprobación (no altera Text pero mantiene consistencia)
             AplicarEstiloMenu();
             InsertarEspaciadoresMenu(10);
             AjustarHeader();
 
-            // Ahora: comprobar si hay caja abierta (solo si el rol es cajero y hay usuario)
-            try
-            {
-                if (user != null && user.Id_rol == 3 && btnAbrirCaja != null && btnAbrirCaja.Enabled)
-                {
-                    bool hayCaja = dao.HayCajaAbierta(user.Id_usuario);
-                    btnAbrirCaja.Text = hayCaja ? "Cerrar Caja" : "Abrir Caja";
-                    cajaAbierta = hayCaja;
-                }
-                else if (btnAbrirCaja != null)
-                {
-                    // Asegurar texto por defecto si no es cajero
-                    btnAbrirCaja.Text = "Abrir Caja";
-                    cajaAbierta = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Si falla la consulta a BD no romper UI, mostrar advertencia y dejar valor por defecto
-                Debug.WriteLine("[Caja] Error comprobando caja abierta: " + ex);
-                btnAbrirCaja.Text = "Abrir Caja";
-                cajaAbierta = false;
-            }
+            // Usa exclusivamente la sesión para decidir el estado inicial
+            ActualizarUIEstadoCaja(Session.CurrentCaja != null);
 
-            // Ajuste visual final del panel central
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.BackColor = pnlContent.BackColor;
         }
-
-
 
         private void timerHora_Tick(object sender, EventArgs e)
         {
@@ -127,13 +99,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void AjustarHeader()
         {
             if (pnlTop == null || lbHora == null || lbFecha == null || lbUsuario == null) return;
-
             int paddingRight = 12;
-            // Ubicar hora y fecha a la derecha
             lbHora.Left = pnlTop.Width - lbHora.Width - paddingRight;
             lbFecha.Left = lbHora.Left - lbFecha.Width - 16;
-
-            // Reservar espacio para el usuario hasta antes de la fecha
             lbUsuario.AutoSize = false;
             int maxRight = Math.Max(0, lbFecha.Left - 16);
             lbUsuario.Width = Math.Max(120, maxRight - lbUsuario.Left);
@@ -161,36 +129,32 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
-            var dao = new CajaDAO();
-            bool cajaRealAbierta = false;
-            try
-            {
-                cajaRealAbierta = dao.HayCajaAbierta(user.Id_usuario);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("[btnAbrirCaja_Click] Error comprobando caja: " + ex);
-                MessageBox.Show("Error comprobando estado de la caja. Revise la conexión.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            bool estaAbierta = Session.CurrentCaja != null;
 
-            if (!cajaRealAbierta)
+            if (!estaAbierta)
             {
+                // Embebido (sin ShowDialog)
                 var frm = new FAbrirCaja();
-                frm.FormClosing += (s, args) => RefrescarEstadoCaja();
-                AbrirFormulario(frm);
+                frm.CajaAbiertaCorrectamente += (s, ev) =>
+                {
+                    ActualizarUIEstadoCaja(true);
+                    MessageBox.Show("Caja abierta. Puede registrar ventas.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                };
+                frm.FormClosed += (s, ev) => ActualizarUIEstadoCaja(Session.CurrentCaja != null);
+                AbrirFormulario(frm); // usa panel central
             }
             else
             {
-                // Abrir formulario de cierre (pasa datos si los tenés; aquí llamamos con 0 por ejemplo)
-                decimal montoInicial = 0m;
-                decimal totalEfectivo = 0m;
-                var frm = new FCerrarCaja(montoInicial, totalEfectivo);
-                frm.FormClosing += (s, args) => RefrescarEstadoCaja();
+                var frm = new FCerrarCaja(0m, 0m);
+                frm.FormClosed += (s, ev) =>
+                {
+                    ActualizarUIEstadoCaja(Session.CurrentCaja != null);
+                    if (Session.CurrentCaja == null)
+                        MessageBox.Show("Caja cerrada. No se permiten operaciones de venta.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                };
                 AbrirFormulario(frm);
             }
         }
-
 
         private void btnPedido_Click(object sender, EventArgs e)
         {
@@ -277,13 +241,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             foreach (var btn in GetBotonesMenu())
             {
                 if (btn == null) continue;
-
                 btn.Height = Math.Max(btn.Height, 48);
                 btn.ImageAlign = ContentAlignment.MiddleLeft;
                 btn.TextAlign = ContentAlignment.MiddleCenter;
                 btn.TextImageRelation = TextImageRelation.ImageBeforeText;
                 TrySetFont(btn, "Segoe UI", 10.5f, FontStyle.Regular);
-
                 btn.UseVisualStyleBackColor = false;
                 btn.FlatStyle = FlatStyle.Flat;
                 btn.FlatAppearance.BorderSize = 0;
@@ -298,21 +260,18 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 {
                     btn.BackColor = Darken(Palette.Vino, 0.35f);
                     btn.ForeColor = Color.FromArgb(200, Palette.Beige);
-                    btn.Cursor = Cursors.No;
                 }
 
                 btn.MouseEnter -= Btn_MouseEnter;
                 btn.MouseEnter += Btn_MouseEnter;
                 btn.MouseLeave -= Btn_MouseLeave;
                 btn.MouseLeave += Btn_MouseLeave;
-
                 btn.Resize -= (s, e) => RedondearControl(btn, 8);
                 btn.Resize += (s, e) => RedondearControl(btn, 8);
                 RedondearControl(btn, 8);
             }
         }
 
-        // Inserta paneles "espaciadores" entre botones dockeados arriba
         private void InsertarEspaciadoresMenu(int alto)
         {
             if (pnlMenuLateral == null) return;
@@ -436,8 +395,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 var user = Session.CurrentUser;
                 if (user == null)
                 {
-                    btnAbrirCaja.Text = "Abrir Caja";
-                    cajaAbierta = false;
+                    ActualizarUIEstadoCaja(false);
                     return;
                 }
 
@@ -453,8 +411,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     cajaRealAbierta = false;
                 }
 
-                btnAbrirCaja.Text = cajaRealAbierta ? "Cerrar Caja" : "Abrir Caja";
-                cajaAbierta = cajaRealAbierta;
+                ActualizarUIEstadoCaja(cajaRealAbierta);
             }
             catch (Exception ex)
             {
@@ -462,6 +419,20 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        private void ActualizarUIEstadoCaja(bool abierta)
+        {
+            cajaAbierta = abierta;
+            Session.CajaAbierta = abierta;
+            btnAbrirCaja.Text = abierta ? "Cerrar Caja" : "Abrir Caja";
 
+            // Habilitar/deshabilitar acciones que requieren caja abierta
+            if (Session.CurrentUser != null && Session.CurrentUser.Id_rol == 3)
+            {
+                btnCargarPedido.Enabled = abierta;
+                btnRegReserva.Enabled = abierta;
+                btnCargarPedido.BackColor = abierta ? Palette.Vino : Darken(Palette.Vino, 0.35f);
+                btnRegReserva.BackColor = abierta ? Palette.Vino : Darken(Palette.Vino, 0.35f);
+            }
+        }
     }
 }

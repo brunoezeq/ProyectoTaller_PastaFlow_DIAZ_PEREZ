@@ -78,7 +78,7 @@
             this.pnlRegistro.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlRegistro.Location = new System.Drawing.Point(0, 0);
             this.pnlRegistro.Name = "pnlRegistro";
-            this.pnlRegistro.Size = new System.Drawing.Size(271, 602);
+            this.pnlRegistro.Size = new System.Drawing.Size(271, 682);
             this.pnlRegistro.TabIndex = 1;
             // 
             // cantPersonas
@@ -117,7 +117,7 @@
             this.btnVolver.ForeColor = System.Drawing.Color.DarkRed;
             this.btnVolver.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoAtrás;
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVolver.Location = new System.Drawing.Point(12, 37);
+            this.btnVolver.Location = new System.Drawing.Point(12, 51);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(42, 30);
             this.btnVolver.TabIndex = 29;
@@ -135,11 +135,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(43, 94);
+            this.label1.Location = new System.Drawing.Point(29, 103);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(188, 29);
+            this.label1.Size = new System.Drawing.Size(212, 33);
             this.label1.TabIndex = 18;
             this.label1.Text = "Registrar Reserva";
             // 
@@ -245,7 +245,7 @@
             // 
             this.dtpInicio.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpInicio.Location = new System.Drawing.Point(317, 119);
+            this.dtpInicio.Location = new System.Drawing.Point(353, 171);
             this.dtpInicio.Name = "dtpInicio";
             this.dtpInicio.Size = new System.Drawing.Size(118, 20);
             this.dtpInicio.TabIndex = 29;
@@ -254,17 +254,17 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(255, 121);
+            this.label3.Location = new System.Drawing.Point(293, 171);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 19);
+            this.label3.Size = new System.Drawing.Size(54, 19);
             this.label3.TabIndex = 30;
-            this.label3.Text = "Desde :";
+            this.label3.Text = "Desde:";
             // 
             // dtpFin
             // 
             this.dtpFin.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFin.Location = new System.Drawing.Point(507, 120);
+            this.dtpFin.Location = new System.Drawing.Point(543, 171);
             this.dtpFin.Name = "dtpFin";
             this.dtpFin.Size = new System.Drawing.Size(118, 20);
             this.dtpFin.TabIndex = 31;
@@ -273,11 +273,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(448, 122);
+            this.label4.Location = new System.Drawing.Point(486, 171);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 19);
+            this.label4.Size = new System.Drawing.Size(51, 19);
             this.label4.TabIndex = 32;
-            this.label4.Text = "Hasta :";
+            this.label4.Text = "Hasta:";
             // 
             // lbEmpTitulo
             // 
@@ -286,7 +286,7 @@
             this.lbEmpTitulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbEmpTitulo.Font = new System.Drawing.Font("Calibri", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbEmpTitulo.ForeColor = System.Drawing.Color.Snow;
-            this.lbEmpTitulo.Location = new System.Drawing.Point(388, 60);
+            this.lbEmpTitulo.Location = new System.Drawing.Point(402, 76);
             this.lbEmpTitulo.Name = "lbEmpTitulo";
             this.lbEmpTitulo.Size = new System.Drawing.Size(288, 33);
             this.lbEmpTitulo.TabIndex = 33;
@@ -298,9 +298,9 @@
             this.btnBuscar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBuscar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
-            this.btnBuscar.Location = new System.Drawing.Point(645, 117);
+            this.btnBuscar.Location = new System.Drawing.Point(679, 166);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(26, 25);
+            this.btnBuscar.Size = new System.Drawing.Size(49, 32);
             this.btnBuscar.TabIndex = 34;
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -311,9 +311,9 @@
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.button1.Location = new System.Drawing.Point(677, 117);
+            this.button1.Location = new System.Drawing.Point(734, 166);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(26, 25);
+            this.button1.Size = new System.Drawing.Size(46, 32);
             this.button1.TabIndex = 35;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.btnLimpiarReserva_Click);
@@ -331,18 +331,19 @@
             this.panel2.Location = new System.Drawing.Point(271, 0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(2);
-            this.panel2.Size = new System.Drawing.Size(887, 179);
+            this.panel2.Size = new System.Drawing.Size(1076, 225);
             this.panel2.TabIndex = 30;
             // 
             // dgvReservas
             // 
             this.dgvReservas.AllowUserToAddRows = false;
             this.dgvReservas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvReservas.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReservas.Location = new System.Drawing.Point(317, 185);
+            this.dgvReservas.Location = new System.Drawing.Point(317, 231);
             this.dgvReservas.Name = "dgvReservas";
             this.dgvReservas.ReadOnly = true;
-            this.dgvReservas.Size = new System.Drawing.Size(887, 411);
+            this.dgvReservas.Size = new System.Drawing.Size(939, 439);
             this.dgvReservas.TabIndex = 31;
             // 
             // FRegistrarReserva
@@ -350,7 +351,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Khaki;
-            this.ClientSize = new System.Drawing.Size(1158, 602);
+            this.ClientSize = new System.Drawing.Size(1347, 682);
             this.Controls.Add(this.dgvReservas);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlRegistro);

@@ -1,12 +1,7 @@
 ﻿using PastaFlow_DIAZ_PEREZ.DataAccess;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -14,6 +9,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 {
     public partial class FGraficos : Form
     {
+        private const int TOP_N = 5;
+
         public FGraficos()
         {
             InitializeComponent();
@@ -23,50 +20,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             btnActualizarGraficos.Click -= BtnActualizarGraficos_Click;
             btnActualizarGraficos.Click += BtnActualizarGraficos_Click;
+            PrepararCharts();
             CargarGraficos();
-
-        }
-
-        private void CargarGraficos()
-        {
-            var dao = new ReporteDAO();
-
-            DateTime? desde = FindControl<DateTimePicker>("dtpDesdeGraficos")?.Value.Date;
-            DateTime? hasta = FindControl<DateTimePicker>("dtpHastaGraficos")?.Value.Date;
-
-            // 1️⃣ Gráfico de empleados
-            var dtEmp = dao.VentasPorEmpleado(desde, hasta);
-            chartEmpleados.Series.Clear();
-            var sEmp = new Series("");
-            sEmp.ChartType = SeriesChartType.Bar;
-            foreach (DataRow r in dtEmp.Rows)
-                sEmp.Points.AddXY(r["Empleado"], Convert.ToDecimal(r["Total"]));
-            chartEmpleados.Series.Add(sEmp);
-            chartEmpleados.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
-
-            // 2️⃣ Gráfico de productos
-            var dtProd = dao.TopProductos(desde, hasta);
-            chartProductos.Series.Clear();
-            var sProd = new Series("");
-            sProd.ChartType = SeriesChartType.Column;
-            foreach (DataRow r in dtProd.Rows)
-                sProd.Points.AddXY(r["Producto"], Convert.ToInt32(r["CantidadVendida"]));
-            chartProductos.Series.Add(sProd);
-
-            // 3️⃣ Gráfico de métodos de pago
-            var dtMet = dao.TotalesPorMetodoPago(desde, hasta);
-            chartMetodos.Series.Clear();
-            var sMet = new Series("");
-            sMet.ChartType = SeriesChartType.Pie;
-            foreach (DataRow r in dtMet.Rows)
-            {
-                string nombre = r["MetodoPago"].ToString();
-                decimal total = Convert.ToDecimal(r["Total"]);
-                var point = sMet.Points.AddY((double)total);
-                sMet.Points[point].LegendText = nombre;
-                sMet.Points[point].Label = $"{nombre} ({total:C0})";
-            }
-            chartMetodos.Series.Add(sMet);
         }
 
         private void BtnActualizarGraficos_Click(object sender, EventArgs e)
@@ -74,12 +29,103 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             CargarGraficos();
         }
 
-        private T FindControl<T>(string name) where T : Control
+        private void PrepararCharts()
         {
-            return this.Controls.Find(name, true)
-                       .OfType<T>()
-                       .FirstOrDefault();
+            foreach (var ch in new[] { chartEmpleados, chartProductos, chartMetodos })
+                ch.Series.Clear();
         }
 
+        private void CargarGraficos()
+        {
+            try
+            {
+                var dao = new ReporteDAO();
+
+                // Rango inclusivo: desde 00:00 hasta 23:59:59 del día seleccionado
+                DateTime? desde = dtpDesdeGraficos.Value.Date;
+                DateTime? hasta = dtpHastaGraficos.Value.Date.AddDays(1).AddTicks(-1);
+
+                // Empleados
+                var dtEmp = dao.VentasPorEmpleado(desde, hasta);
+                dtEmp = FiltrarTop(dtEmp, "Total"); // asegura TOP_N
+                ConfigurarYBind(chartEmpleados, dtEmp, "Empleado", "Total",
+                    SeriesChartType.Bar, "Ventas por empleado");
+
+                // Productos
+                var dtProd = dao.TopProductos(desde, hasta);
+                dtProd = FiltrarTop(dtProd, "CantidadVendida");
+                ConfigurarYBind(chartProductos, dtProd, "Producto", "CantidadVendida",
+                    SeriesChartType.Column, "Top productos");
+
+                // Métodos de pago
+                var dtMet = dao.TotalesPorMetodoPago(desde, hasta);
+                chartMetodos.Series.Clear();
+                var sMet = new Series("Métodos de pago")
+                {
+                    ChartType = SeriesChartType.Pie,
+                    IsValueShownAsLabel = true
+                };
+                foreach (DataRow r in dtMet.Rows)
+                {
+                    string nombre = r["MetodoPago"].ToString();
+                    decimal total = Convert.ToDecimal(r["Total"]);
+                    var idx = sMet.Points.AddY((double)total);
+                    var p = sMet.Points[idx];
+                    p.LegendText = nombre;
+                    p.Label = $"{nombre}\n{total:C0}";
+                }
+                if (dtMet.Rows.Count == 0)
+                {
+                    var idx = sMet.Points.AddY(1);
+                    sMet.Points[idx].LegendText = "Sin datos";
+                    sMet.Points[idx].Label = "Sin datos";
+                }
+                chartMetodos.Series.Add(sMet);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar gráficos: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private DataTable FiltrarTop(DataTable dt, string colOrden)
+        {
+            if (dt == null || dt.Rows.Count == 0) return dt;
+            var tipo = dt.Columns[colOrden].DataType;
+            var orden = dt.AsEnumerable()
+                          .OrderByDescending(r => Convert.ToDecimal(r[colOrden]))
+                          .Take(TOP_N);
+            return orden.CopyToDataTable();
+        }
+
+        private void ConfigurarYBind(Chart chart, DataTable dt,
+            string colX, string colY, SeriesChartType tipo, string nombreSerie)
+        {
+            chart.Series.Clear();
+            var s = new Series(nombreSerie)
+            {
+                ChartType = tipo,
+                XValueMember = colX,
+                YValueMembers = colY
+            };
+            chart.DataSource = dt;
+            chart.Series.Add(s);
+            chart.DataBind();
+
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                chart.Series.Clear();
+                var vacia = new Series("Sin datos")
+                {
+                    ChartType = SeriesChartType.Column
+                };
+                vacia.Points.AddXY("Sin datos", 0);
+                chart.Series.Add(vacia);
+            }
+
+            chart.ChartAreas[0].AxisX.Interval = 1;
+            chart.ChartAreas[0].AxisX.LabelStyle.Angle = -45;
+        }
     }
 }

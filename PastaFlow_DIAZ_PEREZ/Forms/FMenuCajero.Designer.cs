@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbRol = new System.Windows.Forms.Label();
             this.pnlMenuLateral = new System.Windows.Forms.Panel();
+            this.btnBackup = new System.Windows.Forms.Button();
             this.btnVerGraficos = new System.Windows.Forms.Button();
             this.btnVerQuejas = new System.Windows.Forms.Button();
             this.btnRegEmpleado = new System.Windows.Forms.Button();
@@ -50,7 +51,6 @@
             this.btnRegReserva = new System.Windows.Forms.Button();
             this.btnCargarPedido = new System.Windows.Forms.Button();
             this.btnAbrirCaja = new System.Windows.Forms.Button();
-            this.btnBackup = new System.Windows.Forms.Button();
             this.pnlTop.SuspendLayout();
             this.pnlContent.SuspendLayout();
             this.pnlHeader.SuspendLayout();
@@ -184,6 +184,27 @@
             this.pnlMenuLateral.Padding = new System.Windows.Forms.Padding(10, 12, 10, 12);
             this.pnlMenuLateral.Size = new System.Drawing.Size(271, 505);
             this.pnlMenuLateral.TabIndex = 0;
+            // 
+            // btnBackup
+            // 
+            this.btnBackup.BackColor = System.Drawing.Color.DarkRed;
+            this.btnBackup.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBackup.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnBackup.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
+            this.btnBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBackup.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBackup.ForeColor = System.Drawing.Color.White;
+            this.btnBackup.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBackup;
+            this.btnBackup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBackup.Location = new System.Drawing.Point(10, 450);
+            this.btnBackup.Name = "btnBackup";
+            this.btnBackup.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.btnBackup.Size = new System.Drawing.Size(251, 45);
+            this.btnBackup.TabIndex = 10;
+            this.btnBackup.Text = "   Backup";
+            this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBackup.UseVisualStyleBackColor = false;
+            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
             // btnVerGraficos
             // 
@@ -372,27 +393,6 @@
             this.btnAbrirCaja.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAbrirCaja.UseVisualStyleBackColor = false;
             this.btnAbrirCaja.Click += new System.EventHandler(this.btnAbrirCaja_Click);
-            // 
-            // btnBackup
-            // 
-            this.btnBackup.BackColor = System.Drawing.Color.DarkRed;
-            this.btnBackup.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBackup.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnBackup.FlatAppearance.BorderColor = System.Drawing.Color.Khaki;
-            this.btnBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackup.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBackup.ForeColor = System.Drawing.Color.White;
-            this.btnBackup.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBackup;
-            this.btnBackup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBackup.Location = new System.Drawing.Point(10, 450);
-            this.btnBackup.Name = "btnBackup";
-            this.btnBackup.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btnBackup.Size = new System.Drawing.Size(251, 45);
-            this.btnBackup.TabIndex = 10;
-            this.btnBackup.Text = "   Backup";
-            this.btnBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBackup.UseVisualStyleBackColor = false;
-            this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
             // 
             // FMenuCajero
             // 

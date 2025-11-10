@@ -70,5 +70,21 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
                 }
             }
         }
+
+        // Eliminar una reserva
+        public bool EliminarReserva(int idReserva)
+        {
+            using (var conn = DbConnection.GetConnection())
+            {
+                conn.Open();
+                using (var cmd = new SqlCommand("sp_EliminarReserva", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id_reserva", idReserva);
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0;
+                }
+            }
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         public FAbrirCaja()
         {
             InitializeComponent();
+
         }
 
         private void FAbrirCaja_Load(object sender, EventArgs e)
@@ -49,6 +50,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 e.Handled = true;
             }
         }
+
+        // evento para avisar que se abrió correctamente
+        public event EventHandler CajaAbiertaCorrectamente;
 
         private void btnAbrirCaja_Click(object sender, EventArgs e)
         {
@@ -91,15 +95,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             try
             {
-                // declaramos el DAO y llamamos al método
                 var dao = new CajaDAO();
                 var nuevaCaja = dao.AbrirCaja(Session.CurrentUser.Id_usuario, monto, DateTime.Now);
 
                 if (nuevaCaja != null)
                 {
-                    // Guardar la caja actual en la sesión
                     Session.CurrentCaja = nuevaCaja;
-
                     MontoApertura = monto;
                     FechaApertura = DateTime.Now;
 
@@ -112,8 +113,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     MessageBox.Show($"Caja abierta correctamente (ID: {nuevaCaja.Id_caja}).",
                         "Apertura", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    // Disparar evento (embed en panel)
+                    CajaAbiertaCorrectamente?.Invoke(this, EventArgs.Empty);
+
+                   
                 }
                 else
                 {

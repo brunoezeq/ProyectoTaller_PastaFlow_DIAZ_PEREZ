@@ -52,7 +52,7 @@
             this.dgvQuejas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvQuejas.BackgroundColor = System.Drawing.Color.LightCoral;
             this.dgvQuejas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQuejas.Location = new System.Drawing.Point(279, 188);
+            this.dgvQuejas.Location = new System.Drawing.Point(270, 224);
             this.dgvQuejas.Name = "dgvQuejas";
             this.dgvQuejas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvQuejas.ShowCellToolTips = false;
@@ -73,14 +73,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1086, 172);
+            this.panel1.Size = new System.Drawing.Size(1086, 194);
             this.panel1.TabIndex = 30;
             // 
             // dtpHasta
             // 
             this.dtpHasta.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpHasta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpHasta.Location = new System.Drawing.Point(755, 110);
+            this.dtpHasta.Location = new System.Drawing.Point(772, 153);
             this.dtpHasta.Name = "dtpHasta";
             this.dtpHasta.Size = new System.Drawing.Size(118, 27);
             this.dtpHasta.TabIndex = 35;
@@ -89,7 +89,7 @@
             // 
             this.dtpDesde.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpDesde.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDesde.Location = new System.Drawing.Point(556, 110);
+            this.dtpDesde.Location = new System.Drawing.Point(573, 153);
             this.dtpDesde.Name = "dtpDesde";
             this.dtpDesde.Size = new System.Drawing.Size(118, 27);
             this.dtpDesde.TabIndex = 33;
@@ -98,7 +98,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(694, 116);
+            this.label4.Location = new System.Drawing.Point(711, 159);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 19);
             this.label4.TabIndex = 36;
@@ -108,7 +108,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(492, 117);
+            this.label3.Location = new System.Drawing.Point(509, 160);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 19);
             this.label3.TabIndex = 34;
@@ -119,7 +119,7 @@
             this.btnLimpiar.BackColor = System.Drawing.Color.RosyBrown;
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoLimpiar;
-            this.btnLimpiar.Location = new System.Drawing.Point(933, 109);
+            this.btnLimpiar.Location = new System.Drawing.Point(950, 152);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(38, 27);
             this.btnLimpiar.TabIndex = 32;
@@ -131,7 +131,7 @@
             this.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFiltrar.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFiltrar.Image = global::PastaFlow_DIAZ_PEREZ.Properties.Resources.iconoBuscar;
-            this.btnFiltrar.Location = new System.Drawing.Point(889, 110);
+            this.btnFiltrar.Location = new System.Drawing.Point(906, 153);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(38, 26);
             this.btnFiltrar.TabIndex = 31;
@@ -143,7 +143,7 @@
             this.lbQuejasTitulo.BackColor = System.Drawing.Color.DarkRed;
             this.lbQuejasTitulo.Font = new System.Drawing.Font("Calibri", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbQuejasTitulo.ForeColor = System.Drawing.Color.Snow;
-            this.lbQuejasTitulo.Location = new System.Drawing.Point(683, 47);
+            this.lbQuejasTitulo.Location = new System.Drawing.Point(696, 71);
             this.lbQuejasTitulo.Name = "lbQuejasTitulo";
             this.lbQuejasTitulo.Size = new System.Drawing.Size(218, 29);
             this.lbQuejasTitulo.TabIndex = 30;
@@ -154,7 +154,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Khaki;
-            this.ClientSize = new System.Drawing.Size(1086, 450);
+            this.ClientSize = new System.Drawing.Size(1086, 508);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvQuejas);
             this.Name = "FVerQuejas";

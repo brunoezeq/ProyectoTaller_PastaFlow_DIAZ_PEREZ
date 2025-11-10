@@ -1,17 +1,15 @@
 ﻿using PastaFlow_DIAZ_PEREZ.DataAccess;
 using PastaFlow_DIAZ_PEREZ.Utils;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
-using System.IO;
-
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
@@ -26,6 +24,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FBackup_Load(object sender, EventArgs e)
         {
+            ConfigurarDgvHistorial();          // <-- configurar columnas antes de enlazar
             MostrarUltimoBackup();
             CargarHistorialBackups();
         }
@@ -59,6 +58,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 MessageBox.Show("Backup realizado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 MostrarUltimoBackup();
+                CargarHistorialBackups();
 
                 if (File.Exists(txtRuta.Text))
                 {
@@ -94,11 +94,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             try
             {
-                var dao = new BackupDAO();
-                DataTable dt = dao.ObtenerHistorialBackups();
-
-                dgvHistorial.AutoGenerateColumns = false;
-                dgvHistorial.DataSource = dt;
+                var dt = _backupDao.ObtenerHistorialBackups();
+                dgvHistorial.DataSource = dt; // columnas ya configuradas
             }
             catch (Exception ex)
             {
@@ -106,42 +103,45 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        private void btnRestaurarBackup_Click(object sender, EventArgs e)
+        private void ConfigurarDgvHistorial()
         {
-            try
-            {
-                using (var ofd = new OpenFileDialog())
-                {
-                    ofd.Title = "Seleccionar archivo de respaldo (.bak)";
-                    ofd.Filter = "Archivos de respaldo SQL (*.bak)|*.bak";
+            var g = dgvHistorial;
+            g.AutoGenerateColumns = false;
+            g.ReadOnly = true;
+            g.AllowUserToAddRows = false;
+            g.AllowUserToDeleteRows = false;
+            g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            g.RowHeadersVisible = false;
 
-                    if (ofd.ShowDialog() != DialogResult.OK)
-                        return;
+            // Crear columnas una solo vez
+            if (!g.Columns.Contains("ID"))
+                g.Columns.Add(new DataGridViewTextBoxColumn { Name = "ID", HeaderText = "ID", DataPropertyName = "ID", Visible = false });
 
-                    string rutaBackup = ofd.FileName;
-                    var dao = new BackupDAO();
+            if (!g.Columns.Contains("Fecha y hora"))
+                g.Columns.Add(new DataGridViewTextBoxColumn { Name = "Fecha y hora", HeaderText = "Fecha y hora", DataPropertyName = "Fecha y hora", AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells });
 
-                    dao.RestaurarBackup(rutaBackup);
+            if (!g.Columns.Contains("Usuario"))
+                g.Columns.Add(new DataGridViewTextBoxColumn { Name = "Usuario", HeaderText = "Usuario", DataPropertyName = "Usuario", AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells });
 
-                    MessageBox.Show("Base de datos restaurada correctamente.", "Restauración completada",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al restaurar backup: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            if (!g.Columns.Contains("Ruta del archivo"))
+                g.Columns.Add(new DataGridViewTextBoxColumn { Name = "Ruta del archivo", HeaderText = "Ruta del archivo", DataPropertyName = "Ruta del archivo", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
         }
 
         private void dgvHistorial_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgvHistorial.Columns.Clear();
-            dgvHistorial.Columns.Add("ID", "ID");
-            dgvHistorial.Columns.Add("Fecha y hora", "Fecha y hora");
-            dgvHistorial.Columns.Add("Usuario", "Usuario");
-            dgvHistorial.Columns.Add("Ruta del archivo", "Ruta del archivo");
+            // Evitar borrar columnas; opcional: abrir ubicación al hacer click en la ruta
+            if (e.RowIndex < 0) return;
+            if (dgvHistorial.Columns[e.ColumnIndex].Name != "Ruta del archivo") return;
 
-            dgvHistorial.Columns["Ruta del archivo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            var ruta = Convert.ToString(dgvHistorial.Rows[e.RowIndex].Cells["Ruta del archivo"].Value);
+            if (!string.IsNullOrWhiteSpace(ruta) && File.Exists(ruta))
+                Process.Start("explorer.exe", "/select,\"" + ruta + "\"");
+        }
+
+        private void btnRestaurarBackup_Click(object sender, EventArgs e)
+        {
+            // Lógica para restaurar el backup aquí
+            MessageBox.Show("Funcionalidad de restaurar backup aún no implementada.");
         }
     }
 }

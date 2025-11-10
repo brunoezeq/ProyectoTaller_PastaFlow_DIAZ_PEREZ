@@ -42,6 +42,7 @@
             this.btnAtras = new System.Windows.Forms.Button();
             this.btnCerrarCaja = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtDebito = new System.Windows.Forms.TextBox();
             this.txtCredito = new System.Windows.Forms.TextBox();
             this.txtTransferencia = new System.Windows.Forms.TextBox();
@@ -49,7 +50,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.pnlAbrirCaja.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -70,7 +70,7 @@
             this.pnlAbrirCaja.Controls.Add(this.label2);
             this.pnlAbrirCaja.Controls.Add(this.btnAtras);
             this.pnlAbrirCaja.Controls.Add(this.btnCerrarCaja);
-            this.pnlAbrirCaja.Location = new System.Drawing.Point(575, 182);
+            this.pnlAbrirCaja.Location = new System.Drawing.Point(497, 185);
             this.pnlAbrirCaja.Name = "pnlAbrirCaja";
             this.pnlAbrirCaja.Size = new System.Drawing.Size(319, 420);
             this.pnlAbrirCaja.TabIndex = 8;
@@ -207,10 +207,21 @@
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Location = new System.Drawing.Point(917, 182);
+            this.panel1.Location = new System.Drawing.Point(839, 185);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(319, 420);
             this.panel1.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(103, 355);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(124, 18);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "¡Hasta Mañana!";
             // 
             // txtDebito
             // 
@@ -276,17 +287,6 @@
             this.label10.Size = new System.Drawing.Size(154, 26);
             this.label10.TabIndex = 1;
             this.label10.Text = "Total Recaudado";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(103, 355);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(124, 18);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "¡Hasta Mañana!";
             // 
             // FCerrarCaja
             // 
