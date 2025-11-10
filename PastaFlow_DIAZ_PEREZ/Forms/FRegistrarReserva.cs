@@ -68,19 +68,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        private void CantPersonas_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            TextBox txt = sender as TextBox;
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
-            {
-                e.Handled = true;
-            }
-            if (char.IsDigit(e.KeyChar) && cantPersonas.Text.Length >= 15)
-            {
-                e.Handled = true;
-            }
-        }
-
         // Registrar reserva
         private void btnRegistrarReserva_Click(object sender, EventArgs e)
         {
@@ -102,7 +89,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             DateTime fechaHora = dtpFechaHora.Value;
             int cantidad = (int)cantPersonas.Value;
             string estado = cBoxEstado.SelectedItem.ToString();
-            int idUsuario = Session.CurrentUser.Id_usuario; // usuario logueado
+            int idUsuario = Session.CurrentUser.Id_usuario; 
 
             try
             {
@@ -111,44 +98,41 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
                 MessageBox.Show($"Reserva registrada correctamente.");
 
-                // Generar ticket PDF
+                // Generar ticket PDF (NO factura)
                 string ruta = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                     $"Ticket_Reserva_{id}.pdf");
 
                 string nombreLocal = "PastaFlow Restaurante";
 
-                // Asegurar que el logo apunte a un archivo existente con extensión
+                // Asegurar que el logo apunte a un archivo existente
                 string logo = Path.Combine(Application.StartupPath, "Recursos", "logo.png");
                 if (!File.Exists(logo))
                 {
                     var logoJpg = Path.Combine(Application.StartupPath, "Recursos", "logo.jpg");
-                    logo = File.Exists(logoJpg) ? logoJpg : null; // si no existe, no se intenta cargar
+                    logo = File.Exists(logoJpg) ? logoJpg : null;
                 }
 
                 string cajero = Session.CurrentUser.Nombre + " " + Session.CurrentUser.Apellido;
+                string cliente = $"{nombre} {apellido}";
 
-                // Crear una tabla vacía para cumplir con la firma de PdfHelper.GenerarFacturaVenta
-                var productos = new DataTable();
-                productos.Columns.Add("Producto");
-                productos.Columns.Add("Cantidad");
-                productos.Columns.Add("Subtotal", typeof(decimal));
-
-                PdfHelper.GenerarFacturaVenta(
+                PdfHelper.GenerarTicketReserva(
                     nombreLocal,
                     logo,
-                    $"Reserva_{id}", // número de factura como identificador de reserva
+                    id.ToString(),      
                     fechaHora,
+                    cliente,
+                    cantidad,
+                    estado,
                     cajero,
-                    productos, // tabla vacía para evitar null reference
-                    0m,        // totalVenta, no aplica para reserva
                     ruta
-                    // imagenExtraPath: null
                 );
 
                 MessageBox.Show($"Ticket generado en: {ruta}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                //Abre el PDF automáticamente
                 Process.Start(new ProcessStartInfo(ruta) { UseShellExecute = true });
+
 
                 CargarReservas();
             }
@@ -156,25 +140,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             {
                 MessageBox.Show("Error al registrar reserva: " + ex.Message);
             }
-        }
-
-        // Ajustes visuales del DataGridView
-        private void AjustarDataGridView(DataGridView dgv)
-        {
-            // Ajusta columnas al contenido
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-
-            // Evita las barras de desplazamiento
-            dgv.ScrollBars = ScrollBars.None;
-
-            // Permite que el texto se vea correctamente centrado
-            dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            // Fuente y colores legibles
-            dgv.DefaultCellStyle.ForeColor = Color.Black;
-            dgv.ColumnHeadersDefaultCellStyle.Font = new Font(dgv.Font, FontStyle.Bold);
         }
 
         // Carga las reservas en el DataGridView
@@ -247,7 +212,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Nuevo: configuración visual igual a FGestionarInventario
+        // Configuración visual 
         private void ConfigurarGrillaVisualReservas()
         {
             var g = dgvReservas;

@@ -81,6 +81,63 @@ namespace PastaFlow_DIAZ_PEREZ.Utils
                 throw new Exception("Error al generar la factura: " + ex.Message);
             }
         }
+
+        public static void GenerarTicketReserva(
+        string nombreLocal,
+        string logoPath,
+        string numeroReserva,
+        DateTime fechaReserva,
+        string cliente,
+        int cantidadPersonas,
+        string estado,
+        string cajero,
+        string rutaSalida)
+        {
+            Document doc = new Document(PageSize.A6, 25, 25, 25, 25); // tamaño ticket chico
+
+            try
+            {
+                PdfWriter.GetInstance(doc, new FileStream(rutaSalida, FileMode.Create));
+                doc.Open();
+
+                // 🔹 Logo
+                if (!string.IsNullOrEmpty(logoPath) && File.Exists(logoPath))
+                {
+                    Image logo = Image.GetInstance(logoPath);
+                    logo.ScaleAbsolute(60, 60);
+                    logo.Alignment = Element.ALIGN_CENTER;
+                    doc.Add(logo);
+                }
+
+                // 🔹 Encabezado
+                Paragraph titulo = new Paragraph(nombreLocal, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                titulo.Alignment = Element.ALIGN_CENTER;
+                doc.Add(titulo);
+
+                doc.Add(new Paragraph(" "));
+                doc.Add(new Paragraph($"Ticket de Reserva Nº: {numeroReserva}", new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD)));
+                doc.Add(new Paragraph($"Fecha y hora: {fechaReserva:dd/MM/yyyy HH:mm}", new Font(Font.FontFamily.HELVETICA, 9)));
+                doc.Add(new Paragraph($"Cliente: {cliente}", new Font(Font.FontFamily.HELVETICA, 9)));
+                doc.Add(new Paragraph($"Cantidad de personas: {cantidadPersonas}", new Font(Font.FontFamily.HELVETICA, 9)));
+                doc.Add(new Paragraph($"Estado: {estado}", new Font(Font.FontFamily.HELVETICA, 9)));
+                doc.Add(new Paragraph($"Registrado por: {cajero}", new Font(Font.FontFamily.HELVETICA, 9)));
+                doc.Add(new Paragraph(" "));
+
+                // 🔹 Mensaje final
+                Paragraph gracias = new Paragraph("¡Gracias por su reserva!", new Font(Font.FontFamily.HELVETICA, 10, Font.ITALIC));
+                gracias.Alignment = Element.ALIGN_CENTER;
+                doc.Add(gracias);
+
+                doc.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al generar el ticket de reserva: " + ex.Message);
+            }
+        }
+
+
+
     }
 }
 

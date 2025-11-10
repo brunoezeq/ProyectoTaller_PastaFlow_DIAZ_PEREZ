@@ -11,5 +11,7 @@ namespace PastaFlow_DIAZ_PEREZ.Utils
     {
         public static Usuario CurrentUser { get; set; }
         public static Caja CurrentCaja { get; set; }
+        public static bool CajaAbierta { get; set; }
+
     }
 }

@@ -1,8 +1,10 @@
-﻿using PastaFlow_DIAZ_PEREZ.Models;
+﻿using PastaFlow_DIAZ_PEREZ.DataAccess;
+using PastaFlow_DIAZ_PEREZ.Models;
 using PastaFlow_DIAZ_PEREZ.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -30,7 +32,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void FMenu_Load(object sender, EventArgs e)
         {
             var user = Session.CurrentUser;
+            var dao = new CajaDAO();
 
+            // Mostrar datos básicos (defensivo)
             if (user != null)
             {
                 lbUsuario.Text = $"Bienvenido: {user.Nombre} {user.Apellido}";
@@ -38,15 +42,14 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
             else
             {
+                lbUsuario.Text = "Bienvenido: -";
                 lbRol.Text = "Rol: -";
             }
 
             lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
-
-            // Scroll si fuese necesario
             pnlMenuLateral.AutoScroll = true;
 
-            // Mostrar todos los botones, pero deshabilitar por rol (anulados visibles)
+            // Inicial: todos visibles, deshabilitados (depende de rol luego)
             foreach (var btn in GetBotonesMenu())
             {
                 if (btn == null) continue;
@@ -54,14 +57,15 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 btn.Enabled = false;
             }
 
+            // Habilitar botones por rol
             if (user != null)
             {
-                if (user.Id_rol == 1) // Administrador
+                if (user.Id_rol == 1) // Admin
                 {
                     btnVerReportes.Enabled = true;
                     btnRegEmpleado.Enabled = true;
                     btnVerQuejas.Enabled = true;
-                    btnVerGraficos.Enabled = true; 
+                    btnVerGraficos.Enabled = true;
                     btnBackup.Enabled = true;
                 }
                 else if (user.Id_rol == 2) // Gerente
@@ -77,15 +81,42 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 }
             }
 
+            // Aplicar estilo antes de hacer la comprobación (no altera Text pero mantiene consistencia)
             AplicarEstiloMenu();
-            InsertarEspaciadoresMenu(10); // separa botones arriba/abajo
-            AjustarHeader();              // evita superposición usuario/fecha/hora
+            InsertarEspaciadoresMenu(10);
+            AjustarHeader();
 
-            // Centrar y ajustar la imagen "pasaflow"
-            pictureBox1.Dock = DockStyle.Fill;                 // ocupa todo el panel de contenido
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;    // mantiene proporción y centra
-            pictureBox1.BackColor = pnlContent.BackColor;      // fondo consistente
+            // Ahora: comprobar si hay caja abierta (solo si el rol es cajero y hay usuario)
+            try
+            {
+                if (user != null && user.Id_rol == 3 && btnAbrirCaja != null && btnAbrirCaja.Enabled)
+                {
+                    bool hayCaja = dao.HayCajaAbierta(user.Id_usuario);
+                    btnAbrirCaja.Text = hayCaja ? "Cerrar Caja" : "Abrir Caja";
+                    cajaAbierta = hayCaja;
+                }
+                else if (btnAbrirCaja != null)
+                {
+                    // Asegurar texto por defecto si no es cajero
+                    btnAbrirCaja.Text = "Abrir Caja";
+                    cajaAbierta = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Si falla la consulta a BD no romper UI, mostrar advertencia y dejar valor por defecto
+                Debug.WriteLine("[Caja] Error comprobando caja abierta: " + ex);
+                btnAbrirCaja.Text = "Abrir Caja";
+                cajaAbierta = false;
+            }
+
+            // Ajuste visual final del panel central
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.BackColor = pnlContent.BackColor;
         }
+
+
 
         private void timerHora_Tick(object sender, EventArgs e)
         {
@@ -123,23 +154,43 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             MarcarBotonActivo(sender as Button);
 
-            if (!cajaAbierta)
+            var user = Session.CurrentUser;
+            if (user == null)
             {
-                // Abrir caja
-                AbrirFormulario(new FAbrirCaja());
-                btnAbrirCaja.Text = "Cerrar Caja";
-                cajaAbierta = true;
+                MessageBox.Show("No hay usuario logueado. Inicie sesión.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var dao = new CajaDAO();
+            bool cajaRealAbierta = false;
+            try
+            {
+                cajaRealAbierta = dao.HayCajaAbierta(user.Id_usuario);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("[btnAbrirCaja_Click] Error comprobando caja: " + ex);
+                MessageBox.Show("Error comprobando estado de la caja. Revise la conexión.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!cajaRealAbierta)
+            {
+                var frm = new FAbrirCaja();
+                frm.FormClosing += (s, args) => RefrescarEstadoCaja();
+                AbrirFormulario(frm);
             }
             else
-            {   
+            {
+                // Abrir formulario de cierre (pasa datos si los tenés; aquí llamamos con 0 por ejemplo)
                 decimal montoInicial = 0m;
-                decimal totalEfectivo = 0m; 
-
-                AbrirFormulario(new FCerrarCaja(montoInicial, totalEfectivo));
-                btnAbrirCaja.Text = "Abrir Caja";
-                cajaAbierta = false;
+                decimal totalEfectivo = 0m;
+                var frm = new FCerrarCaja(montoInicial, totalEfectivo);
+                frm.FormClosing += (s, args) => RefrescarEstadoCaja();
+                AbrirFormulario(frm);
             }
         }
+
 
         private void btnPedido_Click(object sender, EventArgs e)
         {
@@ -216,7 +267,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 btnRegReserva,
                 btnCargarPedido,
                 btnAbrirCaja,
-                btnVerGraficos
+                btnVerGraficos,
+                btnBackup
             };
         }
 
@@ -377,6 +429,39 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             return Color.FromArgb(color.A, Math.Max(0, r), Math.Max(0, g), Math.Max(0, b));
         }
 
-        
+        private void RefrescarEstadoCaja()
+        {
+            try
+            {
+                var user = Session.CurrentUser;
+                if (user == null)
+                {
+                    btnAbrirCaja.Text = "Abrir Caja";
+                    cajaAbierta = false;
+                    return;
+                }
+
+                var dao = new CajaDAO();
+                bool cajaRealAbierta = false;
+                try
+                {
+                    cajaRealAbierta = dao.HayCajaAbierta(user.Id_usuario);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("[RefrescarEstadoCaja] Error: " + ex);
+                    cajaRealAbierta = false;
+                }
+
+                btnAbrirCaja.Text = cajaRealAbierta ? "Cerrar Caja" : "Abrir Caja";
+                cajaAbierta = cajaRealAbierta;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("[RefrescarEstadoCaja] Error general: " + ex);
+            }
+        }
+
+
     }
 }

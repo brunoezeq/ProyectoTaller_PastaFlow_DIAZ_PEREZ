@@ -117,23 +117,26 @@ namespace PastaFlow_DIAZ_PEREZ.DataAccess
             }
         }
 
-        public bool EstaCajaAbierta(out int cajaId)
+        public bool HayCajaAbierta(int usuarioId)
         {
-            const string sql = @"SELECT TOP 1 id_caja FROM Caja WHERE fecha_hora_cierre IS NULL ORDER BY fecha_hora_apertura DESC";
+            // Devuelve true si existe una caja abierta (fecha_hora_cierre IS NULL) para el usuario indicado.
+            const string sql = @"
+            SELECT TOP 1 1
+            FROM Caja
+            WHERE fecha_hora_cierre IS NULL
+            AND id_usuario = @usuarioId";
+
             using (var cn = new SqlConnection(_connString))
             using (var cmd = new SqlCommand(sql, cn))
             {
+                cmd.Parameters.AddWithValue("@usuarioId", usuarioId);
                 cn.Open();
                 var obj = cmd.ExecuteScalar();
-                if (obj != null && obj != DBNull.Value)
-                {
-                    cajaId = Convert.ToInt32(obj);
-                    return true;
-                }
-                cajaId = -1;
-                return false;
+                return obj != null;
             }
         }
+
+
 
         public decimal ObtenerTotalVentasEfectivo(int idCaja)
         {

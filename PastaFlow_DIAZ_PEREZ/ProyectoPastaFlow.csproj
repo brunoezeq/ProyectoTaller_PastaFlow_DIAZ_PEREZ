@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\BackupDAO.cs" />
     <Compile Include="DataAccess\CajaDao.cs" />
     <Compile Include="DataAccess\CategoriaDao.cs" />
     <Compile Include="DataAccess\DbConnection.cs" />
@@ -151,10 +152,6 @@
     <Compile Include="Forms\FGestionarInventario.Designer.cs">
       <DependentUpon>FGestionarInventario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MenuCajero.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MenuCajero.Designer.cs" />
     <Compile Include="Models\Caja.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Detalle_Venta.cs" />
@@ -176,6 +173,9 @@
     <Compile Include="Utils\Session.cs" />
     <EmbeddedResource Include="Forms\FAbrirCaja.resx">
       <DependentUpon>FAbrirCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FBackup.resx">
+      <DependentUpon>FBackup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FCerrarCaja.resx">
       <DependentUpon>FCerrarCaja.cs</DependentUpon>
