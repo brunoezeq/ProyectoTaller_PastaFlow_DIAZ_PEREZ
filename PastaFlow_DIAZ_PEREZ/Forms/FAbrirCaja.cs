@@ -1,17 +1,15 @@
 ﻿using PastaFlow_DIAZ_PEREZ.Utils;
 using PastaFlow_DIAZ_PEREZ.DataAccess;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Apertura de caja:
+    // - Muestra cajero y fecha/hora actuales.
+    // - Valida el monto inicial (numérico, un separador decimal, no negativo).
+    // - Abre la caja vía CajaDAO, guarda en Session.CurrentCaja y dispara evento de éxito.
+    // - Maneja culturas al parsear el monto (admite coma o punto).
     public partial class FAbrirCaja : Form
     {
         // Propiedades públicas para que quien abra el formulario recupere la apertura
@@ -21,7 +19,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         public FAbrirCaja()
         {
             InitializeComponent();
-
         }
 
         private void FAbrirCaja_Load(object sender, EventArgs e)
@@ -51,7 +48,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // evento para avisar que se abrió correctamente
+        // Evento para avisar que se abrió correctamente a quien embeba este form
         public event EventHandler CajaAbiertaCorrectamente;
 
         private void btnAbrirCaja_Click(object sender, EventArgs e)
@@ -113,10 +110,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     MessageBox.Show($"Caja abierta correctamente (ID: {nuevaCaja.Id_caja}).",
                         "Apertura", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Disparar evento (embed en panel)
+                    // Notificar a quien embebe este formulario
                     CajaAbiertaCorrectamente?.Invoke(this, EventArgs.Empty);
-
-                   
                 }
                 else
                 {
@@ -131,7 +126,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Evento para el botón Atrás
+        // Botón Atrás: cierra el formulario
         private void btnAtras_Click(object sender, EventArgs e)
         {
             this.Close();

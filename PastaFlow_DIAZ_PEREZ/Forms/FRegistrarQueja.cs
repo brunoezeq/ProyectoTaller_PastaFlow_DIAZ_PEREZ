@@ -1,17 +1,14 @@
 ﻿using PastaFlow_DIAZ_PEREZ.DataAccess;
-using System;
 using PastaFlow_DIAZ_PEREZ.Utils;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Registro de quejas de cliente:
+    // - Valida nombre/apellido (no placeholders vacíos) y motivo obligatorio.
+    // - Guarda motivo y descripción opcional vinculando al usuario en sesión.
+    // - Limpia el formulario tras registrar.
     public partial class FRegistrarQueja : Form
     {
         private const string PlaceholderNombre = "Nombre";
@@ -22,16 +19,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             InitializeComponent();
         }
 
+        // Registrar la queja (validación mínima de campos obligatorios)
         private void btnRegistrarQueja_Click(object sender, EventArgs e)
         {
-            // Validar campos obligatorios evitando placeholders (comparación robusta)
-            if (string.IsNullOrWhiteSpace(txtNombreCliente.Text) ||
-                string.Equals(txtNombreCliente.Text.Trim(), PlaceholderNombre, StringComparison.OrdinalIgnoreCase) ||
-                string.IsNullOrWhiteSpace(txtApellidoCliente.Text) ||
-                string.Equals(txtApellidoCliente.Text.Trim(), PlaceholderApellido, StringComparison.OrdinalIgnoreCase) ||
-                string.IsNullOrWhiteSpace(txtMotivo.Text))
+            if (CamposInvalidos())
             {
-                MessageBox.Show("Por favor ingrese nombre y apellido reales y el motivo.",
+                MessageBox.Show("Por favor ingrese nombre, apellido reales y el motivo.",
                                 "Campos requeridos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -59,10 +52,21 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Devuelve true si algún campo obligatorio está vacío o es placeholder
+        private bool CamposInvalidos()
+        {
+            return string.IsNullOrWhiteSpace(txtNombreCliente.Text) ||
+                   string.Equals(txtNombreCliente.Text.Trim(), PlaceholderNombre, StringComparison.OrdinalIgnoreCase) ||
+                   string.IsNullOrWhiteSpace(txtApellidoCliente.Text) ||
+                   string.Equals(txtApellidoCliente.Text.Trim(), PlaceholderApellido, StringComparison.OrdinalIgnoreCase) ||
+                   string.IsNullOrWhiteSpace(txtMotivo.Text);
+        }
+
+        // Limpia todos los campos
         private void LimpiarFormulario()
         {
             txtNombreCliente.Clear();
-            txtApellidoCliente.Clear(); 
+            txtApellidoCliente.Clear();
             txtMotivo.Clear();
             txtDescripcion.Clear();
         }

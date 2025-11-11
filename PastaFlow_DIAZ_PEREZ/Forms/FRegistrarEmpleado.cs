@@ -15,6 +15,13 @@ using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Gestión de empleados (ABM):
+    // - Alta con validaciones (nombre, apellido, DNI, correo, teléfono, rol, contraseña).
+    // - Edición con cambio opcional de contraseña y actualización de datos.
+    // - Búsqueda por DNI y/o Rol, limpieza de filtros y recarga de grilla.
+    // - Activar / dar de baja (lógica) desde la grilla con columna de acción como botón.
+    // - Evita auto-acción sobre el administrador logueado (oculta el botón en su fila).
+    // - Estilo visual de la grilla consistente con otras pantallas (Inventario/Reservas).
     public partial class FRegistrarEmpleado : Form
     {
         public FRegistrarEmpleado()
@@ -84,7 +91,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         }
 
         // Estilo visual del DataGridView 
-
         private void ConfigurarGrillaVisualUsuarios()
         {
             var g = dgvUsuarios;
@@ -143,6 +149,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             AplicarFormatoTabla();
         }
 
+        // Validaciones de formulario (alta/edición). Devuelve errores concatenados.
         private bool ValidarCamposFormulario(out string mensajeError, bool esEdicion = false)
         {
             var errores = new List<string>();
@@ -176,7 +183,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             else if (!System.Text.RegularExpressions.Regex.IsMatch(txtEmpTelefono.Text, @"^\d{10}$"))
                 errores.Add("Teléfono inválido (10 dígitos).");
 
-            // Contraseña
+            // Contraseña (en edición es opcional)
             if (!esEdicion || !string.IsNullOrEmpty(txtEmpContra.Text))
             {
                 if (string.IsNullOrEmpty(txtEmpContra.Text))
@@ -202,7 +209,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             return true;
         }
 
-
+        // Alta de usuario
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             if (!ValidarCamposFormulario(out string errores))
@@ -380,7 +387,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             LimpiarRegistro();
         }
 
-
         // Solo letras y espacios. 
         private void txtSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -408,7 +414,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        //mantiene solo dígitos.
+        // mantiene solo dígitos.
         private void SoloNumeros_TextChanged(object sender, EventArgs e)
         {
             var tb = sender as TextBox;
@@ -422,7 +428,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Editar usuario seleccionado
+        // Edición de usuario seleccionado
         private void btnEditar_Click(object sender, EventArgs e)
         {
             // validación en modo edición

@@ -1,17 +1,15 @@
 ﻿using PastaFlow_DIAZ_PEREZ.DataAccess;
 using PastaFlow_DIAZ_PEREZ.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Cierre de caja:
+    // - Muestra totales por método de pago y calcula efectivo total.
+    // - Calcula monto esperado = monto inicial + total efectivo.
+    // - Permite ingresar el monto actual contado, muestra diferencia y confirma el cierre.
+    // - Persiste el cierre vía CajaDAO y restablece Session.CurrentCaja a null.
     public partial class FCerrarCaja : Form
     {
         private CajaDAO cajaDao = new CajaDAO();
@@ -37,6 +35,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             int idCaja = Session.CurrentCaja.Id_caja;
 
+            // Totales por método de pago para informar en UI (no se usan en el cálculo de efectivo)
             var totalesPorMetodo = dao.ObtenerTotalesPorMetodo(Session.CurrentCaja.Id_caja);
             decimal totalTransferencia = totalesPorMetodo.ContainsKey("Transferencia") ? totalesPorMetodo["Transferencia"] : 0m;
             decimal totalDebito = totalesPorMetodo.ContainsKey("Débito") ? totalesPorMetodo["Débito"] : 0m;
@@ -47,7 +46,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             txtDebito.Text = totalDebito.ToString("C");
             txtCredito.Text = totalCredito.ToString("C");
 
-            // Calcular montos
+            // Calcular montos base para el cierre
             montoInicial = Session.CurrentCaja.Monto_inicio;
             totalEfectivo = cajaDao.ObtenerTotalVentasEfectivo(idCaja);
             montoEsperado = montoInicial + totalEfectivo;
@@ -57,11 +56,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             txtTotalEfectivo.Text = totalEfectivo.ToString("C");
             txtMontoEsperado.Text = montoEsperado.ToString("C");
 
-            txtMontoActual.Focus();   
+            txtMontoActual.Focus();   // foco para ingresar conteo real
         }
 
         private void btnCerrarCaja_Click(object sender, EventArgs e)
         {
+            // Parseo tolerante: reemplaza coma por punto y usa InvariantCulture
             if (!decimal.TryParse(txtMontoActual.Text.Replace(",", "."),
                 System.Globalization.NumberStyles.Number,
                 System.Globalization.CultureInfo.InvariantCulture,
@@ -71,6 +71,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
+            // Diferencia entre lo contado y lo esperado (solo efectivo)
             decimal diferencia = montoActual - montoEsperado;
             string mensaje;
             MessageBoxIcon icono;
@@ -98,7 +99,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             {
                 cajaDao.CerrarCaja(Session.CurrentCaja.Id_caja, montoActual);
                 MessageBox.Show("Caja cerrada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Session.CurrentCaja = null;
+                Session.CurrentCaja = null; 
                 this.Close();
             }
             catch (Exception ex)
@@ -107,10 +108,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close(); // Sale sin hacer nada
+            this.Close(); // Sale 
         }
     }
 }

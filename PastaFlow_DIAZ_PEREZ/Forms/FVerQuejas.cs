@@ -10,6 +10,11 @@ using System.Globalization;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Consulta y administración de quejas:
+    // - Lista quejas con rango de fechas inclusivo (hasta el fin del día).
+    // - Detecta nombres reales de columnas ignorando mayúsculas/tildes.
+    // - Muestra botón para ver detalle completo y otro para eliminar.
+    // - Aplica estilo visual uniforme (similar a Reservas/Inventario).
     public partial class FVerQuejas : Form
     {
         // Nombres detectados de columnas (rellenados al cargar)
@@ -28,11 +33,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             if (btnFiltrar != null) btnFiltrar.Click += (s, e) => btnFiltrarQueja_Click(s, e);
             if (btnLimpiar != null) btnLimpiar.Click += (s, e) => btnLimpiarQuejas_Click(s, e);
            
-
             // Aplicar estilo inicial para consistencia con Reservas/Inventario
             if (dgvQuejas != null) ConfigurarGrillaVisualReservas();
         }
 
+        // Carga inicial: define rango por defecto (6 meses) y carga datos
         private void FVerQuejas_Load(object sender, EventArgs e)
         {
             // Establecer un rango por defecto amplio (evita pasar NULL al SP y que no traiga filas)
@@ -43,6 +48,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             CargarQuejas(dtpDesde.Value.Date, dtpHasta.Value.Date.AddDays(1).AddTicks(-1));
         }
 
+        // Obtiene quejas del DAO, autodetecta columnas y arma la grilla (botones, estilo)
         private void CargarQuejas(DateTime? fechaInicio = null, DateTime? fechaFin = null)
         {
             var dao = new QuejaDAO();
@@ -53,6 +59,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
+            // Detección tolerante de nombres de columnas
             _colId = FindColumn(dt, "id_queja", "idQueja", "id");
             _colNombre = FindColumn(dt, "nombre_cliente", "nombre", "nombre_cliente", "Nombre");
             _colApellido = FindColumn(dt, "apellido_cliente", "apellido", "Apellido");
@@ -62,40 +69,69 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             _colFecha = FindColumn(dt, "fecha_hora_queja", "fecha", "fecha_hora", "Fecha");
 
             dgvQuejas.DataSource = dt;
+
+            // Estilo general + ajustes
             ConfigurarGrillaVisualReservas();
             FormatearGrillaReservas();
+
+            // Etiquetas de encabezado amigables
             TrySetHeader(_colNombre, "Nombre");
             TrySetHeader(_colApellido, "Apellido");
             TrySetHeader(_colMotivo, "Motivo");
             TrySetHeader(_colFecha, "Fecha y Hora");
+
+            // Ocultar ID interno si existe
             if (!string.IsNullOrEmpty(_colId) && dgvQuejas.Columns.Contains(_colId))
                 dgvQuejas.Columns[_colId].Visible = false;
+
+            // Botón Ver detalle (motivo + descripción completos)
             if (!dgvQuejas.Columns.Contains("VerDetalle"))
             {
-                var btnVer = new DataGridViewButtonColumn { Name = "VerDetalle", HeaderText = "Ver", Text = "Ver", UseColumnTextForButtonValue = true, AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells, FlatStyle = FlatStyle.Flat };
+                var btnVer = new DataGridViewButtonColumn
+                {
+                    Name = "VerDetalle",
+                    HeaderText = "Ver",
+                    Text = "Ver",
+                    UseColumnTextForButtonValue = true,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+                    FlatStyle = FlatStyle.Flat
+                };
                 btnVer.DefaultCellStyle.BackColor = Color.LightYellow;
                 btnVer.DefaultCellStyle.ForeColor = Color.Black;
                 dgvQuejas.Columns.Add(btnVer);
             }
+
+            // Botón Eliminar (acción)
             if (!dgvQuejas.Columns.Contains("Accion"))
             {
-                var col = new DataGridViewButtonColumn { Name = "Accion", HeaderText = "Acción", Text = "Eliminar", UseColumnTextForButtonValue = true, AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells, FlatStyle = FlatStyle.Standard };
+                var col = new DataGridViewButtonColumn
+                {
+                    Name = "Accion",
+                    HeaderText = "Acción",
+                    Text = "Eliminar",
+                    UseColumnTextForButtonValue = true,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells,
+                    FlatStyle = FlatStyle.Standard
+                };
                 col.DefaultCellStyle.BackColor = Color.LemonChiffon;
                 col.DefaultCellStyle.ForeColor = Color.Black;
                 col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(170, 40, 40);
                 col.DefaultCellStyle.SelectionForeColor = Color.White;
                 dgvQuejas.Columns.Add(col);
             }
+
             dgvQuejas.ScrollBars = ScrollBars.Vertical;
             dgvQuejas.ClearSelection();
         }
 
+        // Maneja clicks en columnas de acción: VerDetalle y Eliminar
         private void dgvQuejas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
             var colName = dgvQuejas.Columns[e.ColumnIndex].Name;
 
+            // Ver el motivo y la descripción completos en un mensaje
             if (colName == "VerDetalle")
             {
                 var row = dgvQuejas.Rows[e.RowIndex];
@@ -111,6 +147,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
+            // Confirmar y eliminar la queja seleccionada
             if (colName == "Accion")
             {
                 int idQueja = -1;
@@ -141,6 +178,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Aplica filtro por rango de fechas (inclusive hasta fin de día)
         private void btnFiltrarQueja_Click(object sender, EventArgs e)
         {
             DateTime? desde = dtpDesde.Value.Date;
@@ -148,6 +186,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             CargarQuejas(desde, hasta);
         }
 
+        // Restaura rango por defecto (últimos 6 meses) y recarga
         private void btnLimpiarQuejas_Click(object sender, EventArgs e)
         {
             // Volver al rango por defecto y recargar
@@ -156,8 +195,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             CargarQuejas(dtpDesde.Value.Date, dtpHasta.Value.Date.AddDays(1).AddTicks(-1));
         }
 
-                    // --- Copiado/adaptado desde FRegistrarReserva para obtener idéntico estilo ---
-
+        // ——— Estilo visual consistente con Reservas/Inventario ———
         private void ConfigurarGrillaVisualReservas()
         {
             var g = dgvQuejas;
@@ -205,6 +243,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             g.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
 
+        // Ajustes de columnas comunes (oculta ID, alinea cabeceras y asegura botón Acción)
         private void FormatearGrillaReservas()
         {
             // Ocultar id interno si existe
@@ -225,7 +264,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             // Añadir/estilizar columna Acción si falta (se asegura en Cargar)
         }
 
-        // Reemplazar el método FindColumn por este que ignora mayúsculas y tildes
+        // Busca una columna en el DataTable ignorando mayúsculas y tildes (normaliza a FormD)
         private string FindColumn(DataTable dt, params string[] candidates)
         {
             if (dt == null) return null;
@@ -249,14 +288,14 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                                  .ToList();
             var normCandidates = candidates.Select(Normalize).Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
 
-            // Exacto (normalizado)
+            // Coincidencia exacta normalizada
             foreach (var cand in normCandidates)
             {
                 var match = cols.FirstOrDefault(c => c.Norm == cand);
                 if (match != null) return match.Original;
             }
 
-            // Subcadena (normalizada)
+            // Coincidencia por subcadena normalizada
             foreach (var cand in normCandidates)
             {
                 var match = cols.FirstOrDefault(c => c.Norm.Contains(cand));
@@ -266,6 +305,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             return null;
         }
 
+        // Cambia el texto de encabezado si la columna existe
         private void TrySetHeader(string columnName, string headerText)
         {
             if (!string.IsNullOrEmpty(columnName) && dgvQuejas.Columns.Contains(columnName))
@@ -274,6 +314,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Obtiene el valor de una celda por nombre de columna detectado
         private string GetCellValue(DataGridViewRow row, string columnName)
         {
             if (string.IsNullOrEmpty(columnName) || !dgvQuejas.Columns.Contains(columnName)) return null;

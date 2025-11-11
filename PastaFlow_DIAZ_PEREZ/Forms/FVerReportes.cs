@@ -14,6 +14,12 @@ using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Reportes de ventas:
+    // - Paginación por cabecera de venta (detalle multi-línea por fila).
+    // - Filtros por rango de fechas y por columna (menú en encabezados).
+    // - Generación de factura PDF por venta y exportación a CSV compatible con Excel.
+    // - Estilo visual compacto y consistente con el sistema.
+    // - Controles de navegación con estado (página actual / total).
     public partial class FVerReportes : Form
     {
         public FVerReportes()
@@ -76,6 +82,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             if (cell?.Value != null) cell.ToolTipText = cell.Value.ToString();
         }
 
+        // Carga el DataTable completo desde DAO y prepara índices para paginar
         private void CargarVentas()
         {
             try
@@ -143,6 +150,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dgvVentas.ResumeLayout();
         }
 
+        // Construye tabla de “cabecera” con detalle en columnas multilínea
         private DataTable ConstruirTablaPaginaCabecera(int page)
         {
             var cab = CrearEsquemaVentas();

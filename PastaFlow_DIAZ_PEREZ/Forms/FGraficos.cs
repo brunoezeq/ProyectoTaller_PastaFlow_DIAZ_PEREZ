@@ -7,6 +7,11 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Panel de gráficos:
+    // - Ventas por empleado (barras, TOP_N).
+    // - Productos más vendidos (columnas, TOP_N).
+    // - Distribución por método de pago (torta).
+    // - Usa rango de fechas inclusivo (00:00 a 23:59:59) y maneja “sin datos”.
     public partial class FGraficos : Form
     {
         private const int TOP_N = 5;
@@ -41,23 +46,19 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             {
                 var dao = new ReporteDAO();
 
-                // Rango inclusivo: desde 00:00 hasta 23:59:59 del día seleccionado
                 DateTime? desde = dtpDesdeGraficos.Value.Date;
                 DateTime? hasta = dtpHastaGraficos.Value.Date.AddDays(1).AddTicks(-1);
 
-                // Empleados
                 var dtEmp = dao.VentasPorEmpleado(desde, hasta);
-                dtEmp = FiltrarTop(dtEmp, "Total"); // asegura TOP_N
+                dtEmp = FiltrarTop(dtEmp, "Total");
                 ConfigurarYBind(chartEmpleados, dtEmp, "Empleado", "Total",
                     SeriesChartType.Bar, "Ventas por empleado");
 
-                // Productos
                 var dtProd = dao.TopProductos(desde, hasta);
                 dtProd = FiltrarTop(dtProd, "CantidadVendida");
                 ConfigurarYBind(chartProductos, dtProd, "Producto", "CantidadVendida",
                     SeriesChartType.Column, "Top productos");
 
-                // Métodos de pago
                 var dtMet = dao.TotalesPorMetodoPago(desde, hasta);
                 chartMetodos.Series.Clear();
                 var sMet = new Series("Métodos de pago")
@@ -92,7 +93,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private DataTable FiltrarTop(DataTable dt, string colOrden)
         {
             if (dt == null || dt.Rows.Count == 0) return dt;
-            var tipo = dt.Columns[colOrden].DataType;
             var orden = dt.AsEnumerable()
                           .OrderByDescending(r => Convert.ToDecimal(r[colOrden]))
                           .Take(TOP_N);

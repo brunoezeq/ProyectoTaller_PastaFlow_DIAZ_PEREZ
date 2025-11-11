@@ -1,20 +1,23 @@
 ﻿using PastaFlow_DIAZ_PEREZ.DataAccess;
 using PastaFlow_DIAZ_PEREZ.Utils;
 using System;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Formulario de gestión de backups de la base de datos:
+    // - Permite seleccionar una ruta destino y generar un archivo .bak mediante BackupDAO.
+    // - Muestra el último backup realizado (fecha, usuario, ruta).
+    // - Presenta historial de todos los backups registrados en una grilla de solo lectura.
+    // - Opción para abrir el Explorador resaltando el archivo generado.
+    // - Punto de extensión para futura restauración (botón aún no implementado).
     public partial class FBackup : Form
     {
+        // DAO responsable de ejecutar y consultar operaciones de backup.
         private readonly BackupDAO _backupDao = new BackupDAO();
 
         public FBackup()
@@ -22,6 +25,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             InitializeComponent();
         }
 
+        // Load del formulario: configura la grilla, muestra el último backup y carga historial.
         private void FBackup_Load(object sender, EventArgs e)
         {
             ConfigurarDgvHistorial();          // <-- configurar columnas antes de enlazar
@@ -29,6 +33,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             CargarHistorialBackups();
         }
 
+        // Abre un diálogo para elegir ruta y nombre del archivo .bak a generar.
         private void btnSeleccionarRuta_Click(object sender, EventArgs e)
         {
             using (var sfd = new SaveFileDialog())
@@ -42,6 +47,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Ejecuta el backup y actualiza panel informativo e historial. Ofrece abrir la ubicación.
         private void btnGenerarBackup_Click(object sender, EventArgs e)
         {
             try
@@ -75,6 +81,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Consulta y muestra información del último backup en un label informativo.
         private void MostrarUltimoBackup()
         {
             var info = _backupDao.ObtenerUltimoBackup();
@@ -90,6 +97,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Carga el historial completo de backups en la grilla ya configurada.
         private void CargarHistorialBackups()
         {
             try
@@ -103,6 +111,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Configura la grilla (columnas, modos, estilos básicos) antes de asignar DataSource.
         private void ConfigurarDgvHistorial()
         {
             var g = dgvHistorial;
@@ -113,7 +122,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             g.RowHeadersVisible = false;
 
-            // Crear columnas una solo vez
+            // Crear columnas una sola vez (verifica existencia para evitar duplicados).
             if (!g.Columns.Contains("ID"))
                 g.Columns.Add(new DataGridViewTextBoxColumn { Name = "ID", HeaderText = "ID", DataPropertyName = "ID", Visible = false });
 
@@ -127,9 +136,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 g.Columns.Add(new DataGridViewTextBoxColumn { Name = "Ruta del archivo", HeaderText = "Ruta del archivo", DataPropertyName = "Ruta del archivo", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill });
         }
 
+        // Click en celda de la columna de ruta: abre explorador seleccionando el archivo.
         private void dgvHistorial_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Evitar borrar columnas; opcional: abrir ubicación al hacer click en la ruta
             if (e.RowIndex < 0) return;
             if (dgvHistorial.Columns[e.ColumnIndex].Name != "Ruta del archivo") return;
 
@@ -138,9 +147,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 Process.Start("explorer.exe", "/select,\"" + ruta + "\"");
         }
 
+        // Placeholder de restauración (no implementado): punto de extensión futuro.
         private void btnRestaurarBackup_Click(object sender, EventArgs e)
         {
-            // Lógica para restaurar el backup aquí
             MessageBox.Show("Funcionalidad de restaurar backup aún no implementada.");
         }
     }
