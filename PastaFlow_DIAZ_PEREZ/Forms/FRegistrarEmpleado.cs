@@ -15,24 +15,17 @@ using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
-    // Gestión de empleados (ABM):
-    // - Alta con validaciones (nombre, apellido, DNI, correo, teléfono, rol, contraseña)
-    // - Edición con cambio opcional de contraseña
-    // - Búsqueda por DNI/rol y cambio de estado (activar/baja lógica) desde la grilla
-    // - Oculta la acción sobre el administrador actualmente logueado
-    // - Estilo de grilla consistente con el resto del sistema
     public partial class FRegistrarEmpleado : Form
     {
         public FRegistrarEmpleado()
         {
             InitializeComponent();
-
-            // Enlaces de eventos de grilla
+            // this.Load += FRegEmpleado_Load;  // ya suscrito en el Designer
             dgvUsuarios.CellContentClick += dgvUsuarios_CellContentClick;
             dgvUsuarios.CellClick += dgvUsuarios_CellClick;
             dgvUsuarios.DataBindingComplete += dgvUsuarios_DataBindingComplete;
 
-            AsegurarColumnaAccionComoBoton();   // Garantiza botón de acción visible y estilizado
+            AsegurarColumnaAccionComoBoton();   // garantizar botón visible y estilizado
 
             // Restricciones de entrada (teclado y pegado)
             txtEmpNombre.KeyPress += txtSoloLetras_KeyPress;
@@ -51,11 +44,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             txtEmpTelefono.MaxLength = 10;
         }
 
-        // Carga inicial de combos y grilla
+        // Cuando se abre el formulario
         private void FRegEmpleado_Load(object sender, EventArgs e)
         {
-            ConfigurarGrillaVisualUsuarios();   // Estilo tipo Inventario
-            ConfigurarDgvUsuarios();            // DataPropertyName de columnas
+            ConfigurarGrillaVisualUsuarios();   // aplicar estilo de Inventario
+            ConfigurarDgvUsuarios();
 
             // Cargar roles en el ComboBox principal
             List<Rol> roles = new ServiceRol().ListarRoles();
@@ -77,7 +70,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             CargarUsuarios();
         }
 
-        // Enlaza columnas del DGV con los nombres del DataTable
         private void ConfigurarDgvUsuarios()
         {
             dgvUsuarios.AutoGenerateColumns = false;
@@ -91,7 +83,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             if (dgvUsuarios.Columns["Estado"] != null) dgvUsuarios.Columns["Estado"].DataPropertyName = "estado";
         }
 
-        // Estilo visual del DataGridView (coherente con otras pantallas)
+        // Estilo visual del DataGridView 
+
         private void ConfigurarGrillaVisualUsuarios()
         {
             var g = dgvUsuarios;
@@ -132,7 +125,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             g.ColumnHeadersHeight = 42;
         }
 
-        // Filtra por rol desde el ComboBox de búsqueda
         private void cBoxBuscarRol_SelectedIndexChanged(object sender, EventArgs e)
         {
             int? rol = cBoxBuscarRol.SelectedIndex >= 0 ? (int?)cBoxBuscarRol.SelectedValue : null;
@@ -144,14 +136,13 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dgvUsuarios.DefaultCellStyle.ForeColor = Color.Black;
             dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
 
-            // Ocultar id_rol si existe
+            // Ocultar id_rol si existe y aplicar formato de centrado/columna correo
             if (dgvUsuarios.Columns.Contains("id_rol"))
                 dgvUsuarios.Columns["id_rol"].Visible = false;
 
             AplicarFormatoTabla();
         }
 
-        // Validaciones de formulario (alta/edición). Devuelve errores concatenados.
         private bool ValidarCamposFormulario(out string mensajeError, bool esEdicion = false)
         {
             var errores = new List<string>();
@@ -185,7 +176,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             else if (!System.Text.RegularExpressions.Regex.IsMatch(txtEmpTelefono.Text, @"^\d{10}$"))
                 errores.Add("Teléfono inválido (10 dígitos).");
 
-            // Contraseña (en edición es opcional)
+            // Contraseña
             if (!esEdicion || !string.IsNullOrEmpty(txtEmpContra.Text))
             {
                 if (string.IsNullOrEmpty(txtEmpContra.Text))
@@ -211,7 +202,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             return true;
         }
 
-        // Alta de usuario
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             if (!ValidarCamposFormulario(out string errores))
@@ -244,7 +235,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Limpiar campos del formulario de alta/edición
+        // Limpiar campos del formulario
         private void LimpiarRegistro()
         {
             txtEmpNombre.Clear();
@@ -257,7 +248,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             cBoxRol.SelectedIndex = -1;
         }
 
-        // Carga usuarios al DataGridView y aplica estilo
+        // Cargar usuarios en el DataGridView
         private void CargarUsuarios()
         {
             using (var conn = DbConnection.GetConnection())
@@ -279,19 +270,21 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new Font(dgvUsuarios.Font, FontStyle.Bold);
                 AplicarFormatoTabla();
 
-                // Ajustar botón por fila (texto/oculto según usuario)
+                // Reemplaza el foreach del final de CargarUsuarios()
                 foreach (DataGridViewRow row in dgvUsuarios.Rows)
                 {
-                    AplicarAccionEnFila(row);
+                    AplicarAccionEnFila(row); // asigna botón o lo oculta si es el propio admin
                 }
             }
             AjustarDataGridView(dgvUsuarios);
         }
 
-        // Ajustes de columna correo (alineación y tamaño)
+        // Ajustes columna correo)
         private void AplicarFormatoTabla()
         {
             var grid = dgvUsuarios;
+
+            // Mantener estilo aplicado en ConfigurarGrillaVisualUsuarios()
 
             if (grid.Columns.Contains("CorreoElectronico"))
             {
@@ -302,15 +295,15 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Ajuste general de la grilla
         private void AjustarDataGridView(DataGridView dgv)
         {
+            // Mantener configuración visual de Inventario
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
 
-        // Cargar datos de la fila seleccionada al formulario
+        // Al hacer click en una fila, cargar datos en el formulario
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -322,7 +315,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 txtEmpCorreo.Text = Convert.ToString(row.Cells["CorreoElectronico"].Value);
                 txtEmpTelefono.Text = Convert.ToString(row.Cells["Telefono"].Value);
 
-                // Recupera id_rol desde el DataTable
+                // Recuperar id_rol desde el DataTable
                 var drv = row.DataBoundItem as DataRowView;
                 if (drv != null && drv.Row.Table.Columns.Contains("id_rol"))
                     cBoxRol.SelectedValue = drv["id_rol"];
@@ -357,7 +350,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             AplicarFormatoTabla();
         }
 
-        // Limpiar filtros y recargar
+        // Limpiar filtros de búsqueda
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtBuscarDni.Clear();
@@ -365,7 +358,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             CargarUsuarios();
         }
 
-        // Valida que DNI de búsqueda sean sólo números y máx 8
         private void txtBuscarDni_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
@@ -388,21 +380,21 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             LimpiarRegistro();
         }
 
-        // Solo letras y espacios
+
+        // Solo letras y espacios. 
         private void txtSoloLetras_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsControl(e.KeyChar) || char.IsLetter(e.KeyChar) || char.IsWhiteSpace(e.KeyChar)))
                 e.Handled = true;
         }
 
-        // Solo dígitos
+        // Solo dígitos. 
         private void txtSoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsControl(e.KeyChar) || char.IsDigit(e.KeyChar)))
                 e.Handled = true;
         }
 
-        // Mantiene sólo letras en TextBox (si pegan texto)
         private void SoloLetras_TextChanged(object sender, EventArgs e)
         {
             var tb = sender as TextBox;
@@ -416,7 +408,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Mantiene sólo dígitos en TextBox (si pegan texto)
+        //mantiene solo dígitos.
         private void SoloNumeros_TextChanged(object sender, EventArgs e)
         {
             var tb = sender as TextBox;
@@ -430,7 +422,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Edición de usuario seleccionado
+        // Editar usuario seleccionado
         private void btnEditar_Click(object sender, EventArgs e)
         {
             // validación en modo edición
@@ -471,7 +463,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Cambia estado (activar/eliminar) desde la columna Accion
+        // Cambiar estado (activar/eliminar) usuario desde el DataGridView
+        // Refuerza el click: solo actúa si la celda es realmente un botón visible
         private void dgvUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 
@@ -513,12 +506,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Ajusta el botón de acción en cada fila tras cualquier recarga/filtro
+        // Rellena el texto del botón cada vez que cambia el DataSource (búsqueda/filtro/carga)
         private void dgvUsuarios_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewRow row in dgvUsuarios.Rows)
             {
-                AplicarAccionEnFila(row);
+                AplicarAccionEnFila(row); // asegura el estado del botón tras cualquier recarga/filtro
             }
         }
 
@@ -547,7 +540,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 dgvUsuarios.Columns.Insert(index, btnCol);
             }
 
-            // Estilo de botón
+            // Estilo similar a Inventario pero para botón
             btnCol.FlatStyle = FlatStyle.Flat;
             btnCol.DefaultCellStyle.BackColor = Color.LemonChiffon;
             btnCol.DefaultCellStyle.ForeColor = Color.Black;
@@ -576,7 +569,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Define visibilidad/texto del botón "Accion" según el usuario y su estado
         private void AplicarAccionEnFila(DataGridViewRow row)
         {
             if (row == null) return;
@@ -592,7 +584,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             if (ocultar)
             {
-                // Reemplaza el botón por una celda de texto vacía
+                // Reemplaza el botón por una celda de texto vacía (se "oculta" la acción)
                 row.Cells["Accion"] = new DataGridViewTextBoxCell { Value = "" };
                 return;
             }

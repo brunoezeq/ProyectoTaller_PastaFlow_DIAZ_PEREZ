@@ -12,33 +12,21 @@ using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
-    // Menú principal:
-    // - Muestra usuario/rol y fecha/hora
-    // - Habilita opciones según rol y estado de caja
-    // - Carga formularios hijos en el panel central sin abrir nuevas ventanas
-    // - Mantiene un estilo visual consistente (colores, fuentes, cursor, bordes)
     public partial class FMenuCajero : Form
     {
-        // Botón actualmente marcado como activo (resalta selección en el menú)
         private Button _activeButton;
-        // Imagen de fondo simple para el panel central cuando no hay formulario cargado
         private PictureBox pictureBox1;
-        // Flag local para recordar si hay caja abierta
         private bool cajaAbierta = false;
 
         public FMenuCajero()
         {
             InitializeComponent();
-
-            // Imagen base en el contenedor central
             pictureBox1 = new PictureBox();
             pnlContent.Controls.Add(pictureBox1);
-
-            // Eventos de ciclo de vida y layout
             this.Load += FMenu_Load;
             this.pnlTop.Resize += (s, e) => AjustarHeader();
 
-            // Garantiza que el botón se encuentre cableado una sola vez
+            // Asegura que el botón esté cableado
             btnAbrirCaja.Click -= btnAbrirCaja_Click;
             btnAbrirCaja.Click += btnAbrirCaja_Click;
         }
@@ -47,7 +35,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             var user = Session.CurrentUser;
 
-            // Header: usuario y rol
             if (user != null)
             {
                 lbUsuario.Text = $"Bienvenido: {user.Nombre} {user.Apellido}";
@@ -62,7 +49,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             pnlMenuLateral.AutoScroll = true;
 
-            // Todos visibles pero deshabilitados por defecto; luego se habilitan por rol
             foreach (var btn in GetBotonesMenu())
             {
                 if (btn == null) continue;
@@ -70,10 +56,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 btn.Enabled = false;
             }
 
-            // Habilitar por rol
             if (user != null)
             {
-                if (user.Id_rol == 1) // Admin
+                if (user.Id_rol == 1)
                 {
                     btnVerReportes.Enabled = true;
                     btnRegEmpleado.Enabled = true;
@@ -81,26 +66,25 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     btnVerGraficos.Enabled = true;
                     btnBackup.Enabled = true;
                 }
-                else if (user.Id_rol == 2) // Gerente
+                else if (user.Id_rol == 2)
                 {
                     btnInventario.Enabled = true;
                     btnRegQueja.Enabled = true;
                 }
-                else if (user.Id_rol == 3) // Cajero
+                else if (user.Id_rol == 3)
                 {
-                    btnAbrirCaja.Enabled = true; // El resto depende de la caja abierta
+                    btnAbrirCaja.Enabled = true;
+                    // Las demás se habilitan sólo si la caja está abierta
                 }
             }
 
-            // Estilo y espaciado entre botones
             AplicarEstiloMenu();
             InsertarEspaciadoresMenu(10);
             AjustarHeader();
 
-            // Estado inicial de caja desde la sesión (habilita/inhabilita acciones de cajero)
+            // Usa exclusivamente la sesión para decidir el estado inicial
             ActualizarUIEstadoCaja(Session.CurrentCaja != null);
 
-            // Imagen de relleno
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.BackColor = pnlContent.BackColor;
@@ -108,14 +92,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void timerHora_Tick(object sender, EventArgs e)
         {
-            // Reloj en vivo
             lbHora.Text = DateTime.Now.ToString("HH:mm:ss");
             AjustarHeader();
         }
 
         private void AjustarHeader()
         {
-            // Reposiciona hora/fecha para que se mantengan alineadas a la derecha
             if (pnlTop == null || lbHora == null || lbFecha == null || lbUsuario == null) return;
             int paddingRight = 12;
             lbHora.Left = pnlTop.Width - lbHora.Width - paddingRight;
@@ -128,7 +110,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void AbrirFormulario(Form formHijo)
         {
-            // Embebe el formulario hijo en el panel central (sin ventanas extras)
             pnlContent.Controls.Clear();
             formHijo.TopLevel = false;
             formHijo.FormBorderStyle = FormBorderStyle.None;
@@ -139,7 +120,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnAbrirCaja_Click(object sender, EventArgs e)
         {
-            // Alterna entre abrir y cerrar caja según el estado actual
             MarcarBotonActivo(sender as Button);
 
             var user = Session.CurrentUser;
@@ -153,7 +133,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             if (!estaAbierta)
             {
-                // Abre formulario de apertura embebido
+                // Embebido (sin ShowDialog)
                 var frm = new FAbrirCaja();
                 frm.CajaAbiertaCorrectamente += (s, ev) =>
                 {
@@ -161,11 +141,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     MessageBox.Show("Caja abierta. Puede registrar ventas.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 };
                 frm.FormClosed += (s, ev) => ActualizarUIEstadoCaja(Session.CurrentCaja != null);
-                AbrirFormulario(frm);
+                AbrirFormulario(frm); // usa panel central
             }
             else
             {
-                // Abre formulario de cierre embebido
                 var frm = new FCerrarCaja(0m, 0m);
                 frm.FormClosed += (s, ev) =>
                 {
@@ -179,14 +158,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnPedido_Click(object sender, EventArgs e)
         {
-            // Ventas
             MarcarBotonActivo(btnCargarPedido);
             AbrirFormulario(new FRegistrarVenta());
         }
 
         private void btnRegReserva_Click(object sender, EventArgs e)
         {
-            // Reservas
             MarcarBotonActivo(sender as Button);
             pnlMenuLateral.Visible = false;
             var frm = new FRegistrarReserva();
@@ -196,7 +173,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnInventario_Click(object sender, EventArgs e)
         {
-            // Inventario
             MarcarBotonActivo(sender as Button);
             pnlMenuLateral.Visible = false;
             var frm = new FGestionarInventario();
@@ -206,21 +182,18 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnRegQueja_Click(object sender, EventArgs e)
         {
-            // Registro de quejas
             MarcarBotonActivo(sender as Button);
             AbrirFormulario(new FRegistrarQueja());
         }
 
         private void btnVerReportes_Click(object sender, EventArgs e)
         {
-            // Reportes
             MarcarBotonActivo(sender as Button);
             AbrirFormulario(new FVerReportes());
         }
 
         private void btnRegEmpleado_Click(object sender, EventArgs e)
         {
-            // ABM de empleados
             MarcarBotonActivo(sender as Button);
             pnlMenuLateral.Visible = false;
             var frm = new FRegistrarEmpleado();
@@ -230,28 +203,24 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnVerQueja_Click(object sender, EventArgs e)
         {
-            // Consulta de quejas
             MarcarBotonActivo(sender as Button);
             AbrirFormulario(new FVerQuejas());
         }
 
         private void btnVerGraficos_Click(object sender, EventArgs e)
         {
-            // Panel de gráficos
             MarcarBotonActivo(sender as Button);
             AbrirFormulario(new FGraficos());
         }
 
         private void btnBackup_Click(object sender, EventArgs e)
         {
-            // Respaldo de base de datos
             MarcarBotonActivo(sender as Button);
             AbrirFormulario(new FBackup());
         }
 
         private IEnumerable<Button> GetBotonesMenu()
         {
-            // Devuelve todos los botones del menú lateral
             return new Button[]
             {
                 btnVerQuejas,
@@ -269,7 +238,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void AplicarEstiloMenu()
         {
-            // Estilo visual y cursor de cada botón (según Enabled)
             foreach (var btn in GetBotonesMenu())
             {
                 if (btn == null) continue;
@@ -292,10 +260,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 {
                     btn.BackColor = Darken(Palette.Vino, 0.35f);
                     btn.ForeColor = Color.FromArgb(200, Palette.Beige);
-                    btn.Cursor = Cursors.No; // Señal visual de opción no disponible
                 }
 
-                // Hover y redondeado
                 btn.MouseEnter -= Btn_MouseEnter;
                 btn.MouseEnter += Btn_MouseEnter;
                 btn.MouseLeave -= Btn_MouseLeave;
@@ -308,7 +274,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void InsertarEspaciadoresMenu(int alto)
         {
-            // Inserta paneles separadores entre botones para mejorar legibilidad
             if (pnlMenuLateral == null) return;
 
             var existentes = pnlMenuLateral.Controls.Cast<Control>().Where(c => (string)c.Tag == "spacer").ToList();
@@ -331,7 +296,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void Btn_MouseEnter(object sender, EventArgs e)
         {
-            // Efecto hover si no es el botón activo
             var btn = sender as Button;
             if (btn == null || !btn.Visible || !btn.Enabled) return;
             if (btn == _activeButton) return;
@@ -340,7 +304,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void Btn_MouseLeave(object sender, EventArgs e)
         {
-            // Revierte hover si no es el botón activo
             var btn = sender as Button;
             if (btn == null || !btn.Visible || !btn.Enabled) return;
             if (btn == _activeButton) return;
@@ -349,7 +312,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void MarcarBotonActivo(Button btn)
         {
-            // Marca visualmente el botón elegido y desmarca el anterior
             if (btn == null || !btn.Enabled) return;
 
             if (_activeButton != null && _activeButton.Visible)
@@ -370,7 +332,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void RedondearControl(Control c, int radius)
         {
-            // Bordes redondeados para botones del menú
             if (c == null || c.Width <= 0 || c.Height <= 0) return;
             using (var path = new GraphicsPath())
             {
@@ -387,12 +348,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void TrySetFont(Control c, string family, float size, FontStyle style)
         {
-            // Ajuste seguro de tipografía (evita lanzar si la fuente no existe)
             if (c == null) return;
             try { c.Font = new Font(family, size, style); } catch { }
         }
 
-        // Paleta de colores del sistema
         private static class Palette
         {
             public static readonly Color Vino = ColorTranslator.FromHtml("#7B1E1E");
@@ -402,7 +361,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private string ObtenerNombreRol(int idRol)
         {
-            // Traduce id de rol a nombre legible
             switch (idRol)
             {
                 case 1: return "Administrador";
@@ -414,7 +372,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private Color Lighten(Color color, float amount)
         {
-            // Aclara color base (0..1)
             amount = Math.Max(0f, Math.Min(1f, amount));
             int r = color.R + (int)((255 - color.R) * amount);
             int g = color.G + (int)((255 - color.G) * amount);
@@ -424,7 +381,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private Color Darken(Color color, float amount)
         {
-            // Oscurece color base (0..1)
             amount = Math.Max(0f, Math.Min(1f, amount));
             int r = (int)(color.R * (1f - amount));
             int g = (int)(color.G * (1f - amount));
@@ -434,7 +390,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void RefrescarEstadoCaja()
         {
-            // Consulta a BD si hay una caja abierta real y actualiza la UI
             try
             {
                 var user = Session.CurrentUser;
@@ -466,21 +421,18 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void ActualizarUIEstadoCaja(bool abierta)
         {
-            // Activa/desactiva acciones según haya caja abierta
             cajaAbierta = abierta;
             Session.CajaAbierta = abierta;
             btnAbrirCaja.Text = abierta ? "Cerrar Caja" : "Abrir Caja";
 
+            // Habilitar/deshabilitar acciones que requieren caja abierta
             if (Session.CurrentUser != null && Session.CurrentUser.Id_rol == 3)
             {
                 btnCargarPedido.Enabled = abierta;
                 btnRegReserva.Enabled = abierta;
-
-                // Colores coherentes con estado
                 btnCargarPedido.BackColor = abierta ? Palette.Vino : Darken(Palette.Vino, 0.35f);
                 btnRegReserva.BackColor = abierta ? Palette.Vino : Darken(Palette.Vino, 0.35f);
             }
-
         }
     }
 }

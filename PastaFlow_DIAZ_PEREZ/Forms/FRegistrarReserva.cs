@@ -12,14 +12,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
-    // Gestión de reservas:
-    // - Alta con validaciones básicas (nombre, apellido, fecha/hora, personas, estado).
-    // - Listado y búsqueda por rango de fechas.
-    // - Eliminación desde la grilla con confirmación.
-    // - Generación de ticket PDF (no factura) con logo opcional.
-    // - Estilo de grilla unificado y detección dinámica de columna ID.
     public partial class FRegistrarReserva : Form
     {
         public FRegistrarReserva()
@@ -27,25 +22,24 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             InitializeComponent();
         }
 
-        // Nombre de la columna ID de reserva en el resultado (se detecta tras cargar).
+        // Campo privado para recordar el nombre real de la columna ID (puede variar según SP)
         private string _idReservaColumnName = "id_reserva";
 
         private void FReservas_Load(object sender, EventArgs e)
         {
-            // Formato de fecha/hora para la reserva
             dtpFechaHora.Format = DateTimePickerFormat.Custom;
             dtpFechaHora.CustomFormat = "dd/MM/yyyy HH:mm";
 
-            // Estados posibles
             cBoxEstado.Items.AddRange(new string[] { "Pendiente", "Confirmada", "Cancelada" });
             cBoxEstado.SelectedIndex = 0;
 
-            // Estilo y handlers de la grilla
+            // Estilo + datos
             ConfigurarGrillaVisualReservas();
+
+            // Cablear click del botón de acción
             dgvReservas.CellContentClick -= dgvReservas_CellContentClick;
             dgvReservas.CellContentClick += dgvReservas_CellContentClick;
 
-            // Carga inicial
             CargarReservas();
         }
 
@@ -54,7 +48,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             this.Close();
         }
 
-        // Validación de nombre (solo letras y espacio, máx 100)
+        // Validaciones de entrada
         private void NombreCliente_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox txt = sender as TextBox;
@@ -68,7 +62,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Validación de apellido (solo letras y espacio, máx 100)
         private void ApellidoCliente_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox txt = sender as TextBox;
@@ -82,7 +75,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Registra la reserva y genera ticket PDF
+        // Registrar reserva
         private void btnRegistrarReserva_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNombreCliente.Text) ||
@@ -103,7 +96,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             DateTime fechaHora = dtpFechaHora.Value;
             int cantidad = (int)cantPersonas.Value;
             string estado = cBoxEstado.SelectedItem.ToString();
-            int idUsuario = Session.CurrentUser.Id_usuario; // cajero/usuario actual
+            int idUsuario = Session.CurrentUser.Id_usuario; 
 
             try
             {
@@ -112,14 +105,14 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
                 MessageBox.Show($"Reserva registrada correctamente.");
 
-                // Generar ticket PDF (NO factura) en el Escritorio
+                // Generar ticket PDF (NO factura)
                 string ruta = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
                     $"Ticket_Reserva_{id}.pdf");
 
                 string nombreLocal = "PastaFlow Restaurante";
 
-                // Logo opcional (png/jpg)
+                // Asegurar que el logo apunte a un archivo existente
                 string logo = Path.Combine(Application.StartupPath, "Recursos", "logo.png");
                 if (!File.Exists(logo))
                 {
@@ -133,7 +126,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 PdfHelper.GenerarTicketReserva(
                     nombreLocal,
                     logo,
-                    id.ToString(),
+                    id.ToString(),      
                     fechaHora,
                     cliente,
                     cantidad,
@@ -143,7 +136,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 );
 
                 MessageBox.Show($"Ticket generado en: {ruta}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //Abre el PDF automáticamente
                 Process.Start(new ProcessStartInfo(ruta) { UseShellExecute = true });
+
 
                 CargarReservas();
             }
@@ -153,18 +149,20 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Carga y aplica estilo a la grilla de reservas
+        // Carga las reservas en el DataGridView
         private void CargarReservas()
         {
             var dao = new ReservaDAO();
             dgvReservas.DataSource = dao.ListarReservas();
 
+            // Detectar dinámicamente el nombre de la columna ID de la reserva
             DetectarColumnaIdReserva();
+
+            // Aplicar estilo visual completo y luego ajustes por columna
             ConfigurarGrillaVisualReservas();
             FormatearGrillaReservas();
         }
 
-        // Determina el nombre real de la columna ID en el DataGridView
         private void DetectarColumnaIdReserva()
         {
             _idReservaColumnName = null;
@@ -184,7 +182,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
                 if (esId)
                 {
-                    _idReservaColumnName = c.Name;
+                    _idReservaColumnName = c.Name; // usamos Name para acceder a la celda
                     break;
                 }
             }
@@ -196,21 +194,20 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private bool Contiene(string a, string b) =>
             !string.IsNullOrWhiteSpace(a) && a.IndexOf(b, StringComparison.OrdinalIgnoreCase) >= 0;
 
-        // Limpia los campos del formulario de alta
+        // Limpiar campos del formulario
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtNombreCliente.Clear();
-            txtApellidoCliente.Clear();
+            txtNombreCliente.Clear();  
+            txtApellidoCliente.Clear(); 
             cantPersonas.Value = 1;
             dtpFechaHora.Value = DateTime.Now;
             cBoxEstado.SelectedIndex = 0;
         }
 
-        // Búsqueda por fecha (inicio-fin inclusivo hasta fin de día)
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             DateTime fechaInicio = dtpInicio.Value.Date;
-            DateTime fechaFin = dtpFin.Value.Date.AddDays(1).AddSeconds(-1);
+            DateTime fechaFin = dtpFin.Value.Date.AddDays(1).AddSeconds(-1); // Hasta fin del día
 
             try
             {
@@ -235,15 +232,18 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        // Restablece filtros y recarga listado
         private void btnLimpiarReserva_Click(object sender, EventArgs e)
         {
             try
             {
-                dtpInicio.Value = DateTime.Today.AddDays(-7);
+                // Restablecer los DateTimePicker a sus valores por defecto
+                dtpInicio.Value = DateTime.Today.AddDays(-7); // Ejemplo: últimos 7 días
                 dtpFin.Value = DateTime.Today;
+
+                // Limpiar el DataGridView
                 dgvReservas.DataSource = null;
+
+                // (Opcional) Volver a cargar todas las reservas sin filtro
                 CargarReservas();
             }
             catch (Exception ex)
@@ -253,7 +253,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Estilo visual consistente con otras grillas
+        // Configuración visual 
         private void ConfigurarGrillaVisualReservas()
         {
             var g = dgvReservas;
@@ -293,11 +293,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             g.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             g.ColumnHeadersHeight = 42;
 
+            // Asegurar scroll vertical (mejor para tablas largas)
             g.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
             g.ScrollBars = ScrollBars.Vertical;
         }
 
-        // Ajustes por columna y botón de acción
         private void FormatearGrillaReservas()
         {
             if (_idReservaColumnName != null && dgvReservas.Columns.Contains(_idReservaColumnName))
@@ -333,8 +333,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 c.FlatStyle = FlatStyle.Standard;
             }
         }
-
-        // Maneja clicks en la columna "Accion" (Eliminar)
         private void dgvReservas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;

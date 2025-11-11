@@ -12,19 +12,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Diagnostics;
+using System.IO;              
+using System.Diagnostics;   
+
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
-    // Registro de ventas:
-    // - Autocompletado manual con lista emergente (ListBox) filtrada por texto
-    // - Agrega productos con control anti doble Enter (timestamp)
-    // - Acumula cantidades si el producto ya existe en la grilla
-    // - Calcula total y aplica recargo según método dePago seleccionado
-    // - Genera factura PDF y la abre al confirmar
-    // - Permite eliminar items desde la columna de acción
-    // - Bloquea edición directa de celdas para evitar inconsistencias
     public partial class FRegistrarVenta : Form
     {
         private readonly ProductoDao _productoDao = new ProductoDao();
@@ -32,23 +25,27 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private List<string> _nombresProductos = new List<string>();
         private ListBox _lbSuggestions;
 
-        // Control de doble llamada (Enter repetido)
+        // --- nuevos campos para evitar llamadas dobles al agregar ---
         private DateTime _lastAddTimestamp = DateTime.MinValue;
         private string _lastAddedProductoNombre = null;
 
         public FRegistrarVenta()
         {
             InitializeComponent();
-            this.Load += FRegistrarVenta_Load;
+            this.Load += new System.EventHandler(this.FRegistrarVenta_Load);
+
         }
 
         private void FRegistrarVenta_Load(object sender, EventArgs e)
         {
+            // Estética tabla
             ConfigurarGrillaVisualVenta();
             FormatearGrillaVenta();
 
+            // Evitar edición incluso si algo externo cambia ReadOnly
             dgvDetalleVenta.ReadOnly = true;
             dgvDetalleVenta.EditMode = DataGridViewEditMode.EditProgrammatically;
+            // bloquear cualquier intento de comenzar edición con doble clic/tecla
             dgvDetalleVenta.CellBeginEdit += (s, ev) => { ev.Cancel = true; };
 
             // Cargar productos desde BD
@@ -67,43 +64,51 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 _nombresProductos = new List<string>();
             }
 
-            // ListBox dinámico de sugerencias
+            // Crear ListBox de sugerencias (dropdown)
             _lbSuggestions = new ListBox
             {
                 Visible = false,
                 Height = 120,
                 Width = Math.Max(250, textBuscarProducto.Width),
-                Font = textBuscarProducto.Font,
-                TabStop = false
+                Font = textBuscarProducto.Font
             };
+            // posicionarlo justo debajo del TextBox
             var loc = textBuscarProducto.Location;
             _lbSuggestions.Location = new Point(loc.X, loc.Y + textBuscarProducto.Height + 2);
-            _lbSuggestions.MouseClick += (s, ev) => SelectSuggestionFromList();
+            _lbSuggestions.TabStop = false;
+
+            // Eventos
+            _lbSuggestions.MouseClick += (s, ev) => { SelectSuggestionFromList(); };
             _lbSuggestions.KeyDown += (s, ev) =>
             {
                 if (ev.KeyCode == Keys.Enter) { SelectSuggestionFromList(); ev.Handled = true; }
                 else if (ev.KeyCode == Keys.Escape) { HideSuggestions(); textBuscarProducto.Focus(); }
             };
+
+            // Añadir al panel contenedor para que se muestre sobre otros controles
             pnlPrincipal.Controls.Add(_lbSuggestions);
             _lbSuggestions.BringToFront();
 
-            // Eventos de búsqueda
+            // Suscribir eventos del TextBox
             textBuscarProducto.TextChanged += textBuscarProducto_TextChanged;
             textBuscarProducto.KeyDown += textBuscarProducto_KeyDown;
             textBuscarProducto.LostFocus += (s, ev) =>
             {
-                Task.Delay(120).ContinueWith(_ => BeginInvoke((Action)HideSuggestions));
+                // pequeño delay para permitir click en la lista
+                Task.Delay(120).ContinueWith(_ => { this.BeginInvoke((Action)HideSuggestions); });
             };
 
             // Botón agregar
             btnAgregar.Click += btnAgregar_Click;
+            // Inicial cantidad
             txtCantidad.Text = "1";
 
             CargarMetodosPago();
             cBoxMetodoPago.SelectedIndexChanged += cBoxMetodoPago_SelectedIndexChanged;
+
         }
 
-        // Filtro de sugerencias
+        // Mostrar/actualizar sugerencias en la lista debajo del TextBox
         private void textBuscarProducto_TextChanged(object sender, EventArgs e)
         {
             string term = textBuscarProducto.Text?.Trim() ?? "";
@@ -132,6 +137,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             _lbSuggestions.Items.AddRange(matches);
             _lbSuggestions.EndUpdate();
 
+            // ajustar ancho (si es necesario) y mostrar
             _lbSuggestions.Width = Math.Max(textBuscarProducto.Width, GetListBoxPreferredWidth(_lbSuggestions, matches) + 10);
             _lbSuggestions.Location = new Point(textBuscarProducto.Location.X, textBuscarProducto.Location.Y + textBuscarProducto.Height + 2);
             _lbSuggestions.Visible = true;
@@ -152,19 +158,23 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 }
                 else if (e.KeyCode == Keys.Enter)
                 {
+                    // Si hay un item seleccionado, aceptarlo y agregar
                     if (_lbSuggestions.SelectedItem != null)
                     {
                         SelectSuggestionFromList();
+                        // después de seleccionar, agregar producto automáticamente
                         btnAgregar_Click(this, EventArgs.Empty);
                     }
                     else if (_lbSuggestions.Items.Count == 1)
                     {
+                        // si solo hay una sugerencia, usarla
                         _lbSuggestions.SelectedIndex = 0;
                         SelectSuggestionFromList();
                         btnAgregar_Click(this, EventArgs.Empty);
                     }
                     else
                     {
+                        // si hay sugerencias múltiples y ninguna seleccionada, enfocar la lista
                         if (_lbSuggestions.Items.Count > 0)
                         {
                             _lbSuggestions.Focus();
@@ -181,6 +191,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
             else if (e.KeyCode == Keys.Enter)
             {
+                // si el formulario tiene __AcceptButton__ configurado, la tecla Enter puede provocar
+                // la ejecución del botón automáticamente; aquí llamamos explícitamente pero toleramos
+                // llamadas duplicadas en btnAgregar_Click (ver control de tiempo).
                 btnAgregar_Click(this, EventArgs.Empty);
                 e.Handled = true;
             }
@@ -202,14 +215,15 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 _lbSuggestions.Visible = false;
         }
 
-        // Agregar producto a la grilla
+        // Agregar producto seleccionado a la grilla
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             string nombre = textBuscarProducto.Text?.Trim();
 
+            // Si el nombre está vacío y acabamos de agregar algo hace muy poco, 
+            // asumimos llamada duplicada provocada por la tecla Enter y la ignoramos.
             if (string.IsNullOrEmpty(nombre))
             {
-                // Evita doble enter de un agregado previo
                 if ((DateTime.UtcNow - _lastAddTimestamp).TotalMilliseconds < 700)
                     return;
 
@@ -226,8 +240,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
-            var producto = _productosList.FirstOrDefault(p => string.Equals(p.nombre?.Trim(), nombre, StringComparison.CurrentCultureIgnoreCase))
-                           ?? _productosList.FirstOrDefault(p => p.nombre.IndexOf(nombre, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            var producto = _productosList.FirstOrDefault(p => string.Equals(p.nombre?.Trim(), nombre, StringComparison.CurrentCultureIgnoreCase));
+            if (producto == null)
+            {
+                // intentar búsqueda parcial si no exacto
+                producto = _productosList.FirstOrDefault(p => p.nombre.IndexOf(nombre, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            }
 
             if (producto == null)
             {
@@ -235,7 +253,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
-            // Si ya existe, acumular cantidad
+            // Si ya existe en la grilla, actualizar cantidad y subtotal
             foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
             {
                 var cellVal = Convert.ToString(row.Cells["producto"].Value);
@@ -249,17 +267,21 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     row.Cells["subtotal"].Value = subtotal.ToString("C", CultureInfo.CurrentCulture);
                     UpdateTotal();
                     ClearProductEntry();
+
+                    // registrar última adición
                     _lastAddedProductoNombre = producto.nombre?.Trim();
                     _lastAddTimestamp = DateTime.UtcNow;
                     return;
                 }
             }
 
-            // Nueva fila
+            // Agregar nueva fila
             decimal sub = producto.precio * cantidad;
             dgvDetalleVenta.Rows.Add(producto.nombre, cantidad.ToString(), producto.precio.ToString("C", CultureInfo.CurrentCulture), sub.ToString("C", CultureInfo.CurrentCulture), "Eliminar");
             UpdateTotal();
             ClearProductEntry();
+
+            // registrar última adición
             _lastAddedProductoNombre = producto.nombre?.Trim();
             _lastAddTimestamp = DateTime.UtcNow;
         }
@@ -283,16 +305,18 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     total += v;
             }
             txtTotal.Text = total.ToString("C", CultureInfo.CurrentCulture);
-            UpdateTotalConRecargo(); // refresca si hay método seleccionado
         }
 
+        // Evento para botón eliminar en la grilla
         private void dgvDetalleVenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
+
             if (dgvDetalleVenta.Columns[e.ColumnIndex].Name == "bEliminar")
             {
                 dgvDetalleVenta.Rows.RemoveAt(e.RowIndex);
                 UpdateTotal();
+                return;
             }
         }
 
@@ -310,8 +334,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
+            // Obtener el método de pago seleccionado
             var metodo = (Metodo_Pago)cBoxMetodoPago.SelectedItem;
 
+            // Calcular totales
             decimal totalBase = 0m;
             foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
             {
@@ -324,22 +350,26 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             decimal totalFinal = Math.Round(totalBase + (totalBase * metodo.Recargo / 100m), 2);
 
             string numeroFactura = $"F-{DateTime.Now:yyyyMMddHHmmss}";
-            int idCaja = Session.CurrentCaja != null ? Session.CurrentCaja.Id_caja : 1;
-
+            int idCaja = Session.CurrentCaja != null ? Session.CurrentCaja.Id_caja : 1; // usar caja actual
             var dao = new VentaDao();
+
             try
             {
+                // Registrar venta
                 int idVenta = dao.RegistrarVenta(idCaja, metodo.Id_metodo, totalBase, metodo.Recargo, totalFinal, numeroFactura);
 
+                // Registrar detalles
                 foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
                 {
                     if (row.IsNewRow) continue;
                     string nombreProd = row.Cells["producto"].Value.ToString();
                     var prod = _productosList.FirstOrDefault(p => p.nombre == nombreProd);
                     int cantidad = Convert.ToInt32(row.Cells["cantidad"].Value);
+
                     dao.InsertarDetalleVenta(idVenta, prod.id_producto, cantidad, prod.precio);
                 }
 
+                //Crear DataTable con los productos para el PDF
                 DataTable dtProductos = new DataTable();
                 dtProductos.Columns.Add("Producto", typeof(string));
                 dtProductos.Columns.Add("Cantidad", typeof(int));
@@ -348,14 +378,16 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
                 {
                     if (row.IsNewRow) continue;
-                    string prodNom = row.Cells["producto"].Value.ToString();
-                    int cant = Convert.ToInt32(row.Cells["cantidad"].Value);
+                    string producto = row.Cells["producto"].Value.ToString();
+                    int cantidad = Convert.ToInt32(row.Cells["cantidad"].Value);
                     decimal subtotal = 0;
                     decimal.TryParse(row.Cells["subtotal"].Value.ToString(), NumberStyles.Currency, CultureInfo.CurrentCulture, out subtotal);
-                    dtProductos.Rows.Add(prodNom, cant, subtotal);
+
+                    dtProductos.Rows.Add(producto, cantidad, subtotal);
                 }
 
-                string logoPath = Path.Combine(Application.StartupPath, "Resources", "logo.png");
+                //Generar la factura PDF
+                string logoPath = Path.Combine(Application.StartupPath, "Resources", "logo.png"); // Ajusta ruta si es necesario
                 string rutaSalida = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"Factura_{numeroFactura}.pdf");
 
                 PdfHelper.GenerarFacturaVenta(
@@ -369,6 +401,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     rutaSalida: rutaSalida
                 );
 
+                //Abrir automáticamente el PDF generado
                 if (File.Exists(rutaSalida))
                 {
                     Process.Start(new ProcessStartInfo
@@ -379,6 +412,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 }
 
                 MessageBox.Show($"Venta registrada correctamente.\nFactura: {numeroFactura}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Limpiar grilla y total
                 dgvDetalleVenta.Rows.Clear();
                 txtTotal.Text = "";
             }
@@ -388,9 +423,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e) => Close();
 
-        // Cargar métodos de pago al combo
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void CargarMetodosPago()
         {
             var metodos = new List<Metodo_Pago>();
@@ -418,12 +456,16 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             cBoxMetodoPago.SelectedIndex = -1;
         }
 
-        private void cBoxMetodoPago_SelectedIndexChanged(object sender, EventArgs e) => UpdateTotalConRecargo();
+        private void cBoxMetodoPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateTotalConRecargo();
+        }
 
         private void UpdateTotalConRecargo()
         {
             if (cBoxMetodoPago.SelectedItem is Metodo_Pago metodo)
             {
+                // Tomar el total base (sin recargo)
                 decimal totalBase = 0m;
                 foreach (DataGridViewRow row in dgvDetalleVenta.Rows)
                 {
@@ -433,29 +475,39 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                         totalBase += v;
                 }
 
+                // Calcular total con recargo
                 decimal recargo = metodo.Recargo / 100;
                 decimal totalFinal = totalBase + (totalBase * recargo);
+
+                // Mostrar el total formateado
                 txtTotal.Text = totalFinal.ToString("C", CultureInfo.CurrentCulture);
             }
         }
 
-        // Validación de entrada para cantidad
+        // Validar que txtCantidad acepte solo números
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-                e.Handled = true;
+            {
+                e.Handled = true; // bloquea cualquier letra o símbolo
+            }
         }
 
         private void pnlPrincipal_Paint(object sender, PaintEventArgs e) { }
+
         private void FRegistrarVenta_Load_1(object sender, EventArgs e) { }
 
-        // Estética de la grilla de detalle
+        // -------------------- Estética y formato para dgvDetalleVenta --------------------
+
         private void ConfigurarGrillaVisualVenta()
         {
             var g = dgvDetalleVenta;
+
+            // Comportamiento general
             g.AutoGenerateColumns = true;
             g.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             g.RowTemplate.Height = 36;
+
             g.AllowUserToAddRows = false;
             g.AllowUserToDeleteRows = false;
             g.AllowUserToResizeColumns = false;
@@ -463,6 +515,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             g.MultiSelect = false;
             g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             g.RowHeadersVisible = false;
+
+            // Apariencia
             g.BorderStyle = BorderStyle.None;
             g.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             g.GridColor = Color.FromArgb(230, 200, 190);
@@ -478,6 +532,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             g.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 243, 230);
 
+            // Encabezados
             g.EnableHeadersVisualStyles = false;
             g.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             g.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -486,8 +541,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             g.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
             g.ColumnHeadersHeight = 42;
 
+            // Evitar edición directa de celdas por clic. Si necesita edición de cantidad crear control específico.
             g.ReadOnly = true;
             g.EditMode = DataGridViewEditMode.EditProgrammatically;
+
+            // Scroll vertical por si la lista crece
             g.ScrollBars = ScrollBars.Vertical;
         }
 
@@ -495,6 +553,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         {
             var g = dgvDetalleVenta;
 
+            // Añadir/asegurar columna eliminar con estilo si no existe (Designer ya crea columnas)
             if (!g.Columns.Contains("bEliminar"))
             {
                 var col = new DataGridViewButtonColumn
@@ -508,14 +567,16 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 };
                 col.DefaultCellStyle.BackColor = Color.LemonChiffon;
                 col.DefaultCellStyle.ForeColor = Color.Black;
-                col.ReadOnly = false;
+                col.ReadOnly = false; // permitir que el botón responda aunque la grilla sea ReadOnly
                 g.Columns.Add(col);
             }
             else
             {
+                // Asegurar que el botón de eliminar sea clicable
                 g.Columns["bEliminar"].ReadOnly = false;
             }
 
+            // Alineaciones y formatos por nombre de columna (tolerante a distintas convenciones)
             TryFormatColumn(g, "producto", DataGridViewContentAlignment.MiddleLeft, DataGridViewAutoSizeColumnMode.Fill, 200);
             TryFormatColumn(g, "Descripcion", DataGridViewContentAlignment.MiddleLeft, DataGridViewAutoSizeColumnMode.Fill, 200);
             TryFormatColumn(g, "cantidad", DataGridViewContentAlignment.MiddleCenter, DataGridViewAutoSizeColumnMode.AllCells, 80);
@@ -524,17 +585,22 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             TryFormatColumn(g, "subtotal", DataGridViewContentAlignment.MiddleRight, DataGridViewAutoSizeColumnMode.AllCells, 120, "C2");
             TryFormatColumn(g, "Total", DataGridViewContentAlignment.MiddleRight, DataGridViewAutoSizeColumnMode.AllCells, 140, "C2");
 
+            // Encabezado centrado
             g.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Evitar envoltura de texto salvo en columnas de descripción
             g.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
             if (g.Columns.Contains("Descripcion"))
                 g.Columns["Descripcion"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
+            // Forzar selección limpia al iniciar
             g.ClearSelection();
         }
 
         private void TryFormatColumn(DataGridView g, string colName, DataGridViewContentAlignment align,
                                      DataGridViewAutoSizeColumnMode mode, int fillWeight = 100, string format = null)
         {
+            // Buscar columna por nombres similares (tolerancia)
             DataGridViewColumn c = null;
             foreach (DataGridViewColumn col in g.Columns)
             {
@@ -554,6 +620,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 c.FillWeight = fillWeight;
             if (!string.IsNullOrEmpty(format))
                 c.DefaultCellStyle.Format = format;
+
+            // Evitar edición directa por defecto en columnas formateadas
             c.ReadOnly = true;
         }
 
@@ -571,5 +639,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
             return maxWidth;
         }
+
+        
+
     }
 }

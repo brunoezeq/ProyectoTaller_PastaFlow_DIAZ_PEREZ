@@ -12,11 +12,6 @@ using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
-    // Registro de quejas:
-    // - Valida nombre, apellido y motivo (evita placeholders vacíos)
-    // - Usa usuario en sesión para asociar la queja
-    // - Guarda motivo y descripción opcional
-    // - Limpia el formulario tras registrar
     public partial class FRegistrarQueja : Form
     {
         private const string PlaceholderNombre = "Nombre";
@@ -29,7 +24,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnRegistrarQueja_Click(object sender, EventArgs e)
         {
-            // Validar campos obligatorios evitando placeholders
+            // Validar campos obligatorios evitando placeholders (comparación robusta)
             if (string.IsNullOrWhiteSpace(txtNombreCliente.Text) ||
                 string.Equals(txtNombreCliente.Text.Trim(), PlaceholderNombre, StringComparison.OrdinalIgnoreCase) ||
                 string.IsNullOrWhiteSpace(txtApellidoCliente.Text) ||
@@ -64,11 +59,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Limpia todos los campos del formulario
         private void LimpiarFormulario()
         {
             txtNombreCliente.Clear();
-            txtApellidoCliente.Clear();
+            txtApellidoCliente.Clear(); 
             txtMotivo.Clear();
             txtDescripcion.Clear();
         }

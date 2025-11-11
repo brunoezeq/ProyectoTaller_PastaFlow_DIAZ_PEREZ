@@ -15,7 +15,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 {
     public partial class FBackup : Form
     {
-        // Acceso a operaciones de backup (crear y consultar historial)
         private readonly BackupDAO _backupDao = new BackupDAO();
 
         public FBackup()
@@ -25,15 +24,13 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void FBackup_Load(object sender, EventArgs e)
         {
-            // Preparar grilla y mostrar estado inicial
-            ConfigurarDgvHistorial();
+            ConfigurarDgvHistorial();          // <-- configurar columnas antes de enlazar
             MostrarUltimoBackup();
             CargarHistorialBackups();
         }
 
         private void btnSeleccionarRuta_Click(object sender, EventArgs e)
         {
-            // Diálogo para elegir dónde guardar el .bak
             using (var sfd = new SaveFileDialog())
             {
                 sfd.Filter = "Backup SQL (*.bak)|*.bak";
@@ -47,7 +44,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnGenerarBackup_Click(object sender, EventArgs e)
         {
-            // Crear archivo .bak en la ruta seleccionada
             try
             {
                 if (string.IsNullOrWhiteSpace(txtRuta.Text))
@@ -64,7 +60,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 MostrarUltimoBackup();
                 CargarHistorialBackups();
 
-                // Ofrecer abrir carpeta del archivo generado
                 if (File.Exists(txtRuta.Text))
                 {
                     if (MessageBox.Show("¿Desea abrir la carpeta donde se guardó el backup?", "Backup generado",
@@ -82,7 +77,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void MostrarUltimoBackup()
         {
-            // Mostrar resumen del último backup registrado
             var info = _backupDao.ObtenerUltimoBackup();
             if (info != null)
             {
@@ -98,11 +92,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void CargarHistorialBackups()
         {
-            // Listar registros de backups previos
             try
             {
                 var dt = _backupDao.ObtenerHistorialBackups();
-                dgvHistorial.DataSource = dt;
+                dgvHistorial.DataSource = dt; // columnas ya configuradas
             }
             catch (Exception ex)
             {
@@ -112,7 +105,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void ConfigurarDgvHistorial()
         {
-            // Ajustar columnas sólo una vez (evita recrear al recargar)
             var g = dgvHistorial;
             g.AutoGenerateColumns = false;
             g.ReadOnly = true;
@@ -121,6 +113,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             g.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             g.RowHeadersVisible = false;
 
+            // Crear columnas una solo vez
             if (!g.Columns.Contains("ID"))
                 g.Columns.Add(new DataGridViewTextBoxColumn { Name = "ID", HeaderText = "ID", DataPropertyName = "ID", Visible = false });
 
@@ -136,7 +129,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void dgvHistorial_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Al hacer click sobre la ruta abrir ubicación (si existe)
+            // Evitar borrar columnas; opcional: abrir ubicación al hacer click en la ruta
             if (e.RowIndex < 0) return;
             if (dgvHistorial.Columns[e.ColumnIndex].Name != "Ruta del archivo") return;
 
@@ -147,7 +140,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
         private void btnRestaurarBackup_Click(object sender, EventArgs e)
         {
-            // Punto de entrada para la futura restauración
+            // Lógica para restaurar el backup aquí
             MessageBox.Show("Funcionalidad de restaurar backup aún no implementada.");
         }
     }
