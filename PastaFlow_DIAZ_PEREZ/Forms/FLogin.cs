@@ -16,13 +16,18 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PastaFlow_DIAZ_PEREZ
 {
+    // Pantalla de inicio de sesión:
+    // - Valida DNI (solo 8 dígitos) y contraseña
+    // - Permite ingresar con Enter desde cualquier control
+    // - Verifica hash SHA-256 contra la base y estado del usuario
+    // - Al iniciar sesión abre el menú principal y oculta el login
     public partial class FLogin : Form
     {
         public FLogin()
         {
             InitializeComponent();
 
-            // Hace que Enter dispare el botón de entrar
+            // Enter ejecuta el botón Ingresar
             this.AcceptButton = btnIngresar;
 
             // Fallback por si algún control consume Enter
@@ -37,26 +42,27 @@ namespace PastaFlow_DIAZ_PEREZ
             };
         }
 
-        //Cierra la aplicación
+        // Cierra la ventana de login (si no hay otras ventanas, finaliza la app)
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         private void txtDNI_KeyPress(object sender, KeyPressEventArgs e)
-        {   //Solo permite ingresar numeros en el textbox
+        {
+            // Solo números y Backspace
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true; 
             }
-            //Solo permite ingresar 8 caracteres en el textbox
+            // Máximo 8 caracteres
             if (char.IsDigit(e.KeyChar) && txtDNI.Text.Length >= 8)
             {
                 e.Handled = true;
             }
         }
 
-        //Ingresa al menú
+        // Intenta iniciar sesión y abrir el menú
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             string dni = txtDNI.Text.Trim();
@@ -68,6 +74,7 @@ namespace PastaFlow_DIAZ_PEREZ
                 return;
             }
 
+            // Busca usuario por DNI
             var dao = new UsuarioDAO();
             var user = dao.ObtenerPorDni(dni);
 
@@ -77,19 +84,19 @@ namespace PastaFlow_DIAZ_PEREZ
                 return;
             }
 
-            // Hasheamos la contraseña ingresada y comparamos
+            // Hashea entrada y compara con lo almacenado
             byte[] hashedInput = SeguridadHelper.ComputeSha256Hash(password);
-
             bool iguales = hashedInput.Length == user.Contrasena_hash.Length &&
                            hashedInput.SequenceEqual(user.Contrasena_hash);
 
+            // También requiere que el usuario esté activo
             if (!iguales || !user.Estado)
             {
                 MessageBox.Show("Nro de documento o contraseña incorrectos.", "Error de Login", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Login OK: guardamos sesión y abrimos menú
+            // Login OK: guarda sesión y abre menú principal
             Session.CurrentUser = user;
             FMenuCajero menu = new FMenuCajero();
             menu.Show();
@@ -97,7 +104,7 @@ namespace PastaFlow_DIAZ_PEREZ
             menu.FormClosing += frmClosing;
         }
 
-        //Al cerrar el menú, limpia los textbox y vuelve a mostrar el login
+        // Al cerrar el menú, limpia campos y vuelve a mostrar el login
         private void frmClosing(object sender, FormClosingEventArgs e)
         {
             txtDNI.Clear();

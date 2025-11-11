@@ -8,61 +8,66 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
-
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Pantalla de gestión de inventario:
+    // - Lista productos con paginación y ordenamiento en memoria
+    // - Permite alta, edición, baja lógica y restauración
+    // - Búsqueda rápida por nombre o categoría
+    // - Estilos visuales coherentes con el resto del sistema
     public partial class FGestionarInventario : Form
     {
-        // Límites de texto para los campos
+        // Límites de texto para validaciones simples (UI)
         private const int MAX_NOMBRE = 25;
         private const int MAX_DESCRIPCION = 100;
 
-        // Listas y conexión con la base
+        // Colecciones vinculadas al DataGridView (BindingList para notificar cambios)
         private readonly BindingList<Producto> _productos = new BindingList<Producto>();
         private readonly BindingList<Categoria> _categorias = new BindingList<Categoria>();
         private readonly BindingSource _bsProductos = new BindingSource();
 
+        // Acceso a datos
         private readonly ProductoDao _productoDao = new ProductoDao();
         private readonly CategoriaDao _categoriaDao = new CategoriaDao();
 
-        // Campo para alternar el orden
+        // Flags de orden para alternar asc/desc por columna
         private bool _ordenNombreAsc = true;
         private bool _ordenDescAsc = true;
-        private bool _ordenPrecioAsc = false; // primero mayor->menor
+        private bool _ordenPrecioAsc = false; // Comienza mayor->menor
         private bool _ordenStockAsc = true;
         private bool _ordenCategoriaAsc = true;
         private bool _ordenEstadoAsc = true;
 
-        // Paginación
+        // Paginación en memoria (carga completa y se segmenta)
         private int _paginaActual = 1;
         private int _totalPaginas = 1;
         private const int _itemsPorPagina = 12;
-        private List<Producto> _productosTodos = new List<Producto>();
+        private List<Producto> _productosTodos = new List<Producto>(); // Lista completa para paginar/filtrar
 
         public FGestionarInventario()
         {
             InitializeComponent();
 
-            // Configuración general del formulario
-            this.DoubleBuffered = true;
+            // Ajustes generales del formulario
+            this.DoubleBuffered = true; // reduce flicker al redibujar
             this.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
 
-            // Eventos principales
+            // Eventos clave del ciclo de vida y del grid
             this.Load += FGestionarInventario_Load;
             dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
             dgvProductos.CellFormatting += dgvProductos_CellFormatting;
             dgvProductos.CellContentClick += dgvProductos_CellContentClick;
-            dgvProductos.ColumnHeaderMouseClick += dgvProductos_ColumnHeaderMouseClick; // ordenar al hacer click en encabezado
+            dgvProductos.ColumnHeaderMouseClick += dgvProductos_ColumnHeaderMouseClick; // ordenar por encabezado
 
-            // Búsqueda en tiempo real
+            // Búsqueda incremental
             if (txtBuscarProducto != null)
                 txtBuscarProducto.TextChanged += txtBuscarProducto_TextChanged;
         }
 
-        // Cuando se abre el formulario
+        // Carga inicial: estilos, datos y estado de controles
         private void FGestionarInventario_Load(object sender, EventArgs e)
         {
-            // Desconectar el evento para evitar selección automática
+            // Se quita para evitar que la selección inicial dispare carga al form
             dgvProductos.SelectionChanged -= dgvProductos_SelectionChanged;
 
             ConfigurarGrillaVisual();
@@ -72,40 +77,34 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dgvProductos.DataSource = _bsProductos;
 
             CargarCategorias();
-            CargarProductos(true);
+            CargarProductos(true); // incluye inactivos
 
             LimpiarFormulario();
             dgvProductos.ClearSelection();
             dgvProductos.CurrentCell = null;
 
-            // Foco en el primer campo
+            // Foco inicial en nombre
             this.ActiveControl = txtProdNombre;
 
-            // Reconectar el evento después de la carga
+            // Se reconecta después de la preparación
             dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
 
+            // Estilo de botones de navegación de página
             EstilizarBotonNavegacion(btnAtras);
             EstilizarBotonNavegacion(btnAdelante);
-
             dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
-
-            // Estilizar los botones de navegación con colores modernos y agradables
             EstilizarBotonesNavegacion();
         }
 
-        // =========================
-        // Diseño visual del DataGridView
-        // =========================
+        // ========== Estilo visual del DataGridView ==========
         private void ConfigurarGrillaVisual()
         {
+            // Configuración general de apariencia y comportamiento
             dgvProductos.AutoGenerateColumns = false;
-
-            // Tamaños / ajuste
             dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProductos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvProductos.RowTemplate.Height = 38;
 
-            // Comportamiento
             dgvProductos.AllowUserToAddRows = false;
             dgvProductos.AllowUserToDeleteRows = false;
             dgvProductos.AllowUserToResizeColumns = false;
@@ -120,24 +119,24 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dgvProductos.Cursor = Cursors.Hand;
             dgvProductos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 
-            // Estilo general de celdas
+            // Estilo de celdas
             dgvProductos.DefaultCellStyle.Font = new Font("Segoe UI", 10F);
-            dgvProductos.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Centrar texto
+            dgvProductos.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvProductos.DefaultCellStyle.BackColor = Color.White;
             dgvProductos.DefaultCellStyle.ForeColor = Color.FromArgb(40, 40, 40);
             dgvProductos.DefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 204, 204);
             dgvProductos.DefaultCellStyle.SelectionForeColor = Color.FromArgb(40, 40, 40);
             dgvProductos.DefaultCellStyle.WrapMode = DataGridViewTriState.False;
 
+            // Estilo alternado y selección
             dgvProductos.RowsDefaultCellStyle.SelectionBackColor = Color.FromArgb(255, 204, 204);
             dgvProductos.RowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(40, 40, 40);
-
             dgvProductos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 243, 230);
 
             // Encabezados
             dgvProductos.EnableHeadersVisualStyles = false;
             dgvProductos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvProductos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Centrar encabezado
+            dgvProductos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvProductos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(128, 0, 0);
             dgvProductos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvProductos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold);
@@ -146,11 +145,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             dgvProductos.ColumnHeadersDefaultCellStyle.SelectionForeColor = dgvProductos.ColumnHeadersDefaultCellStyle.ForeColor;
         }
 
-        // =========================
-        // Columnas de la tabla
-        // =========================
+        // ========== Enlace de columnas a propiedades y estilos específicos ==========
         private void ConfigurarGrillaDatos()
         {
+            // Asignación de DataPropertyName y modo de ordenamiento programático
             if (nombreProd != null)
             {
                 nombreProd.DataPropertyName = "nombre";
@@ -172,74 +170,61 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 Stock.SortMode = DataGridViewColumnSortMode.Programmatic;
             }
             if (Categoria != null)
-            {
                 Categoria.SortMode = DataGridViewColumnSortMode.Programmatic;
-            }
             if (Estado != null)
-            {
                 Estado.SortMode = DataGridViewColumnSortMode.Programmatic;
-            }
 
+            // Columna dinámica para acciones (baja/restaurar)
             if (dgvProductos.Columns["Accion"] == null)
             {
-                var colAccion = new DataGridViewButtonColumn();
-                colAccion.Name = "Accion";
-                colAccion.HeaderText = "ACCION";
-                colAccion.UseColumnTextForButtonValue = false;
-                colAccion.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                var colAccion = new DataGridViewButtonColumn
+                {
+                    Name = "Accion",
+                    HeaderText = "ACCION",
+                    UseColumnTextForButtonValue = false,
+                    AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                };
                 dgvProductos.Columns.Add(colAccion);
             }
 
-            // —— Estilos por columna (sin cambiar nombres) ——
             var ar = CultureInfo.GetCultureInfo("es-AR");
 
-            // NOMBRE
+            // Ajustes de ancho y formato por columna
             if (nombreProd != null)
             {
                 nombreProd.FillWeight = 180;
                 nombreProd.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             }
-
-            // DESCRIPCION
             if (DescProd != null)
             {
                 DescProd.FillWeight = 220;
                 DescProd.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                DescProd.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // permite múltiples líneas
+                DescProd.DefaultCellStyle.WrapMode = DataGridViewTriState.True; // Permite varias líneas
             }
-
-            // PRECIO
             if (Precio != null)
             {
                 Precio.FillWeight = 95;
                 Precio.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                Precio.DefaultCellStyle.Format = "C";            
-                Precio.DefaultCellStyle.FormatProvider = ar;     
+                Precio.DefaultCellStyle.Format = "C";
+                Precio.DefaultCellStyle.FormatProvider = ar;
             }
-
-            // STOCK
             if (Stock != null)
             {
                 Stock.FillWeight = 75;
                 Stock.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                Stock.DefaultCellStyle.Format = "N0";
+                Stock.DefaultCellStyle.Format = "N0"; // Entero sin decimales
             }
-
-            // CATEGORIA
             if (Categoria != null)
             {
                 Categoria.FillWeight = 120;
                 Categoria.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             }
-
-            // ESTADO
             if (Estado != null)
             {
                 Estado.FillWeight = 90;
                 Estado.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
-            // ACCION
             var colAccionRef = dgvProductos.Columns["Accion"] as DataGridViewButtonColumn;
             if (colAccionRef != null)
             {
@@ -251,11 +236,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Cargo las categorías al ComboBox
+        // Carga de categorías en combo (manteniendo referencia a objetos)
         private void CargarCategorias()
         {
             _categorias.Clear();
-
             try
             {
                 List<Categoria> datos = _categoriaDao.Listar();
@@ -272,7 +256,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             cBoxProdCat.SelectedIndex = _categorias.Count > 0 ? 0 : -1;
         }
 
-        // Cargar productos
+        // Carga base de productos (completa) y reinicia paginación
         private void CargarProductos(bool incluirInactivos)
         {
             _productosTodos.Clear();
@@ -289,7 +273,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             ActualizarPaginacion();
         }
 
-        // Actualiza la paginación y carga los productos de la página actual
+        // Calcula páginas y llena la lista visible para la página actual
         private void ActualizarPaginacion()
         {
             int totalItems = _productosTodos.Count;
@@ -306,12 +290,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             foreach (var p in productosPagina) _productos.Add(p);
             _bsProductos.ResetBindings(false);
 
-            // Actualiza el estado de los botones
             btnAtras.Enabled = _paginaActual > 1;
             btnAdelante.Enabled = _paginaActual < _totalPaginas;
         }
 
-        // Registrar un nuevo producto
+        // Alta de producto
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             decimal precio;
@@ -341,7 +324,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 _bsProductos.ResetBindings(false);
                 LimpiarFormulario();
                 dgvProductos.ClearSelection();
-                AplicarFiltro();
+                AplicarFiltro(); // Reaplica filtro activo (si hubiera texto)
             }
             catch (Exception ex)
             {
@@ -349,7 +332,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Editar un producto existente
+        // Edición de producto seleccionado
         private void btnEditar_Click(object sender, EventArgs e)
         {
             var prodSel = dgvProductos.CurrentRow?.DataBoundItem as Producto;
@@ -389,7 +372,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Baja o restaurar producto
+        // Baja lógica o restauración según estado
         private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || dgvProductos.Columns[e.ColumnIndex].Name != "Accion") return;
@@ -401,7 +384,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             {
                 if (MessageBox.Show($"¿Dar de baja el producto '{prod.nombre}'?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
-
                 try
                 {
                     _productoDao.EliminarLogico(prod.id_producto);
@@ -417,7 +399,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             {
                 if (MessageBox.Show($"¿Restaurar el producto '{prod.nombre}'?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                     return;
-
                 try
                 {
                     _productoDao.Restaurar(prod.id_producto);
@@ -431,7 +412,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Muestra los datos al seleccionar
+        // Carga datos del producto seleccionado al formulario (edición)
         private void dgvProductos_SelectionChanged(object sender, EventArgs e)
         {
             var p = dgvProductos.CurrentRow?.DataBoundItem as Producto;
@@ -453,11 +434,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Formato visual del DataGridView
+        // Formato condicional por fila/columna (estado, acción, estilos)
         private void dgvProductos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (e.RowIndex < 0) return;
-
             var item = dgvProductos.Rows[e.RowIndex].DataBoundItem as Producto;
             if (item == null) return;
 
@@ -465,19 +445,17 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             if (colName == "Categoria")
                 e.Value = item.id_categoria?.nombre_categoria ?? "";
-
             else if (colName == "Estado")
                 e.Value = item.estado ? "Activo" : "Inactivo";
-
             else if (colName == "Accion")
                 e.Value = item.estado ? "Dar baja" : "Restaurar";
 
-            // —— Badge visual para ESTADO (verde/gris) ——
+            // Badge visual para estado
             if (colName == "Estado")
             {
                 if (item.estado)
                 {
-                    e.CellStyle.BackColor = Color.FromArgb(222, 247, 231); // verde suave
+                    e.CellStyle.BackColor = Color.FromArgb(222, 247, 231);
                     e.CellStyle.ForeColor = Color.FromArgb(25, 135, 84);
                 }
                 else
@@ -488,7 +466,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 e.CellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
-            // Cambio visual si está inactivo (tu lógica original)
+            // Estilo fila si está inactivo (gris y cursiva)
             var row = dgvProductos.Rows[e.RowIndex];
             if (!item.estado)
             {
@@ -502,9 +480,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Filtrar productos por nombre o categoría
+        // Búsqueda incremental
         private void txtBuscarProducto_TextChanged(object sender, EventArgs e) => AplicarFiltro();
 
+        // Aplica filtro sobre la lista visible (no recarga de base)
         private void AplicarFiltro()
         {
             string termino = txtBuscarProducto?.Text?.Trim().ToLower() ?? "";
@@ -524,7 +503,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             _bsProductos.ResetBindings(false);
         }
 
-        // Limpia el formulario
+        // Limpia campos de entrada
         private void LimpiarFormulario()
         {
             txtProdNombre.Clear();
@@ -556,10 +535,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Boton volver
+        // Cerrar pantalla
         private void btnVolver_Click(object sender, EventArgs e) => this.Close();
 
-        // Eventos de paginación
+        // Navegación paginación: atrás
         private void btnAnterior_Click(object sender, EventArgs e)
         {
             if (_paginaActual > 1)
@@ -569,6 +548,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
+        // Navegación paginación: adelante
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
             if (_paginaActual < _totalPaginas)
@@ -578,7 +558,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Validaciones  
+        // Validaciones básicas de campos numéricos y texto
         private bool ValidarProducto(out decimal precio, out int stock)
         {
             precio = 0m;
@@ -616,32 +596,31 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             return true;
         }
+
+        // Estilo botón navegación beige/vino
         private void EstilizarBotonNavegacion(Button btn)
         {
             btn.FlatStyle = FlatStyle.Flat;
             btn.FlatAppearance.BorderSize = 2;
-            btn.FlatAppearance.BorderColor = Color.FromArgb(128, 0, 0); // Vino
-            btn.BackColor = Color.FromArgb(245, 237, 200); // Beige
-            btn.ForeColor = Color.FromArgb(60, 25, 15); // Marrón Suave
+            btn.FlatAppearance.BorderColor = Color.FromArgb(128, 0, 0);
+            btn.BackColor = Color.FromArgb(245, 237, 200);
+            btn.ForeColor = Color.FromArgb(60, 25, 15);
             btn.Font = new Font("Segoe UI Semibold", 10F);
 
-            // Bordes más suaves
             btn.Region = System.Drawing.Region.FromHrgn(
                 CreateRoundRectRgn(2, 2, btn.Width, btn.Height, 8, 8)
             );
 
-            // Hover
             btn.MouseEnter += (s, e) => btn.BackColor = Color.FromArgb(230, 215, 170);
             btn.MouseLeave += (s, e) => btn.BackColor = Color.FromArgb(245, 237, 200);
         }
 
-        // Agrega este método para estilizar los botones de navegación con colores modernos y agradables
+        // Estilo alternativo para botones atrás / adelante (rojo oscuro)
         private void EstilizarBotonesNavegacion()
         {
-            // Colores darkred y variantes
-            Color fondo = Color.DarkRed; // darkred
+            Color fondo = Color.DarkRed;
             Color texto = Color.White;
-            Color borde = Color.FromArgb(100, 0, 0); // Un borde más oscuro
+            Color borde = Color.FromArgb(100, 0, 0);
 
             var botones = new[] { btnAtras, btnAdelante };
             foreach (var btn in botones)
@@ -654,18 +633,16 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 btn.ForeColor = texto;
                 btn.Font = new Font("Segoe UI Semibold", 10F);
 
-                // Bordes redondeados
                 btn.Region = System.Drawing.Region.FromHrgn(
                     CreateRoundRectRgn(2, 2, btn.Width, btn.Height, 12, 12)
                 );
 
-                // Efecto hover
-                btn.MouseEnter += (s, e) => btn.BackColor = Color.FromArgb(139, 0, 0); // darkred más intenso
+                btn.MouseEnter += (s, e) => btn.BackColor = Color.FromArgb(139, 0, 0);
                 btn.MouseLeave += (s, e) => btn.BackColor = fondo;
             }
         }
 
-        // Necesario para esquinas redondeadas
+        // Win32 para esquinas redondeadas
         [System.Runtime.InteropServices.DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -673,8 +650,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             int nWidthEllipse, int nHeightEllipse
         );
 
-
-        // Mensajes
+        // Helpers de mensajes
         private void MostrarWarn(string msg) =>
             MessageBox.Show(msg, "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         private void MostrarError(string msg) =>
@@ -682,10 +658,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void MostrarInfo(string msg) =>
             MessageBox.Show(msg, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        // Ordenamiento manual por encabezado: aplica sort en la colección visible
         private void dgvProductos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var visible = _bsProductos.DataSource as IEnumerable<Producto> ?? _productos;
-
             IEnumerable<Producto> ordenada = visible;
             SortOrder glyph;
 
@@ -784,6 +760,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
+            // Suspender selección para no disparar eventos mientras se reasigna la fuente
             dgvProductos.SelectionChanged -= dgvProductos_SelectionChanged;
             try
             {
@@ -796,6 +773,11 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             {
                 dgvProductos.SelectionChanged += dgvProductos_SelectionChanged;
             }
+        }
+
+        private void panelLateral_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

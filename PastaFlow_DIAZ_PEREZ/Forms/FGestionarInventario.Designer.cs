@@ -251,6 +251,7 @@
             this.panelLateral.Controls.Add(this.lbProdDescripcion);
             resources.ApplyResources(this.panelLateral, "panelLateral");
             this.panelLateral.Name = "panelLateral";
+            this.panelLateral.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLateral_Paint);
             // 
             // lbProdCategoria
             // 

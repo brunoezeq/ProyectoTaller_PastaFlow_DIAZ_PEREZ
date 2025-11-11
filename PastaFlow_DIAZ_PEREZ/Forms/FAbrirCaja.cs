@@ -14,49 +14,39 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 {
     public partial class FAbrirCaja : Form
     {
-        // Propiedades públicas para que quien abra el formulario recupere la apertura
+        // Datos resultantes de la apertura
         public decimal MontoApertura { get; private set; }
         public DateTime FechaApertura { get; private set; }
 
         public FAbrirCaja()
         {
             InitializeComponent();
-
         }
 
         private void FAbrirCaja_Load(object sender, EventArgs e)
         {
             var user = Session.CurrentUser;
-
             if (user != null)
-            {
                 lbCajero.Text = $"{user.Nombre} {user.Apellido}";
-            }
             lbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             lbHora.Text = DateTime.Now.ToString("HH:mm");
         }
 
         private void txtMontoInicial_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Solo permite números, punto decimal y teclas de control (como borrar)
+            // Acepta dígitos, control y un único punto
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
-            {
                 e.Handled = true;
-            }
 
-            // Solo permite un punto decimal
             if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
                 e.Handled = true;
-            }
         }
 
-        // evento para avisar que se abrió correctamente
+        // Notifica a quien embebe el formulario que la caja quedó abierta
         public event EventHandler CajaAbiertaCorrectamente;
 
         private void btnAbrirCaja_Click(object sender, EventArgs e)
         {
-            // Validar entrada
             var texto = txtMontoInicial.Text.Trim();
             if (string.IsNullOrEmpty(texto))
             {
@@ -65,12 +55,12 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
-            // Intentar parsear con cultura actual e invariante (acepta ',' o '.')
             decimal monto;
-            var parsed = decimal.TryParse(texto, System.Globalization.NumberStyles.Number,
-                          System.Globalization.CultureInfo.CurrentCulture, out monto)
-                      || decimal.TryParse(texto, System.Globalization.NumberStyles.Number,
-                          System.Globalization.CultureInfo.InvariantCulture, out monto);
+            var parsed =
+                decimal.TryParse(texto, System.Globalization.NumberStyles.Number,
+                    System.Globalization.CultureInfo.CurrentCulture, out monto)
+             || decimal.TryParse(texto, System.Globalization.NumberStyles.Number,
+                    System.Globalization.CultureInfo.InvariantCulture, out monto);
 
             if (!parsed)
             {
@@ -88,7 +78,6 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
-            // Confirmar apertura
             var dr = MessageBox.Show($"Abrir caja con monto inicial {monto:C}?",
                 "Confirmar apertura", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr != DialogResult.Yes) return;
@@ -113,10 +102,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                     MessageBox.Show($"Caja abierta correctamente (ID: {nuevaCaja.Id_caja}).",
                         "Apertura", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // Disparar evento (embed en panel)
                     CajaAbiertaCorrectamente?.Invoke(this, EventArgs.Empty);
-
-                   
                 }
                 else
                 {
@@ -131,10 +117,9 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-        // Evento para el botón Atrás
         private void btnAtras_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

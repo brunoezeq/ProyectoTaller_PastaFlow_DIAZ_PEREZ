@@ -12,14 +12,20 @@ using System.Windows.Forms;
 
 namespace PastaFlow_DIAZ_PEREZ.Forms
 {
+    // Formulario para cerrar la caja: muestra totales por método de pago, calcula efectivo esperado
+    // y permite registrar el cierre comparando contra el monto contado.
     public partial class FCerrarCaja : Form
     {
+        // DAO para operaciones de caja (totales y cierre)
         private CajaDAO cajaDao = new CajaDAO();
 
-        private decimal montoInicial;
-        private decimal totalEfectivo;
-        private decimal montoEsperado;
+        // Montos calculados para el cierre
+        private decimal montoInicial;      // Monto con que se abrió la caja
+        private decimal totalEfectivo;     // Ventas cobradas en efectivo
+        private decimal montoEsperado;     // Suma de monto inicial + efectivo
 
+        // Recibe montos iniciales/ventas, pero actualmente se recalculan en Load desde la sesión.
+        // Podría usarse si se quisiera pasar datos precargados (se dejó por compatibilidad).
         public FCerrarCaja(decimal montoInicial, decimal totalVentas)
         {
             InitializeComponent();
@@ -28,6 +34,8 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
         private void FCerrarCaja_Load(object sender, EventArgs e)
         {
             var dao = new CajaDAO();
+
+            // Validar que exista una caja abierta en la sesión
             if (Session.CurrentCaja == null)
             {
                 MessageBox.Show("No hay ninguna caja abierta actualmente.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -37,31 +45,34 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
 
             int idCaja = Session.CurrentCaja.Id_caja;
 
+            // Obtener totales por método de pago (Transferencia, Débito, Crédito)
             var totalesPorMetodo = dao.ObtenerTotalesPorMetodo(Session.CurrentCaja.Id_caja);
             decimal totalTransferencia = totalesPorMetodo.ContainsKey("Transferencia") ? totalesPorMetodo["Transferencia"] : 0m;
             decimal totalDebito = totalesPorMetodo.ContainsKey("Débito") ? totalesPorMetodo["Débito"] : 0m;
             decimal totalCredito = totalesPorMetodo.ContainsKey("Crédito") ? totalesPorMetodo["Crédito"] : 0m;
 
-            // Mostrar totales por método de pago
+            // Mostrar totales por método
             txtTransferencia.Text = totalTransferencia.ToString("C");
             txtDebito.Text = totalDebito.ToString("C");
             txtCredito.Text = totalCredito.ToString("C");
 
-            // Calcular montos
+            // Montos base para cierre
             montoInicial = Session.CurrentCaja.Monto_inicio;
             totalEfectivo = cajaDao.ObtenerTotalVentasEfectivo(idCaja);
             montoEsperado = montoInicial + totalEfectivo;
 
-            // Mostrar montos al cierre
+            // Mostrar en interfaz
             txtMontoInicial.Text = montoInicial.ToString("C");
             txtTotalEfectivo.Text = totalEfectivo.ToString("C");
             txtMontoEsperado.Text = montoEsperado.ToString("C");
 
-            txtMontoActual.Focus();   
+            // Foco para ingresar lo contado
+            txtMontoActual.Focus();
         }
 
         private void btnCerrarCaja_Click(object sender, EventArgs e)
         {
+            // Parsear monto actual contado; admite punto como separador
             if (!decimal.TryParse(txtMontoActual.Text.Replace(",", "."),
                 System.Globalization.NumberStyles.Number,
                 System.Globalization.CultureInfo.InvariantCulture,
@@ -71,6 +82,7 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 return;
             }
 
+            // Calcular diferencia entre contado y esperado
             decimal diferencia = montoActual - montoEsperado;
             string mensaje;
             MessageBoxIcon icono;
@@ -91,11 +103,13 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
                 icono = MessageBoxIcon.Information;
             }
 
+            // Confirmar cierre con la diferencia mostrada
             var dr = MessageBox.Show(mensaje, "Resultado del cierre", MessageBoxButtons.YesNo, icono);
             if (dr != DialogResult.Yes) return;
 
             try
             {
+                // Registrar cierre y limpiar sesión
                 cajaDao.CerrarCaja(Session.CurrentCaja.Id_caja, montoActual);
                 MessageBox.Show("Caja cerrada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Session.CurrentCaja = null;
@@ -107,10 +121,10 @@ namespace PastaFlow_DIAZ_PEREZ.Forms
             }
         }
 
-
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close(); // Sale sin hacer nada
+            // Salir sin cerrar caja
+            this.Close();
         }
     }
 }
